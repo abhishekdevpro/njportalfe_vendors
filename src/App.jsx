@@ -127,6 +127,7 @@ import ResetPassword from "./markup/Pages/ResetPassword";
 import ResumeSecurity from "./markup/Pages/ResumeSecurity";
 import LandingPage from "./employeeMarkup/Pages/LandingPage";
 import Verifyemail from "./markup/Pages/Verifyemail";
+import Aboutus1 from "./markup/Pages/Aboutus1";
 function App() {
   const dispatch = useDispatch();
 
@@ -134,6 +135,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="services" element={<LandingPage />} />
+      <Route path="aboutus1" element={<Aboutus1 />} />
       <Route path="/*" element={<Error404 />} />
 
       <Route path="/user">

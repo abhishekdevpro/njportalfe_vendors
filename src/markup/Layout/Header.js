@@ -138,6 +138,9 @@ class UserHeader extends Component {
                     <li className="">
                       <Link to={"/services"}>services </Link>
                     </li>
+                    <li className="">
+                      <Link to={"/aboutus1"}>About Us </Link>
+                    </li>
                     <li
                       onClick={() => {
                         localStorage.removeItem("selectedLocation");
