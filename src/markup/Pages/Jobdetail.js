@@ -48,7 +48,7 @@ function Jobdetail() {
   const navigate = useNavigate();
   const getJobData = async () => {
     axios({
-      url: `https://novajobs.us/api/jobseeker/job-lists/${id}`,
+      url: `https://api.novajobs.us/api/jobseeker/job-lists/${id}`,
       method: "get",
       headers: {
         Authorization: token,
@@ -79,7 +79,7 @@ function Jobdetail() {
 
   const submitApplication = async () => {
     await axios({
-      url: "https://novajobs.us/api/jobseeker/jobs-applied",
+      url: "https://api.novajobs.us/api/jobseeker/jobs-applied",
       method: "POST",
       headers: {
         Authorization: token,

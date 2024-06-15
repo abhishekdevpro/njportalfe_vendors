@@ -169,7 +169,7 @@ function Jobmyresume() {
 
   const getResumeData = async () => {
     axios({
-      url: "https://novajobs.us/api/jobseeker/user-profile",
+      url: "https://api.novajobs.us/api/jobseeker/user-profile",
       method: "Get",
       headers: {
         Authorization: token,
@@ -610,7 +610,7 @@ function Jobmyresume() {
   const handleUpdateResume = () => {
     axios({
       method: "PUT",
-      url: "https://novajobs.us/api/jobseeker/resume-update",
+      url: "https://api.novajobs.us/api/jobseeker/resume-update",
       headers: {
         Authorization: token,
       },

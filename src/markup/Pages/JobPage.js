@@ -47,7 +47,7 @@ function JobPage() {
   const toggleFabJobs = async () => {
     try {
       await axios({
-        url: "https://novajobs.us/api/jobseeker/job-favorites",
+        url: "https://api.novajobs.us/api/jobseeker/job-favorites",
         method: "POST",
         headers: { Authorization: token },
         data: {
@@ -68,7 +68,7 @@ function JobPage() {
   const fetchJobApplicationData = async () => {
     try {
       const response = await axios.get(
-        "https://novajobs.us/api/jobseeker/job-lists",
+        "https://api.novajobs.us/api/jobseeker/job-lists",
         {
           headers: {
             Authorization: token,
@@ -133,7 +133,7 @@ function JobPage() {
     const fetchJobApplicationData = async () => {
       try {
         const response = await axios.get(
-          "https://novajobs.us/api/jobseeker/job-lists",
+          "https://api.novajobs.us/api/jobseeker/job-lists",
           {
             headers: {
               Authorization: token,
@@ -259,7 +259,7 @@ function JobPage() {
   const getJobTyes = async () => {
     await axios({
       method: "GET",
-      url: "https://novajobs.us/api/jobseeker/job-types",
+      url: "https://api.novajobs.us/api/jobseeker/job-types",
 
       headers: {
         Authorization: token,
@@ -277,7 +277,7 @@ function JobPage() {
   const getWorkplaceType = () => {
     axios({
       method: "GET",
-      url: "https://novajobs.us/api/jobseeker/workplace-types",
+      url: "https://api.novajobs.us/api/jobseeker/workplace-types",
       headers: {
         Authorization: token,
       },
@@ -296,7 +296,7 @@ function JobPage() {
   const getCountry = () => {
     axios({
       method: "GET",
-      url: "https://novajobs.us/api/jobseeker/countries",
+      url: "https://api.novajobs.us/api/jobseeker/countries",
       headers: {
         Authorization: token,
       },
@@ -314,7 +314,7 @@ function JobPage() {
   const getState = () => {
     axios({
       method: "GET",
-      url: `https://novajobs.us/api/jobseeker/stats/231`,
+      url: `https://api.novajobs.us/api/jobseeker/stats/231`,
       headers: {
         Authorization: token,
       },
@@ -333,7 +333,7 @@ function JobPage() {
   const getCities = () => {
     axios({
       method: "GET",
-      url: `https://novajobs.us/api/jobseeker/cities/${jobApplicationValues.state_id}`,
+      url: `https://api.novajobs.us/api/jobseeker/cities/${jobApplicationValues.state_id}`,
       headers: {
         Authorization: token,
       },
@@ -351,7 +351,7 @@ function JobPage() {
   const getExperience = () => {
     axios({
       method: "GET",
-      url: "https://novajobs.us/api/jobseeker/experience-level",
+      url: "https://api.novajobs.us/api/jobseeker/experience-level",
       headers: {
         Authorization: token,
       },
@@ -398,7 +398,7 @@ function JobPage() {
   useEffect(() => {
     axios({
       method: "GET",
-      url: "https://novajobs.us/api/jobseeker/job-categories",
+      url: "https://api.novajobs.us/api/jobseeker/job-categories",
       headers: {
         Authorization: token,
       },
@@ -412,7 +412,7 @@ function JobPage() {
 
   const submitApplication = async () => {
     await axios({
-      url: "https://novajobs.us/api/jobseeker/jobs-applied",
+      url: "https://api.novajobs.us/api/jobseeker/jobs-applied",
       method: "POST",
       headers: {
         Authorization: token,
@@ -436,8 +436,8 @@ function JobPage() {
   const selectedLocation = localStorage.getItem("selectedLocation");
   const title_keyword = localStorage.getItem("title_keyword");
   const baseUrl =
-    // "https://novajobs.us/api/jobseeker/job-lists/?page_size=7&is_publish=1";
-    "https://novajobs.us/api/jobseeker/job-lists?page_size=7&is_publish=1";
+    // "https://api.novajobs.us/api/jobseeker/job-lists/?page_size=7&is_publish=1";
+    "https://api.novajobs.us/api/jobseeker/job-lists?page_size=7&is_publish=1";
 
   const params = new URLSearchParams();
 

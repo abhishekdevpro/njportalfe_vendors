@@ -126,7 +126,7 @@ function Jobprofile() {
   const getReq = () => {
     axios({
       method: "GET",
-      url: "https://novajobs.us/api/jobseeker/user-profile",
+      url: "https://api.novajobs.us/api/jobseeker/user-profile",
       headers: {
         Authorization: token,
       },
@@ -184,7 +184,7 @@ function Jobprofile() {
     e.preventDefault();
     axios({
       method: "PUT",
-      url: "https://novajobs.us/api/jobseeker/user-profile",
+      url: "https://api.novajobs.us/api/jobseeker/user-profile",
       headers: {
         Authorization: token,
       },
@@ -222,7 +222,7 @@ function Jobprofile() {
   const getCountry = () => {
     axios({
       method: "GET",
-      url: "https://novajobs.us/api/jobseeker/countries",
+      url: "https://api.novajobs.us/api/jobseeker/countries",
       headers: {
         Authorization: token,
       },
@@ -240,7 +240,7 @@ function Jobprofile() {
   const getState = () => {
     axios({
       method: "GET",
-      url: `https://novajobs.us/api/jobseeker/stats/${jobProfileValues.country_id}`,
+      url: `https://api.novajobs.us/api/jobseeker/stats/${jobProfileValues.country_id}`,
       headers: {
         Authorization: token,
       },
@@ -258,7 +258,7 @@ function Jobprofile() {
   const getCities = () => {
     axios({
       method: "GET",
-      url: `https://novajobs.us/api/jobseeker/cities/${jobProfileValues.state_id}`,
+      url: `https://api.novajobs.us/api/jobseeker/cities/${jobProfileValues.state_id}`,
       headers: {
         Authorization: token,
       },

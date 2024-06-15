@@ -131,7 +131,7 @@ function EmployeeComponypostjobs() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://novajobs.us/api/employeer/job-categories",
+      url: "https://api.novajobs.us/api/employeer/job-categories",
       headers: {
         Authorization: token,
       },
@@ -159,7 +159,7 @@ function EmployeeComponypostjobs() {
 
   const getJob = async () => {
     await axios({
-      url: `https://novajobs.us/api/employeer/job-lists/${id}`,
+      url: `https://api.novajobs.us/api/employeer/job-lists/${id}`,
       method: "get",
       headers: {
         Authorization: token,
@@ -195,7 +195,7 @@ function EmployeeComponypostjobs() {
   const aiJobDescription = async () => {
     setDescription(true);
     await axios({
-      url: `https://novajobs.us/api/employeer/ai-job-description`,
+      url: `https://api.novajobs.us/api/employeer/ai-job-description`,
       method: "post",
       headers: {
         Authorization: token,
@@ -215,7 +215,7 @@ function EmployeeComponypostjobs() {
 
   const postCompleted = async () => {
     await axios({
-      url: `https://novajobs.us/api/employeer/job-post/${id}`,
+      url: `https://api.novajobs.us/api/employeer/job-post/${id}`,
       method: "PUT",
       headers: {
         Authorization: token,
@@ -243,7 +243,7 @@ function EmployeeComponypostjobs() {
   
   const getJobTyes = async () => {
     await axios({
-      url: "https://novajobs.us/api/employeer/job-types",
+      url: "https://api.novajobs.us/api/employeer/job-types",
 
       headers: {
         Authorization: token,
@@ -260,7 +260,7 @@ function EmployeeComponypostjobs() {
 
   const getWorkplaceType = async () => {
     await axios({
-      url: "https://novajobs.us/api/employeer/workplace-types",
+      url: "https://api.novajobs.us/api/employeer/workplace-types",
 
       headers: {
         Authorization: token,
@@ -278,7 +278,7 @@ function EmployeeComponypostjobs() {
   const getCountry = async () => {
     await axios({
       method: "get",
-      url: "https://novajobs.us/api/employeer/countries",
+      url: "https://api.novajobs.us/api/employeer/countries",
       headers: {
         Authorization: token,
       },
@@ -296,7 +296,7 @@ function EmployeeComponypostjobs() {
   const getState = async () => {
     await axios({
       method: "get",
-      url: `https://novajobs.us/api/employeer/stats/${postAJobData.selectedCountry}`,
+      url: `https://api.novajobs.us/api/employeer/stats/${postAJobData.selectedCountry}`,
       headers: {
         Authorization: token,
       },
@@ -321,7 +321,7 @@ function EmployeeComponypostjobs() {
   const getCities = async () => {
     await axios({
       method: "get",
-      url: `https://novajobs.us/api/employeer/cities/${postAJobData.selectedState}`,
+      url: `https://api.novajobs.us/api/employeer/cities/${postAJobData.selectedState}`,
       headers: {
         Authorization: token,
       },

@@ -27,7 +27,7 @@ function ResetPassword(props) {
     formData.append("new_password", password);
     await axios({
       method: "POST",
-      url: "https://novajobs.us/api/jobseeker/reset-password",
+      url: "https://api.novajobs.us/api/jobseeker/reset-password",
       headers: {
         "Content-Type": "Application/json",
       },

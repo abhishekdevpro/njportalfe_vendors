@@ -115,7 +115,8 @@ class UserHeader extends Component {
                 >
                   <div className="logo-header mostion d-md-block d-lg-none">
                     <Link to={"/"} className="dez-page">
-                      <img src={logo2} alt="" />
+                      <img 
+                        src={require("./../../images/logo/NovaUS.png")} alt="" />
                     </Link>
                   </div>
                   <ul className="nav navbar-nav align-items-center ">
@@ -292,7 +293,7 @@ class UserHeader extends Component {
                 <div
                   className="col-lg-6 col-md-6 overlay-primary-dark d-flex p-a0"
                   style={{
-                    backgroundImage: "url(" + bnr3 + ")",
+                   backgroundImage: "url(" + bnr3 + ")",
                     backgroundPosition: "center",
                     backgroundSize: "cover",
                   }}

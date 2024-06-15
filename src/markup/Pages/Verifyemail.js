@@ -12,7 +12,7 @@ function VerifyEmail() {
       try {
        
         
-        const response = await axios.post(`https://novajobs.us/api/jobseeker/verify-account/${token}`);
+        const response = await axios.post(`https://api.novajobs.us/api/jobseeker/verify-account/${token}`);
         console.log(response)
         if (response.data.success.token) {
           showToastSuccess(response,"Email verified successfully");

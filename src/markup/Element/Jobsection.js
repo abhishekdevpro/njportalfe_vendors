@@ -40,7 +40,7 @@ function Jobsection() {
   const fetchJobApplicationData = async () => {
     try {
       const response = await axios.get(
-        "https://novajobs.us/api/jobseeker/job-lists?page_size=7&is_publish=1",
+        "https://api.novajobs.us/api/jobseeker/job-lists?page_size=7&is_publish=1",
         {
           headers: {
             Authorization: token,
@@ -66,7 +66,7 @@ function Jobsection() {
   const toggleFabJobs = async (id) => {
     try {
       await axios({
-        url: "https://novajobs.us/api/jobseeker/job-favorites",
+        url: "https://api.novajobs.us/api/jobseeker/job-favorites",
         method: "POST",
         headers: { Authorization: token },
         data: {

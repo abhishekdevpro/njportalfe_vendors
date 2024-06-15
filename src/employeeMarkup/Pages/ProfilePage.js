@@ -17,7 +17,7 @@ const ProfilePage = () => {
   const getUser = async () => {
     try {
       await axios({
-        url: `https://novajobs.us/api/employeer/job-seekers/${id}`,
+        url: `https://api.novajobs.us/api/employeer/job-seekers/${id}`,
         method: "GET",
         headers: { Authorization: token },
       })

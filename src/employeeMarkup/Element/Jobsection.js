@@ -30,7 +30,7 @@ function Jobsection() {
   useEffect(() => {
     axios({
       method: "GET",
-      url: "https://novajobs.us/api/employeer/job-seekers?page_size=10",
+      url: "https://api.novajobs.us/api/employeer/job-seekers?page_size=10",
       headers: {
         Authorization: token,
       },

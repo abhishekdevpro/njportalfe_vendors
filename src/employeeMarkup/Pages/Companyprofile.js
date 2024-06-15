@@ -45,7 +45,7 @@ function EmployeeCompanyprofile() {
     // Fetch industries from API
     axios({
       method: "GET",
-      url: "https://novajobs.us/api/employeer/company-industry",
+      url: "https://api.novajobs.us/api/employeer/company-industry",
       headers: {
         Authorization: token, // Assuming you have token stored
       },
@@ -69,7 +69,7 @@ function EmployeeCompanyprofile() {
 
     axios({
       method: "put",
-      url: `https://novajobs.us/api/employeer/company`,
+      url: `https://api.novajobs.us/api/employeer/company`,
       headers: {
         Authorization: token,
       },
@@ -131,7 +131,7 @@ function EmployeeCompanyprofile() {
   const getCountry = async () => {
     axios({
       method: "get",
-      url: "https://novajobs.us/api/employeer/countries",
+      url: "https://api.novajobs.us/api/employeer/countries",
       headers: {
         Authorization: token,
       },
@@ -147,7 +147,7 @@ function EmployeeCompanyprofile() {
   const getState = async () => {
     axios({
       method: "get",
-      url: `https://novajobs.us/api/employeer/stats/${selectedCountry}`,
+      url: `https://api.novajobs.us/api/employeer/stats/${selectedCountry}`,
       headers: {
         Authorization: token,
       },
@@ -163,7 +163,7 @@ function EmployeeCompanyprofile() {
   const getCities = async () => {
     axios({
       method: "get",
-      url: `https://novajobs.us/api/employeer/cities/${selectedStates}`,
+      url: `https://api.novajobs.us/api/employeer/cities/${selectedStates}`,
       headers: {
         Authorization: token,
       },

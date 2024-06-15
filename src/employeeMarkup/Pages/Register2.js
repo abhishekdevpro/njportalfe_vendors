@@ -118,7 +118,7 @@ const notify = (data) => toast.warning(data);
     }
 
     axios
-      .post("https://novajobs.us/api/employeer/resume-upload", formData, {
+      .post("https://api.novajobs.us/api/employeer/resume-upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: token,
@@ -150,7 +150,7 @@ const notify = (data) => toast.warning(data);
     };
 
     try {
-      const res = await axios.post("https://novajobs.us/api/employeer/auth/signup", body, {
+      const res = await axios.post("https://api.novajobs.us/api/employeer/auth/signup", body, {
         headers: {
           "Content-Type": "application/json",
           //Authorization: token,
@@ -212,7 +212,7 @@ const notify = (data) => toast.warning(data);
     console.log(resumeUrl);
     await axios({
       method: "post",
-      url: "https://novajobs.us/api/jobseeker/file-based-ai",
+      url: "https://api.novajobs.us/api/jobseeker/file-based-ai",
       data: {
         keyword: "Rate this resume content in percentage ?",
         file_location: resumeUrl,

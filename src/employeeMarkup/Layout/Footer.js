@@ -28,7 +28,7 @@ function EmployeerFooter() {
 
     axios({
       method: "POST",
-      url: "https://novajobs.us/api/jobseeker/user-subscribe",
+      url: "https://api.novajobs.us/api/jobseeker/user-subscribe",
       data: { email },
     })
       .then((res) => {

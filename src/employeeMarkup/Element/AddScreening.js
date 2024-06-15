@@ -21,7 +21,7 @@ const AddScreening = () => {
   const dispatch = useDispatch();
   const screeningQuestion = async () => {
     await axios({
-      url: "https://novajobs.us/api/employeer/screen-questions",
+      url: "https://api.novajobs.us/api/employeer/screen-questions",
       method: "GET",
       headers: {
         Authorization: token,

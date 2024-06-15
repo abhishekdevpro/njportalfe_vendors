@@ -9,7 +9,7 @@ export const fetchCompanyInfo = createAsyncThunk(
     try {
       const response = await axios({
         method: "get",
-        url: "https://novajobs.us/api/employeer/employeer-profile",
+        url: "https://api.novajobs.us/api/employeer/employeer-profile",
         headers: {
           Authorization: token,
         },
