@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 import Homepage from "./markup/Pages/Homepage1";
@@ -54,6 +55,7 @@ import "./css/templete.css";
 import "./css/skin/skin-1.css";
 import "./plugins/slick/slick.min.css";
 import "./plugins/slick/slick-theme.min.css";
+import "./css/share.css"
 import EmployeeLogin from "./employeeMarkup/Pages/Loginpage2";
 import EmployeeRegister1 from "./employeeMarkup/Pages/Register1";
 import EmployeeHomepage from "./employeeMarkup/Pages/Homepage1";

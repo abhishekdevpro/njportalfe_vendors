@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+
 import Header2 from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 import { Form, Button } from "react-bootstrap";
@@ -461,6 +462,42 @@ function EmployeeComponypostjobs() {
                               placeholder="Enter Job Title"
                               id="jobTitle"
                               name="jobTitle"
+                              value={postAJobData.jobTitle}
+                              onChange={handleChange}
+                              
+                            />
+                          </div>
+                          {errors.jobTitle && (
+                            <p className="text-danger">{errors.jobTitle}</p>
+                          )}
+                        </div>
+                        <div className="col-6 ">
+                          <div className="form-group">
+                            <label htmlFor="jobTitle">Salary</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Enter Salary"
+                              id="jobTitle"
+                              name="jobTitle"
+                              value={postAJobData.jobTitle}
+                              onChange={handleChange}
+                              
+                            />
+                          </div>
+                          {errors.jobTitle && (
+                            <p className="text-danger">{errors.jobTitle}</p>
+                          )}
+                        </div>
+                        <div className="col-6 ">
+                          <div className="form-group">
+                            <label htmlFor="jobTitle">Experience</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Enter Experience"
+                              id=""
+                              name=""
                               value={postAJobData.jobTitle}
                               onChange={handleChange}
                               

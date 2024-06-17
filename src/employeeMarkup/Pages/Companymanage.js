@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { FaLinkedin, FaWhatsapp } from "react-icons/fa";
+
 import { Link, useNavigate } from "react-router-dom";
 import Header2 from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
@@ -19,33 +21,23 @@ function EmployeeCompanymanage() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [btn, setBtn] = useState("");
+  const [showOptions, setShowOptions] = useState(false);
+  const [tabs, setTabs] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [timeSlot, setTimeSlot] = useState("8am - 12pm");
+  const [shortNoteValue, setShortNoteValue] = useState("");
+  const [rejectWithNote, setRejectWithNote] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedJobId, setSelectedJobId] = useState(null);
+
 
   useEffect(() => {
     fetchPublishedJobs();
   }, []);
 
+  
 
-  const fetchDraftJobs = () => {
-    axios({
-      method: "GET",
-      url: "https://api.novajobs.us/api/employeer/job-lists?is_publish=0",
-      headers: {
-        Authorization: token,
-      },
-    })
-      .then((response) => {
-        console.log(response.data.data, "draft");
-        setData(response.data.data);
-        setBtn("View");
-
-        setSkeleton(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        console.log(err.response.data.message);
-        showToastError(err?.response?.data?.message);
-      });
-  };
+  
   const fetchPublishedJobs = () => {
     axios({
       method: "GET",
@@ -63,11 +55,14 @@ function EmployeeCompanymanage() {
       .catch((err) => {
         console.log(err);
         console.log(err.response.data.message);
-        showToastError(err?.response?.data?.message);
+        
       });
   };
-  const handlePutReq = (id) => {
-    console.log(id, "id");
+  
+  
+  const handleRepostJob = (id) => {
+    const currentDate = new Date().toISOString();
+
     axios({
       method: "PUT",
       url: `https://api.novajobs.us/api/employeer/job-post/${id}`,
@@ -76,25 +71,37 @@ function EmployeeCompanymanage() {
       },
       data: {
         is_publish: 1,
+        reposted_at: currentDate,
       },
     })
       .then((response) => {
-        console.log(response);
+        const updatedData = data.map((job) =>
+          job.job_detail.id === id
+            ? { ...job, job_detail: { ...job.job_detail, reposted_at: currentDate } }
+            : job
+        );
+
+        // Move the reposted job to the top of the list
+        const repostedJobIndex = updatedData.findIndex(job => job.job_detail.id === id);
+        if (repostedJobIndex !== -1) {
+          const repostedJob = updatedData.splice(repostedJobIndex, 1)[0];
+          updatedData.unshift(repostedJob);
+        }
+
+        setData(updatedData);
       })
-      .catch((err) => console.log(err, "error"));
+      .catch((err) => {
+        console.error("Error reposting job:", err);
+      });
   };
-  const [showOptions, setShowOptions] = useState(false);
+
   const handleShowOptions = (index) => {
     setShowOptions(index === showOptions ? null : index);
   };
 
-  const [tabs, setTabs] = useState(false);
   const handleTabs = (index) => {
     setTabs(index === tabs ? null : index);
   };
-
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [timeSlot, setTimeSlot] = useState("8am - 12pm");
 
   const handleDateChange = (date) => {
     const formattedDate = date.toLocaleDateString("en-CA");
@@ -105,17 +112,25 @@ function EmployeeCompanymanage() {
     setTimeSlot(slot);
   };
 
-  console.log(selectedDate, timeSlot);
-
-  const [shortNoteValue, setShortNoteValue] = useState("");
   const handleShortNoteValue = (e) => {
     setShortNoteValue(e.target.value);
   };
 
-  const [rejectWithNote, setRejectWithNote] = useState("");
   const handleRejectWithNote = (e) => {
     setRejectWithNote(e.target.value);
   };
+
+  const handleShareClick = (jobId) => {
+    setSelectedJobId(jobId);
+    setShowModal(true);
+  };
+  
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+
+
   return (
     <div className="position-relative">
       <Header2 />
@@ -176,17 +191,17 @@ function EmployeeCompanymanage() {
                                   {item.job_category.name ||
                                   item.job_type.name ||
                                   item.job_workplace_types.name ? (
-                                    <div className="row">
+                                    <div className="d-flex">
                                       {item.job_category.name ? (
-                                        <p className="ml-3">
+                                        <p className="">
                                           {item.job_category.name}
-                                          {" |"}{" "}
+                                          {"|"}{" "}
                                         </p>
                                       ) : null}
                                       {item.job_type.name ? (
-                                        <p className="ml-3">
+                                        <p className="">
                                           {item.job_type.name}
-                                          {"| "}{" "}
+                                          {"|"}{" "}
                                         </p>
                                       ) : null}{" "}
                                      {item.job_detail.skills_arr ? (
@@ -196,9 +211,7 @@ function EmployeeCompanymanage() {
                                                             {skill}
                                                                 </span>  ))}
                                                                 </div>
-                                                              ) : null}{" | "}
-
-                                    {" "}
+                                                              ) : null}{"|"}{" "}
                                       {item.job_workplace_types.name ? (
                                         <p>{item.job_workplace_types.name}</p>
                                       ) : null}
@@ -235,15 +248,19 @@ function EmployeeCompanymanage() {
                                       ) : null}
                                     </p>
                                   ) : null}
-                                  {item.job_detail.created_at ? (
+                                   {item.job_detail.reposted_at ? (
                                     <p className="mb-0">
-                                      {" "}
-                                      <span className="text-black mr-2">
-                                        Posted on* 
-                                      </span>
-                                      {formattedDate}
+                                      <span className="text-black mr-2">Posted on* </span>
+                                      {moment(item.job_detail.reposted_at).format("MMMM DD, YYYY")}
                                     </p>
-                                  ) : null}
+                                  ) : (
+                                    <p className="mb-0">
+                                      <span className="text-black mr-2">Posted on* </span>
+                                      {moment(item.job_detail.created_at).format("MMMM DD, YYYY")}
+                                    </p>
+                                  )}
+
+
                                 </div>
                                 <div
                                   className="d-flex flex-row justify-content-center align-items-center "
@@ -280,101 +297,96 @@ function EmployeeCompanymanage() {
                                     <i className="fa fa-id-card-o mr-1" aria-hidden="true"></i>
                                     <span>Applicants</span>
                                   </Link>
+                                  
                                   )}
-                                  {/* <button
-                                  className="px-3 site-button py-2  text-white border-0"
+                                    <button
+                                  className="px-3 py-2 site-button text-white border-0 bg-danger"
                                   style={{
-                                    borderRadius: "7px",
                                     cursor: "pointer",
                                     backgroundColor: "red",
                                   }}
+                                  onClick={() => handleRepostJob(item.job_detail.id)}
                                 >
-                                  Draft
-                                </button> */}
+                                  Refresh
+                                </button>
+
                                 </div>
                                 
                               </div>
                               
-                              {showOptions === index ? (
-                                <div
-                                  style={{
-                                    position: "absolute",
-                                    width: "30%",
-                                    textAlign: "center",
-                                    zIndex: 4,
-                                    right: "-50px",
-                                    top: "100px",
-                                    backgroundColor: "white",
-                                    borderRadius: "12px",
-                                    boxShadow:
-                                      "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                                    border: "1px solid #e2e8f0",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    gap: "0px",
-                                  }}
-                                >
-                                  <p
-                                    onClick={() => {
-                                      handleTabs("shortNote");
-                                      setShowOptions(false);
-                                    }}
-                                    style={{
-                                      borderBottom: "1px solid #e2e8f0",
-                                      padding: "7px",
-                                      cursor: "pointer",
-                                      fontSize: "12px",
-                                      margin: "0px",
-                                    }}
-                                  >
-                                    Short Note
-                                  </p>
-                                  <p
-                                    onClick={() => {
-                                      handleTabs("rejectWithNote");
-                                      setShowOptions(false);
-                                    }}
-                                    style={{
-                                      borderBottom: "1px solid #e2e8f0",
-                                      cursor: "pointer",
-                                      padding: "7px",
-
-                                      fontSize: "12px",
-                                      margin: "0px",
-                                    }}
-                                  >
-                                    Reject with Note
-                                  </p>
-                                  <p
-                                    onClick={() => {
-                                      handleTabs("scheduleInterview");
-                                      setShowOptions(false);
-                                    }}
-                                    style={{
-                                      borderBottom: "1px solid #e2e8f0",
-                                      cursor: "pointer",
-                                      padding: "7px",
-
-                                      fontSize: "12px",
-                                      color: "#1c2957",
-                                      margin: "0px",
-                                    }}
-                                  >
-                                    Schedule Interview
-                                  </p>
-                                </div>
-                                
-                              ) : null}
+                              
+                              
                               <button
-                                    
-                                    className="px-3 py-2 site-button text-white border-0 float-right mb-2"
-                                    style={{
-                                      
-                                      cursor: "pointer",
-                                    }}
-                                  >
-                                    Share
-                                  </button>
+  className="px-3 py-2 site-button text-white border-0 float-right mb-2"
+  style={{
+    cursor: "pointer",
+  }}
+  onClick={() => handleShareClick(item.job_detail.id)}
+>
+  Share
+</button>
+
+
+      {showModal && selectedJobId === item.job_detail.id && (
+                                <div className="modal" >
+                                  <div className="modal-content text-white text-center"  style={{ backgroundColor: "#1C2957" }}>
+                                    <div> 
+                                      Share on
+                                    <span className="close float-right" onClick={closeModal}>
+                                      &times;
+                                    </span>
+                                    </div>
+                                    <br />
+                                    {/* LinkedIn share */}
+                                   <div className="d-flex justify-content-evenly">
+                                   <a
+                                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+                                        `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+                                      )}`}
+                                      className="text-white text-center"
+                                      style={{width:'40px'}}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                       <FaLinkedin size={40} style={{ marginRight: '5px' }} />
+                                       LinkedIn
+                                    </a>
+                                    {/* WhatsApp share */}
+                                    <a
+                                      href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                                        `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+                                      )}`}
+                                      className="text-white text-center"
+                                      style={{ width:'40px'}}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <FaWhatsapp size={40} style={{ marginRight: '5px' }} />
+                                      WhatsApp
+                                    </a>
+                                   </div> <br />
+                                    {/* Copy link */}
+                                    <div   >
+                                      <input style={{width:'300px'}}
+                                        type="text"
+                                        value={`${window.location.origin}/user/job-detail/${item.job_detail.id}`}
+                                        readOnly
+                                      />
+                                      <button
+                                        onClick={() => {
+                                          navigator.clipboard.writeText(
+                                            `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+                                          );
+                                          alert("Link copied!");
+                                        }}
+                                      >
+                                        Copy Link
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                                  
                             </li>
                             
                           );

@@ -48,7 +48,11 @@ function Jobsection() {
         }
       );
       console.log(response, "res");
-      dispatch(setJobApplicationData(response.data.data));
+
+      // Sort the job application data by updated_at in descending order
+      const sortedData = response.data.data.sort((a, b) => new Date(b.job_detail.updated_at) - new Date(a.job_detail.updated_at));
+
+      dispatch(setJobApplicationData(sortedData));
       setSkeleton(false);
     } catch (error) {
       console.log(error);
@@ -138,9 +142,17 @@ function Jobsection() {
                               ) : null}
                               <li>
                                 <i className="fa fa-clock-o"></i>{" "}
-                                {moment(item.job_detail.created_at).fromNow()}
+                                {moment(item.job_detail.updated_at).fromNow()}
                               </li>
                             </ul>
+                            {item.job_detail.skills_arr ? (
+                                       <div className="mx-1">
+                                            {item.job_detail.skills_arr.map((skill, index) => (
+                                                   <span key={index} className="badge badge-primary m-2">
+                                                            {skill}
+                                                                </span>  ))}
+                                                                </div>
+                                                              ) : null}
                           </div>
                         </div>
                         <div className="d-flex">

@@ -5,8 +5,7 @@ import Footer from "./../Layout/Footer";
 import PageTitle from "./../Layout/PageTitle";
 import axios from "axios";
 import { showToastError } from "../../utils/toastify";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Tab, Nav, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,7 +14,6 @@ import {
 } from "../../store/reducers/jobApplicationScreeningQues";
 
 var bnr = require("./../../images/banner/bnr1.jpg");
-
 const blogGrid = [
   {
     image: require("./../../images/blog/grid/pic1.jpg"),
@@ -46,24 +44,27 @@ function Jobdetail() {
   );
 
   const navigate = useNavigate();
+
   const getJobData = async () => {
-    axios({
-      url: `https://api.novajobs.us/api/jobseeker/job-lists/${id}`,
-      method: "get",
-      headers: {
-        Authorization: token,
-      },
-    })
-      .then((res) => {
-        console.log();
+    try {
+      const res = await axios({
+        url: `https://api.novajobs.us/api/jobseeker/job-lists/${id}`,
+        method: "get",
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      if (res.data && res.data.data) {
         setJobData(res.data.data);
         console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        console.log(err.response.data.message);
-        showToastError(err?.response?.data?.message);
-      });
+      } else {
+        console.log("No job data found.");
+      }
+    } catch (err) {
+      console.log(err);
+      showToastError(err?.response?.data?.message);
+    }
   };
 
   const handlePrev = () => {
@@ -101,22 +102,26 @@ function Jobdetail() {
   };
 
   useEffect(() => {
-    if (jobData && jobData.screen_questions) {
+    if (!jobData) return;
+    if (jobData.screen_questions && jobData.screen_questions.screen_question_keywords) {
       dispatch(setScreeningQuestion(jobData.screen_questions));
     }
   }, [jobData]);
+  
 
   const convertDate = (date) => {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
-    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
     var yyyy = today.getFullYear();
     today = mm + "/" + dd + "/" + yyyy;
     return today;
   };
+
   useEffect(() => {
     getJobData();
   }, []);
+
   return (
     <>
       <Header />
@@ -144,24 +149,25 @@ function Jobdetail() {
                           </div>
                         </div>
                         <div className="col-lg-12 col-md-6">
-                          <div className="widget bg-white p-lr20 p-t20  widget_getintuch radius-sm">
-                            {jobData.job_detail.job_title ? (
+                          <div className="widget bg-white p-lr20 p-t20 widget_getintuch radius-sm">
+                            { jobData.job_detail.job_title ? (
                               <h4 className="text-black font-weight-700 p-t10 m-b15">
                                 {jobData.job_detail.job_title}
                               </h4>
                             ) : null}
                             <ul>
-                              {jobData.countries.name ||
-                              jobData.states.name ||
-                              jobData.cities.name ? (
+                              {jobData.countries?.name ||
+                              jobData.states?.name ||
+                              jobData.cities?.name ? (
                                 <li>
                                   <i className="ti-location-pin"></i>
                                   <strong className="font-weight-700 text-black">
                                     Address
                                   </strong>
                                   <span className="text-black-light">
-                                    {jobData.countries.name},{" "}
-                                    {jobData.states.name}, {jobData.cities.name}
+                                    {jobData.countries?.name},{" "}
+                                    {jobData.states?.name},{" "}
+                                    {jobData.cities?.name}
                                   </span>
                                 </li>
                               ) : null}
@@ -193,28 +199,35 @@ function Jobdetail() {
                         </Link>
                       </h3>
                       <ul className="job-info">
-                        {jobData.job_detail.skills_arr ? (
-                          <li>
-                            <strong>Skills</strong>{" "}
-                            {jobData.job_detail.skills_arr.map((item) => (
-                              <span>{item} </span>
-                            ))}
-                          </li>
+                        {jobData.job_detail?.skills_arr ? (
+                          <div className="mx-1">
+                            <strong>Skills: </strong>{" "}
+                            {jobData.job_detail.skills_arr.map(
+                              (skill, index) => (
+                                <span
+                                  key={index}
+                                  className="badge badge-primary mr-1 mb-1"
+                                >
+                                  {skill}
+                                </span>
+                              )
+                            )}
+                          </div>
                         ) : null}
-                        {jobData.job_detail.created_at ? (
+                        {jobData.job_detail?.created_at ? (
                           <li>
                             <strong>Posted on:</strong>{" "}
                             {convertDate(jobData.job_detail.created_at)}
                           </li>
                         ) : null}
-                        {jobData.cities.name ? (
+                        {jobData.cities?.name ? (
                           <li>
                             <i className="ti-location-pin text-black m-r5"></i>
                             {jobData.cities.name}
                           </li>
                         ) : null}
                       </ul>
-                      {jobData.job_detail.job_description ? (
+                      {jobData.job_detail?.job_description ? (
                         <p className="p-t20">
                           <div
                             className="ql-editor mb-1 "
@@ -228,7 +241,7 @@ function Jobdetail() {
                         </p>
                       ) : null}
 
-                      <div className="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+<div className="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
                       {localStorage.getItem("jobSeekerLoginToken") ? (
                         <>
                           {jobData.job_detail.is_job_applied ? (
@@ -280,47 +293,45 @@ function Jobdetail() {
                             {/* Tab Content */}
 
                             <Tab.Content>
-                              <Tab.Pane eventKey="contact-info">
-                                <form className="col-12 p-a0">
-                                  {jobData.screen_questions.screen_question_keywords.map(
-                                    (item, index) => (
-                                      <div>
-                                        <h2>{item.name}</h2>
-                                        <div>
-                                          {item.screen_questions.map(
-                                            (ques, questionIndex) => (
-                                              <div>
-                                                <h4>{ques.name}</h4>
-                                                {ques.screen_questions_options.map(
-                                                  (option) => (
-                                                    <Form.Check
-                                                      type="radio"
-                                                      label={option.option}
-                                                      className="p-10"
-                                                      name={ques.name}
-                                                      onClick={() => {
-                                                        dispatch(
-                                                          setJobSeekerAnswer({
-                                                            index: index,
-                                                            questionIndex:
-                                                              questionIndex,
-                                                            answer:
-                                                              option.option,
-                                                          })
-                                                        );
-                                                      }}
-                                                    />
-                                                  )
-                                                )}
-                                              </div>
-                                            )
-                                          )}
-                                        </div>
-                                      </div>
-                                    )
-                                  )}
-                                </form>
-                              </Tab.Pane>
+                            <Tab.Pane eventKey="contact-info">
+  <form className="col-12 p-a0">
+    {jobData.screen_questions && jobData.screen_questions.screen_question_keywords ? (
+      jobData.screen_questions.screen_question_keywords.map((item, index) => (
+        <div key={index}>
+          <h2>{item.name}</h2>
+          <div>
+            {item.screen_questions.map((ques, questionIndex) => (
+              <div key={questionIndex}>
+                <h4>{ques.name}</h4>
+                {ques.screen_questions_options.map((option, optionIndex) => (
+                  <Form.Check
+                    key={optionIndex}
+                    type="radio"
+                    label={option.option}
+                    className="p-10"
+                    name={ques.name}
+                    onClick={() => {
+                      dispatch(
+                        setJobSeekerAnswer({
+                          index: index,
+                          questionIndex: questionIndex,
+                          answer: option.option,
+                        })
+                      );
+                    }}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    ) : (
+      <p>No screening questions found.</p>
+    )}
+  </form>
+</Tab.Pane>
+
                               <Tab.Pane eventKey="additional-info">
                                 {/* Additional Info Form */}
                                 <form className="col-12 p-a0">
