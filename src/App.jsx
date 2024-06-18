@@ -172,7 +172,7 @@ function App() {
             </UserPrivateRoute>
           }
         />
-        <Route path="job-application" element={<JobPage />} />
+        <Route path="job" element={<JobPage />} />
         <Route
           path="applicant-job"
           element={
