@@ -742,7 +742,7 @@ function JobPage() {
 
                 <div className="container">
                   <div
-                    className="row d-flex justify-content-center "
+                    className="d-flex justify-content-center "
                     style={{ gap: "12px" }}
                   >
                     <div
@@ -759,7 +759,7 @@ function JobPage() {
                         onChange={handleChange}
                         value={jobApplicationValues.search_input}
                         autoComplete="false"
-                        className="w-100 p-2 h-100 bg-transparent border-0 "
+                        className="w-100 p-2 h-100 bg-transparent border-0"
                         placeholder="search here..."
                         style={{ outline: "none" }}
                       />
@@ -781,12 +781,12 @@ function JobPage() {
                 {jobApplicationData.length !== 0 ? (
                   <div className="container">
                     <div className="row">
-                      <div className="col-xl-4 col-lg-5 m-b30">
-                        <div className="sticky-top">
+                      <div className="col-xl-4 col-lg-5 m-b30 rounded-5 ">
+                        <div className="sticky-top ">
                           {jobApplicationData ? (
-                            <div className="candidate-info company-info">
+                            <div className="candidate-info company-info rounded-5 ">
                               <ul
-                                className="job-list-container"
+                                className="job-list-container rounded-4"
                                 style={{
                                   maxHeight: "calc(100vh - 200px)",
                                   overflowY: "auto",
@@ -807,7 +807,7 @@ function JobPage() {
                                             position: "relative",
                                           }}
                                         >
-                                          <div
+                                          {/*<div
                                             style={{
                                               width: "30%",
                                             }}
@@ -820,7 +820,7 @@ function JobPage() {
                                                 height: "80px",
                                               }}
                                             />
-                                          </div>
+                                          </div> */}
                                           <div
                                             style={{
                                               width: "80%",
@@ -831,15 +831,16 @@ function JobPage() {
                                               <p
                                                 className="mb-0"
                                                 style={{
-                                                  color: "#1c2957",
+                                                  color: "black",
+                                                  fontWeight:"500",
                                                   fontSize: "20px",
                                                 }}
                                               >
                                                 {job.job_detail.job_title}
                                               </p>
-                                            )}
+                                            )} 
                                             <div
-                                              className="d-flex flex-row mb-0 "
+                                              className="d-flex flex-row mt-2 "
                                               style={{
                                                 gap: "7px",
                                                 fontWeight: "500",
@@ -855,7 +856,26 @@ function JobPage() {
                                                 }}
                                               ></p>
                                             </div>
+                                            <div
+                                              className="d-flex flex-row mb-0 "
+                                              style={{
+                                                gap: "3px",
+                                                fontSize:'12px'
+                                                
+                                              }}
+                                            >
+                                              {job.companies.countries.name}
+                                              <p
+                                                className="mb-0"
+                                                onClick={() => {
+                                                  navigate(
+                                                    `/user/company/${job.companies.id}`
+                                                  );
+                                                }}
+                                              ></p>
+                                            </div>
 
+                                            <div className="d-flex">
                                             <span
                                               style={{
                                                 marginBottom: "0px",
@@ -865,6 +885,7 @@ function JobPage() {
                                             >
                                               Skills required:
                                             </span>
+                                            
                                             <span
                                               className="d-flex flex-row mb-0 "
                                               style={{ gap: "7px" }}
@@ -883,6 +904,7 @@ function JobPage() {
                                                 )
                                               )}
                                             </span>
+                                            </div>
 
                                             <div
                                               className=" gap-0 align-items-center joblist"
@@ -923,7 +945,7 @@ function JobPage() {
                                                       style={{
                                                         margin: "0px",
                                                       }}
-                                                    >
+                                                    >Workplace: {" "}
                                                       {
                                                         job.job_workplace_types
                                                           .name
@@ -931,9 +953,9 @@ function JobPage() {
                                                     </p>
                                                   )}
                                                 </div>
-                                                <div>
+                                                <div className="float-end">
                                                   {job.job_detail
-                                                    .created_at && (
+                                                    .updated_at && (
                                                     <p
                                                       style={{
                                                         margin: "0px",
@@ -942,7 +964,7 @@ function JobPage() {
                                                     >
                                                       {moment(
                                                         job.job_detail
-                                                          .created_at
+                                                          .updated_at
                                                       ).fromNow()}
                                                     </p>
                                                   )}
@@ -960,9 +982,9 @@ function JobPage() {
                           ) : null}
                         </div>
                       </div>
-                      <div className="col-xl-8 col-lg-7 m-b30">
+                      <div className="col-xl-8 col-lg-7 m-b30 ">
                         {selectedJob && (
-                          <div className="m-b20 job-bx ">
+                          <div className="m-b20 job-bx rounded-4  ">
                             <div>
                               <div className="candidate-title">
                                 <Link to="#">
@@ -982,11 +1004,11 @@ function JobPage() {
                                     )}
                                   <div
                                     className="d-flex"
-                                    style={{ gap: "7px" }}
+                                    style={{ gap: "4px" }}
                                   >
                                     {selectedJob.job_detail.skills_arr.map(
                                       (item, index) => (
-                                        <p key={index} className="mb-5">
+                                        <p key={index} className="">
                                           {item}
                                         </p>
                                       )
@@ -997,11 +1019,43 @@ function JobPage() {
                                       Skills: {selectedJob.job_detail.skills}
                                     </p>
                                   )}
+                                   {localStorage.getItem("jobSeekerLoginToken") ? (
+                                  <>
+                                    {selectedJob.job_detail.is_job_applied ? (
+                                      <button
+                                        className="site-button btn btn-primary"
+                                        // onClick={handleShow}
+                                      >
+                                        View Status
+                                      </button>
+                                    ) : (
+                                      <button
+                                        className="site-button btn btn-primary"
+                                        onClick={handleShow}
+                                      >
+                                        Apply
+                                      </button>
+                                    )}
+                                  </>
+                                ) : (
+                                  <>
+                                    <button
+                                      className=" site-button btn btn-primary "
+                                      onClick={() => navigate("/user/login")}
+                                    >
+                                      Apply now
+                                    </button>
+                                  </>
+                                )}
+                                <p>You must create an nova account before continuing to the company website to apply</p>
+                                 <div className="d-inline-block border-end border-1 border-btn btn-outline-secondary w-100 mb-4"></div>
+                                <h5>Job details</h5>
+                                
                                   {selectedJob.companies.id && (
                                     <div
-                                      className="d-flex"
+                                      className="d-flex "
                                       style={{
-                                        gap: "100px",
+                                        gap: "50px",
                                       }}
                                     >
                                       <p
@@ -1032,6 +1086,7 @@ function JobPage() {
                                       </p>
                                     </div>
                                   )}
+                                  
                                   {selectedJob.companies.id && (
                                     <div
                                       className="d-flex"
@@ -1062,6 +1117,8 @@ function JobPage() {
                                     </div>
                                   )}{" "}
                                 </div>
+                                <div className="d-inline-block border-end border-1 border-btn btn-outline-secondary w-100 my-3"></div>
+                                <h5>Full job description</h5>
                                 {selectedJob.job_detail.job_description && (
                                   <p className="mb-1">
                                     <div
@@ -1087,34 +1144,7 @@ function JobPage() {
                                 </p>
                               )}
                               <div className="d-flex justify-content-start align-items-center">
-                                {localStorage.getItem("jobSeekerLoginToken") ? (
-                                  <>
-                                    {selectedJob.job_detail.is_job_applied ? (
-                                      <button
-                                        className="radius-xl site-button"
-                                        // onClick={handleShow}
-                                      >
-                                        View Status
-                                      </button>
-                                    ) : (
-                                      <button
-                                        className="radius-xl site-button"
-                                        onClick={handleShow}
-                                      >
-                                        Apply
-                                      </button>
-                                    )}
-                                  </>
-                                ) : (
-                                  <>
-                                    <button
-                                      className="radius-xl site-button"
-                                      onClick={() => navigate("/user/login")}
-                                    >
-                                      Apply
-                                    </button>
-                                  </>
-                                )}
+                                
 
                                 <Modal
                                   show={show}
@@ -1378,6 +1408,7 @@ function JobPage() {
                                 </Modal>
 
                                 <label className="like-btn" labl>
+                               
                                   <input
                                     type="checkbox"
                                     defaultChecked={
@@ -1389,13 +1420,14 @@ function JobPage() {
                                     }}
                                   />
                                   <span className="checkmark"></span>
+                                  
                                 </label>
                               </div>
                             </div>
                           </div>
                         )}
                         {selectedJob ? (
-                          <div className="job-bx ">
+                          <div className="job-bx rounded-5 ">
                             <h3>About Company</h3>
                             {selectedJob.companies.about}
                           </div>
