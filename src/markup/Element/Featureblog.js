@@ -13,7 +13,7 @@ function Featureblog() {
   const navigate = useNavigate();
   const handleLocationSelect = (location) => {
     localStorage.setItem("selectedLocation", location);
-    navigate("/user/job-application");
+    navigate("/user/job");
   };
 
   return (

@@ -24,7 +24,7 @@ function Jobcategories() {
   const navigate = useNavigate();
   const handleSelectedTitle = (category) => {
     localStorage.setItem("jobCategory", category);
-    navigate("/user/job-application");
+    navigate("/user/job");
   };
   const token = localStorage.getItem("jobSeekerLoginToken");
   const [categories, setCategories] = useState([
@@ -232,7 +232,7 @@ function Jobcategories() {
       </div> */}
       <div className="col-lg-12 text-center m-t30">
         <button className="site-button radius-xl">
-          <Link to={"/user/job-application"} className="site-button">
+          <Link to={"/user/job"} className="site-button">
             All Categories
           </Link>
         </button>

@@ -102,7 +102,7 @@ function Jobsection() {
             </div>
             <div className="align-self-end">
               
-              <Link to={"/user/job-application"} className="site-button button-sm">
+              <Link to={"/user/job"} className="site-button button-sm">
                 Browse All Jobs <i className="fa fa-long-arrow-right"></i>
               </Link>
             </div>
