@@ -60,15 +60,16 @@ const CompanySideBar = ({ active }) => {
           Authorization: token,
         },
       });
-      setLogo(`https://novajobs.us${response.data.data.company_detail.logo}`); // This is the resolved value used as action.payload
+      setLogo(`${response.data.data.company_detail.logo}`);
     } catch (error) {
-      // Using rejectWithValue to return a custom error payload
+      console.error("Error fetching logo:", error);
+      // Handle error if necessary
     }
   };
 
   useEffect(() => {
-    getLogo();
-  }, []);
+    getLogo(); // Fetch logo on component mount
+  }, []); // Empty dependency array ensures it runs only once
 
   console.log(logo, "lavi");
 

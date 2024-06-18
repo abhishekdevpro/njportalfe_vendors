@@ -77,11 +77,15 @@ function Jobsection() {
                     <div className="d-flex m-b30">
                       <div className="job-post-company">
                         <span>
-                          <img
+                        <img
                             alt="profile"
-                            src={item?.jobskkers_detail?.photo}
+                            src={item?.jobskkers_detail?.photo || 'path-to-default-image.jpg'}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                            
+                            }}
                           />
-                        </span>
+                        </span>{console.log(item?.jobskkers_detail?.photo,'data is comming')}
                       </div>
                       <div className="job-post-info">
                         <h4>

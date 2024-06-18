@@ -134,37 +134,49 @@ function Register2(props) {
 
   const dispatch = useDispatch();
 
- const onSignUp = async (e) => {
-  e.preventDefault();
-  const body = {
-    first_name: registerValues.firstName,
-    last_name: registerValues.lastName,
-    company_name: registerValues.company,
-    email: registerValues.email,
-    phone: registerValues.phone,
-    password: registerValues.password,
+  const onSignUp = async (e) => {
+    e.preventDefault();
+    const body = {
+      first_name: registerValues.firstName,
+      last_name: registerValues.lastName,
+      company_name: registerValues.company,
+      email: registerValues.email,
+      phone: registerValues.phone,
+      password: registerValues.password,
+    };
+  
+    try {
+      const res = await axios.post("https://api.novajobs.us/api/jobseeker/auth/signup", body, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+  
+      localStorage.setItem("jobseeker", res.data.data);
+      showToastSuccess("Please check your email");
+  
+      // Send confirmation email with verification link
+      await sendConfirmationEmail(registerValues.email, res.data.token);
+  
+      // Reset the form fields
+      setRegisterValues({
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        password: "",
+        jobTitle: "",
+      });
+  
+      setErrors({}); // Clear any existing errors
+      setShowUpload(false);
+    } catch (err) {
+      console.log(err);
+      showToastError("User already registered with this email");
+    }
   };
-
-  try {
-    const res = await axios.post("https://api.novajobs.us/api/jobseeker/auth/signup", body, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    });
-
-    localStorage.setItem("jobseeker", res.data.data);
-    showToastSuccess("Please check your email");
-
-    // Send confirmation email with verification link
-    await sendConfirmationEmail(registerValues.email, res.data.token);
-
-    setShowUpload(false);
-  } catch (err) {
-    console.log(err);
-    showToastError("user already registered from this email before");
-  }
-};
+  
 
 // Function to send confirmation email with verification link
 const sendConfirmationEmail = async (email, token) => {
@@ -407,7 +419,7 @@ useEffect(() => {
                                 className="custom-control-label"
                                 htmlFor="terms"
                               >
-                                I agree to the{" "}
+                              {" "}  I  d agree to the{" "}
                                 {
                                   <Link to={"/employee/privacy-rights"}>
                                     Privacy Policy

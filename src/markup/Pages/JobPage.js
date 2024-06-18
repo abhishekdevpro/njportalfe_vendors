@@ -896,7 +896,7 @@ function JobPage() {
                                                     style={{
                                                       fontSize: "12px",
                                                     }}
-                                                    className="mb-0 "
+                                                   className="badge badge-primary mr-1 mb-1"
                                                     key={index}
                                                   >
                                                     {item}
@@ -1008,7 +1008,7 @@ function JobPage() {
                                   >
                                     {selectedJob.job_detail.skills_arr.map(
                                       (item, index) => (
-                                        <p key={index} className="">
+                                        <p key={index} className="badge badge-primary mr-1 mb-1">
                                           {item}
                                         </p>
                                       )
@@ -1094,6 +1094,7 @@ function JobPage() {
                                         gap: "100px",
                                       }}
                                     >
+                                     {/*
                                       <p>
                                         <i
                                           class="fa fa-users"
@@ -1104,6 +1105,7 @@ function JobPage() {
                                             .range
                                         }
                                       </p>
+                                     */}
                                       <p>
                                         <i
                                           class="fa fa-location-arrow"

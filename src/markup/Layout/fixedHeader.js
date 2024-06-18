@@ -173,10 +173,10 @@ const FixedHeader = () => {
   const imagePath = fixedHeaderValues.photo;
 
   // Define the base URL
-  const baseUrl = "https://novajobs.us";
+ 
 
   // Create the full URL
-  const fullImageUrl = baseUrl + imagePath;
+  const fullImageUrl =  imagePath;
 
   console.log(fullImageUrl);
 

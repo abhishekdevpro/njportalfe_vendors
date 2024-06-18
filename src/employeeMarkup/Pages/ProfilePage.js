@@ -56,7 +56,7 @@ const ProfilePage = () => {
                               className="cover-picture"
                             />
                             <img
-                              src={`https://novajobs.us${userData.jobskkers_detail.photo}`}
+                              src={`https://novajobs.us${userData?.jobskkers_detail?.photo}`}
                               alt="Profile"
                               roundedCircle
                               className="profile-picture"
