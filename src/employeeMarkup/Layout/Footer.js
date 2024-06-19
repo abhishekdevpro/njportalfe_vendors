@@ -54,7 +54,7 @@ function EmployeerFooter() {
                   src={require("./../../images/logo/NovaUS.png")}
                   width="180"
                   className="m-b15"
-                  alt=""
+                  alt="img" 
                 />
                   </Link>
                 <p className="text-capitalize m-b20">
