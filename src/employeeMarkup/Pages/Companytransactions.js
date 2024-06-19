@@ -21,7 +21,7 @@ function EmployeeCompanytransactions() {
                       Wallet History
                       </h5>
                       <Link
-                        to={"/employee/company-post-jobs"}
+                        to={"/employee/company-profile"}
                         className="site-button right-arrow button-sm float-right"
                       >
                         Back

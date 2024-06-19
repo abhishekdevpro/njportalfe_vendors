@@ -71,11 +71,11 @@ const AddScreening = () => {
                   <div>
                     {category.screen_questions.map((question, qIndex) => (
                       <div key={qIndex}>
-                        <label className="mt-4">{question.name}</label>
+                        <label className="mt-2">{question.name}</label>
 
                         {question.screen_questions_options.map((item) => (
                           <div className="custom-control custom-checkbox">
-                            <label className="custom-control-label">
+                            <label className="custom-control-label ps-4">
                               {item.option}
                             </label>
                           </div>

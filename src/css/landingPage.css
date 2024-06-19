@@ -112,3 +112,16 @@ body {
     }
   }
   
+  /* Example CSS - Adjust as needed */
+.modal-content {
+    border-radius: 8px;
+  }
+  
+  .custom-modal-header {
+    border-bottom: none;
+  }
+  
+  .site-button {
+    /* Your button styles */
+  }
+  

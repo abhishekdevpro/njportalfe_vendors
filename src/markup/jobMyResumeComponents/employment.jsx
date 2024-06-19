@@ -117,10 +117,10 @@ const EmploymentComponent = () => {
         </Link>
       </div>
       {employmentData ? (
-        <div>
+        <div >
           {employmentData.map((item, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="text-break">
                 <div
                   className="d-flex justify-content-between align-items-center px-3 "
                   style={{ gap: "20px" }}

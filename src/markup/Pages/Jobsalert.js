@@ -121,9 +121,9 @@ function Jobsalert() {
                   <div className="job-bx table-job-bx browse-job clearfix">
                     <div className="job-bx-title clearfix">
                       <h5 className="font-weight-700 pull-left text-uppercase">
-                        Job Alerts
+                      Notifications
                       </h5>
-                      <div className="float-right">
+                      {/*<div className="float-right">
                         <span className="select-title">Sort by freshness</span>
                         <select className="custom-btn">
                           <option>Last 2 Months</option>
@@ -131,9 +131,10 @@ function Jobsalert() {
                           <option>Last Weeks</option>
                           <option>Last 3 Days</option>
                         </select>
-                      </div>
-                    </div>
-                    <table>
+                      </div> */}
+                    </div><div className="d-flex justify-content-center"
+                    ><h1>🚧  Notifications coming soon</h1></div>
+                    {/**<table>
                       <thead>
                         <tr>
                           <th>Premium jobs</th>
@@ -190,7 +191,8 @@ function Jobsalert() {
                           </Link>
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
+                    
                   </div>
                   <Modal
                     show={company}

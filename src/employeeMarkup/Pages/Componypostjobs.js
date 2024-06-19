@@ -794,7 +794,7 @@ function EmployeeComponypostjobs() {
                         </p>
                       </div>
                     )}
-                    <div>
+                    <div> <br/>
                       <h4>Description</h4>
                       {description ? (
                         <div>
@@ -834,7 +834,7 @@ function EmployeeComponypostjobs() {
                             class="custom-control-label"
                             for="check1"></label>
                         </div>
-                        <div style={{ color: "#9d9d9d" }}>
+                        <div style={{ color: "#9d9d9d" }} className="ms-4">
                           Filter out and send rejections to applicants who don't
                           meet any must-have qualifications.{" "}
                           <FaCircleQuestion />

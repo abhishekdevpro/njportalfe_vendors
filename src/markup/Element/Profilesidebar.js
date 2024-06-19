@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, withRouter } from "react-router-dom";
 
 function Profilesidebar({ data }) {
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    localStorage.removeItem("jobSeekerLoginToken");
+    navigate("/user/login");
+  };
   return (
     <div className="col-xl-3 col-lg-4 m-b30">
       <div className="sticky-top">
@@ -16,6 +22,15 @@ function Profilesidebar({ data }) {
               </Link>
             </li>
             <li>
+            <Link
+                to={"https://ai-resume-sepia.vercel.app/"}
+                className={data === "resume" ? "active" : null}>
+                <i className="fa fa-file-text-o" aria-hidden="true"></i>
+                <span>AI Resume Builder</span>
+              </Link>
+            </li>
+            <li>
+            
               <Link
                 to={"/user/jobs-my-resume"}
                 className={data === "resume" ? "active" : null}>
@@ -44,7 +59,7 @@ function Profilesidebar({ data }) {
                 to={"/user/jobs-alerts"}
                 className={data === "alerts-jobs" ? "active" : null}>
                 <i className="fa fa-bell-o" aria-hidden="true"></i>
-                <span>Job Alerts</span>
+                <span>Notifications</span>
               </Link>
             </li>
             {/* <li>
@@ -70,9 +85,11 @@ function Profilesidebar({ data }) {
               </Link>
             </li>
             <li>
-              <Link to={"./"}>
+            
+              <Link to={"/user/login"}>
                 <i className="fa fa-sign-out" aria-hidden="true"></i>
-                <span>Log Out</span>
+                
+                <span  onClick={() => onLogout()}>Log Out</span>
               </Link>
             </li>
           </ul>

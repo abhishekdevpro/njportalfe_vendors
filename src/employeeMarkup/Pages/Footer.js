@@ -9,7 +9,7 @@ function EmployeeFooter() {
     <footer className="site-footer">
       <div className="footer-top">
         <div className="container">
-          <div className="row">
+          <div className="d-flex ">
             <div className="col-xl-5 col-lg-4 col-md-12 col-sm-12">
               <div className="widget">
                 {/* <img src={require("./../../images/logo-white.png")} width="180" className="m-b15" alt=""/> */}

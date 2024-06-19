@@ -1,29 +1,25 @@
 import React, { useState } from "react";
 import "../../css/landingPage.css";
 import img from "../../images/360_F_309586333_FU8eARHr7QnC1TSPmvrIdqWp0qoRGMDM-removebg-preview.png";
-// import img2 from "../../images/WhatsApp_Image_2024-05-08_at_11.14.27-removebg-preview.png";
-// import img3 from "../../images/WhatsApp_Image_2024-05-08_at_11.14.26-removebg-preview.png";
-// import img4 from "../../images/WhatsApp_Image_2024-05-08_at_11.14.27__1_-removebg-preview.png";
-// import img5 from "../../images/WhatsApp_Image_2024-05-08_at_11.14.27__2_-removebg-preview.png";
-// import img6 from "../../images/WhatsApp_Image_2024-05-08_at_11.14.26__1_-removebg-preview.png";
 import img7 from "../../images/services/1.jpeg"
 import img2 from "../../images/services/2.jpeg";
 import img3 from "../../images/services/3.jpeg";
 import img4 from "../../images/services/4.jpeg";
 import img5 from "../../images/services/5.jpeg";
 import img6 from "../../images/services/6.jpeg";
-import { Tab, Nav, Form, Modal } from "react-bootstrap";
+
+import { Modal } from "react-bootstrap";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
 
 const LandingPage = () => {
+  const [show, setShow] = useState(false);
+
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
-  const [show, setShow] = useState(false);
-
   return (
-    <div>
+    <div className="position-relative">
       <Header />
 
       <Modal
@@ -31,80 +27,71 @@ const LandingPage = () => {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
-        
+        centered // This will center the modal
       >
-         <Modal.Header
-        
-        style={{ backgroundColor: "#fff" }}
-        className="mt-4 custom-modal-header"
-      >
-          <Modal.Title style={{ color: "#000" }}>
-            <p>Contact Form</p>
-          </Modal.Title>
-          <button type="button" className="close" onClick={handleClose} style={{ fontSize: "44px", padding: "10px" }}>
-                <span aria-hidden="true">&times;</span>
-                 </button>
+        <Modal.Header closeButton style={{ backgroundColor: "#fff" }}>
+          <Modal.Title style={{ color: "#000" }}>Contact Form</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div class="row">
-            <div class="col">
-              <div data-mdb-input-init class="form-outline">
-                <label class="form-label" for="form8Example3">
+          <div className="row">
+            <div className="col">
+              <div className="form-outline">
+                <label className="form-label" htmlFor="form8Example3">
                   First name
                 </label>
-                <input type="text" id="form8Example3" class="form-control" />
+                <input type="text" id="form8Example3" className="form-control" />
               </div>
             </div>
-            <div class="col">
-              <div data-mdb-input-init class="form-outline">
-                <label class="form-label" for="form8Example4">
+            <div className="col">
+              <div className="form-outline">
+                <label className="form-label" htmlFor="form8Example4">
                   Last name
                 </label>
-                <input type="text" id="form8Example4" class="form-control" />
+                <input type="text" id="form8Example4" className="form-control" />
               </div>
             </div>
-            <div class="col-12">
-              <div data-mdb-input-init class="form-outline">
-                <label class="form-label" for="form8Example5">
+            <div className="col-12">
+              <div className="form-outline">
+                <label className="form-label" htmlFor="form8Example5">
                   Email address
                 </label>
-                <input type="email" id="form8Example5" class="form-control" />
+                <input type="email" id="form8Example5" className="form-control" />
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12">
-              <div data-mdb-input-init class="form-outline">
-                <label class="form-label" for="form8Example1">
+          <div className="row">
+            <div className="col-12">
+              <div className="form-outline">
+                <label className="form-label" htmlFor="form8Example1">
                   Phone No.
                 </label>
-                <input type="number" id="form8Example1" class="form-control" />
+                <input type="number" id="form8Example1" className="form-control" />
               </div>
             </div>
-            <div class="col">
-              <div data-mdb-input-init class="form-outline">
-                <label class="form-label" for="form8Example2">
-                  Company Name{" "}
+            <div className="col">
+              <div className="form-outline">
+                <label className="form-label" htmlFor="form8Example2">
+                  Company Name
                 </label>
-                <input type="email" id="form8Example2" class="form-control" />
+                <input type="text" id="form8Example2" className="form-control" />
               </div>
             </div>
-            <div class="col-12">
-              <div data-mdb-input-init class="form-outline">
-                <label class="form-label" for="form8Example2">
-                  Designation{" "}
+            <div className="col-12">
+              <div className="form-outline">
+                <label className="form-label" htmlFor="form8Example2">
+                  Designation
                 </label>
-                <input type="email" id="form8Example2" class="form-control" />
+                <input type="text" id="form8Example2" className="form-control" />
               </div>
             </div>
           </div>
-          <div class="">
-            <div data-mdb-input-init class="form-outline mb-4">
-              <label class="form-label" for="form6Example7">
+          <div>
+            <div className="form-outline mb-4">
+              <label className="form-label" htmlFor="form6Example7">
                 Remark
               </label>
               <textarea
-                class="form-control"
+                className="form-control"
                 id="form6Example7"
                 rows="4"
               ></textarea>
@@ -112,22 +99,44 @@ const LandingPage = () => {
             <button className="site-button">Submit</button>
           </div>
         </Modal.Body>
-      </Modal>
+      </Modal><br/>
+      <div className="position-absolute top-0 start-50 translate-middle-x mt-5 pt-5">
+      <button className="site-button  mt-5 px-5 py-4 fw-bold" style={{margintop:'500px' ,fontSize:'20px'}} onClick={handleShow}>
+              Explore Our one stop white label AI Enabled services for Employers & Staffing companies
+            </button>
+      </div>
       <div className="banner">
+        
         <div className="banner-text">
+          
+          
           <h2>
             Nova Jobs us <br /> AI based job Portal
           </h2>
+          
         </div>
         <div className="banner-img">
-          <img src={img} alt="" />
+          <img src={img} alt="Banner" />
         </div>
       </div>
+
       <div className="services">
         <div className="services-row">
           <div className="service-div">
-            <img src={img2} alt="" />
-            <p>AI-Based Job Portal:</p>
+            <img src={img2} alt="Service 2" />
+            <p style={{fontSize:'20px'}} className="text-center"> For Employers & Staffing </p>
+            <ul>
+              <li>Payroll & Team manage</li>
+              <li>Task assign</li>
+              <li>  One stop HR Solution</li>
+            </ul>
+            <button className="site-button" onClick={handleShow}>
+              Interested ?
+            </button>
+          </div>
+          <div className="service-div">
+            <img src={img2} alt="Service 2" />
+            <p style={{fontSize:'20px'}}>AI-Based Job Portal:</p>
             <ul>
               <li>Jobseeker Login</li>
               <li>Employer Login</li>
@@ -138,8 +147,8 @@ const LandingPage = () => {
             </button>
           </div>
           <div className="service-div">
-            <img src={img3} alt="" className="img-3" />
-            <p>AI-Based Skill Test:</p>
+            <img src={img3} alt="Service 3" className="img-3" />
+            <p style={{fontSize:'20px'}}>AI-Based Skill Test:</p>
             <ul>
               <li>Timer Based</li>
               <li>Immediate Result</li>
@@ -152,8 +161,8 @@ const LandingPage = () => {
         </div>
         <div className="services-row">
           <div className="service-div">
-            <img src={img4} alt="" />
-            <p>AI-Based Functionality:</p>
+            <img src={img4} alt="Service 4" />
+            <p style={{fontSize:'20px'}}>AI-Based Functionality:</p>
             <ul>
               <li>Auto Job Match</li>
               <li>Skill Based Match</li>
@@ -164,8 +173,20 @@ const LandingPage = () => {
             </button>
           </div>
           <div className="service-div">
-            <img src={img5} alt="" />
-            <p>Ai-Based CV Services:</p>
+            <img src={img4} alt="Service 4" />
+            <p style={{fontSize:'20px'}}>AI-Based Functionality:</p>
+            <ul>
+              <li>Auto Job Match</li>
+              <li>Skill Based Match</li>
+              <li>Auto JD Writing ..</li>
+            </ul>
+            <button className="site-button" onClick={handleShow}>
+              Interested ?
+            </button>
+          </div>
+          <div className="service-div">
+            <img src={img5} alt="Service 5" />
+            <p style={{fontSize:'20px'}}>Ai-Based CV Services:</p>
             <ul>
               <li>Live CV Score</li>
               <li>Live CV Builder</li>
@@ -175,11 +196,11 @@ const LandingPage = () => {
               Interested ?
             </button>
           </div>
-        </div>{" "}
+        </div>
         <div className="services-row">
           <div className="service-div">
-            <img src={img6} alt="" />
-            <p>Robust Vendor Panel:</p>
+            <img src={img6} alt="Service 6" />
+            <p style={{fontSize:'20px'}}>Robust Vendor Panel:</p>
             <ul>
               <li>Bulk CV upload</li>
               <li>Bulk Opening upload</li>
@@ -190,8 +211,20 @@ const LandingPage = () => {
             </button>
           </div>
           <div className="service-div">
-            <img src={img7} alt="" />
-            <p>AI-Based Add-ONS:</p>
+            <img src={img7} alt="Service 7" />
+            <p style={{fontSize:'20px'}}>AI-Based Add-ONS:</p>
+            <ul>
+              <li>Robust Wallet</li>
+              <li>Secure Chats</li>
+              <li>Vendor Login</li>
+            </ul>
+            <button className="site-button" onClick={handleShow}>
+              Interested ?
+            </button>
+          </div>
+          <div className="service-div">
+            <img src={img7} alt="Service 7" />
+            <p style={{fontSize:'20px'}}>AI-Based Add-ONS:</p>
             <ul>
               <li>Robust Wallet</li>
               <li>Secure Chats</li>

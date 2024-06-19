@@ -263,7 +263,7 @@ const runAi = async (e) => {
                     <Link to={"#"}>
                       {fixedHeaderValues.photo ? (
                         <img
-                          src={fullImageUrl}
+                          src={fullImageUrl }
                           style={{
                             height: "100px",
                           }}

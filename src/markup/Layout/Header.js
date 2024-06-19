@@ -149,7 +149,7 @@ class UserHeader extends Component {
                       }}
                       className=""
                     >
-                      <Link to={"/user/job-application"}>Job Page</Link>
+                      <Link to={"/user/job"}>Job Page</Link>
                     </li>
                     {localStorage.getItem("jobSeekerLoginToken") ? (
                       <li>

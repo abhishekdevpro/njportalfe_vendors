@@ -987,11 +987,42 @@ function JobPage() {
                           <div className="m-b20 job-bx rounded-4  ">
                             <div>
                               <div className="candidate-title">
-                                <Link to="#">
+                                <div className="d-flex gap-4">
+                                <div><Link to="#">
                                   <h3 className="mb-1">
                                     {selectedJob.job_detail.job_title}
                                   </h3>
-                                </Link>
+                                </Link></div>
+                                <div>{localStorage.getItem("jobSeekerLoginToken") ? (
+                                  <>
+                                    {selectedJob.job_detail.is_job_applied ? (
+                                      <button
+                                        className="site-button btn btn-primary"
+                                        // onClick={handleShow}
+                                      >
+                                        View Status
+                                      </button>
+                                    ) : (
+                                      <button
+                                        className="site-button btn btn-primary"
+                                        onClick={handleShow}
+                                      >
+                                        Apply
+                                      </button>
+                                    )}
+                                  </>
+                                ) : (
+                                  <>
+                                    <button
+                                      className=" site-button btn btn-primary "
+                                      onClick={() => navigate("/user/login")}
+                                    >
+                                      Apply now
+                                    </button>
+                                  </>
+                                )}</div>
+                                </div>
+                                
                                 <div className="job-details-content">
                                   {selectedJob.job_workplace_types.name &&
                                     selectedJob.job_type.name &&
@@ -1019,34 +1050,7 @@ function JobPage() {
                                       Skills: {selectedJob.job_detail.skills}
                                     </p>
                                   )}
-                                   {localStorage.getItem("jobSeekerLoginToken") ? (
-                                  <>
-                                    {selectedJob.job_detail.is_job_applied ? (
-                                      <button
-                                        className="site-button btn btn-primary"
-                                        // onClick={handleShow}
-                                      >
-                                        View Status
-                                      </button>
-                                    ) : (
-                                      <button
-                                        className="site-button btn btn-primary"
-                                        onClick={handleShow}
-                                      >
-                                        Apply
-                                      </button>
-                                    )}
-                                  </>
-                                ) : (
-                                  <>
-                                    <button
-                                      className=" site-button btn btn-primary "
-                                      onClick={() => navigate("/user/login")}
-                                    >
-                                      Apply now
-                                    </button>
-                                  </>
-                                )}
+                                   
                                 <p>You must create an nova account before continuing to the company website to apply</p>
                                  <div className="d-inline-block border-end border-1 border-btn btn-outline-secondary w-100 mb-4"></div>
                                 <h5>Job details</h5>
@@ -1163,12 +1167,21 @@ function JobPage() {
                                       <p> Apply to {selectedJob.company}</p>
                                     </Modal.Title>
                                   </Modal.Header>
-                                  <Modal.Body>
-                                    <Tab.Container
-                                      id="tabs-example"
-                                      activeKey={activeTab}
-                                    >
-                                      <div
+                                 
+                                    
+                                     
+                                      
+                                        <Tab.Pane eventKey="contact-info">
+                                          <form className="col-12 p-a0">
+                                            {selectedJob.screen_questions
+                                              .screen_question_keywords !==
+                                            null ? (
+                                              <div>
+                                                
+                                                {selectedJob.screen_questions.screen_question_keywords.map(
+                                                  (item, index) => (
+                                                    <div key={index}>
+                                                       <div
                                         style={{
                                           fontSize: "20px",
                                           paddingBottom: "10px",
@@ -1176,16 +1189,6 @@ function JobPage() {
                                       >
                                         Screening questions
                                       </div>
-                                      <Tab.Content>
-                                        <Tab.Pane eventKey="contact-info">
-                                          <form className="col-12 p-a0">
-                                            {selectedJob.screen_questions
-                                              .screen_question_keywords !==
-                                            null ? (
-                                              <div>
-                                                {selectedJob.screen_questions.screen_question_keywords.map(
-                                                  (item, index) => (
-                                                    <div key={index}>
                                                       <h4>{item.name}</h4>
                                                       <div>
                                                         {item.screen_questions.map(
@@ -1382,9 +1385,9 @@ function JobPage() {
                                             </div>
                                           </form>
                                         </Tab.Pane>
-                                      </Tab.Content>
-                                    </Tab.Container>
-                                  </Modal.Body>
+                                      
+                                    
+                                
                                   <Modal.Footer>
                                     {activeTab !== "contact-info" && (
                                       <button

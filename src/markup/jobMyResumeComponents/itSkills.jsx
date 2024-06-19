@@ -73,10 +73,7 @@ const ITSkillsComponent = () => {
     const trimmedLastUsed = itSkillsValue.lastUsed.trim();
     const trimmedExperience = itSkillsValue.experience.trim();
 
-    if (!resumeUploaded) {
-      setErrorMessage("Please upload resume");
-      return;
-    }
+   
 
     if (
       trimmedSkills &&

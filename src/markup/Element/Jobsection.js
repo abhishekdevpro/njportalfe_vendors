@@ -1,13 +1,17 @@
-import axios from "axios";
-import { showToastError } from "../../utils/toastify";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setJobApplicationData } from "../../store/reducers/jobApplicationSlice";
+import axios from "axios";
 import moment from "moment";
+import { ToastContainer, toast } from "react-toastify";
+import Modal from "react-modal"; // Import React Modal
+import { setJobApplicationData } from "../../store/reducers/jobApplicationSlice";
+import { showToastError } from "../../utils/toastify";
 import JobPageSkeleton from "../skeleton/jobPage";
 import TwoBoxWithLinesSkeleton from "../skeleton/twoBoxLines";
-import { ToastContainer, toast } from "react-toastify";
+
+// Add your other imports like ToastContainer and other components
+
 
 const postBlog = [
   {
@@ -37,6 +41,8 @@ function Jobsection() {
     (state) => state.jobApplicationSlice.jobApplicationData
   );
   const [skeleton, setSkeleton] = useState(true);
+  const [logoUrls, setLogoUrls] = useState([]);
+
   const fetchJobApplicationData = async () => {
     try {
       const response = await axios.get(
@@ -58,6 +64,51 @@ function Jobsection() {
       console.log(error);
     }
   };
+
+  const getLogoUrls = async () => {
+    try {
+      const response = await axios.get(
+        "https://api.novajobs.us/api/jobseeker/job-lists?page_size=7&is_publish=1",
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      const logos = response.data.data.map((item) => ({
+        id: item.id, // assuming each job has an id
+        logo: item.company_detail.logo, // adjust according to your API response
+      }));
+      setLogoUrls(logos);
+      setSkeleton(false);
+    } catch (error) {
+      console.error("Error fetching logos:", error);
+      // Handle error if necessary
+    }
+  };
+  
+  useEffect(() => {
+    getLogoUrls();
+  }, []);
+  
+
+  useEffect(()=>{
+    axios({
+      method: "PUT",
+      url: "https://api.novajobs.us/api/employeer/company-logo",
+      headers: {
+       Authorization: `Bearer ${token}`,
+      },
+     
+    })
+      .then((res) => {
+        console.log(res);
+      
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  })
 
   useEffect(() => {
     fetchJobApplicationData();
@@ -116,18 +167,30 @@ function Jobsection() {
                       <div className="post-bx">
                         <div className="d-flex m-b30">
                           <div className="job-post-company">
-                            <span>
-                              <img alt="" src={postBlog[0].image} />
-                            </span>
+                          <span>
+            {logoUrls[index] && (
+              <img
+                alt=""
+                src={logoUrls[index].logo}
+                style={{
+                  width: "100%",
+                  aspectRatio: 1,
+                }}
+              />
+            )}
+          </span>
                           </div>
                           <div className="job-post-info">
                             <h4>
                               <Link
-                                to={`/user/job-detail/${item.job_detail.id}`}
+                                to={`/user/job`}
                               >
                                 {item.job_detail.job_title}
                               </Link>
                             </h4>
+                            <h6>
+                              {item.companies.company_name}
+                            </h6>
                             <ul>
                               <li>
                                 <i className="fa fa-map-marker"></i>{" "}

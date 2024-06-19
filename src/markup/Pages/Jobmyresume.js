@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import Listingsidebar from "./../Element/Listingsidebar";

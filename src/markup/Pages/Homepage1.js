@@ -292,7 +292,7 @@ function Homepage() {
                   <div className="col-sm-12 col-md-4 col-lg-4 p-lr0">
                     <div
                       className="pricingtable-wrapper style2 bg-white"
-                      style={{ height: "350px" }}
+                      style={{ height: "300px" }}
                     >
                       <div className="pricingtable-inner">
                         <div className="pricingtable-price">
@@ -305,25 +305,27 @@ function Homepage() {
                           Jumpstart your AI Powered career transformation with
                           our free Plan, all at no cost.
                         </p>
-                        <div className="m-t20">
+                       
+                          {/*
+                           <div className="m-t20">
                           <Link
                             to={"/user/register-2"}
                             className="site-button radius-xl"
                           >
                             <span className="p-lr30">Sign Up</span>
-                          </Link>
-                        </div>
+                          </Link> </div>*/}
+                        
                       </div>
                     </div>
                   </div>
                   <div className="col-sm-12 col-md-4 col-lg-4 p-lr0">
                     <div
-                      className="pricingtable-wrapper style2 bg-primary text-white"
-                      style={{ height: "350px" }}
+                      className="pricingtable-wrapper style2  text-white"
+                      style={{ height: "300px" ,backgroundColor:"#1C2957"}}
                     >
                       <div className="pricingtable-inner">
                         <div className="pricingtable-price">
-                          <h4 className="font-weight-300 m-t40 m-b0">
+                          <h4 className="font-weight-300 m m-b0">
                             Freemium
                           </h4>
                           <div className="pricingtable-bx">
@@ -335,14 +337,14 @@ function Homepage() {
                         <p>
                           Explore our freemium plan, with pay as you go option.
                         </p>
-                        <div className="m-t20">
+                        {/*<div className="m-t20">
                           <Link
                             to={"/user/register-2"}
                             className="site-button white radius-xl"
                           >
                             <span className="text-primary p-lr30">Sign Up</span>
                           </Link>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>

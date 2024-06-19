@@ -140,7 +140,7 @@ class UserHeader2 extends Component {
                         localStorage.removeItem("title_keyword");
                       }}
                       className="">
-                      <Link to={"/user/job-application"}>Job Page</Link>
+                      <Link to={"/user/job"}>Job Page</Link>
                     </li>
                     <li className="">
                       <Link to={"/services"}>services </Link>

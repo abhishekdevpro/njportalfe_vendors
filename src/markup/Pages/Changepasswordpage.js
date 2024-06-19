@@ -4,7 +4,7 @@ import Header2 from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 import FixedHeader from "../Layout/fixedHeader";
 import axios from "axios";
-import { showToastError } from "../../utils/toastify";
+import { showToastError, showToastSuccess } from "../../utils/toastify";
 import Profilesidebar from "../Element/Profilesidebar";
 function Changepasswordpage() {
   const [showOldPassword, setShowOldPassword] = useState(false);
@@ -38,8 +38,10 @@ function Changepasswordpage() {
     })
       .then((response) => {
         console.log(response);
+        showToastSuccess("Password has been changed successfully")
       })
       .catch((err) => console.log(err));
+      showToastError("Something went wrong please try again")
   };
 
   return (

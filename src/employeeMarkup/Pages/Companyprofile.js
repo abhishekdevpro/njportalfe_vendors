@@ -206,12 +206,12 @@ function EmployeeCompanyprofile() {
                       <h5 className="font-weight-700 pull-left text-uppercase">
                         Company Profile
                       </h5>
-                      <Link
+                      {/*<Link
                         to={"/employee/company-profile"}
                         className="site-button right-arrow button-sm float-right"
                       >
                         Back
-                      </Link>
+                      </Link> */}
                     </div>
                     <form onSubmit={(e) => {
                       e.preventDefault();

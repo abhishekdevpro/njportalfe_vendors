@@ -113,7 +113,7 @@ function EmployeeCompanyresume() {
                         Applicant
                       </h5>
                       <Link
-                        to={"/company-manage-job"}
+                        to={"/employee/company-manage-job/jobs"}
                         className="site-button right-arrow button-sm float-right"
                       >
                         Back

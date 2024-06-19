@@ -73,7 +73,7 @@ function Changepasswordpage() {
                         Change Password
                       </h5>
                       <Link
-                        to={"/user/jobs-cv-manager"}
+                        to={"/employee/company-resume"}
                         className="site-button right-arrow button-sm float-right"
                       >
                         Back
