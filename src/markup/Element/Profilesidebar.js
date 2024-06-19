@@ -23,7 +23,7 @@ function Profilesidebar({ data }) {
             </li>
             <li>
             <Link
-                to={"https://ai-resume-sepia.vercel.app/"}
+               // to={"https://ai-resume-sepia.vercel.app/"}
                 className={data === "resume" ? "active" : null}>
                 <i className="fa fa-file-text-o" aria-hidden="true"></i>
                 <span>AI Resume Builder</span>
