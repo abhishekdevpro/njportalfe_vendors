@@ -109,7 +109,7 @@ function Homepage() {
                       with advance filters and power of AI
                     </p>
                     <Link
-                      to={"/user/job-application"}
+                      to={"/user/job"}
                       style={{ color: "white" }}
                     ><button type="button" className="btn text-white hoverlogo-3d" style={{backgroundColor:"#080F3A"}}>Apply Now</button>
                       
@@ -227,13 +227,13 @@ function Homepage() {
         <div className="section-full job-categories content-inner-2 bg-white">
           <div className="container">
             <div className="section-head d-flex head-counter clearfix">
-              <div className="mr-auto">
+              <div className="mr-auto text-break">
                 <h2 className="m-b5">Popular Categories</h2>
                 <h6 className="fw3">
                   8+ Categories waiting for your application
                 </h6>
               </div>
-              <div className="head-counter-bx">
+              <div className="head-counter-bx text-break">
                 <h2 className="m-b5 counter">
                   <CountUp end={100} duration={5} />+
                 </h2>
@@ -249,7 +249,7 @@ function Homepage() {
                 <h2 className="m-b5 counter">
                   <CountUp end={100} duration={5} />%
                 </h2>
-                <h6 className="fw3">AI Verified Opportunities</h6>
+                <h6 className="fw3 text-break">AI Verified Opportunities</h6>
               </div>
             </div>
             <Jobcategories />
@@ -286,39 +286,28 @@ function Homepage() {
                 starts with a Free Plan...
               </p>
             </div>
-            <div className="section-content box-sort-in button-example m-t80">
+            <div className="section-content box-sort-in button-example m-t80 ">
               <div className="pricingtable-row">
                 <div className="row max-w1000 m-auto justify-content-center ">
-                  <div className="col-sm-12 col-md-4 col-lg-4 p-lr0">
-                    <div
-                      className="pricingtable-wrapper style2 bg-white"
-                      style={{ height: "300px" }}
-                    >
-                      <div className="pricingtable-inner">
-                        <div className="pricingtable-price">
-                          <h4 className="font-weight-300 m-t10 m-b0">Basic</h4>
-                          <div className="pricingtable-bx">
-                            <span>Free</span>
-                          </div>
-                        </div>
-                        <p>
-                          Jumpstart your AI Powered career transformation with
-                          our free Plan, all at no cost.
-                        </p>
-                       
-                          {/*
-                           <div className="m-t20">
-                          <Link
-                            to={"/user/register-2"}
-                            className="site-button radius-xl"
-                          >
-                            <span className="p-lr30">Sign Up</span>
-                          </Link> </div>*/}
-                        
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-sm-12 col-md-4 col-lg-4 p-lr0">
+                <div className="col-12 col-md-4 ">
+  <div className="pricingtable-wrapper style2 bg-white text-center">
+    <div className="pricingtable-inner">
+      <div className="pricingtable-price">
+        <h4 className="font-weight-300 m-t10 m-b0">Basic</h4>
+        <div className="pricingtable-bx">
+          <span>Free</span>
+        </div>
+      </div>
+      <p className="pb-4">
+        Jumpstart your AI Powered career transformation with our free Plan, all
+        at no cost.
+      </p>
+    
+    </div>
+  </div>
+</div>
+
+<div className="col-12 col-md-4">
                     <div
                       className="pricingtable-wrapper style2  text-white"
                       style={{ height: "300px" ,backgroundColor:"#1C2957"}}
@@ -328,13 +317,13 @@ function Homepage() {
                           <h4 className="font-weight-300 m m-b0">
                             Freemium
                           </h4>
-                          <div className="pricingtable-bx">
+                          <div className="pricingtable-bx text-break">
                             {" "}
                             {/* $ <span>29</span> / Per Installation{" "} */}
                             <span>Free To use</span>
                           </div>
                         </div>
-                        <p>
+                        <p className="text-break">
                           Explore our freemium plan, with pay as you go option.
                         </p>
                         {/*<div className="m-t20">

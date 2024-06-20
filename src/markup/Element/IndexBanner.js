@@ -151,7 +151,7 @@ class IndexBanner extends Component {
                       type="submit"
                       onClick={(e) => {
                         e.preventDefault();
-                        window.location.href = "/user/job-application";
+                        window.location.href = "/user/job";
                       }}
                       className="site-button btn-block"
                     >

@@ -4,44 +4,19 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
-import Modal from "react-modal"; // Import React Modal
 import { setJobApplicationData } from "../../store/reducers/jobApplicationSlice";
-import { showToastError } from "../../utils/toastify";
-import JobPageSkeleton from "../skeleton/jobPage";
 import TwoBoxWithLinesSkeleton from "../skeleton/twoBoxLines";
 
 // Add your other imports like ToastContainer and other components
 
-
-const postBlog = [
-  {
-    image: require("./../../images/logo/icon1.png"),
-  },
-  {
-    image: require("./../../images/logo/icon1.png"),
-  },
-  {
-    image: require("./../../images/logo/icon1.png"),
-  },
-  {
-    image: require("./../../images/logo/icon1.png"),
-  },
-  {
-    image: require("./../../images/logo/icon1.png"),
-  },
-  {
-    image: require("./../../images/logo/icon1.png"),
-  },
-];
-
 function Jobsection() {
   const dispatch = useDispatch();
-  const token = localStorage.getItem("jobSeekerLoginToken");
+  const token = localStorage.getItem("employeeLoginToken");
   const jobApplicationData = useSelector(
     (state) => state.jobApplicationSlice.jobApplicationData
   );
   const [skeleton, setSkeleton] = useState(true);
-  const [logoUrls, setLogoUrls] = useState([]);
+  const [logo, setLogo] = useState("");
 
   const fetchJobApplicationData = async () => {
     try {
@@ -56,7 +31,9 @@ function Jobsection() {
       console.log(response, "res");
 
       // Sort the job application data by updated_at in descending order
-      const sortedData = response.data.data.sort((a, b) => new Date(b.job_detail.updated_at) - new Date(a.job_detail.updated_at));
+      const sortedData = response.data.data.sort(
+        (a, b) => new Date(b.job_detail.updated_at) - new Date(a.job_detail.updated_at)
+      );
 
       dispatch(setJobApplicationData(sortedData));
       setSkeleton(false);
@@ -65,50 +42,24 @@ function Jobsection() {
     }
   };
 
-  const getLogoUrls = async () => {
+  const getLogo = async () => {
     try {
-      const response = await axios.get(
-        "https://api.novajobs.us/api/jobseeker/job-lists?page_size=7&is_publish=1",
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      const logos = response.data.data.map((item) => ({
-        id: item.id, // assuming each job has an id
-        logo: item.company_detail.logo, // adjust according to your API response
-      }));
-      setLogoUrls(logos);
-      setSkeleton(false);
+      const response = await axios({
+        method: "get",
+        url: "https://api.novajobs.us/api/employeer/employeer-profile",
+        headers: {
+          Authorization: token,
+        },
+      });
+      setLogo(response.data.data.company_detail.logo);
     } catch (error) {
-      console.error("Error fetching logos:", error);
-      // Handle error if necessary
+      console.error("Error fetching logo:", error);
     }
   };
-  
-  useEffect(() => {
-    getLogoUrls();
-  }, []);
-  
 
-  useEffect(()=>{
-    axios({
-      method: "PUT",
-      url: "https://api.novajobs.us/api/employeer/company-logo",
-      headers: {
-       Authorization: `Bearer ${token}`,
-      },
-     
-    })
-      .then((res) => {
-        console.log(res);
-      
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  })
+  useEffect(() => {
+    getLogo(); // Fetch logo on component mount
+  }, []); // Empty dependency array ensures it runs only once
 
   useEffect(() => {
     fetchJobApplicationData();
@@ -152,7 +103,6 @@ function Jobsection() {
               <h6 className="fw4 m-b0">20+ Recently Added Jobs</h6>
             </div>
             <div className="align-self-end">
-              
               <Link to={"/user/job"} className="site-button button-sm">
                 Browse All Jobs <i className="fa fa-long-arrow-right"></i>
               </Link>
@@ -167,35 +117,27 @@ function Jobsection() {
                       <div className="post-bx">
                         <div className="d-flex m-b30">
                           <div className="job-post-company">
-                          <span>
-            {logoUrls[index] && (
-              <img
-                alt=""
-                src={logoUrls[index].logo}
-                style={{
-                  width: "100%",
-                  aspectRatio: 1,
-                }}
-              />
-            )}
-          </span>
+                            <span>
+                              <img src={logo} alt="Company Logo"
+                              style={{backgroundImage:'fit'}}
+                              />
+                            </span>
                           </div>
+                          {console.log(logo,'logo')}
                           <div className="job-post-info">
                             <h4>
-                              <Link
-                                to={`/user/job`}
-                              >
-                                {item.job_detail.job_title}
-                              </Link>
+                            <Link to={{
+    pathname: `/user/job`,
+    state: { job: jobApplicationData }
+  }}>   {item.job_detail.job_title}    </Link>
+                              
                             </h4>
-                            <h6>
-                              {item.companies.company_name}
-                            </h6>
+                            <h6>{item.companies.company_name}</h6>
                             <ul>
                               <li>
                                 <i className="fa fa-map-marker"></i>{" "}
-                                {item.cities.name}, {item.states.name},
-                                {item.countries.name},
+                                {item.cities.name}, {item.states.name},{" "}
+                                {item.countries.name}
                               </li>
                               {item.job_category.name ? (
                                 <li>
@@ -209,13 +151,14 @@ function Jobsection() {
                               </li>
                             </ul>
                             {item.job_detail.skills_arr ? (
-                                       <div className="mx-1">
-                                            {item.job_detail.skills_arr.map((skill, index) => (
-                                                   <span key={index} className="badge badge-primary m-2">
-                                                            {skill}
-                                                                </span>  ))}
-                                                                </div>
-                                                              ) : null}
+                              <div className="mx-1">
+                                {item.job_detail.skills_arr.map((skill, index) => (
+                                  <span key={index} className="badge badge-primary m-2">
+                                    {skill}
+                                  </span>
+                                ))}
+                              </div>
+                            ) : null}
                           </div>
                         </div>
                         <div className="d-flex">
@@ -225,7 +168,7 @@ function Jobsection() {
                             </Link>
                           </div>
                           <div className="salary-bx">
-                            <span> {item.job_workplace_types.name}</span>
+                            <span>{item.job_workplace_types.name}</span>
                           </div>
                         </div>
                         {localStorage.getItem("jobSeekerLoginToken") ? (

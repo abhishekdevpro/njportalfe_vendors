@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useLocation } from "react-router-dom";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
 import { FaSave, FaSearch, FaTimes } from "react-icons/fa";
@@ -38,9 +38,22 @@ function JobPage() {
     (state) => state.jobApplicationSlice.jobApplicationData
   );
   const token = localStorage.getItem("jobSeekerLoginToken");
+  const location = useLocation();
+  const jobFromState = location.state?.job || null;
+
+  useEffect(() => {
+    if (jobFromState) {
+      setSelectedJob(jobFromState);
+    } else if (jobApplicationData.length > 0) {
+      setSelectedJob(jobApplicationData[0]);
+    }
+  }, [jobFromState, jobApplicationData]);
+
   const screeningQuestion = useSelector(
     (state) => state.jobApplicationScreeningQues.selectedScreeningQuestions
   );
+
+  
 
   const [showSkeleton, setShowSkeleton] = useState(true);
   const navigate = useNavigate();
@@ -82,15 +95,22 @@ function JobPage() {
   };
 
   useEffect(() => {
-    if (selectedJob && selectedJob.screen_questions) {
-      dispatch(setScreeningQuestion(selectedJob.screen_questions));
+    // New: Set selectedJob based on job title from URL or state
+    const searchParams = new URLSearchParams(location.search);
+    const jobTitleFromState = location.state?.jobTitle || searchParams.get("jobTitle");
+    
+    if (jobTitleFromState) {
+      const job = jobApplicationData.find(
+        (job) => job.job_detail.job_title === jobTitleFromState
+      );
+      if (job) setSelectedJob(job);
     }
-  }, [selectedJob]);
+  }, [jobApplicationData, location]);
+
   const convertToPlainText = (htmlContent) => {
     const div = document.createElement("div");
     div.innerHTML = htmlContent;
     let plainText = div.innerText || div.textContent || "";
-    // Reduce length to 50 words
     plainText = plainText.split(/\s+/).slice(0, 30).join(" ");
     return plainText;
   };
@@ -522,10 +542,10 @@ function JobPage() {
           <div className="page-content bg-white">
             <div className="content-block">
               <div className="section-full bg-white p-t50 p-b20">
-                <div className="container">
-                  <div className="d-flex justify-content-center align-items-center  ">
-                    <div className="col-lg-2  col-md-5 col-12  ">
-                      <div className="form-group">
+              <div className="container">
+  <div className="row justify-content-center align-items-center">
+    <div className="col-lg-2 col-md-4 col-sm-6 col-12">
+      <div className="form-group">
                         {/* <label htmlFor="country_id">Country:</label>
                       {countries ? (
                         <select
@@ -796,9 +816,10 @@ function JobPage() {
                                 {jobApplicationData.map((job) => (
                                   <div>
                                     <li key={job.s_no}>
+                                      {console.log(job.s_no,'no')}
                                       <Link
                                         to="#"
-                                        onClick={() => handleSelectJob(job)}
+                                        onClick={() => setSelectedJob(job)}
                                       >
                                         <div
                                           style={{
@@ -875,7 +896,7 @@ function JobPage() {
                                               ></p>
                                             </div>
 
-                                            <div className="d-flex">
+                                            {/*<div className="d-flex">
                                             <span
                                               style={{
                                                 marginBottom: "0px",
@@ -904,7 +925,7 @@ function JobPage() {
                                                 )
                                               )}
                                             </span>
-                                            </div>
+                                            </div> */}
 
                                             <div
                                               className=" gap-0 align-items-center joblist"
@@ -1256,8 +1277,8 @@ function JobPage() {
                                             ) : null}
                                           </form>
                                         </Tab.Pane>
-                                        <Tab.Pane eventKey="additional-info">
-                                          {/* Additional Info Form */}
+                                       {/* <Tab.Pane eventKey="additional-info">
+                                          
                                           <form className="col-12 p-a0">
                                             <h6 className="font-weight-600">
                                               Additional info
@@ -1334,7 +1355,7 @@ function JobPage() {
                                           </form>
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="resume-info">
-                                          {/* Additional Info Form */}
+                                          
                                           <form className="col-12 p-a0">
                                             <h6 className="font-weight-600">
                                               Resume info
@@ -1384,7 +1405,7 @@ function JobPage() {
                                               </select>
                                             </div>
                                           </form>
-                                        </Tab.Pane>
+                                        </Tab.Pane> */}
                                       
                                     
                                 

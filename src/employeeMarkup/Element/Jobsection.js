@@ -124,21 +124,18 @@ function Jobsection() {
                             style={{ gap: "12px" }}
                           >
                             <ul>
-                              <li>Skills :</li>
+                              <li className="fw-bold"> Skills: </li>
                             </ul>
-                            <div className="row" style={{ gap: "7px" }}>
-                              {item.jobskkers_detail.skills_arr.map(
-                                (item, index) => {
-                                  return (
-                                    <ul key={index} className="job-time">
-                                      <Link to={"#"}>
-                                        <span>{item}</span>
-                                      </Link>
-                                    </ul>
-                                  );
-                                }
-                              )}
-                            </div>
+                            <div className="d-flex text-break" style={{ gap: "3px", flexWrap: "wrap" }}>
+  {item.jobskkers_detail.skills_arr.map((skill, index) => (
+    <ul key={index} className="job-time" style={{ marginBottom: index % 5 === 4 ? '3px' : '0' }}>
+      <Link to={"#"}>
+        <span>{skill}</span>
+      </Link>
+    </ul>
+  ))}
+</div>
+
                           </div>
                         ) : null}
                       </div>

@@ -100,14 +100,22 @@ const LandingPage = () => {
           </div>
         </Modal.Body>
       </Modal><br/>
-      <div className="position-absolute top-0 start-50 translate-middle-x mt-5 pt-5">
-      <button className="site-button  mt-5 px-5 py-4 fw-bold" style={{margintop:'500px' ,fontSize:'20px'}} onClick={handleShow}>
-              Explore Our one stop white label AI Enabled services for Employers & Staffing companies
-            </button>
-      </div>
+      <div className="position-absolute top-5 start-50 translate-middle text-center">
+      <div className="container">
+  <div className="row">
+    <div className="col-12 d-flex justify-content-center mt-5 pt-5">
+      <button className="site-button mt-5 fw-bold responsive-button " onClick={handleShow}>
+        Explore Our one stop white label AI Enabled services for Employers & Staffing companies
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+
       <div className="banner">
         
-        <div className="banner-text">
+        <div className="banner-text mt-5 pt-4">
           
           
           <h2>
@@ -120,122 +128,118 @@ const LandingPage = () => {
         </div>
       </div>
 
-      <div className="services">
-        <div className="services-row">
+        <div className="container">
+      <div className="row">
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
-            <img src={img2} alt="Service 2" />
-            <p style={{fontSize:'20px'}} className="text-center"> For Employers & Staffing </p>
+            <img src={img2} alt="Service 2" className="img-fluid" />
+            <p className="text-center" style={{ fontSize: '20px' }}>For Employers & Staffing</p>
             <ul>
               <li>Payroll & Team manage</li>
               <li>Task assign</li>
-              <li>  One stop HR Solution</li>
+              <li>One stop HR Solution</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>
-              Interested ?
-            </button>
+            <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
+        </div>
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
-            <img src={img2} alt="Service 2" />
-            <p style={{fontSize:'20px'}}>AI-Based Job Portal:</p>
+            <img src={img2} alt="Service 2" className="img-fluid" />
+            <p style={{ fontSize: '20px' }}>AI-Based Job Portal:</p>
             <ul>
               <li>Jobseeker Login</li>
               <li>Employer Login</li>
               <li>Vendor Login</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>
-              Interested ?
-            </button>
+            <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
+        </div>
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
-            <img src={img3} alt="Service 3" className="img-3" />
-            <p style={{fontSize:'20px'}}>AI-Based Skill Test:</p>
+            <img src={img3} alt="Service 3" className="img-fluid" />
+            <p style={{ fontSize: '20px' }}>AI-Based Skill Test:</p>
             <ul>
               <li>Timer Based</li>
               <li>Immediate Result</li>
               <li>Skill Badge Option</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>
-              Interested ?
-            </button>
+            <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
-        <div className="services-row">
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
-            <img src={img4} alt="Service 4" />
-            <p style={{fontSize:'20px'}}>AI-Based Functionality:</p>
+            <img src={img4} alt="Service 4" className="img-fluid" />
+            <p style={{ fontSize: '20px' }}>AI-Based Functionality:</p>
             <ul>
               <li>Auto Job Match</li>
               <li>Skill Based Match</li>
               <li>Auto JD Writing ..</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>
-              Interested ?
-            </button>
+            <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
+        </div>
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
-            <img src={img4} alt="Service 4" />
-            <p style={{fontSize:'20px'}}>AI-Based Functionality:</p>
+            <img src={img4} alt="Service 4" className="img-fluid" />
+            <p style={{ fontSize: '20px' }}>AI-Based Functionality:</p>
             <ul>
               <li>Auto Job Match</li>
               <li>Skill Based Match</li>
               <li>Auto JD Writing ..</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>
-              Interested ?
-            </button>
+            <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
+        </div>
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
-            <img src={img5} alt="Service 5" />
-            <p style={{fontSize:'20px'}}>Ai-Based CV Services:</p>
+            <img src={img5} alt="Service 5" className="img-fluid" />
+            <p style={{ fontSize: '20px' }}>AI-Based CV Services:</p>
             <ul>
               <li>Live CV Score</li>
               <li>Live CV Builder</li>
               <li>Multiple Templates</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>
-              Interested ?
-            </button>
+            <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
-        <div className="services-row">
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
-            <img src={img6} alt="Service 6" />
-            <p style={{fontSize:'20px'}}>Robust Vendor Panel:</p>
+            <img src={img6} alt="Service 6" className="img-fluid" />
+            <p style={{ fontSize: '20px' }}>Robust Vendor Panel:</p>
             <ul>
               <li>Bulk CV upload</li>
               <li>Bulk Opening upload</li>
               <li>Use Nova Services</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>
-              Interested ?
-            </button>
+            <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
+        </div>
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
-            <img src={img7} alt="Service 7" />
-            <p style={{fontSize:'20px'}}>AI-Based Add-ONS:</p>
+            <img src={img7} alt="Service 7" className="img-fluid" />
+            <p style={{ fontSize: '20px' }}>AI-Based Add-ONS:</p>
             <ul>
               <li>Robust Wallet</li>
               <li>Secure Chats</li>
               <li>Vendor Login</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>
-              Interested ?
-            </button>
+            <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
+        </div>
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
-            <img src={img7} alt="Service 7" />
-            <p style={{fontSize:'20px'}}>AI-Based Add-ONS:</p>
+            <img src={img7} alt="Service 7" className="img-fluid" />
+            <p style={{ fontSize: '20px' }}>AI-Based Add-ONS:</p>
             <ul>
               <li>Robust Wallet</li>
               <li>Secure Chats</li>
               <li>Vendor Login</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>
-              Interested ?
-            </button>
+            <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
       </div>
+    </div>
       <Footer />
     </div>
   );

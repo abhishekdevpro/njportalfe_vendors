@@ -1602,7 +1602,7 @@ function Jobmyresume() {
                       id="accomplishments_bx"
                       className="job-bx bg-white m-b30"
                     >
-                      <h5 className="m-b10">Accomplishments</h5>
+                      <h5 className="m-b10 text-break">Accomplishments</h5>
                       <div className="list-row">
                         <div className="list-line">
                           <div className="list-line">

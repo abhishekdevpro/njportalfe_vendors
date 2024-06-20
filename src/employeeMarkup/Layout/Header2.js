@@ -58,7 +58,7 @@ class EmployeeHeader2 extends Component {
             <div className="main-bar clearfix">
               <div className="container clearfix">
                 <div className="logo-header mostion">
-                  {/* <Link to={"./"}><img src={require('./../../images/logo.png')} className="logo" alt="" /></Link> */}
+                  
                   <Link to={"/employee"}>
                     <img
                       src={require("./../../images/logo/NovaUS.png")}

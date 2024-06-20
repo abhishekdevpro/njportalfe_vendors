@@ -106,7 +106,7 @@ const EmploymentComponent = () => {
     <div>
       {" "}
       <div className="d-flex">
-        <h5 className="m-b15">Employment</h5>
+        <h5 className="m-b15 text-break">Employment</h5>
         <Link
           to={"#"}
           data-toggle="modal"

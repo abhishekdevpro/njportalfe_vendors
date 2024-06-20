@@ -104,7 +104,7 @@ function EmployeeHomepage() {
                       with advance filters and power of AI
                     </p>
                     <Link
-                      to={"/user/job-application"}
+                      to={"/user/job"}
                       style={{ color: "white" }}
                     >
                      <button type="button" className="btn text-white hoverlogo-3d" style={{backgroundColor:"#080F3A"}}>Apply Now</button>

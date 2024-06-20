@@ -115,8 +115,11 @@ class UserHeader extends Component {
                 >
                   <div className="logo-header mostion d-md-block d-lg-none">
                     <Link to={"/"} className="dez-page">
-                      <img 
-                        src={require("./../../images/logo/NovaUS.png")} alt="" />
+                    <img
+                      src={require("./../../images/logo/NovaUS.png")}
+                      className="logo"
+                      alt="img"
+                    />
                     </Link>
                   </div>
                   <ul className="nav navbar-nav align-items-center ">
