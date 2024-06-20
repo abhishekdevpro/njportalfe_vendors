@@ -10,10 +10,14 @@ import {
 } from "../../store/reducers/postAJobSlice";
 import { fetchCompanyInfo } from "../../store/thunkFunctions/companyFunction";
 import { ToastContainer } from "react-toastify";
+import "../../css/profilesidebar.css"
+
 
 const CompanySideBar = ({ active }) => {
   const token = localStorage.getItem("employeeLoginToken");
   //   const [res.data.data, setres.data.dataa] = useState({})
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [logo, setLogo] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -67,6 +71,10 @@ const CompanySideBar = ({ active }) => {
     }
   };
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   useEffect(() => {
     getLogo(); // Fetch logo on component mount
   }, []); // Empty dependency array ensures it runs only once
@@ -107,8 +115,12 @@ const CompanySideBar = ({ active }) => {
         console.log(err);
       });
   };
-  return (
-    <div className="col-xl-3 col-lg-4 m-b30">
+  return (<>
+    <button className="sidebar-toggle" onClick={toggleSidebar}>
+        ☰
+      </button>
+      <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
+    <div className="">
       <ToastContainer />
       <div className="sticky-top">
         <div className="candidate-info company-info">
@@ -116,20 +128,24 @@ const CompanySideBar = ({ active }) => {
             <div className="canditate-des">
               <Link to={"#"}>
                 {file?.url ? (
-                  <img
+                  <img className="img-fluid"
                     alt=""
                     src={file?.url}
                     style={{
                       width: "100%",
+                      height:'100%',
                       aspectRatio: 1,
+                      backgroundImage:'fit'
+                      
                     }}
                   />
                 ) : (
-                  <img
+                  <img className="img-fluid"
                     alt=""
                     src={logo}
                     style={{
                       width: "100%",
+                      height:'100%',
                       aspectRatio: 1,
                     }}
                   />
@@ -150,8 +166,11 @@ const CompanySideBar = ({ active }) => {
                 />
                 <i className="fa fa-pencil"></i>
               </div>
+              
             </div>
-            <div className="candidate-title">
+            
+          </div>
+          <div className="candidate-title text-center candidate-detail text-break">
               <h4 className="m-b5">
                 <Link to={"#"}>{companyDetail?.company_name}</Link>
               </h4>
@@ -164,7 +183,6 @@ const CompanySideBar = ({ active }) => {
                 </button>
               ) : null}
             </div>
-          </div>
           <ul>
             <li>
               <Link
@@ -242,6 +260,7 @@ const CompanySideBar = ({ active }) => {
         </div>
       </div>
     </div>
+    </div></>
   );
 };
 

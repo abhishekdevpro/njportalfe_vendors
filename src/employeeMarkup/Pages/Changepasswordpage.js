@@ -66,7 +66,7 @@ function Changepasswordpage() {
             <div className="container">
               <div className="row">
                 <CompanySideBar active="jobs-change-password" />
-                <div className="col-xl-9 col-lg-8 m-b30">
+                <div className="col-xl-9 col-lg-9 m-b30">
                   <div className="job-bx job-profile">
                     <div className="job-bx-title clearfix">
                       <h5 className="font-weight-700 pull-left text-uppercase">

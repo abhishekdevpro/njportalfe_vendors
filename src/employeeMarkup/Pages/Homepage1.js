@@ -251,7 +251,7 @@ function EmployeeHomepage() {
             <div className="section-content box-sort-in button-example m-t80">
               <div className="pricingtable-row">
                 <div className="row max-w1000 m-auto">
-                  <div className="col-sm-12 col-md-4 col-lg-4 p-lr0">
+                <div className="col-12 col-md-4">
                     <div className="pricingtable-wrapper style2 bg-white">
                       <div className="pricingtable-inner">
                         <div className="pricingtable-price">
@@ -276,7 +276,7 @@ function EmployeeHomepage() {
                       </div>
                     </div>
                   </div>
-                  <div className="col-sm-12 col-md-4 col-lg-4 p-lr0">
+                  <div className="col-12 col-md-4">
                     <div className="pricingtable-wrapper style2 bg-primary text-white active">
                       <div className="pricingtable-inner">
                         <div className="pricingtable-price">
@@ -304,7 +304,7 @@ function EmployeeHomepage() {
                       </div>
                     </div>
                   </div>
-                  <div className="col-sm-12 col-md-4 col-lg-4 p-lr0">
+                  <div className="col-12 col-md-4">
                     <div className="pricingtable-wrapper style2 bg-white">
                       <div className="pricingtable-inner">
                         <div className="pricingtable-price">

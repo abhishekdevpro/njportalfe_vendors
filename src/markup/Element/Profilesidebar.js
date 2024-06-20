@@ -19,9 +19,9 @@ function Profilesidebar({ data }) {
       <button className="sidebar-toggle" onClick={toggleSidebar}>
         ☰
       </button>
-      <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <div className="sticky-top">
-          <div className="candidate-info">
+      <div className={`sidebar ${sidebarOpen ? 'open' : ''} overflow-y`}>
+        <div className="sticky-top overflow-y">
+          <div className="candidate-info overflow-y">
             <ul>
               <li>
                 <Link
