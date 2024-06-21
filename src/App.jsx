@@ -133,6 +133,20 @@ import ResumeSecurity from "./markup/Pages/ResumeSecurity";
 import LandingPage from "./employeeMarkup/Pages/LandingPage";
 import Verifyemail from "./markup/Pages/Verifyemail";
 import Aboutus1 from "./markup/Pages/Aboutus1";
+import Admin from "./adminPanel/Admin";
+import Vendor from './adminPanel/Vendor';
+import User from './adminPanel/User';
+import Dashboard from './adminPanel/Dashboard';
+import Employee from "./adminPanel/Employee";
+import Wallet from "./adminPanel/Wallet";
+import Addteam from "./adminPanel/Addteam";
+import AssignRole from "./adminPanel/AssignRole";
+import AssignTask from "./adminPanel/Assigntask";
+import JobSeekers from "./adminPanel/JobSeekers";
+import Jobs from "./adminPanel/Jobs"
+import Notifications from "./adminPanel/Notifications"
+import Team from "./adminPanel/Team"
+
 function App() {
   const dispatch = useDispatch();
 
@@ -142,7 +156,25 @@ function App() {
       <Route path="services" element={<LandingPage />} />
       <Route path="aboutus1" element={<Aboutus1 />} />
       <Route path="/*" element={<Error404 />} />
+      
 
+      <Route path="/admin" element={<Admin />}>
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="users" element={<User />} />
+        <Route path="vendor" element={<Vendor />} />
+        <Route path="employee" element={<Employee />} />
+        <Route path="wallet" element={<Wallet />} />
+        <Route path="addteam" element={<Addteam />} />
+          <Route path="assignrole" element={<AssignRole />} />
+            <Route path="assigntask" element={<AssignTask />} />
+              <Route path="jobseekers" element={<JobSeekers />} />
+              <Route path="jobs" element={<Jobs />} />
+              <Route path="notifications" element={<Notifications />} />
+              <Route path="team" element={<Team />} />
+                
+      </Route>
+
+      
       <Route path="/user">
         <Route path="" element={<Homepage />} />
         <Route path="login" element={<Loginpage2 />} />

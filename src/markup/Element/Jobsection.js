@@ -51,7 +51,7 @@ function Jobsection() {
           Authorization: token,
         },
       });
-      setLogo(response.data.data.company_detail.logo);
+      setLogo(`${response.data.data.company_detail.logo}`);
     } catch (error) {
       console.error("Error fetching logo:", error);
     }
@@ -89,6 +89,8 @@ function Jobsection() {
       console.log(error);
     }
   };
+
+  
 
   return (
     <div className="section-full bg-white content-inner-2">
