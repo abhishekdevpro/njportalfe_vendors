@@ -7,7 +7,7 @@ import "../Layout/Headerjobseeker.css"
 import logo2 from "./../../images/logo.png";
 var bnr3 = require("./../../images/background/bg3.jpg");
 
-class UserHeader extends Component {
+class Headerservice extends Component {
   state = {
     // initial state
     show: false,
@@ -384,4 +384,4 @@ class UserHeader extends Component {
     );
   }
 }
-export default UserHeader;
+export default Headerservice;

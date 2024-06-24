@@ -11,6 +11,8 @@ import img6 from "../../images/services/6.jpeg";
 import { Modal } from "react-bootstrap";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
+import Headerservice from "../../markup/Layout/Headerservice";
+import EmployeeHeader from "./../Layout/Header";
 
 const LandingPage = () => {
   const [show, setShow] = useState(false);
@@ -20,7 +22,12 @@ const LandingPage = () => {
 
   return (
     <div className="position-relative">
-      <Header />
+    
+    {localStorage.getItem("employeeLoginToken") ? (
+                     <EmployeeHeader/> 
+                    ) : (
+                      <Headerservice/>
+                    )}
 
       <Modal
         show={show}
@@ -166,7 +173,19 @@ const LandingPage = () => {
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
-        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
+        {/*<div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
+          <div className="service-div">
+            <img src={img4} alt="Service 4" className="img-fluid" />
+            <p style={{ fontSize: '20px' }}>AI-Based Functionality:</p>
+            <ul>
+              <li>Auto Job Match</li>
+              <li>Skill Based Match</li>
+              <li>Auto JD Writing ..</li>
+            </ul>
+            <button className="site-button" onClick={handleShow}>Interested?</button>
+          </div>
+        </div> */}
+        <div className="col-12 col-md-6  mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img4} alt="Service 4" className="img-fluid" />
             <p style={{ fontSize: '20px' }}>AI-Based Functionality:</p>
@@ -178,19 +197,7 @@ const LandingPage = () => {
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
-        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
-          <div className="service-div">
-            <img src={img4} alt="Service 4" className="img-fluid" />
-            <p style={{ fontSize: '20px' }}>AI-Based Functionality:</p>
-            <ul>
-              <li>Auto Job Match</li>
-              <li>Skill Based Match</li>
-              <li>Auto JD Writing ..</li>
-            </ul>
-            <button className="site-button" onClick={handleShow}>Interested?</button>
-          </div>
-        </div>
-        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
+        <div className="col-12 col-md-6 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img5} alt="Service 5" className="img-fluid" />
             <p style={{ fontSize: '20px' }}>AI-Based CV Services:</p>
@@ -202,7 +209,7 @@ const LandingPage = () => {
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
-        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
+        <div className="col-12 col-md-6 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img6} alt="Service 6" className="img-fluid" />
             <p style={{ fontSize: '20px' }}>Robust Vendor Panel:</p>
@@ -214,7 +221,7 @@ const LandingPage = () => {
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
-        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
+        <div className="col-12 col-md-6 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img7} alt="Service 7" className="img-fluid" />
             <p style={{ fontSize: '20px' }}>AI-Based Add-ONS:</p>
@@ -226,6 +233,7 @@ const LandingPage = () => {
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
+        {/*
         <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img7} alt="Service 7" className="img-fluid" />
@@ -237,7 +245,7 @@ const LandingPage = () => {
             </ul>
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
-        </div>
+        </div>*/}
       </div>
     </div>
       <Footer />

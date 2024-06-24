@@ -12,7 +12,8 @@ const CustomNavbar = () => {
     // Clear authentication token or perform necessary logout actions
     localStorage.removeItem('authToken');
     // Redirect to admin login screen
-    return <Navigate to="/admin/login" />;
+    <Navigate to="/admin/login" />
+    return ;
   };
 
   // Check if the user is on the login screen
@@ -38,9 +39,11 @@ const CustomNavbar = () => {
             </Badge>
           </Nav.Link>
 
+          <Link to={"/admin/login"}>
           <Button  onClick={handleLogout} style={{backgroundColor:'#1C2957'}} className='text-white px-4'>
             Logout
           </Button>
+          </Link>
         </Nav>
       )}
     </Navbar>
