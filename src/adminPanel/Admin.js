@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import { Container, Row, Col } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../adminPanel/Sidebar';

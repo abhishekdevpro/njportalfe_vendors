@@ -182,11 +182,6 @@ function App() {
               <Route path="/admin/notifications" element={<PrivateRouteadmin><Notifications /></PrivateRouteadmin>} />
               <Route path="/admin/team" element={<PrivateRouteadmin><Team /></PrivateRouteadmin>} />
         
-      <Route path="/admin" element={<Admin />}>
-        
-        
-                
-      </Route>
 
       
       <Route path="/user">
