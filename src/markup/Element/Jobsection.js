@@ -121,11 +121,11 @@ function Jobsection() {
                           <div className="job-post-company">
                             <span>
                               <img src={logo} alt="Company Logo"
-                              style={{backgroundImage:'fit'}}
+                             
                               />
                             </span>
                           </div>
-                          {console.log(logo,'logo')}
+                          {console.log(logo,'logo this is logo')}
                           <div className="job-post-info">
                             <h4>
                             <Link to={{

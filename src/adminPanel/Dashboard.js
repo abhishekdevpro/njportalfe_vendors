@@ -1,94 +1,206 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import {
-  FaUsers, FaStore, FaUserTie, FaBriefcase, FaUserGraduate, FaBell, FaUserPlus, FaTasks, FaWallet, FaTachometerAlt
-} from 'react-icons/fa';
+import { FaUsers, FaStore, FaUserTie, FaBriefcase, FaUserGraduate, FaBell, FaUserPlus, FaTasks, FaWallet, FaTachometerAlt } from 'react-icons/fa';
+
+import Sidebar from './Sidebar';
+import CustomNavbar from './Navbar';
 
 const Dashboard = () => {
-  const [counts, setCounts] = useState({
-    team: 0,
-    vendors: 0,
-    employees: 0,
-    jobs: 0,
-    jobSeekers: 0,
-    notification: 0,
-    addtoteam: 0,
-    assignRole: 0,
-    assignTask: 0,
-    wallet: 0,
-  });
-
+  const [maxSNo, setMaxSNo] = useState(0); 
+  const [maxSNo2, setMaxSNo2] = useState(0);// State to store max s_no
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Replace with your API endpoint
-    const fetchCounts = async () => {
+    const fetchJobsCount = async () => {
       try {
-        const response = await fetch('https://api.example.com/dashboard-counts');
+        const authToken = localStorage.getItem('authToken');
+        if (!authToken) {
+          throw new Error('Auth token not found');
+        }
+
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: authToken,
+        };
+
+        const jobsEndpoint = 'https://api.novajobs.us/api/admin/job-lists';
+
+        const response = await fetch(jobsEndpoint, { headers });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const data = await response.json();
-        setCounts({
-          team: data.team,
-          vendors: data.vendors,
-          employees: data.employees,
-          jobs: data.jobs,
-          jobSeekers: data.jobSeekers,
-          notification: data.notification,
-          addtoteam: data.addtoteam,
-          assignRole: data.assignRole,
-          assignTask: data.assignTask,
-          wallet: data.wallet,
-        });
+        if (data.data && data.data.length > 0) {
+          // Find the maximum s_no value
+          const maxSNoValue = Math.max(...data.data.map(job => job.s_no));
+          setMaxSNo(maxSNoValue);
+        } else {
+          setMaxSNo(0); // Handle case where no jobs are returned
+        }
       } catch (error) {
-        console.error('Error fetching counts:', error);
+        console.error('Error fetching jobs count:', error);
+        // Handle errors, e.g., setMaxSNo(-1);
       }
     };
 
-    fetchCounts();
+    fetchJobsCount();
   }, []);
 
-  const cardData = [
-    { icon: <FaUsers />, title: 'Team', count: counts.team, size: 2, path: '/admin/team' },
-    { icon: <FaStore />, title: 'Vendors', count: counts.vendors, size: 2, path: '/admin/vendor' },
-    { icon: <FaUserTie />, title: 'Employees', count: counts.employees, size: 2, path: '/admin/employees' },
-    { icon: <FaBriefcase />, title: 'Jobs', count: counts.jobs, size: 2, path: '/admin/jobs' },
-    { icon: <FaBell />, title: 'Notifications', count: counts.notification, size: 2, path: '/admin/notifications' },
-    { icon: <FaUserGraduate />, title: 'JobSeekers', count: counts.jobSeekers, size: 2, path: '/admin/jobseekers' },
-    { icon: <FaUserPlus />, title: 'Add to team', count: counts.addtoteam, size: 2, path: '/admin/addteam' },
-    { icon: <FaWallet />, title: 'Wallet', count: counts.wallet, size: 6, path: '/admin/wallet' },
-    { icon: <FaTasks />, title: 'Assign Role', count: counts.assignRole, size: 2, path: '/admin/assignrole' },
-    { icon: <FaTasks />, title: 'Assign Task', count: counts.assignTask, size: 2, path: '/admin/assigntask' },
-  ];
+  useEffect(() => {
+    const fetchJobsCount2 = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken');
+        if (!authToken) {
+          throw new Error('Auth token not found');
+        }
+
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: authToken,
+        };
+
+        const jobsEndpoint = 'https://api.novajobs.us/api/admin/job-seekers';
+
+        const response = await fetch(jobsEndpoint, { headers });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.data && data.data.length > 0) {
+          // Find the maximum s_no value
+          const maxSNoValue = Math.max(...data.data.map(job => job.jobskkers_detail.id));
+          setMaxSNo2(maxSNoValue);
+        } else {
+          setMaxSNo2(0); // Handle case where no jobs are returned
+        }
+      } catch (error) {
+        console.error('Error fetching jobs count:', error);
+        // Handle errors, e.g., setMaxSNo(-1);
+      }
+    };
+
+    fetchJobsCount2();
+  }, []);
+
+  const Box = ({ icon, title, count, path, size }) => (
+    <Col md={size} className="">
+      <Card
+        className="border rounded-5 w-100 "
+        style={{ backgroundColor: '#F8F9FA', cursor: 'pointer', color:'#1C2957'  }}
+        onClick={() => navigate(path)}
+      >
+        <Card.Body>
+          <div className="d-flex align-items-center justify-content-center ">
+            {icon}
+          </div>
+          <Card.Title className="text-center">{title}</Card.Title>
+          <Card.Text className="text-center border px-5 rounded-5"  style={{ fontSize: '1.5rem', fontWeight:'500', color:'white', backgroundColor:'#1C2957' }}>
+            {title === 'Jobs' ? maxSNo : count}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    </Col>
+  );
 
   return (
-    <Container fluid className="p-4" style={{ fontSize: '1rem', color: '#1C2957' }}>
-      <Row className="mb-4">
-        <Col>
-          <p className="d-flex align-items-center">
-            <FaTachometerAlt className="mx-1" /> / Dashboard
-          </p>
-        </Col>
-      </Row>
-      <Row>
-        {cardData.map((card, index) => (
-          <Col
-            key={index}
-            md={card.size}
-            className="mb-4 border border-5 rounded-5 m-2"
-            style={{ backgroundColor: '#F8F9FA', cursor: 'pointer' }}
-            onClick={() => navigate(card.path)}
-          >
-            <Card.Body className="">
-              <div className="d-flex align-items-center justify-content-center mb-2" style={{ fontSize: '3rem', color: '#1C2957' }}>
-                {card.icon}
-              </div>
-              <Card.Title>{card.title}</Card.Title>
-              <Card.Text style={{ fontSize: '1.5rem' }}>{card.count}</Card.Text>
-            </Card.Body>
+    <div>
+      <CustomNavbar />
+      <Container fluid>
+        <Row>
+          <Col md={2} className="p-0">
+            <Sidebar />
           </Col>
-        ))}
-      </Row>
-    </Container>
+          <Col md={10}>
+            <Container fluid className="p-4">
+              <Row className="mb-4">
+                <Col>
+                  <p className="d-flex align-items-center">
+                    <FaTachometerAlt className="mx-1" /> Dashboard
+                  </p>
+                </Col>
+              </Row>
+              <Row className='gap-3'>
+                <Box 
+                
+                  icon={<FaUsers className="display-4" />}
+                  title="Team"
+                  count={0} // Replace with actual count
+                  path="/admin/team"
+                  size={2} // Size for this Box
+                />
+                <Box
+                  icon={<FaStore className="display-4" />}
+                  title="Vendors"
+                  count={0} // Replace with actual count
+                  path="/admin/vendors"
+                  size={2} // Size for this Box
+                />
+                <Box
+                  icon={<FaUserTie className="display-4" />}
+                  title="Employees"
+                  count={0} // Replace with actual count
+                  path="/admin/employees"
+                  size={2} // Size for this Box
+                />
+                <Box 
+                  icon={<FaBriefcase className="display-4" />}
+                  title="Jobs"
+                  count={maxSNo} // Display max s_no here
+                  path="/admin/jobs"
+                  size={2} // Larger size for this Box
+                />
+                <Box
+                  icon={<FaBell className="display-4" />}
+                  title="Notifications"
+                  count={0} // Replace with actual count
+                  path="/admin/notifications"
+                  size={2} // Size for this Box
+                />
+                <Box
+                  icon={<FaUserGraduate className="display-4" />}
+                  title="JobSeekers"
+                  count={maxSNo2} // Replace with actual count
+                  path="/admin/jobseekers"
+                  size={3} // Size for this Box
+                />
+                <Box
+                  icon={<FaUserPlus className="display-4" />}
+                  title="Add to team"
+                  count={0} // Replace with actual count
+                  path="/admin/addteam"
+                  size={4} // Size for this Box
+                />
+                 <Box
+                  icon={<FaTasks className="display-4" />}
+                  title="Assign Task"
+                  count={0} // Replace with actual count
+                  path="/admin/assigntask"
+                  size={4} // Size for this Box
+                />
+                <Box
+                  icon={<FaWallet className="display-4" />}
+                  title="Wallet"
+                  count={0} // Replace with actual count
+                  path="/admin/wallet"
+                  size={8} // Size for this Box
+                />
+                <Box
+                  icon={<FaTasks className="display-4" />}
+                  title="Assign Role"
+                  count={0} // Replace with actual count
+                  path="/admin/assignrole"
+                  size={3} // Size for this Box
+                />
+               
+              </Row>
+            </Container>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 

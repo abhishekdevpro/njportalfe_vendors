@@ -51,7 +51,7 @@ const Sidebar = () => {
   };
 
   return (
-    <Nav className="flex-column bg-light vh-screen gap-3 ">
+    <Nav className="flex-column bg-light vh-screen gap-2 ">
       <Nav.Link as={NavLink} to="/admin/dashboard" style={navLinkStyle("/admin/dashboard")} className='ps-4'>
         <FaTachometerAlt style={iconStyle} /> Dashboard
       </Nav.Link>

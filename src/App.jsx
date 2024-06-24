@@ -146,6 +146,8 @@ import JobSeekers from "./adminPanel/JobSeekers";
 import Jobs from "./adminPanel/Jobs"
 import Notifications from "./adminPanel/Notifications"
 import Team from "./adminPanel/Team"
+import Adminlogin from "./adminPanel/Adminlogin";
+import PrivateRouteadmin from "./adminPanel/PrivateRouteadmin";
 
 function App() {
   const dispatch = useDispatch();
@@ -156,21 +158,33 @@ function App() {
       <Route path="services" element={<LandingPage />} />
       <Route path="aboutus1" element={<Aboutus1 />} />
       <Route path="/*" element={<Error404 />} />
+     
       
-
+      <Route path="/admin/login" element={<Adminlogin />} />
+        <Route  path="/admin/dashboard" element={
+            <PrivateRouteadmin>
+              <Dashboard />
+              
+            </PrivateRouteadmin>
+            
+          } 
+        />
+    
+        <Route path="/admin/users" element={<PrivateRouteadmin><User /> </PrivateRouteadmin>} />
+        <Route path="/admin/vendor" element={<PrivateRouteadmin><Vendor /></PrivateRouteadmin>} />
+        <Route path="/admin/employee" element={<PrivateRouteadmin><Employee /></PrivateRouteadmin>} />
+        <Route path="/admin/wallet" element={<PrivateRouteadmin><Wallet /></PrivateRouteadmin>} />
+        <Route path="/admin/addteam" element={<PrivateRouteadmin><Addteam /></PrivateRouteadmin>} />
+          <Route path="/admin/assignrole" element={<PrivateRouteadmin><AssignRole /></PrivateRouteadmin>} />
+            <Route path="/admin/assigntask" element={<PrivateRouteadmin><AssignTask /></PrivateRouteadmin>} />
+              <Route path="/admin/jobseekers" element={<PrivateRouteadmin><JobSeekers /></PrivateRouteadmin>} />
+              <Route path="/admin/jobs" element={<PrivateRouteadmin><Jobs /></PrivateRouteadmin>} />
+              <Route path="/admin/notifications" element={<PrivateRouteadmin><Notifications /></PrivateRouteadmin>} />
+              <Route path="/admin/team" element={<PrivateRouteadmin><Team /></PrivateRouteadmin>} />
+        
       <Route path="/admin" element={<Admin />}>
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="users" element={<User />} />
-        <Route path="vendor" element={<Vendor />} />
-        <Route path="employee" element={<Employee />} />
-        <Route path="wallet" element={<Wallet />} />
-        <Route path="addteam" element={<Addteam />} />
-          <Route path="assignrole" element={<AssignRole />} />
-            <Route path="assigntask" element={<AssignTask />} />
-              <Route path="jobseekers" element={<JobSeekers />} />
-              <Route path="jobs" element={<Jobs />} />
-              <Route path="notifications" element={<Notifications />} />
-              <Route path="team" element={<Team />} />
+        
+        
                 
       </Route>
 
