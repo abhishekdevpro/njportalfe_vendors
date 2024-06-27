@@ -133,6 +133,8 @@ import ResumeSecurity from "./markup/Pages/ResumeSecurity";
 import LandingPage from "./employeeMarkup/Pages/LandingPage";
 import Verifyemail from "./markup/Pages/Verifyemail";
 import Aboutus1 from "./markup/Pages/Aboutus1";
+import Jobreferral from "./markup/Element/Jobreferral";
+
 import Admin from "./adminPanel/Admin";
 import Vendor from './adminPanel/Vendor';
 import User from './adminPanel/User';
@@ -285,6 +287,14 @@ function App() {
           element={
             <UserPrivateRoute>
               <Jobsalert />
+            </UserPrivateRoute>
+          }
+        />
+        <Route
+          path="jobs-referral"
+          element={
+            <UserPrivateRoute>
+              <Jobreferral />
             </UserPrivateRoute>
           }
         />

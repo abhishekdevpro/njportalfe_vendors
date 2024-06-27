@@ -124,10 +124,7 @@ const LandingPage = () => {
         
         <div className="banner-text mt-5 pt-4">
           
-          
-          <h2>
-            Nova Jobs us <br /> AI based job Portal
-          </h2>
+       
           
         </div>
         <div className="banner-img">

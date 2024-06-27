@@ -95,6 +95,16 @@ function Profilesidebar({ data }) {
               </li>
               <li>
                 <Link
+                  to={"/user/jobs-referral"}
+                  className={data === "jobs-referral" ? "active" : null}
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  <i className="fa fa-id-card-o" aria-hidden="true"></i>
+                  <span>Add Referral </span>
+                </Link>
+              </li>
+              <li>
+                <Link
                   to={"/user/jobs-change-password"}
                   className={data === "password" ? "active" : null}
                   onClick={() => setSidebarOpen(false)}
