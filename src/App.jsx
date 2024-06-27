@@ -148,6 +148,26 @@ import Notifications from "./adminPanel/Notifications"
 import Team from "./adminPanel/Team"
 import Adminlogin from "./adminPanel/Adminlogin";
 import PrivateRouteadmin from "./adminPanel/PrivateRouteadmin";
+import Addvendor from "./adminPanel/Addvendor";
+import Editadmin from "./adminPanel/Editadmin";
+import Listteam from "./adminPanel/Listteam";
+import Listnumber from "./adminPanel/Listnumber";
+
+import Listvendor from "./adminPanel/Listvendor";
+
+
+import VerifyEmail from "./vendor/VerifyEmail";
+import Vendorlogin from "./vendor/Vendorlogin";
+import PrivateRoutevendor from "./vendor/PrivateRoutevendor";
+import VendorCompanyprofile from "./vendor/Vendorprofile";
+import VendorCompanySideBar from "./vendor/Vendorsidebar";
+import VendorComponypostjobs from "./vendor/Vendorpostjob";
+import Vendorwallet from "./vendor/Vendorwallet";
+import VendorCompanymanage from "./vendor/Vendormanagejob";
+import Vendorapplicant from "./vendor/Vendorapplicant";
+import VendorChangepasswordpage from "./vendor/VendorChangepasswordpage";
+import Vendorbulkuploadjobopeneing from "./vendor/Vendorbulkuploadjobopeneing copy";
+import Vendorbulkuploadjobseeker from "./vendor/Vendorbulkuploadjobseeker";
 
 function App() {
   const dispatch = useDispatch();
@@ -161,15 +181,7 @@ function App() {
      
       
       <Route path="/admin/login" element={<Adminlogin />} />
-        <Route  path="/admin/dashboard" element={
-            <PrivateRouteadmin>
-              <Dashboard />
-              
-            </PrivateRouteadmin>
-            
-          } 
-        />
-    
+        <Route  path="/admin/dashboard" element={ <PrivateRouteadmin> <Dashboard />  </PrivateRouteadmin> }  />
         <Route path="/admin/users" element={<PrivateRouteadmin><User /> </PrivateRouteadmin>} />
         <Route path="/admin/vendor" element={<PrivateRouteadmin><Vendor /></PrivateRouteadmin>} />
         <Route path="/admin/employee" element={<PrivateRouteadmin><Employee /></PrivateRouteadmin>} />
@@ -181,9 +193,28 @@ function App() {
               <Route path="/admin/jobs" element={<PrivateRouteadmin><Jobs /></PrivateRouteadmin>} />
               <Route path="/admin/notifications" element={<PrivateRouteadmin><Notifications /></PrivateRouteadmin>} />
               <Route path="/admin/team" element={<PrivateRouteadmin><Team /></PrivateRouteadmin>} />
-        
+              <Route path="/admin/addvendor" element={<PrivateRouteadmin><Addvendor /></PrivateRouteadmin>} />
+              <Route path="/admin/edit" element={<PrivateRouteadmin><Editadmin /></PrivateRouteadmin>} />
+              <Route path="/admin/listvendor" element={<PrivateRouteadmin><Listvendor /></PrivateRouteadmin>} />
+              <Route path="/admin/team/list-team" element={<PrivateRouteadmin><Listteam /></PrivateRouteadmin>} />
+              <Route path="/admin/team/list-number" element={<PrivateRouteadmin><Listnumber /></PrivateRouteadmin>} />
 
-      
+
+
+
+              <Route path="/vendor/verify" component={<VerifyEmail/>} />
+
+              <Route path="/vendor/login" element={<Vendorlogin />} />
+        <Route  path="/vendor/vendorprofile" element={ <PrivateRoutevendor> <VendorCompanyprofile />  </PrivateRoutevendor> }  />
+        <Route path="/vendor/vendorcompanySideBar" element={<PrivateRoutevendor><VendorCompanySideBar /> </PrivateRoutevendor>} />
+        <Route path="/vendor/vendorcomponypostjobs" element={<PrivateRoutevendor><VendorComponypostjobs /></PrivateRoutevendor>} />
+        <Route path="/vendor/vendorwallet" element={<PrivateRoutevendor><Vendorwallet /></PrivateRoutevendor>} />
+        <Route path="/vendor/vendorcompanymanage" element={<PrivateRoutevendor><VendorCompanymanage /></PrivateRoutevendor>} />
+        <Route path="/vendor/vendorapplicant" element={<PrivateRoutevendor><Vendorapplicant /></PrivateRoutevendor>} />
+        <Route path="/vendor/vendorchangepasswordpage" element={<PrivateRoutevendor><VendorChangepasswordpage /></PrivateRoutevendor>} />
+        <Route path="/vendor/vendorbulkuploadjobopeneing" element={<PrivateRoutevendor><Vendorbulkuploadjobopeneing /></PrivateRoutevendor>} />
+        <Route path="/vendor/vendorbulkuploadjobseeker" element={<PrivateRoutevendor><Vendorbulkuploadjobseeker /></PrivateRoutevendor>} />
+       
       <Route path="/user">
         <Route path="" element={<Homepage />} />
         <Route path="login" element={<Loginpage2 />} />

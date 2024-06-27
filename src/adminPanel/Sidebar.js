@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Nav } from 'react-bootstrap';
 import { NavLink, useLocation } from 'react-router-dom';
 import { 
@@ -28,6 +28,16 @@ const Sidebar = () => {
     marginRight: '10px',
   };
 
+  useEffect(() => {
+    if (location.pathname.startsWith('/admin/vendor')) setShowTeamSubmenu5(true);
+    if (location.pathname.startsWith('/admin/team')) setShowTeamSubmenu(true);
+    if (location.pathname.startsWith('/admin/jobs')) setShowTeamSubmenu3(true);
+    if (location.pathname.startsWith('/admin/notifications')) setShowTeamSubmenu4(true);
+    if (location.pathname.startsWith('/admin/jobseekers')) setShowTeamSubmenu1(true);
+    if (location.pathname.startsWith('/admin/employee')) setShowTeamSubmenu2(true);
+    if (location.pathname.startsWith('/admin/wallet')) setShowTeamSubmenu6(true);
+  }, [location.pathname]);
+
   const handleTeamClick = () => {
     setShowTeamSubmenu(!showTeamSubmenu);
   };
@@ -51,7 +61,7 @@ const Sidebar = () => {
   };
 
   return (
-    <Nav className="flex-column bg-light vh-screen gap-2 ">
+    <Nav className="flex-column bg-light vh-screen gap-3 h-full">
       <Nav.Link as={NavLink} to="/admin/dashboard" style={navLinkStyle("/admin/dashboard")} className='ps-4'>
         <FaTachometerAlt style={iconStyle} /> Dashboard
       </Nav.Link>
@@ -63,17 +73,16 @@ const Sidebar = () => {
           style={navLinkStyle("/admin/vendor")}
           className='ps-4'
         >
-          <FaStore style={iconStyle} />Vendor
+          <FaStore style={iconStyle} /> Vendor
         </Nav.Link>
         {showTeamSubmenu5 && (
           <>
-            <Nav.Link as={NavLink} to="/admin/team/listallvendor" style={navLinkStyle("/admin/team/listallvendor")} className='ps-5'>
+            <Nav.Link as={NavLink} to="/admin/listallvendor" style={navLinkStyle("/admin/listallvendor")} className='ps-5'>
               <FaStore style={iconStyle} /> List Vendor
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/team/addvendor" style={navLinkStyle("/admin/team/addvendor")} className='ps-5'>
+            <Nav.Link as={NavLink} to="/admin/addvendor" style={navLinkStyle("/admin/addvendor")} className='ps-5'>
               <FaUsers style={iconStyle} /> Add Vendor
             </Nav.Link>
-            
           </>
         )}
       </div>
@@ -81,6 +90,7 @@ const Sidebar = () => {
       <Nav.Link as={NavLink} to="/admin/users" style={navLinkStyle("/admin/users")} className='ps-4'>
         <FaUsers style={iconStyle} /> User
       </Nav.Link>
+      
       <div>
         <Nav.Link
           onClick={handleTeamClick}
@@ -88,7 +98,7 @@ const Sidebar = () => {
           style={navLinkStyle("/admin/team")}
           className='ps-4'
         >
-          <FaUserTie style={iconStyle} />Team
+          <FaUserTie style={iconStyle} /> Team
         </Nav.Link>
         {showTeamSubmenu && (
           <>
@@ -96,7 +106,7 @@ const Sidebar = () => {
               <FaUsers style={iconStyle} /> List Number
             </Nav.Link>
             <Nav.Link as={NavLink} to="/admin/team/list-team" style={navLinkStyle("/admin/team/list-team")} className='ps-5'>
-              <FaUsers style={iconStyle} /> List Team
+              <FaUsers style={iconStyle} /> Add Team
             </Nav.Link>
           </>
         )}
@@ -109,7 +119,7 @@ const Sidebar = () => {
           style={navLinkStyle("/admin/jobs")}
           className='ps-4'
         >
-          <FaBriefcase style={iconStyle} />Jobs
+          <FaBriefcase style={iconStyle} /> Jobs
         </Nav.Link>
         {showTeamSubmenu3 && (
           <>
@@ -126,8 +136,6 @@ const Sidebar = () => {
         )}
       </div>
 
-
-      
       <div>
         <Nav.Link
           onClick={handleTeamClick4}
@@ -135,14 +143,13 @@ const Sidebar = () => {
           style={navLinkStyle("/admin/notifications")}
           className='ps-4'
         >
-          <FaBell style={iconStyle} />Notifications
+          <FaBell style={iconStyle} /> Notifications
         </Nav.Link>
         {showTeamSubmenu4 && (
           <>
             <Nav.Link as={NavLink} to="/admin/team/listallnotificationss" style={navLinkStyle("/admin/team/listallnotificationss")} className='ps-5'>
               <FaUsers style={iconStyle} /> List notifications
             </Nav.Link>
-            
           </>
         )}
       </div>
@@ -154,7 +161,7 @@ const Sidebar = () => {
           style={navLinkStyle("/admin/jobseekers")}
           className='ps-4'
         >
-          <FaUserGraduate style={iconStyle} />JobSeekers
+          <FaUserGraduate style={iconStyle} /> JobSeekers
         </Nav.Link>
         {showTeamSubmenu1 && (
           <>
@@ -178,7 +185,7 @@ const Sidebar = () => {
           style={navLinkStyle("/admin/employee")}
           className='ps-4'
         >
-          <FaUserTie style={iconStyle} />Employee
+          <FaUserTie style={iconStyle} /> Employer
         </Nav.Link>
         {showTeamSubmenu2 && (
           <>
@@ -194,9 +201,8 @@ const Sidebar = () => {
           </>
         )}
       </div>
-      <Nav.Link as={NavLink} to="/admin/addteam" style={navLinkStyle("/admin/addteam")} className='ps-4'>
-        <FaUserPlus style={iconStyle} /> Add to Team
-      </Nav.Link>
+      
+     
       
       <div>
         <Nav.Link
@@ -205,17 +211,17 @@ const Sidebar = () => {
           style={navLinkStyle("/admin/wallet")}
           className='ps-4'
         >
-          <FaWallet style={iconStyle} />Wallet
+          <FaWallet style={iconStyle} /> Wallet
         </Nav.Link>
         {showTeamSubmenu6 && (
           <>
-            <Nav.Link as={NavLink} to="/admin/team/totaltransaction" style={navLinkStyle("/admin/team/listalljobs")} className='ps-5'>
+            <Nav.Link as={NavLink} to="/admin/team/totaltransaction" style={navLinkStyle("/admin/team/totaltransaction")} className='ps-5'>
               <FaUsers style={iconStyle} /> Total Transaction
             </Nav.Link>
             <Nav.Link as={NavLink} to="/admin/team/credit" style={navLinkStyle("/admin/team/credit")} className='ps-5'>
               <FaUsers style={iconStyle} /> Credit
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/team/debit" style={navLinkStyle("/admin/team/Debit")} className='ps-5'>
+            <Nav.Link as={NavLink} to="/admin/team/debit" style={navLinkStyle("/admin/team/debit")} className='ps-5'>
               <FaUsers style={iconStyle} /> Debit
             </Nav.Link>
             <Nav.Link as={NavLink} to="/admin/team/filters" style={navLinkStyle("/admin/team/filters")} className='ps-5'>
@@ -231,7 +237,6 @@ const Sidebar = () => {
         )}
       </div>
 
-      
       <Nav.Link as={NavLink} to="/admin/assignrole" style={navLinkStyle("/admin/assignrole")} className='ps-4'>
         <FaTasks style={iconStyle} /> Assign Role
       </Nav.Link>

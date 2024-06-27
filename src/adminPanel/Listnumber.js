@@ -4,7 +4,7 @@ import { FaStore } from 'react-icons/fa';
 import CustomNavbar from './Navbar';
 import Sidebar from './Sidebar';
 
-const User = () => {
+const Listnumber = () => {
   const [jobs, setJobs] = useState([
     {
       id: 1,
@@ -51,7 +51,7 @@ const User = () => {
           </Col>
           <Col md={10}>
             <p>
-              <FaStore className="mx-1" /> / Users
+              <FaStore className="mx-1" /> / List Team
             </p>
             <Row>
               <Col md={14}>
@@ -109,4 +109,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Listnumber;

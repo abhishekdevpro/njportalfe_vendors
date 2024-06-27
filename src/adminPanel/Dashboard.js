@@ -9,6 +9,7 @@ import CustomNavbar from './Navbar';
 const Dashboard = () => {
   const [maxSNo, setMaxSNo] = useState(0); 
   const [maxSNo2, setMaxSNo2] = useState(0);// State to store max s_no
+  const [maxSNo3, setMaxSNo3] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -85,6 +86,43 @@ const Dashboard = () => {
     fetchJobsCount2();
   }, []);
 
+  useEffect(() => {
+    const fetchJobsCount3 = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken');
+        if (!authToken) {
+          throw new Error('Auth token not found');
+        }
+
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: authToken,
+        };
+
+        const jobsEndpoint = 'https://api.novajobs.us/api/admin/vendor-lists';
+
+        const response = await fetch(jobsEndpoint, { headers });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.data && data.data.length > 0) {
+          // Find the maximum s_no value
+          const maxSNoValue = Math.max(...data.data.map(job => job.vendors_detail.id));
+          setMaxSNo3(maxSNoValue);
+        } else {
+          setMaxSNo3(0); // Handle case where no jobs are returned
+        }
+      } catch (error) {
+        console.error('Error fetching jobs count:', error);
+        // Handle errors, e.g., setMaxSNo(-1);
+      }
+    };
+
+    fetchJobsCount3();
+  }, []);
+
   const Box = ({ icon, title, count, path, size }) => (
     <Col md={size} className="">
       <Card
@@ -134,13 +172,13 @@ const Dashboard = () => {
                 <Box
                   icon={<FaStore className="display-4" />}
                   title="Vendors"
-                  count={0} // Replace with actual count
+                  count={maxSNo3} // Replace with actual count
                   path="/admin/vendors"
                   size={2} // Size for this Box
                 />
                 <Box
                   icon={<FaUserTie className="display-4" />}
-                  title="Employees"
+                  title="Employer"
                   count={0} // Replace with actual count
                   path="/admin/employees"
                   size={2} // Size for this Box

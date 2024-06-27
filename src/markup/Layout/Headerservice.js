@@ -97,7 +97,7 @@ class Headerservice extends Component {
                     </div> */}
                 <div>
                   {localStorage.getItem("jobSeekerLoginToken") ? null : (
-                    <Link to={"https://nova-admin-panel-main.vercel.app/"}>
+                    <Link to={"/vendor/login"}>
                       <div className="extra-nav">
                         <button
                           style={{ color: "white" }}
