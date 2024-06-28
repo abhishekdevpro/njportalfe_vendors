@@ -609,24 +609,8 @@ function EmployeeBrowsecandidates() {
                                               height: "auto",
                                             }}
                                           >
-                                            {item.jobskkers_detail.email && (
-                                              <p
-                                                style={{
-                                                  margin: "0px",
-                                                }}
-                                              >
-                                                {item.jobskkers_detail.email}
-                                              </p>
-                                            )}
-                                            {item.jobskkers_detail.phone && (
-                                              <p
-                                                style={{
-                                                  margin: "0px",
-                                                }}
-                                              >
-                                                {item.jobskkers_detail.phone}
-                                              </p>
-                                            )}
+                                           
+                                            
                                             <div
                                               className="d-flex "
                                               style={{
@@ -711,13 +695,7 @@ function EmployeeBrowsecandidates() {
                               </h3>
                             </Link>
                             <div className="job-details-content">
-                              {selectedJob.jobskkers_detail.email &&
-                                selectedJob.jobskkers_detail.phone && (
-                                  <p className="mb-0">
-                                    {selectedJob.jobskkers_detail.email} |{" "}
-                                    {selectedJob.jobskkers_detail.phone}
-                                  </p>
-                                )}
+                             
                               {selectedJob.jobskkers_detail.skills_arr ? (
                                 <div
                                   className="d-flex flex-column "

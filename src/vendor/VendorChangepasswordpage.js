@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-
+import { Navbar, Nav, Badge } from 'react-bootstrap';
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import VendorCompanySideBar from "./Vendorsidebar";
 import { showToastError, showToastSuccess } from "../utils/toastify";
 import 'react-toastify/dist/ReactToastify.css'; 
+import Footer from "../markup/Layout/Footer";
 
 function VendorChangepasswordpage() {
   const [showOldPassword, setShowOldPassword] = useState(false);
@@ -61,6 +62,24 @@ function VendorChangepasswordpage() {
     
       <ToastContainer />
       <div className="page-content bg-white">
+      <Navbar bg="white" variant="white" className='py-3 border-bottom'>
+      <Navbar.Brand as={Link} to="/">
+        <img
+          style={{ width: "110px" }}
+          src={require("../images/logo/NovaUS.png")}
+          className="logo"
+          alt="img"
+        />
+      </Navbar.Brand>
+
+
+        <Nav className="ml-auto align-items-center">
+         
+
+          
+        </Nav>
+    
+    </Navbar>
         <div className="content-block">
           <div className="section-full bg-white browse-job p-t50 p-b20">
             <div className="container">
@@ -214,7 +233,7 @@ function VendorChangepasswordpage() {
           </div>
         </div>
       </div>
-     
+     <Footer/>
     </>
   );
 }

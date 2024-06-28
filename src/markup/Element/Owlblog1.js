@@ -6,14 +6,14 @@ const postBlog = [
     image: require("./../../images/testimonials/pic1.png"),
     comment:
       "This Website made finding job so much easier! I love how simple it is to filter my search and set up alerts for the kinds of positions I'm interested in. Landed two Interviews in My First Weak",
-    name: "Sarah T.",
+    name: "Sarah ",
     location: "Seattle",
   },
   {
     image: require("./../../images/testimonials/pic2.png"),
     comment:
       "I felt lost before finding this site. The resume builder helped me craft a much stronger document, and the practice interview questions were a lifesaver. Now, I feel more confident going into interviews.",
-    name: "Alex P.",
+    name: "Alex ",
     location: "Chicago",
   },
   {
@@ -27,14 +27,14 @@ const postBlog = [
     image: require("./../../images/testimonials/pic4.png"),
     comment:
       "Not only great tech, but their customer service helped me every step.",
-    name: "Lisa D.",
+    name: "Lisa",
     location: "Miami",
   },
   {
     image: require("./../../images/testimonials/pic5.png"),
     comment:
       "The feedback on my skills section was invaluable. Love this AI service!",
-    name: "Jessica B.",
+    name: "Jessica",
     location: "Denver",
   },
 ];

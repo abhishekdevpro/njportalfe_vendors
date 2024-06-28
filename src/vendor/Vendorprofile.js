@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { Navbar, Nav, Badge } from 'react-bootstrap';
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import { showToastError, showToastSuccess } from "../utils/toastify";
@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import VendorCompanySideBar from "./Vendorsidebar";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "../markup/Layout/Footer";
 
 function VendorCompanyprofile() {
   const companyData = useSelector(
@@ -194,6 +195,24 @@ function VendorCompanyprofile() {
     <>
       
       <div className="page-content bg-white">
+      <Navbar bg="white" variant="white" className='py-3 border-bottom'>
+      <Navbar.Brand as={Link} to="/">
+        <img
+          style={{ width: "110px" }}
+          src={require("../images/logo/NovaUS.png")}
+          className="logo"
+          alt="img"
+        />
+      </Navbar.Brand>
+
+
+        <Nav className="ml-auto align-items-center">
+         
+
+          
+        </Nav>
+    
+    </Navbar>
         <div className="content-block">
           <div className="section-full bg-white p-t50 p-b20">
             <div className="container">
@@ -490,6 +509,7 @@ function VendorCompanyprofile() {
       </div>
     
       <ToastContainer />
+      <Footer/>
     </>
   );
 }

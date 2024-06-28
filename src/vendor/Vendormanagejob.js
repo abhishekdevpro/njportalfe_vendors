@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
 import { Link, useNavigate } from "react-router-dom";
-
+import { Navbar, Nav, Badge } from 'react-bootstrap';
 import { Modal } from "react-bootstrap";
 import VendorCompanySideBar from "./Vendorsidebar";
 import axios from "axios";
@@ -13,6 +13,7 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import { FaX } from "react-icons/fa6";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Footer from "../markup/Layout/Footer";
 
 function VendorCompanymanage() {
   const [skeleton, setSkeleton] = useState(true);
@@ -133,7 +134,24 @@ function VendorCompanymanage() {
 
   return (
     <div className="position-relative">
+    <Navbar bg="white" variant="white" className='py-3 border-bottom'>
+      <Navbar.Brand as={Link} to="/">
+        <img
+          style={{ width: "110px" }}
+          src={require("../images/logo/NovaUS.png")}
+          className="logo"
+          alt="img"
+        />
+      </Navbar.Brand>
+
+
+        <Nav className="ml-auto align-items-center">
+         
+
+          
+        </Nav>
     
+    </Navbar>
       <div className="page-content bg-white ">
         <div className="content-block">
           <div className="section-full bg-white p-t50 p-b20">
@@ -736,6 +754,7 @@ function VendorCompanymanage() {
           </div>
         </div>
       ) : null}
+      <Footer/>
     </div>
   );
 }

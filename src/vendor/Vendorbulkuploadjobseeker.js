@@ -3,12 +3,32 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUploadAlt, faFileDownload } from '@fortawesome/free-solid-svg-icons'; // Import the specific icons you need
 import VendorCompanySideBar from "./Vendorsidebar";
+import { Navbar, Nav, Badge } from 'react-bootstrap';
+import Footer from "../markup/Layout/Footer";
 
 function Vendorbulkuploadjobseeker() {
   return (
     <>
     
     <div className="page-content bg-white">
+    <Navbar bg="white" variant="white" className='py-3 border-bottom'>
+      <Navbar.Brand as={Link} to="/">
+        <img
+          style={{ width: "110px" }}
+          src={require("../images/logo/NovaUS.png")}
+          className="logo"
+          alt="img"
+        />
+      </Navbar.Brand>
+
+
+        <Nav className="ml-auto align-items-center">
+         
+
+          
+        </Nav>
+    
+    </Navbar>
         <div className="content-block">
           <div className="section-full bg-white p-t50 p-b20">
             <div className="container">
@@ -69,7 +89,7 @@ function Vendorbulkuploadjobseeker() {
           </div>
         </div>
       </div>
-
+      <Footer/>
     </>
   );
 }

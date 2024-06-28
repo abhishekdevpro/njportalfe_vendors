@@ -154,8 +154,11 @@ import Addvendor from "./adminPanel/Addvendor";
 import Editadmin from "./adminPanel/Editadmin";
 import Listteam from "./adminPanel/Listteam";
 import Listnumber from "./adminPanel/Listnumber";
-
 import Listvendor from "./adminPanel/Listvendor";
+import Jobslist from "./adminPanel/Joblist";
+import Jobseekerlist from "./adminPanel/Jobseekerlist";
+
+
 
 
 import VerifyEmail from "./vendor/VerifyEmail";
@@ -170,7 +173,7 @@ import Vendorapplicant from "./vendor/Vendorapplicant";
 import VendorChangepasswordpage from "./vendor/VendorChangepasswordpage";
 import Vendorbulkuploadjobopeneing from "./vendor/Vendorbulkuploadjobopeneing copy";
 import Vendorbulkuploadjobseeker from "./vendor/Vendorbulkuploadjobseeker";
-
+import Vendorregistration from "./vendor/Vendorregistration";
 function App() {
   const dispatch = useDispatch();
 
@@ -178,7 +181,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="services" element={<LandingPage />} />
-      <Route path="aboutus1" element={<Aboutus1 />} />
+      <Route path="aboutus" element={<Aboutus1 />} />
       <Route path="/*" element={<Error404 />} />
      
       
@@ -200,6 +203,8 @@ function App() {
               <Route path="/admin/listvendor" element={<PrivateRouteadmin><Listvendor /></PrivateRouteadmin>} />
               <Route path="/admin/team/list-team" element={<PrivateRouteadmin><Listteam /></PrivateRouteadmin>} />
               <Route path="/admin/team/list-number" element={<PrivateRouteadmin><Listnumber /></PrivateRouteadmin>} />
+              <Route path="/admin/listalljobs" element={<PrivateRouteadmin><Jobslist /></PrivateRouteadmin>} />
+              <Route path="/admin/listalljobseeker" element={<PrivateRouteadmin><Jobseekerlist /></PrivateRouteadmin>} />
 
 
 
@@ -216,7 +221,9 @@ function App() {
         <Route path="/vendor/vendorchangepasswordpage" element={<PrivateRoutevendor><VendorChangepasswordpage /></PrivateRoutevendor>} />
         <Route path="/vendor/vendorbulkuploadjobopeneing" element={<PrivateRoutevendor><Vendorbulkuploadjobopeneing /></PrivateRoutevendor>} />
         <Route path="/vendor/vendorbulkuploadjobseeker" element={<PrivateRoutevendor><Vendorbulkuploadjobseeker /></PrivateRoutevendor>} />
-       
+        <Route path="/vendor/vendorregistration" element={<Vendorregistration />} />
+
+
       <Route path="/user">
         <Route path="" element={<Homepage />} />
         <Route path="login" element={<Loginpage2 />} />

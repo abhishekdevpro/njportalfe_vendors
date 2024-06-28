@@ -106,7 +106,7 @@ function Homepage() {
                       }}
                     >
                       List Your Profile, Check Your Resume Score, Search Jobs,
-                      with advance filters and power of AI
+                      with Advance Filters and Power of AI
                     </p>
                     <Link
                       to={"/user/job"}
@@ -155,7 +155,7 @@ function Homepage() {
                         fontSize: "14px",
                       }}
                     >
-                      List Your Company, Post Jobs, Search Talent, with advanced filters and power
+                      List Your Company, Post Jobs, Search Talent, with Advanced Filters and Power
                       of AI{" "}
                     </p>
                     <Link
@@ -264,7 +264,7 @@ function Homepage() {
           <div className="container">
             <div className="section-head text-center text-white">
               <h2 className="m-b5">Testimonials</h2>
-              <h5 className="fw4">Few words from Users</h5>
+             
             </div>
             <Owltestimonial />
           </div>

@@ -144,7 +144,7 @@ class Headerservice extends Component {
                       <Link to={"/services"}>services </Link>
                     </li>
                     <li className="">
-                      <Link to={"/aboutus1"}>About Us </Link>
+                      <Link to={"/aboutus"}>About Us </Link>
                     </li>
                     <li
                       onClick={() => {

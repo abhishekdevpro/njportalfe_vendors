@@ -37,7 +37,7 @@ function Aboutus1() {
     <div className="mx-3 mx-lg-5 mb-4 mb-lg-0" style={{ maxWidth: '350px' }}>
         <h1 className="mb-4" style={{ fontSize: 'clamp(24px, 5vw, 30px)', fontWeight: 'bold' }}>Introduction</h1>
         <p style={{ fontSize: 'clamp(14px, 3vw, 15px)' }}>
-            We are Hyper V Solutions, a technical AI-driven business incubator at University of South Carolina, your gateway to a future of endless career possibilities. Our mission is simple yet powerful: to revolutionize recruitment by seamlessly connecting talented individuals with rewarding opportunities. With our advanced AI job portal Nova Jobs and comprehensive human capital services, we ensure a seamless experience for both job seekers and employers.
+            We are Hyper V Solutions, a  AI-driven business incubator of South Carolina, your gateway to a future of endless career possibilities. Our mission is simple yet powerful: to revolutionize recruitment by seamlessly connecting talented individuals with rewarding opportunities. With our advanced  Nova Jobs and comprehensive human capital services, we ensure a seamless experience for both job seekers and employers.
         </p>
     </div>
     <div className="mx-3 mx-lg-5">

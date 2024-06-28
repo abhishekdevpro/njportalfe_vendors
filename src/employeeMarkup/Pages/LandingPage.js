@@ -112,7 +112,7 @@ const LandingPage = () => {
   <div className="row">
     <div className="col-12 d-flex justify-content-center mt-5 pt-5">
       <button className="site-button mt-5 fw-bold responsive-button " onClick={handleShow}>
-        Explore Our one stop white label AI Enabled services for Employers & Staffing companies
+        Explore Our One-stop white label AI Enabled services for Employers & Staffing Companies
       </button>
     </div>
   </div>
@@ -137,11 +137,11 @@ const LandingPage = () => {
         <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img2} alt="Service 2" className="img-fluid" />
-            <p className="text-center" style={{ fontSize: '20px' }}>For Employers & Staffing</p>
+            <p className="text-center" style={{ fontSize: '20px' }}>For Employers</p>
             <ul>
-              <li>Payroll & Team manage</li>
-              <li>Task assign</li>
-              <li>One stop HR Solution</li>
+              <li>Management</li>
+              <li>Assignment</li>
+              <li>HR Solutions</li>
             </ul>
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
@@ -161,11 +161,12 @@ const LandingPage = () => {
         <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img3} alt="Service 3" className="img-fluid" />
-            <p style={{ fontSize: '20px' }}>AI-Based Skill Test:</p>
+            <p style={{ fontSize: '20px' }}>Skill-based</p>
             <ul>
               <li>Timer Based</li>
               <li>Immediate Result</li>
               <li>Skill Badge Option</li>
+
             </ul>
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
@@ -185,7 +186,7 @@ const LandingPage = () => {
         <div className="col-12 col-md-6  mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img4} alt="Service 4" className="img-fluid" />
-            <p style={{ fontSize: '20px' }}>AI-Based Functionality:</p>
+            <p style={{ fontSize: '20px' }}>Automatic JD  writing</p>
             <ul>
               <li>Auto Job Match</li>
               <li>Skill Based Match</li>
@@ -197,7 +198,7 @@ const LandingPage = () => {
         <div className="col-12 col-md-6 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img5} alt="Service 5" className="img-fluid" />
-            <p style={{ fontSize: '20px' }}>AI-Based CV Services:</p>
+            <p style={{ fontSize: '20px' }}>Resumè/CV services</p>
             <ul>
               <li>Live CV Score</li>
               <li>Live CV Builder</li>
@@ -221,7 +222,7 @@ const LandingPage = () => {
         <div className="col-12 col-md-6 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img7} alt="Service 7" className="img-fluid" />
-            <p style={{ fontSize: '20px' }}>AI-Based Add-ONS:</p>
+            <p style={{ fontSize: '20px' }}> Add-ONS:</p>
             <ul>
               <li>Robust Wallet</li>
               <li>Secure Chats</li>

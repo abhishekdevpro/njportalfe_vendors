@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-
+import { Navbar, Nav, Badge } from 'react-bootstrap';
+import Footer from '../markup/Layout/Footer';
 
 const Vendorlogin = () => {
   const [email, setEmail] = useState('');
@@ -36,7 +37,29 @@ const Vendorlogin = () => {
 
   return (
     <div>
-       
+        <Navbar bg="white" variant="white" className='py-3 border-bottom'>
+      <Navbar.Brand as={Link} to="/">
+        <img
+          style={{ width: "110px" }}
+          src={require("../images/logo/NovaUS.png")}
+          className="logo"
+          alt="img"
+        />
+      </Navbar.Brand>
+
+
+        <Nav className="ml-auto align-items-center">
+          <Nav.Link href="/vendor/vendorregistration" className="mr-4">
+          
+          <Button variant="primary" type="submit" className="  " style={{ backgroundColor: '#1C2957'}}>
+                  Sign Up
+                </Button>
+          </Nav.Link>
+
+          
+        </Nav>
+    
+    </Navbar>
     <Container className="d-flex justify-content-center align-items-center vh-50">
       <Row className="w-100">
         <Col md={{ span: 6, offset: 3 }}>
@@ -82,13 +105,14 @@ const Vendorlogin = () => {
               </div>
             </Form.Group>
             {error && <p className="text-danger mt-3">{error}</p>}
-            <Button variant="primary" type="submit" className="mt-3 w-100" style={{ backgroundColor: '#1C2957'}}>
+            <Button variant="primary" type="submit" className="my-5 w-100" style={{ backgroundColor: '#1C2957'}}>
               Login
             </Button>
           </Form>
         </Col>
       </Row>
     </Container>
+    <Footer/>
     </div>
   );
 };

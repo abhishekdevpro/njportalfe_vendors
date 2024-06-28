@@ -114,7 +114,7 @@ function EducationPage() {
                       <h3 style={{ fontWeight: "600" }}>
                         Percentage :{" "}
                         <span style={{ fontWeight: "400" }}>
-                          {results.Percentage}
+                          {Math.floor(results.Percentage)}%
                         </span>
                       </h3>
                     </div>

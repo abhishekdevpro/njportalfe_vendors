@@ -6,7 +6,8 @@ import Sidebar from './Sidebar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Jobs = () => {
+
+const Jobslist = () => {
   const [jobs, setJobs] = useState([]);
   const [openDropdownId, setOpenDropdownId] = useState(null); // Track which dropdown is open
   const token = localStorage.getItem('authToken');
@@ -194,4 +195,4 @@ const Jobs = () => {
   );
 };
 
-export default Jobs;
+export default Jobslist;

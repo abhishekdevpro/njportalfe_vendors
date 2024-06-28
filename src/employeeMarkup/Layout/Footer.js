@@ -63,8 +63,8 @@ function Footer() {
                 </Link>
 
                 <p className="text-capitalize m-b20">
-                  NovaJobs.US is an AI-Enabled HR Technology company based at
-                  North Carolina, USA
+                NOVAJOBS US is an AI-Enabled HR Technology company based at
+                  South  Carolina, USA
                 </p>
 
                 <div className="subscribe-form m-b20 d-flex ">
@@ -125,128 +125,128 @@ function Footer() {
                 </h5>
                 <div className="row">
                   <div className="col-xl- col-lg-4 col-md-4 col-sm-6 col-6 ">
-                    <ul className="list-2 w10 list-line text-break">
+                    <ul className="list-3 d-flex row gap-3 text-break">
                       <li>
                         <Link to={"/employee/privacy-rights"}>
-                          Privacy Rights
+                          * Privacy Rights
                         </Link>
                       </li>
                       <li>
                         <Link to={"/employee/term-of-use-nova-jobs"}>
-                          Terms of Use
+                        * Terms of Use
                         </Link>
                       </li>
                       <li>
                         <Link to={"/employee/accessibility-center"}>
-                          Accessibility Center
+                        * Accessibility Center
                         </Link>
                       </li>
                       <li>
                         <Link to={"/employee/cookies-digital-advertising"}>
-                          Cookies & Digital Advertising
+                        * Cookies & Digital Advertising
                         </Link>
                       </li>
                     </ul>
                   </div>
 
                   <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
-                    <ul className="list-2 w10 list-line text-break">
+                    <ul className="list-3 d-flex row gap-3 text-break">
                       <li>
                         <Link to={"/employee/cooking-advertising-overview"}>
-                          Cookies & Advertising
+                        *  Cookies & Advertising
                         </Link>
                       </li>
                       <li>
                         <Link to={"/employee/data-privacy-framework"}>
-                          Data Privacy Framework
+                        *  Data Privacy Framework
                         </Link>
                       </li>
                       <li>
                         <Link to={"/employee/data-sharing-helps-you"}>
-                          Data Sharing Helps
+                        *  Help data Sharing
                         </Link>
                       </li>
                     </ul>
                   </div>
 
                   <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
-                    <ul className="list-2 w10 list-line text-break">
+                    <ul className="list-3 d-flex row gap-3 text-break">
                       <li>
                         <Link
                           to={
                             "/employee/international-transfer-of-personal-information"
                           }
                         >
-                          International Transfer
+                        *  International Transfer
                         </Link>
                       </li>
                       <li>
                         <Link to={"/employee/online-interview-scams"}>
-                          Online Interview Scams
+                         * Online Interview Scams
                         </Link>
                       </li>
                       <li>
                         <Link to={"/employee/resume-security"}>
-                          Resume Security
+                        *  Resume Security
                         </Link>
                       </li>
                       <li>
                         <Link
                           to={"/employee/retention-period-resume-visibility"}
                         >
-                          Retention Period
+                        *  Retention Period
                         </Link>
                       </li>
                     </ul>
                   </div>
 
                   <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
-                    <ul className="list-2 w10 list-line text-break">
+                    <ul className="list-3 d-flex row gap-3 text-break">
                       <li>
                         <Link to={"/employee/scope-privacy-notice"}>
-                          Scope Privacy Notice
+                        *  Scope Privacy Notice
                         </Link>
                       </li>
                       <li>
                         <Link to={"/employee/security-bug-reporting"}>
-                          Security Bug Reporting
+                        *  Security Bug Reporting
                         </Link>
                       </li>
                       <li>
                         <Link
                           to={"/employee/security-center-account-management"}
                         >
-                          Security Center Account Management
+                        *  Security Center Account Management
                         </Link>
                       </li>
                       <li>
                         <Link to={"/employee/safeguard-from-email-scams"}>
-                          Email Scams
+                        *  Email Scams
                         </Link>
                       </li>
                     </ul>
                   </div>
 
                   <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-4">
-                    <ul className="list-2 w10 list-line text-break">
+                    <ul className="list-3 d-flex row gap-3 w10  text-break">
                       <li>
                         <Link to={"/employee/general-contact-information"}>
-                          General Contact Information
+                        *  General Contact Information
                         </Link>
                       </li>
                       <li>
                         <Link to={"/employee/howitworks-for-candidates"}>
-                          How It Works For Candidates
+                        * How It Works For Candidates
                         </Link>
                       </li>
                       <li>
                         <Link to={"/employee/howitworks-for-employee"}>
-                          How It Works For Employee
+                        *  How It Works For employee
                         </Link>
                       </li>
                       <li>
                         <Link to={"/employee/information-novaus-jobs"}>
-                          Information of NovaUs Jobs
+                        *  Novajobs US information
                         </Link>
                       </li>
                     </ul>

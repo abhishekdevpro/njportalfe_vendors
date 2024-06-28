@@ -86,7 +86,7 @@ function Homepage2(){
           <div className="container">
             <div className="section-head text-center text-white">
               <h2 className="m-b5">Testimonials</h2>
-              <h5 className="fw4">Few words from candidates</h5>
+              
             </div>
             <Owltestimonial />
           </div>

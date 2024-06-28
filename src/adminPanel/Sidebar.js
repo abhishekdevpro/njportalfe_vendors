@@ -123,13 +123,13 @@ const Sidebar = () => {
         </Nav.Link>
         {showTeamSubmenu3 && (
           <>
-            <Nav.Link as={NavLink} to="/admin/team/listalljobs" style={navLinkStyle("/admin/team/listalljobs")} className='ps-5'>
+            <Nav.Link as={NavLink} to="/admin/listalljobs" style={navLinkStyle("/admin/listalljobs")} className='ps-5'>
               <FaUsers style={iconStyle} /> List All
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/team/addjobs" style={navLinkStyle("/admin/team/addjobs")} className='ps-5'>
+            <Nav.Link as={NavLink} to="/admin/addjobs" style={navLinkStyle("/admin/addjobs")} className='ps-5'>
               <FaBriefcase style={iconStyle} /> Add Jobs
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/team/bulkUploadjobs" style={navLinkStyle("/admin/team/bulkUploadjobs")} className='ps-5'>
+            <Nav.Link as={NavLink} to="/admin/bulkUploadjobs" style={navLinkStyle("/admin/bulkUploadjobs")} className='ps-5'>
               <FaUsers style={iconStyle} /> Bulk Upload
             </Nav.Link>
           </>
@@ -165,13 +165,13 @@ const Sidebar = () => {
         </Nav.Link>
         {showTeamSubmenu1 && (
           <>
-            <Nav.Link as={NavLink} to="/admin/team/listall" style={navLinkStyle("/admin/team/listall")} className='ps-5'>
+            <Nav.Link as={NavLink} to="/admin/listalljobseeker" style={navLinkStyle("/admin/listalljobseeker")} className='ps-5'>
               <FaUsers style={iconStyle} /> List All
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/team/Addjobseeker" style={navLinkStyle("/admin/team/Addjobseeker")} className='ps-5'>
+            <Nav.Link as={NavLink} to="/admin/Addjobseeker" style={navLinkStyle("/admin/Addjobseeker")} className='ps-5'>
               <FaUserGraduate style={iconStyle} /> Add Job Seeker
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/team/bulkUpload" style={navLinkStyle("/admin/team/bulkUpload")} className='ps-5'>
+            <Nav.Link as={NavLink} to="/admin/bulkUpload" style={navLinkStyle("/admin/bulkUpload")} className='ps-5'>
               <FaUsers style={iconStyle} /> Bulk Upload
             </Nav.Link>
           </>

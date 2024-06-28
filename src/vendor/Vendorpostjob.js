@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-
+import { Navbar, Nav, Badge } from 'react-bootstrap';
 import { Form, Button } from "react-bootstrap";
 import { FaX } from "react-icons/fa6";
 import TextEditor from "../employeeMarkup/Element/Editor";
@@ -23,6 +23,7 @@ import { showToastError , showToastSuccess} from "../utils/toastify";
 
 import { useEffect } from "react";
 import VendorCompanySideBar from "./Vendorsidebar";
+import Footer from "../markup/Layout/Footer";
 function VendorComponypostjobs() {
   const postAJobData = useSelector((state) => state.postAJobSlice.postAJobData);
 
@@ -433,6 +434,24 @@ function VendorComponypostjobs() {
     <>
      
       <div className="page-content bg-white">
+      <Navbar bg="white" variant="white" className='py-3 border-bottom'>
+      <Navbar.Brand as={Link} to="/">
+        <img
+          style={{ width: "110px" }}
+          src={require("../images/logo/NovaUS.png")}
+          className="logo"
+          alt="img"
+        />
+      </Navbar.Brand>
+
+
+        <Nav className="ml-auto align-items-center">
+         
+
+          
+        </Nav>
+    
+    </Navbar>
         <div className="content-block">
           <div className="section-full bg-white p-t50 p-b20">
             <div className="container">
@@ -875,7 +894,7 @@ function VendorComponypostjobs() {
           </div>
         </div>
       </div>
-
+<Footer/>
     </>
   );
 }
