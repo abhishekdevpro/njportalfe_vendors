@@ -219,7 +219,7 @@ function Homepage() {
               </div>
               <h3>AI Skill Testing Tool</h3>
               <p>
-                AI Skill testing tool & Earn Badge.
+                AI Skill testing tool &  Earn Rewards.
               </p>
             </div>
           </div>

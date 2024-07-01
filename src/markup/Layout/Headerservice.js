@@ -95,20 +95,7 @@ class Headerservice extends Component {
                 </div>
                       )}
                     </div> */}
-                <div>
-                  {localStorage.getItem("jobSeekerLoginToken") ? null : (
-                    <Link to={"/vendor/login"}>
-                      <div className="extra-nav">
-                        <button
-                          style={{ color: "white" }}
-                          className="site-button"
-                        >
-                          Partner With Us
-                        </button>
-                      </div>
-                    </Link>
-                  )}
-                </div>
+                
 
                 <div
                   className="header-nav navbar-collapse collapse myNavbar justify-content-start"
@@ -260,6 +247,20 @@ class Headerservice extends Component {
         </div>
         </div>
       )}
+      
+                  {localStorage.getItem("jobSeekerLoginToken") ? null : (
+                    <Link to={"/vendor/login"}>
+                      <div className="extra-nav">
+                        <button
+                          style={{ color: "white" }}
+                          className="site-button"
+                        >
+                          Partner With Us
+                        </button>
+                      </div>
+                    </Link>
+                  )}
+                
     </li>
                     {/* <li>
                       {localStorage.getItem("jobSeekerLoginToken") ? null : (

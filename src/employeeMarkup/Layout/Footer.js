@@ -241,7 +241,7 @@ function Footer() {
                       </li>
                       <li>
                         <Link to={"/employee/howitworks-for-employee"}>
-                        *  How It Works For employee
+                        *  How It Works For Employees
                         </Link>
                       </li>
                       <li>

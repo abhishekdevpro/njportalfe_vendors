@@ -34,7 +34,7 @@ const postBlog = [
     image: require("./../../images/testimonials/pic5.png"),
     comment:
       "The feedback on my skills section was invaluable. Love this AI service!",
-    name: "Jessica ",
+    name: "Max ",
     location: "Denver",
   },
 ];

@@ -77,7 +77,7 @@ const Sidebar = () => {
         </Nav.Link>
         {showTeamSubmenu5 && (
           <>
-            <Nav.Link as={NavLink} to="/admin/listallvendor" style={navLinkStyle("/admin/listallvendor")} className='ps-5'>
+            <Nav.Link as={NavLink} to="/admin/listvendor" style={navLinkStyle("/admin/listvendor")} className='ps-5'>
               <FaStore style={iconStyle} /> List Vendor
             </Nav.Link>
             <Nav.Link as={NavLink} to="/admin/addvendor" style={navLinkStyle("/admin/addvendor")} className='ps-5'>

@@ -120,7 +120,7 @@ function Jobsection() {
                         <div className="d-flex m-b30">
                           <div className="job-post-company">
                             <span>
-                              <img src={logo} alt="Company Logo"
+                              <img src={require("./../../images/logo/icon1.png")} alt="Company Logo"
                              
                               />
                             </span>

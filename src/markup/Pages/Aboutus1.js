@@ -34,11 +34,12 @@ function Aboutus1() {
 
                             <div className="job-bx">
                             <div className="d-flex flex-column flex-lg-row justify-content-around mt-5">
-    <div className="mx-3 mx-lg-5 mb-4 mb-lg-0" style={{ maxWidth: '350px' }}>
+    <div className="mx-3 mx-lg-5 mb-4 mb-lg-0" style={{ maxWidth: '320px' }}>
         <h1 className="mb-4" style={{ fontSize: 'clamp(24px, 5vw, 30px)', fontWeight: 'bold' }}>Introduction</h1>
         <p style={{ fontSize: 'clamp(14px, 3vw, 15px)' }}>
-            We are Hyper V Solutions, a  AI-driven business incubator of South Carolina, your gateway to a future of endless career possibilities. Our mission is simple yet powerful: to revolutionize recruitment by seamlessly connecting talented individuals with rewarding opportunities. With our advanced  Nova Jobs and comprehensive human capital services, we ensure a seamless experience for both job seekers and employers.
+            We are Hyper V Solutions, An AI driven business incubator at University of South Carolina, your gateway to a future of endless career possibilities.<br/> 
         </p>
+        <p style={{ fontSize: 'clamp(14px, 3vw, 15px)' }}>Our mission is simple yet powerfull to revolutionize recruitment by seamlessly connecting talented individuals with rewarding opportunities. With our advanced  Nova Jobs, we ensure a seamless experience for both job seekers and employers.</p>
     </div>
     <div className="mx-3 mx-lg-5">
         <img src={logo1} alt="SBE Logo" style={{ height: 'auto', maxWidth: '250px' }} />

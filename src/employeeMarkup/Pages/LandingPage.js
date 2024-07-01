@@ -7,17 +7,26 @@ import img3 from "../../images/services/3.jpeg";
 import img4 from "../../images/services/4.jpeg";
 import img5 from "../../images/services/5.jpeg";
 import img6 from "../../images/services/6.jpeg";
+import img8 from "../../images/services/Pink Cute Illustration Discord Avatar (1).png";
+import img9 from "../../images/services/Pink Cute Illustration Discord Avatar.png";
 
 import { Modal } from "react-bootstrap";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
 import Headerservice from "../../markup/Layout/Headerservice";
 import EmployeeHeader from "./../Layout/Header";
+import { Link ,useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
   const [show, setShow] = useState(false);
 
-  const handleShow = () => setShow(true);
+  //const handleShow = () => setShow(true);
+  const navigate = useNavigate();
+
+  const handleShow = () => {
+    window.location.href = 'https://ultraaura.education/';
+  };
+
   const handleClose = () => setShow(false);
 
   return (
@@ -171,19 +180,19 @@ const LandingPage = () => {
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
-        {/*<div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
+      <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
-            <img src={img4} alt="Service 4" className="img-fluid" />
-            <p style={{ fontSize: '20px' }}>AI-Based Functionality:</p>
+            <img src={img8} alt="Service 4" className="img-fluid" />
+            <p style={{ fontSize: '20px' }}>Range Of Services:</p>
             <ul>
-              <li>Auto Job Match</li>
-              <li>Skill Based Match</li>
-              <li>Auto JD Writing ..</li>
+              <li>AI Jobs Portal</li>
+              <li>Edtech Portal</li>
+              <li>White Label services</li>
             </ul>
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
-        </div> */}
-        <div className="col-12 col-md-6  mb-4 d-flex justify-content-center">
+        </div> 
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img4} alt="Service 4" className="img-fluid" />
             <p style={{ fontSize: '20px' }}>Automatic JD  writing</p>
@@ -195,7 +204,7 @@ const LandingPage = () => {
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
-        <div className="col-12 col-md-6 mb-4 d-flex justify-content-center">
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img5} alt="Service 5" className="img-fluid" />
             <p style={{ fontSize: '20px' }}>Resumè/CV services</p>
@@ -207,7 +216,7 @@ const LandingPage = () => {
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
-        <div className="col-12 col-md-6 mb-4 d-flex justify-content-center">
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img6} alt="Service 6" className="img-fluid" />
             <p style={{ fontSize: '20px' }}>Robust Vendor Panel:</p>
@@ -219,7 +228,7 @@ const LandingPage = () => {
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
-        <div className="col-12 col-md-6 mb-4 d-flex justify-content-center">
+        <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img7} alt="Service 7" className="img-fluid" />
             <p style={{ fontSize: '20px' }}> Add-ONS:</p>
@@ -231,19 +240,19 @@ const LandingPage = () => {
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
         </div>
-        {/*
+        
         <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
-            <img src={img7} alt="Service 7" className="img-fluid" />
-            <p style={{ fontSize: '20px' }}>AI-Based Add-ONS:</p>
+            <img src={img9} alt="Service 7" className="img-fluid" />
+            <p style={{ fontSize: '20px' }}>UltraAura:</p>
             <ul>
-              <li>Robust Wallet</li>
-              <li>Secure Chats</li>
-              <li>Vendor Login</li>
+              <li>Learn from Experts</li>
+              <li>Online Sessions</li>
+              <li>Certifications</li>
             </ul>
             <button className="site-button" onClick={handleShow}>Interested?</button>
           </div>
-        </div>*/}
+        </div>
       </div>
     </div>
       <Footer />

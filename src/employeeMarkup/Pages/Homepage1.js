@@ -213,7 +213,7 @@ function EmployeeHomepage() {
                 <FaRegUser />
               </div>
               <h3>AI Skill Testing Tool</h3>
-              <p>AI Skill testing tool & Earn Badge.</p>
+              <p>AI Skill testing tool &  Earn Rewards</p>
             </div>
           </div>
         </div>
