@@ -248,31 +248,20 @@ class UserHeader extends Component {
         </div>
       )}
        
-                  {localStorage.getItem("jobSeekerLoginToken") ? null : (
-                    <Link to={"/vendor/login"}>
-                      <div className="">
-                        <button
-                          style={{ color: "white" }}
-                          className="site-button"
-                        >
-                          Partner With Us
-                        </button>
-                      </div>
-                    </Link>
-                  )}
+                  
               
     </li>
-                    {/* <li>
-                      {localStorage.getItem("jobSeekerLoginToken") ? null : (
-                        <Link
-                        style={{ color: "white" }}
-                        to={"/employee/login"}
-                        className="site-button"
-                      >
-                        Employers / Post Job
-                      </Link>
-                      )}
-                    </li> */}
+                    <li>
+                    {localStorage.getItem("jobSeekerLoginToken") ? null : (
+                  <Link to={"/vendor/login"}
+                    
+                  style={{ color: "white" }}
+                  className="site-button "
+                  >    
+                    Partner With Us
+                  </Link>
+                  )}
+                    </li> 
                     <li>
                       {localStorage.getItem("jobSeekerLoginToken") ? (
                         ""

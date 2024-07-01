@@ -248,19 +248,19 @@ class Headerservice extends Component {
         </div>
       )}
       
-                  {localStorage.getItem("jobSeekerLoginToken") ? null : (
-                    <Link to={"/vendor/login"}>
-                      <div className="">
-                        <button
-                          style={{ color: "white" }}
-                          className="site-button"
-                        >
-                          Partner With Us
-                        </button>
-                      </div>
+                
+    </li>
+    <li>
+      
+    {localStorage.getItem("jobSeekerLoginToken") ? null : (
+                    <Link to={"/vendor/login"}
+                    
+                    style={{ color: "white" }}
+                    className="site-button"
+                    >    
+                      Partner With Us
                     </Link>
                   )}
-                
     </li>
                     {/* <li>
                       {localStorage.getItem("jobSeekerLoginToken") ? null : (
