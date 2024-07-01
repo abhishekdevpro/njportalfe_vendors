@@ -250,7 +250,7 @@ class Headerservice extends Component {
       
                   {localStorage.getItem("jobSeekerLoginToken") ? null : (
                     <Link to={"/vendor/login"}>
-                      <div className="extra-nav">
+                      <div className="">
                         <button
                           style={{ color: "white" }}
                           className="site-button"

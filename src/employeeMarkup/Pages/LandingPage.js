@@ -24,7 +24,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleShow = () => {
-    window.location.href = 'https://ultraaura.education/';
+    
   };
 
   const handleClose = () => setShow(false);
