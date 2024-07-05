@@ -174,6 +174,7 @@ import VendorChangepasswordpage from "./vendor/VendorChangepasswordpage";
 import Vendorbulkuploadjobopeneing from "./vendor/Vendorbulkuploadjobopeneing copy";
 import Vendorbulkuploadjobseeker from "./vendor/Vendorbulkuploadjobseeker";
 import Vendorregistration from "./vendor/Vendorregistration";
+import JobPagethirdparty from "./markup/Pages/JobPagethirdparty";
 function App() {
   const dispatch = useDispatch();
 
@@ -257,6 +258,7 @@ function App() {
           }
         />
         <Route path="job" element={<JobPage />} />
+        <Route path="jobthirdparty" element={<JobPagethirdparty />} />
         <Route
           path="applicant-job"
           element={

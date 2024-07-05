@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../css/profilesidebar.css"
+import "../../css/profilesidebar.css";
+import axios from "axios";
+
 function Profilesidebar({ data }) {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("jobSeekerLoginToken");
+    if (storedToken) {
+      console.log("Stored token:", storedToken); // Log the stored token when component mounts
+      setToken(storedToken);
+    }
+  }, []);
 
   const onLogout = () => {
     localStorage.removeItem("jobSeekerLoginToken");
@@ -12,6 +23,35 @@ function Profilesidebar({ data }) {
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "https://api.novajobs.us/api/jobseeker/auth/login",
+        {
+          // Add your login credentials here if needed
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Login response:", response); // Log the entire response for reference
+      const generatedToken = response?.data?.data?.token;
+      console.log("Generated token:", generatedToken); // Log the token
+
+      localStorage.setItem("jobSeekerLoginToken", generatedToken);
+      setToken(generatedToken);
+      navigate("/user");
+    } catch (error) {
+      console.error("Login error:", error);
+      console.log(error.response?.data?.message || "Login failed");
+    }
   };
 
   return (
@@ -35,7 +75,7 @@ function Profilesidebar({ data }) {
               </li>
               <li>
                 <Link
-                  to={"https://ai-resume-iota.vercel.app/"}
+                  to={`https://ai-resume-iota.vercel.app/?t=${token}`}
                   className={data === "resume" ? "active" : null}
                   onClick={() => setSidebarOpen(false)}
                 >
