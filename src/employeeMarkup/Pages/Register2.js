@@ -29,7 +29,7 @@ function EmployeeRegister2(props) {
   const [showUpload, setShowUpload] = useState(true);
   const [file, setFile] = useState();
   const [jobSeekerId, setJobSeekerId] = useState("");
-  const token = localStorage.getItem("jobSeekerLoginToken");
+  const token = localStorage.getItem("employeeLoginToken");
   console.log('itstoken',token)
   const [AiBtn, setAiBtn] = useState(true);
   const [showVideo, setShowVideo] = useState(true);

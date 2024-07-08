@@ -10,7 +10,7 @@ function VerifyEmailemployee() {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const accessToken = localStorage.getItem("jobSeekerLoginToken"); // Example: Fetch from local storage
+        const accessToken = localStorage.getItem("employeeLoginToken"); // Example: Fetch from local storage
 
         const headers = {
           Authorization: accessToken,
