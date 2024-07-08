@@ -160,9 +160,7 @@ const notify = (data) => toast.warning(data);
       localStorage.setItem("employeeLoginToken", res.data.data);
       showToastSuccess("Please check your email");
 
-      // Send email to the user upon successful registration
-      await sendConfirmationEmail(registerValues.email);
-
+      
       setShowUpload(false);
     } catch (err) {
       console.log(err);
@@ -171,22 +169,7 @@ const notify = (data) => toast.warning(data);
   };
 
   // Function to send confirmation email
-  const sendConfirmationEmail = async (email) => {
-    try {
-      await axios.post(
-        "YOUR_BACKEND_EMAIL_SENDING_ENDPOINT",
-        { email },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("Email sent successfully");
-    } catch (error) {
-      console.error("Error sending email:", error);
-    }
-  };
+  
 
   const verifyAccount = async () => {
     try {

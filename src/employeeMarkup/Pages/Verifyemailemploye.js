@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { showToastError, showToastSuccess } from "../../utils/toastify";
 
-function VerifyEmail() {
+function VerifyEmailemployee() {
   const navigate = useNavigate();
   const { token } = useParams();
 
@@ -49,4 +49,4 @@ function VerifyEmail() {
   );
 }
 
-export default VerifyEmail;
+export default VerifyEmailemployee;

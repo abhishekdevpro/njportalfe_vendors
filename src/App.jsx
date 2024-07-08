@@ -134,6 +134,8 @@ import LandingPage from "./employeeMarkup/Pages/LandingPage";
 import Verifyemail from "./markup/Pages/Verifyemail";
 import Aboutus1 from "./markup/Pages/Aboutus1";
 import Jobreferral from "./markup/Element/Jobreferral";
+import VerifyEmailemployee from "./employeeMarkup/Pages/Verifyemailemploye";
+
 
 import Admin from "./adminPanel/Admin";
 import Vendor from './adminPanel/Vendor';
@@ -602,6 +604,7 @@ function App() {
       {/* routes for empployees */}
 
       <Route path="/employee">
+      <Route path="verify" element={<VerifyEmailemployee />} />
         <Route
           path=""
           element={
