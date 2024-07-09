@@ -26,7 +26,7 @@ function ForgotPassword(props) {
     })
       .then((response) => {
         console.log(response);
-        navigate("/user/reset-password");
+        navigate("/user/login");
       })
       .catch((err) => {
         console.log(err);

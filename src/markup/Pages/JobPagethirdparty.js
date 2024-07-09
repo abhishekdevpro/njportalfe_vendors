@@ -52,6 +52,18 @@ function JobPagethirdparty() {
                   <p>{job.MatchedObjectDescriptor.OrganizationName}</p>
                   <p>{job.MatchedObjectDescriptor.DepartmentName}</p>
                   <p>{job.MatchedObjectDescriptor.PositionLocationDisplay}</p>
+                  <p>{job.MatchedObjectDescriptor.OrganizationName}</p>
+                  {/* Check if PositionLocation is an array or object and render accordingly */}
+                  {Array.isArray(job.MatchedObjectDescriptor.PositionLocation) ? (
+                    job.MatchedObjectDescriptor.PositionLocation.map((location, locIndex) => (
+                      <div key={locIndex}>
+                       <p>{location.LocationName}</p>
+                        <p>{location.CityName}, {location.CountryCode}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <p>{job.MatchedObjectDescriptor.PositionLocation}</p>
+                  )}
                   <a href={job.MatchedObjectDescriptor.ApplyURI[0]} className="text-blue-600 hover:underline site-button ">Apply Now</a>
                 </div>
               ))

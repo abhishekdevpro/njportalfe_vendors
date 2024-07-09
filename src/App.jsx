@@ -604,7 +604,7 @@ function App() {
       {/* routes for empployees */}
 
       <Route path="/employee">
-      <Route path="verify" element={<VerifyEmailemployee />} />
+      <Route path="verify" element={ <EmployeePrivateRoute><VerifyEmailemployee /></EmployeePrivateRoute>} />
         <Route
           path=""
           element={

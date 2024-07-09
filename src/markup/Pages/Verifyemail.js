@@ -1,34 +1,28 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { showToastError, showToastSuccess } from "../../utils/toastify";
 
 function VerifyEmail() {
   const navigate = useNavigate();
-  const { token } = useParams();
+  const token = localStorage.getItem("jobSeekerLoginToken");
 
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const accessToken = localStorage.getItem("jobseeker"); // Example: Fetch from local storage
-
         const headers = {
-          Authorization: accessToken,
-          "Content-Type": "application/json", // Adjust content type as per API requirements
+          Authorization: token,
         };
 
         const response = await axios.get(
-          `https://api.novajobs.us/api/jobseeker/verify-account/${token}`,
+          "https://api.novajobs.us/api/jobseeker/verify-account/",
           { headers }
         );
 
         console.log(response);
 
-        if (response.data.status === "error" && response.data.code === 400) {
-          showToastError(response.data.message || "Invalid token");
-          navigate("/user/login");
-        } else if (response.data.success && response.data.success.token) {
-          showToastSuccess(response.data, "Email verified successfully");
+        if (response.data.success && response.data.success.token) {
+          showToastSuccess("Email verified successfully");
           navigate("/user");
         } else {
           showToastError("Verification failed");
@@ -41,12 +35,14 @@ function VerifyEmail() {
       }
     };
 
-    verifyEmail();
+    if (token) {
+      verifyEmail();
+    } else {
+      navigate("/user/login");
+    }
   }, [token, navigate]);
 
-  return (
-    <div>Verifying...</div>
-  );
+  return <div>Verifying...</div>;
 }
 
 export default VerifyEmail;

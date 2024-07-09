@@ -153,7 +153,7 @@ const notify = (data) => toast.warning(data);
       const res = await axios.post("https://api.novajobs.us/api/employeer/auth/signup", body, {
         headers: {
           "Content-Type": "application/json",
-          //Authorization: token,
+          Authorization: token,
         },
       });
 
