@@ -10,7 +10,7 @@ import loginbg from "./../../images/bg6.jpg";
 import axios from "axios";
 import { showToastError } from "../../utils/toastify";
 
-function ResetPassword(props) {
+function ResetPasswordemployee(props) {
    const { token } = useParams();
   console.log("Extracted token from URL params:", token); 
   let errorsObj = { email: "", password: "" };
@@ -30,16 +30,16 @@ function ResetPassword(props) {
   
     await axios({
       method: "POST",
-      url: "https://api.novajobs.us/api/jobseeker/reset-password",
+      url: "https://api.novajobs.us/api/employee/reset-password",
       data: formData,
     })
       .then((response) => {
         console.log(response, "login");
         localStorage.setItem(
-          "employeeLoginToken",
+          "jobSeekerLoginToken",
           response?.data?.data?.token
         );
-        navigate("/employee/login");
+        navigate("/user/login");
       })
       .catch((err) => {
         console.log(err);
@@ -219,4 +219,4 @@ const mapStateToProps = (state) => {
     showLoading: state.auth.showLoading,
   };
 };
-export default connect(mapStateToProps)(ResetPassword);
+export default connect(mapStateToProps)(ResetPasswordemployee);

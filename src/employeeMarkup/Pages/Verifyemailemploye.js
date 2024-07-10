@@ -5,7 +5,7 @@ import { showToastError, showToastSuccess } from "../../utils/toastify";
 
 function VerifyEmailemployee() {
   const navigate = useNavigate();
-  const token = localStorage.getItem("employeeLoginToken");  // Replace with your token retrieval logic
+   const token = localStorage.getItem("employeeLoginToken");  // Replace with your token retrieval logic
 
   useEffect(() => {
     const verifyEmail = async () => {
