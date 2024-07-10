@@ -10,14 +10,12 @@ function VerifyEmailemployee() {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const headers = {
-          Authorization: token,
-        };
-
+       
         const response = await axios.get(
           "https://api.novajobs.us/api/employee/verify-account/",
           { headers:{
             "Content-Type": "Application/json",
+            Authorization: token,
           } }
         );
 
