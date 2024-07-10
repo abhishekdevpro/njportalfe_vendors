@@ -236,7 +236,7 @@ function App() {
         <Route path="reset-password/:token" element={<ResetPassword />} />
         <Route path="register" element={<Register1 />} />
         <Route path="register-2" element={<Register2 />} />
-        <Route path="verify" element={<Verifyemail />} />
+        <Route path="verify/:token" element={ <UserPrivateRoute><Verifyemail /></UserPrivateRoute>} />
         <Route
           path="jobs-profile"
           element={
@@ -606,7 +606,7 @@ function App() {
       {/* routes for empployees */}
 
       <Route path="/employee">
-      <Route path="verify" element={ <EmployeePrivateRoute><VerifyEmailemployee /></EmployeePrivateRoute>} />
+      <Route path="verify/:token" element={ <EmployeePrivateRoute><VerifyEmailemployee /></EmployeePrivateRoute>} />
       <Route path="forgot-password" element={<ForgotPasswordemployee />} />
       <Route path="reset-password/:token" element={<ResetPasswordemployee />} />
         <Route

@@ -9,6 +9,7 @@ import {
 import loginbg from "./../../images/bg6.jpg";
 import axios from "axios";
 import { showToastError } from "../../utils/toastify";
+import { ToastContainer } from "react-toastify";
 
 function ResetPassword(props) {
    const { token } = useParams();
@@ -206,6 +207,7 @@ function ResetPassword(props) {
               </div>
             </div>
           </div>
+          <ToastContainer/>
         </footer>
       </div>
     </div>
