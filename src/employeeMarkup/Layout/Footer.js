@@ -163,7 +163,7 @@ function Footer() {
                       </li>
                       <li>
                         <Link to={"/employee/data-sharing-helps-you"}>
-                        *  Help data Sharing
+                        *  Help Data Sharing
                         </Link>
                       </li>
                     </ul>
@@ -246,7 +246,7 @@ function Footer() {
                       </li>
                       <li>
                         <Link to={"/employee/information-novaus-jobs"}>
-                        *  Novajobs US information
+                        *  Novajobs US Information
                         </Link>
                       </li>
                     </ul>

@@ -236,7 +236,7 @@ function App() {
         <Route path="reset-password/:token" element={<ResetPassword />} />
         <Route path="register" element={<Register1 />} />
         <Route path="register-2" element={<Register2 />} />
-        <Route path="verify/:token" element={ <UserPrivateRoute><Verifyemail /></UserPrivateRoute>} />
+        <Route path="verify/:token" element={<Verifyemail />} />
         <Route
           path="jobs-profile"
           element={

@@ -156,6 +156,8 @@ function Register2(props) {
       localStorage.setItem("jobseeker", res.data.data);
       showToastSuccess("Please check your email");
   
+      // Send confirmation email with verification link
+      await sendConfirmationEmail(registerValues.email, res.data.token);
   
       // Reset the form fields
       setRegisterValues({
@@ -177,7 +179,24 @@ function Register2(props) {
   
 
 // Function to send confirmation email with verification link
+const sendConfirmationEmail = async (email, token) => {
+  try {
+    const encodedEmail = encodeURIComponent(email); // Encode email
+    const encodedToken = encodeURIComponent(token); // Encode token
 
+    const verificationLink = `https://api.novajobs.us/api/jobseeker/verify-account/${encodedToken}?email=${encodedEmail}`;
+    const emailBody = {
+      to: email,
+      subject: "Confirm Your Email",
+      body: `Please click on the following link to confirm your email: ${verificationLink}`,
+    };
+
+    
+    console.log("Email sent successfully");
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
+};
 
 
 

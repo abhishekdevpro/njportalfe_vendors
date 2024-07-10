@@ -21,8 +21,8 @@ function Featureblog() {
       <div className="container">
         <div className="row">
           <div className="col-lg-12 section-head text-center">
-            <h2 className="m-b5">Featured Cities</h2>
-            <h6 className="fw4 m-b0">20+ Featured Cities Added Jobs</h6>
+            <h2 className="m-b5">Featured States</h2>
+            <h6 className="fw4 m-b0">20+ Featured States Added Jobs</h6>
           </div>
         </div>
         <div className="row">
@@ -91,7 +91,7 @@ function Featureblog() {
             </div>
           </div>
           <div className="col-lg-3 col-sm-6 col-md-6 m-b30">
-            <div onClick={() => handleLocationSelect("virginia")}>
+            <div onClick={() => handleLocationSelect("Vergina")}>
               <div
                 className="city-bx align-items-end  d-flex"
                 style={{
@@ -100,7 +100,7 @@ function Featureblog() {
                 }}
               >
                 <div className="city-info">
-                  <h5>Virginia</h5>
+                  <h5>Vergina</h5>
                   <span>765 Jobs</span>
                 </div>
               </div>

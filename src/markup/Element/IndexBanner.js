@@ -65,7 +65,7 @@ class IndexBanner extends Component {
               >
                 
                 <div className="hover-3d">
-                  <h2> An AI-enabled HR Job portal</h2>
+                  <h2> An AI-Enabled HR Job Portal</h2>
                 </div>
               </div>
               <h2>
@@ -79,7 +79,7 @@ class IndexBanner extends Component {
                     1000,
                     "Connect with Employers",
                     1000,
-                    "Get Hired...",
+                    "Get Hired",
                     1000,
                   ]}
                   wrapper="span"

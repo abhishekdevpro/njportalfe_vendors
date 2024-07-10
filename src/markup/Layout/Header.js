@@ -271,7 +271,7 @@ class UserHeader extends Component {
                           to={"/employee/login"}
                           className="site-button"
                         >
-                          Employers / Post Job
+                          Employers/Post Job
                         </Link>
                       )}
                     </li>

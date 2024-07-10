@@ -1,45 +1,51 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { showToastError, showToastSuccess } from "../../utils/toastify";
 
 function VerifyEmail() {
   const navigate = useNavigate();
-  const token = localStorage.getItem("jobSeekerLoginToken");
+  const { token } = useParams(); // Extract token from URL parameters
+  console.log("Extracted token from URL params:", token);
 
   useEffect(() => {
+   
+
     const verifyEmail = async () => {
-      try {
-        const headers = {
-          Authorization: token,
-        };
+      console.log("Token:", token); // Log the token
 
-        const response = await axios.get(
-          "https://api.novajobs.us/api/jobseeker/verify-account/",
-          { headers }
-        );
+      const headers = {
+        Authorization: token, // Adjust if your token format is different
+        "Content-Type": "application/json",
+      };
 
-        console.log(response);
-
-        if (response.data.success && response.data.success.token) {
-          showToastSuccess("Email verified successfully");
-          navigate("/user");
-        } else {
-          showToastError("Verification failed");
-          navigate("/user/login");
-        }
-      } catch (error) {
-        console.error("Verification Error:", error);
-        showToastError("Invalid token or email");
-        navigate("/user/login");
-      }
+      await axios({
+        method: "GET",
+        url: "https://api.novajobs.us/api/jobseeker/verify-account/",
+        headers: headers,
+      })
+        .then((response) => {
+          console.log(response, "verification");
+          if (response.data.success && response.data.success.token) {
+            localStorage.setItem(
+              "jobSeekerLoginToken",
+              response.data.success.token
+            );
+            showToastSuccess("Email verified successfully");
+            navigate("/user");
+          } else {
+            showToastError("Verification failed");
+           
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          showToastError(err?.response?.data?.message || "Invalid token or email");
+          
+        });
     };
 
-    if (token) {
-      verifyEmail();
-    } else {
-      navigate("/user/login");
-    }
+    verifyEmail();
   }, [token, navigate]);
 
   return <div>Verifying...</div>;

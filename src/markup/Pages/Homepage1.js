@@ -105,8 +105,8 @@ function Homepage() {
                         fontSize: "14px",
                       }}
                     >
-                      List Your Profile, Check Your Resume Score, Search Jobs,
-                      with Advance Filters and Power of AI
+                    List Your Profile, Check Your Resume Score, Search Jobs, with Advance Filters and Power of AI
+
                     </p>
                     <Link
                       to={"/user/job"}
@@ -155,8 +155,7 @@ function Homepage() {
                         fontSize: "14px",
                       }}
                     >
-                      List Your Company, Post Jobs, Search Talent, with Advanced Filters and Power
-                      of AI{" "}
+                     List Your Company, Post Jobs, Search Talent, with Advanced Filters and Power of AI{" "}
                     </p>
                     <Link
                       to={"/employee/register-2"}
@@ -204,14 +203,14 @@ function Homepage() {
                 <FaRegFileAlt />
               </div>
               <h3>Check Resume Score</h3>
-              <p>Our AI gives immediate score on your Resume.</p>
+              <p>Our AI Gives Immediate Score On Your Resume.</p>
             </div>
             <div className="card">
               <div className="card-icon">
                 <FaRegFilePdf />
               </div>
               <h3>Build Your Public Profile</h3>
-              <p>Add Your Details to reach leading companies.</p>
+              <p>Add Your Details To Reach leading Companies.</p>
             </div>
             <div className="card">
               <div className="card-icon">
@@ -219,7 +218,7 @@ function Homepage() {
               </div>
               <h3>AI Skill Testing Tool</h3>
               <p>
-                AI Skill testing tool &  Earn Rewards.
+              AI Skill Testing Tool & Earn Rewards.
               </p>
             </div>
           </div>

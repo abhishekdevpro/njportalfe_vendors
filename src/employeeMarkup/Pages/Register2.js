@@ -29,7 +29,7 @@ function EmployeeRegister2(props) {
   const [showUpload, setShowUpload] = useState(true);
   const [file, setFile] = useState();
   const [jobSeekerId, setJobSeekerId] = useState("");
-  const token = localStorage.getItem("employeeLoginToken");
+  const token = localStorage.getItem("jobSeekerLoginToken");
   console.log('itstoken',token)
   const [AiBtn, setAiBtn] = useState(true);
   const [showVideo, setShowVideo] = useState(true);
@@ -153,14 +153,16 @@ const notify = (data) => toast.warning(data);
       const res = await axios.post("https://api.novajobs.us/api/employeer/auth/signup", body, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: token,
+          //Authorization: token,
         },
       });
 
       localStorage.setItem("employeeLoginToken", res.data.data);
       showToastSuccess("Please check your email");
 
-      
+      // Send email to the user upon successful registration
+      await sendConfirmationEmail(registerValues.email);
+
       setShowUpload(false);
     } catch (err) {
       console.log(err);
@@ -169,7 +171,22 @@ const notify = (data) => toast.warning(data);
   };
 
   // Function to send confirmation email
-  
+  const sendConfirmationEmail = async (email) => {
+    try {
+      await axios.post(
+        "YOUR_BACKEND_EMAIL_SENDING_ENDPOINT",
+        { email },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Email sent successfully");
+    } catch (error) {
+      console.error("Error sending email:", error);
+    }
+  };
 
   const verifyAccount = async () => {
     try {

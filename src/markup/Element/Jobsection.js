@@ -240,9 +240,9 @@ function Jobsection() {
                 </div>
                 <div className="quote-bx">
                   <div className="quote-info">
-                    <h4>Make a Difference with Our AI Resume Builder!</h4>
+                    <h4>Make A Difference With Our AI Resume Builder!</h4>
                     <p>
-                      Ai Resume is built in minutes, with multiple premium
+                      AI Resume is built in minutes, with multiple premium
                       templates.
                     </p>
                     <Link to={"/user/register-2"} className="site-button">
