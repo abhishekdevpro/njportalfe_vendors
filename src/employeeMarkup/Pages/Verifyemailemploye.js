@@ -9,7 +9,10 @@ function VerifyEmailemployee() {
 
   useEffect(() => {
     const verifyEmail = async () => {
-      
+      if (!token) {
+        navigate("/employee/login");
+        return;
+      }
 
       try {
         const headers = {
