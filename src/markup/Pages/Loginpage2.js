@@ -12,6 +12,7 @@ import { showToastError } from "../../utils/toastify";
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 import { toast, ToastContainer } from "react-toastify";
 import Footer from "../Layout/Footer";
+import Header from "../Layout/Header"
 function Login(props) {
   const [email, setEmail] = useState("demo@example.com");
   let errorsObj = { email: "", password: "" };
@@ -83,6 +84,7 @@ function Login(props) {
 
   return (
     <div className="page-wraper">
+      <Header/>
       <ToastContainer />
 
       <div
@@ -217,7 +219,7 @@ function Login(props) {
                         <h5 className="form-title m-t5 pull-left">
                           Sign In With
                         </h5>
-                        <ul className="dez-social-icon dez-border pull-right dez-social-icon-lg text-white">
+                        {/*<ul className="dez-social-icon dez-border pull-right dez-social-icon-lg text-white">
                           <li>
                             <Link
                               to={""}
@@ -232,7 +234,7 @@ function Login(props) {
                               target="bank"
                             ></Link>
                           </li>
-                        </ul>
+                        </ul> */}
                       </div>
                       <div className="text-center">
                         <button

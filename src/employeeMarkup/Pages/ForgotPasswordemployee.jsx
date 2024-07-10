@@ -6,19 +6,19 @@ import loginbg from "../../images/login/loginbg.jpeg";
 import axios from "axios";
 import { showToastError } from "../../utils/toastify";
 
-function ForgotPassword(props) {
+function ForgotPasswordemployee(props) {
   const [email, setEmail] = useState("demo@example.com");
   let errorsObj = { email: "", password: "" };
   const [errors, setErrors] = useState(errorsObj);
   const navigate = useNavigate();
-  const token = localStorage.getItem("jobSeekerLoginToken");
+  const token = localStorage.getItem("employeeLoginToken");
   const handlePostRequest = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("email", email);
     await axios({
       method: "POST",
-      url: "https://api.novajobs.us/api/jobseeker/forgot-password",
+      url: "https://api.novajobs.us/api/employee/forgot-password",
       headers: {
         "Content-Type": "Application/json",
       },
@@ -26,7 +26,7 @@ function ForgotPassword(props) {
     })
       .then((response) => {
         console.log(response);
-        navigate("/user/login");
+        navigate("/employee/login");
       })
       .catch((err) => {
         console.log(err);
@@ -110,7 +110,7 @@ function ForgotPassword(props) {
                     </form>
                     <div className="form-group text-center">
                       <Link
-                        to="/user/login"
+                        to="/employee/login"
                         className="site-button-link  m-t15 "
                       >
                         Back to Login
@@ -163,4 +163,4 @@ const mapStateToProps = (state) => {
     showLoading: state.auth.showLoading,
   };
 };
-export default connect(mapStateToProps)(ForgotPassword);
+export default connect(mapStateToProps)(ForgotPasswordemployee);

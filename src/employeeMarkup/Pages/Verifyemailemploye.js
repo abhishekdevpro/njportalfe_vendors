@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { showToastError, showToastSuccess } from "../../utils/toastify";
@@ -9,6 +9,11 @@ function VerifyEmailemployee() {
 
   useEffect(() => {
     const verifyEmail = async () => {
+      if (!token) {
+        navigate("/employee/login");
+        return;
+      }
+
       try {
         const headers = {
           Authorization: token,
@@ -35,15 +40,10 @@ function VerifyEmailemployee() {
       }
     };
 
-    if (token) {
-      verifyEmail();
-    } else {
-      navigate("/employee/login");
-    }
+    verifyEmail();
   }, [token, navigate]);
 
   return <div>Verifying...</div>;
 }
-
 
 export default VerifyEmailemployee;

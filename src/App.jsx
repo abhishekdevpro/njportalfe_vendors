@@ -128,6 +128,7 @@ import CompanyPage from "./markup/Pages/CompanyPageView";
 import EmailVerification from "./markup/Pages/EmailVerification";
 import NewPasswordSet from "./markup/Pages/NewPasswordSet";
 import ForgotPassword from "./markup/Pages/ForgotPassword";
+import ForgotPasswordemployee from "./employeeMarkup/Pages/ForgotPasswordemployee";
 import ResetPassword from "./markup/Pages/ResetPassword";
 import ResumeSecurity from "./markup/Pages/ResumeSecurity";
 import LandingPage from "./employeeMarkup/Pages/LandingPage";
@@ -605,6 +606,7 @@ function App() {
 
       <Route path="/employee">
       <Route path="verify" element={ <EmployeePrivateRoute><VerifyEmailemployee /></EmployeePrivateRoute>} />
+      <Route path="forgot-password" element={<ForgotPasswordemployee />} />
         <Route
           path=""
           element={

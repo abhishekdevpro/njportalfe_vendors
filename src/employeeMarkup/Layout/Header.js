@@ -92,8 +92,10 @@ class EmployeeHeader extends Component {
                       </Link>
                     )}
                     {/* <Link to ={'#'} title="READ MORE" onClick={this.handleShow}  className="site-button"><i className="fa fa-lock"></i> login </Link> */}
-                     
-                    <Logout />
+                    {localStorage.getItem("employeeLoginToken") ? <Logout /> : (
+                      null
+                    )}
+                    
                   </div>
                 </div>
 

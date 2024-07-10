@@ -14,6 +14,7 @@ import { showToastError } from "../../utils/toastify";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../Layout/Footer";
+import Header from "../Layout/Header"
 function EmployeeLogin(props) {
   const [email, setEmail] = useState("demo@example.com");
   let errorsObj = { email: "", password: "" };
@@ -80,6 +81,7 @@ function EmployeeLogin(props) {
   };
   return (
     <div className="page-wraper">
+      <Header/>
       <ToastContainer />
       <div
         className="page-content bg-white login-style2"
@@ -223,7 +225,7 @@ function EmployeeLogin(props) {
                       <div className="form-group text-center">
                         <Link
                           data-toggle="tab"
-                          to={"/user/email-verification"}
+                          to={"/employee/forgot-password"}
                           className="forget-pass m-l5"
                         >
                           <i className="fa fa-unlock-alt"></i> Forgot Password
@@ -233,7 +235,7 @@ function EmployeeLogin(props) {
                         <h5 className="form-title m-t5 pull-left">
                           Sign In With
                         </h5>
-                        <ul className="dez-social-icon dez-border pull-right dez-social-icon-lg text-white">
+                        {/*<ul className="dez-social-icon dez-border pull-right dez-social-icon-lg text-white">
                           <li>
                             <Link
                               to={""}
@@ -248,7 +250,7 @@ function EmployeeLogin(props) {
                               target="bank"
                             ></Link>
                           </li>
-                        </ul>
+                        </ul> */}
                       </div>
                       <div className="text-center">
                         <button
