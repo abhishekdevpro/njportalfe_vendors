@@ -153,7 +153,7 @@ function Register2(props) {
         },
       });
   
-      localStorage.setItem("jobseeker", res.data.data);
+      localStorage.setItem("jobSeekerLoginToken", res.data.data);
       showToastSuccess("Please check your email");
   
       // Send confirmation email with verification link
@@ -191,7 +191,11 @@ const sendConfirmationEmail = async (email, token) => {
       body: `Please click on the following link to confirm your email: ${verificationLink}`,
     };
 
-    
+    await axios.post("YOUR_BACKEND_EMAIL_SENDING_ENDPOINT", emailBody, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     console.log("Email sent successfully");
   } catch (error) {
     console.error("Error sending email:", error);

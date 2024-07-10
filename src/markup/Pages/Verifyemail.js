@@ -9,20 +9,16 @@ function VerifyEmail() {
   console.log("Extracted token from URL params:", token);
 
   useEffect(() => {
-   
-
     const verifyEmail = async () => {
       console.log("Token:", token); // Log the token
 
-      const headers = {
-        Authorization: token, // Adjust if your token format is different
-        "Content-Type": "application/json",
-      };
+      const formData = new FormData();
+      formData.append("token", token);
 
       await axios({
         method: "GET",
         url: "https://api.novajobs.us/api/jobseeker/verify-account/",
-        headers: headers,
+        data: formData,
       })
         .then((response) => {
           console.log(response, "verification");
@@ -35,13 +31,13 @@ function VerifyEmail() {
             navigate("/user");
           } else {
             showToastError("Verification failed");
-           
+            navigate("/user/verify");
           }
         })
         .catch((err) => {
           console.log(err);
           showToastError(err?.response?.data?.message || "Invalid token or email");
-          
+          navigate("/user/verify");
         });
     };
 

@@ -606,7 +606,7 @@ function App() {
       {/* routes for empployees */}
 
       <Route path="/employee">
-      <Route path="verify/:token" element={ <EmployeePrivateRoute><VerifyEmailemployee /></EmployeePrivateRoute>} />
+      <Route path="verify/:token" element={ <VerifyEmailemployee />} />
       <Route path="forgot-password" element={<ForgotPasswordemployee />} />
       <Route path="reset-password/:token" element={<ResetPasswordemployee />} />
         <Route
