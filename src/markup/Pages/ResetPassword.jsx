@@ -37,7 +37,7 @@ function ResetPassword(props) {
       .then((response) => {
         console.log(response, "login");
         localStorage.setItem(
-          "employeeLoginToken",
+          "jobSeekerLoginToken",
           response?.data?.data?.token
         );
         navigate("/user");

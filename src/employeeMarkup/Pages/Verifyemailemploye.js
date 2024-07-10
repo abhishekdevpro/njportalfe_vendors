@@ -18,7 +18,7 @@ function VerifyEmailemployee() {
 
         const response = await axios.get(
           "https://api.novajobs.us/api/employee/verify-account/",
-          { params }
+           params 
         );
 
         console.log(response);
