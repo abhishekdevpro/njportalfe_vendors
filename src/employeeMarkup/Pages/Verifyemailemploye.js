@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { showToastError, showToastSuccess } from "../../utils/toastify";
@@ -9,11 +9,6 @@ function VerifyEmailemployee() {
 
   useEffect(() => {
     const verifyEmail = async () => {
-      if (!token) {
-        navigate("/employee/login");
-        return;
-      }
-
       try {
         const headers = {
           Authorization: token,
@@ -21,7 +16,9 @@ function VerifyEmailemployee() {
 
         const response = await axios.get(
           "https://api.novajobs.us/api/employee/verify-account/",
-          { headers }
+          { headers:{
+            "Content-Type": "Application/json",
+          } }
         );
 
         console.log(response);
@@ -40,10 +37,15 @@ function VerifyEmailemployee() {
       }
     };
 
-    verifyEmail();
+    if (token) {
+      verifyEmail();
+    } else {
+      navigate("/employee/login");
+    }
   }, [token, navigate]);
 
   return <div>Verifying...</div>;
 }
+
 
 export default VerifyEmailemployee;
