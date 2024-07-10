@@ -2,42 +2,40 @@ import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { showToastError, showToastSuccess } from "../../utils/toastify";
+import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
+
 
 function VerifyEmailemployee() {
   const navigate = useNavigate();
   const { token } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const verifyEmail = async () => {
+      console.log("Token:", token); // Log the token
+
       try {
-        console.log("Token:", token);
-
-        const params = {
-          token: token,
-        };
-
         const response = await axios.get(
-          "https://api.novajobs.us/api/employee/verify-account/",
-           params 
+          `https://api.novajobs.us/api/employee/verify-account/`,
+          {
+            token 
+          }
         );
 
-        console.log(response);
-
-        if (response.data.success && response.data.success.token) {
-          localStorage.setItem(
-            "employeeLoginToken",
-            response.data.success.token
-          );
-          showToastSuccess("Email verified successfully");
-          navigate("/employee");
-        } else {
-          showToastError("Verification failed");
-          navigate("/employee/verify");
-        }
+        console.log(response, "login");
+        localStorage.setItem(
+          "employeeLoginToken",
+          response?.data?.data?.token
+        );
+       // Dispatch success action
+        showToastSuccess("Email verified successfully");
+        navigate("/employee");
       } catch (err) {
-        console.error("Verification Error:", err);
-        showToastError(err?.response?.data?.message || "Invalid token or email");
-        navigate("/employee/verify");
+        console.log(err);
+        console.log(err?.response?.data?.message || "Verification failed");
+        // Dispatch failure action
+        showToastError(err?.response?.data?.message || "Verification failed");
       }
     };
 
@@ -47,9 +45,17 @@ function VerifyEmailemployee() {
       showToastError("No token found");
       navigate("/employee");
     }
-  }, [token, navigate]);
+  }, [token, navigate, dispatch]);
 
   return <div>Verifying...</div>;
 }
 
-export default VerifyEmailemployee;
+const mapStateToProps = (state) => {
+  return {
+    errorMessage: state.auth.errorMessage,
+    successMessage: state.auth.successMessage,
+    showLoading: state.auth.showLoading,
+  };
+};
+
+export default connect(mapStateToProps)(VerifyEmailemployee);
