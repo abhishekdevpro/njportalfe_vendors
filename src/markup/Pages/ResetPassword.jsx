@@ -39,7 +39,7 @@ function ResetPassword(props) {
           "employeeLoginToken",
           response?.data?.data?.token
         );
-        navigate("/employee/login");
+        navigate("/user");
       })
       .catch((err) => {
         console.log(err);
