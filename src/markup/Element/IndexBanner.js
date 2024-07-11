@@ -55,10 +55,20 @@ class IndexBanner extends Component {
         <div className="container">
           <div className="dez-bnr-inr-entry align-m">
             <div className="find-job-bx ">
-            <span className=" d-flex justify-content-around mb-4 " style={{width:'280px'}}>
-                  <span className="m-2 hoverlogo-3d"><img src={SBELogo} alt="SBE Logo" style={{height:'90px'}}/></span>
-                  <span className="m-2 hoverlogo-3d"><img src={NewDBELogo} alt="SBE Logo" style={{height:'90px'}}/></span>
-                </span>
+            <span className="d-flex justify-content-around mb-4" style={{ width: '280px' }}>
+  <span className="m-2 hover-container">
+    <img src={SBELogo} alt="SBE Logo" style={{ height: '90px' }} />
+    <span className="hover-text">Small Business Enterprise (SBE) Certification
+At Hyper V Solutions, our SBE certification underscores our commitment to supporting small businesses and fostering local economic growth. This certification enables us to engage in various opportunities, promoting innovation and collaboration within our community.
+</span>
+  </span>
+  <span className="m-2 hover-container">
+    <img src={NewDBELogo} alt="New DBE Logo" style={{ height: '90px' }} />
+    <span className="hover-text">Disadvantaged Business Enterprise (DBE) Certification
+    Our DBE certification at Hyper V Solutions highlights our dedication to diversity and inclusion. This certification allows us to participate in projects that prioritize equal opportunities for minority and disadvantaged businesses, driving positive change and fostering a more equitable business</span>
+  </span>
+</span>
+
               <div
                 className="d-flex align-items-center "
                 style={{ gap: "7px" }}

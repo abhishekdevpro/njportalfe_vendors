@@ -161,7 +161,7 @@ import Listnumber from "./adminPanel/Listnumber";
 import Listvendor from "./adminPanel/Listvendor";
 import Jobslist from "./adminPanel/Joblist";
 import Jobseekerlist from "./adminPanel/Jobseekerlist";
-
+import Employeelist from "./adminPanel/Employeelist";
 
 
 
@@ -195,6 +195,7 @@ function App() {
         <Route path="/admin/users" element={<PrivateRouteadmin><User /> </PrivateRouteadmin>} />
         <Route path="/admin/vendor" element={<PrivateRouteadmin><Vendor /></PrivateRouteadmin>} />
         <Route path="/admin/employee" element={<PrivateRouteadmin><Employee /></PrivateRouteadmin>} />
+        <Route path="/admin/employeelist" element={<PrivateRouteadmin><Employeelist /></PrivateRouteadmin>} />
         <Route path="/admin/wallet" element={<PrivateRouteadmin><Wallet /></PrivateRouteadmin>} />
         <Route path="/admin/addteam" element={<PrivateRouteadmin><Addteam /></PrivateRouteadmin>} />
           <Route path="/admin/assignrole" element={<PrivateRouteadmin><AssignRole /></PrivateRouteadmin>} />
@@ -236,7 +237,9 @@ function App() {
         <Route path="reset-password/:token" element={<ResetPassword />} />
         <Route path="register" element={<Register1 />} />
         <Route path="register-2" element={<Register2 />} />
+
         <Route path="verify/:token" element={<Verifyemail />} />
+        
         <Route
           path="jobs-profile"
           element={
@@ -607,6 +610,7 @@ function App() {
 
       <Route path="/employee">
       <Route path="verify/:token" element={ <VerifyEmailemployee />} />
+      
       <Route path="forgot-password" element={<ForgotPasswordemployee />} />
       <Route path="reset-password/:token" element={<ResetPasswordemployee />} />
         <Route

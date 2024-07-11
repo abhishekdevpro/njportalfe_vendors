@@ -209,7 +209,7 @@ function Login(props) {
                       </div>
                       <div className="form-group text-center">
                         <Link
-                          to={"/user/forgot-password"}
+                          to={"/user/reset-password"}
                           className="forget-pass m-l5"
                         >
                           <i className="fa fa-unlock-alt"></i> Forgot Password

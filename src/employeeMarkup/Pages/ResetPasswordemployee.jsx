@@ -6,7 +6,7 @@ import {
   loginAction,
 } from "../../store/actions/AuthActions";
 
-import loginbg from "./../../images/bg6.jpg";
+import loginbg from "../../images/login/loginbg.jpeg";
 import axios from "axios";
 import { showToastError } from "../../utils/toastify";
 
@@ -71,10 +71,9 @@ function ResetPasswordemployee(props) {
                       />
                     </Link>
                   </div>
-                  <h2 className="m-b10">Login To Yo</h2>
+                  <h2 className="m-b10">Verify Your Email To Get Link</h2>
                   <p className="m-b30">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry has been the industry.
+                  Welcome To One Stop AI Powered Staffing Solution
                   </p>
                   <ul className="list-inline m-a0">
                     <li>
@@ -177,9 +176,9 @@ function ResetPasswordemployee(props) {
         </div>
         <footer className="login-footer">
           <div className="container">
-            <div className="row">
+            <div className="row text-white">
               <div className="col-lg-12 text-center">
-                <span className="float-left text-white">
+                <span className="float-left">
                   © Copyright by{" "}
                   <img
                     src="../../images/WhatsApp_Image_2024-05-11_at_19.51.05-removebg-preview.png"
@@ -195,13 +194,10 @@ function ResetPasswordemployee(props) {
                       width: "40px",
                     }}
                   />
-                  <span className="text-white">Nova Jobs </span>
-                  <Link style={{ color: "white" }} to={"#"}>
-                    Powered By Hyper V Solutions
-                  </Link>
+                  <Link to={"#"} ><strong className="text-white" style={{fontSize:'20px'}}>Nova Jobs </strong></Link>{" "}
                 </span>
-                <span className="float-right text-white">
-                  “Hyper V Solutions” | All Rights Reserved
+                <span className="float-right">
+                <strong className="text-white" style={{ fontWeight:'bold'}}>Hyper V Solutions</strong>  | All Rights Reserved
                 </span>
               </div>
             </div>

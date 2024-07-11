@@ -10,6 +10,8 @@ import VendorCompanySideBar from "./Vendorsidebar";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from "../markup/Layout/Footer";
+import { Navigate } from 'react-router-dom';
+import {  Button } from 'react-bootstrap';
 
 function VendorCompanyprofile() {
   const companyData = useSelector(
@@ -38,6 +40,9 @@ function VendorCompanyprofile() {
   const [glassdoor, setGlassdor] = useState("");
 
   const [industries, setIndustries] = useState([]);
+
+  
+
 
   const token = localStorage.getItem("vendorToken");
 
@@ -191,6 +196,14 @@ function VendorCompanyprofile() {
     getCities();
   }, [selectedStates]);
 
+  const handleLogout = () => {
+    // Clear authentication token or perform necessary logout actions
+    localStorage.removeItem('vendorToken');
+    // Redirect to admin login screen
+    <Navigate to="/vendor/login" />
+    return ;
+  };
+
   return (
     <>
       
@@ -208,7 +221,9 @@ function VendorCompanyprofile() {
 
         <Nav className="ml-auto align-items-center">
          
-
+        <Button  onClick={handleLogout} style={{backgroundColor:'#1C2957'}} className='text-white px-4'>
+            Logout
+          </Button>
           
         </Nav>
     

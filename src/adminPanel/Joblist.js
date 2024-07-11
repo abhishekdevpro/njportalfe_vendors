@@ -99,7 +99,7 @@ const Jobslist = () => {
                   <thead>
                     <tr className="text-center">
                       <th style={{ backgroundColor: '#1C2957', color: 'white' }}>
-                        Job ID
+                        ID
                       </th>
                       <th style={{ backgroundColor: '#1C2957', color: 'white' }}>
                         Job Title
@@ -181,7 +181,10 @@ const Jobslist = () => {
                             </Dropdown.Menu>
                           </Dropdown>
                         </td>
-                        
+                        <td> <input
+                        type='textbox'
+                        className='p-2'
+                        /></td>
                       </tr>
                     ))}
                   </tbody>

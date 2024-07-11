@@ -885,7 +885,7 @@ function JobPage() {
                                                 
                                               }}
                                             >
-                                              {job.companies.countries.name}
+                                              {job.companies.cities.name}{","}{job.companies.states.name}
                                               <p
                                                 className="mb-0"
                                                 onClick={() => {

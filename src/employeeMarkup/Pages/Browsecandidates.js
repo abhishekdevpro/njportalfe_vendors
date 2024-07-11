@@ -331,7 +331,11 @@ function EmployeeBrowsecandidates() {
   return (
     <>
       <Header />
-      <div className="page-content bg-white">
+     
+                    <div className="d-flex justify-content-center p-5 m-5" style={{height:"500%"}}
+                    ><h1>🚧 coming soon</h1></div>
+
+                    {/*<div className="page-content bg-white">
         <div
           className="dez-bnr-inr overlay-black-middle"
           style={{ backgroundImage: "url(" + bnr + ")" }}
@@ -371,7 +375,7 @@ function EmployeeBrowsecandidates() {
                       <span className="input-group-text">
                         <i className="fa fa-search"></i>
                       </span>
-                    </div> */}
+                    </div> 
                       </div>
                     </div>
                   </div>
@@ -401,11 +405,7 @@ function EmployeeBrowsecandidates() {
                             );
                           })}
                         </select>
-                        {/* <div className="input-group-append">
-                      <span className="input-group-text">
-                        <i className="fa fa-map-marker"></i>
-                      </span>
-                    </div> */}
+                        
                       </div>
                     </div>
                   </div>
@@ -431,11 +431,7 @@ function EmployeeBrowsecandidates() {
                             );
                           })}
                         </select>
-                        {/* <div className="input-group-append">
-                      <span className="input-group-text">
-                        <i className="fa fa-dollar"></i>
-                      </span>
-                    </div> */}
+                       
                       </div>
                     </div>
                   </div>
@@ -461,11 +457,11 @@ function EmployeeBrowsecandidates() {
                             );
                           })}
                         </select>
-                        {/* <div className="input-group-append">
+                        <div className="input-group-append">
                       <span className="input-group-text">
                         <i className="fa fa-dollar"></i>
                       </span>
-                    </div> */}
+                    </div> 
                       </div>
                     </div>
                   </div>
@@ -876,7 +872,7 @@ function EmployeeBrowsecandidates() {
                               ).fromNow()}
                             </p>
                           )}
-                          {/* <div className="d-flex justify-content-start align-items-center">
+                          <div className="d-flex justify-content-start align-items-center">
                           {selectedJob.job_detail.is_job_applied ? (
                             <button
                               className="radius-xl site-button"
@@ -945,7 +941,7 @@ function EmployeeBrowsecandidates() {
                             />
                             <span className="checkmark"></span>
                           </label>
-                        </div> */}
+                        </div> 
                         </div>
                       </div>
                     )}
@@ -963,7 +959,7 @@ function EmployeeBrowsecandidates() {
             />
           </div>
         )}
-      </div>
+      </div> */}
       <Footer />
     </>
   );

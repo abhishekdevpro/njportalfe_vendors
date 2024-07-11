@@ -10,42 +10,30 @@ function VerifyEmailemployee() {
   const navigate = useNavigate();
   const { token } = useParams();
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     const verifyEmail = async () => {
-      console.log("Token:", token); // Log the token
-
       try {
-        const response = await axios.get(
-          `https://api.novajobs.us/api/employee/verify-account/`,
-          {
-            token 
-          }
-        );
-
-        console.log(response, "login");
-        localStorage.setItem(
-          "employeeLoginToken",
-          response?.data?.data?.token
-        );
-       // Dispatch success action
-        showToastSuccess("Email verified successfully");
-        navigate("/employee");
-      } catch (err) {
-        console.log(err);
-        console.log(err?.response?.data?.message || "Verification failed");
-        // Dispatch failure action
-        showToastError(err?.response?.data?.message || "Verification failed");
+       
+        
+        const response = await axios.get(`https://api.novajobs.us/api/employee/verify-account/${token}`);
+        console.log(response)
+        if (response.data.success.token) {
+          showToastSuccess(response,"Email verified successfully");
+          navigate("/employee");
+        } else {
+          showToastError("Verification failed");
+          navigate("/employee/login");
+        }
+      } catch (error) {
+        console.error("Verification Error:", error);
+        showToastError("Invalid token or email");
+        navigate("/employee/login");
       }
     };
 
-    if (token) {
-      verifyEmail();
-    } else {
-      showToastError("No token found");
-      navigate("/employee");
-    }
-  }, [token, navigate, dispatch]);
+    verifyEmail();
+  }, [token, navigate]);
 
   return <div>Verifying...</div>;
 }

@@ -225,7 +225,7 @@ function EmployeeLogin(props) {
                       <div className="form-group text-center">
                         <Link
                           data-toggle="tab"
-                          to={"/employee/forgot-password"}
+                          to={"/employee/reset-password"}
                           className="forget-pass m-l5"
                         >
                           <i className="fa fa-unlock-alt"></i> Forgot Password

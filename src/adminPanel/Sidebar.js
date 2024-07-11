@@ -189,7 +189,7 @@ const Sidebar = () => {
         </Nav.Link>
         {showTeamSubmenu2 && (
           <>
-            <Nav.Link as={NavLink} to="/admin/team/listallemployee" style={navLinkStyle("/admin/team/listallemployee")} className='ps-5'>
+            <Nav.Link as={NavLink} to="/admin/employeelist" style={navLinkStyle("/admin/employeelist")} className='ps-5'>
               <FaUsers style={iconStyle} /> List All
             </Nav.Link>
             <Nav.Link as={NavLink} to="/admin/team/addemployers" style={navLinkStyle("/admin/team/addemployers")} className='ps-5'>

@@ -96,6 +96,10 @@ const Listnumber = () => {
                         
                       
                         <td>{job.note}</td>
+                        <td> <input
+                        type='textbox'
+                        className='p-2'
+                        /></td>
                       </tr>
                     ))}
                   </tbody>
