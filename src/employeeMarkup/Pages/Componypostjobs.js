@@ -480,7 +480,7 @@ function EmployeeComponypostjobs() {
                               placeholder="Enter Salary"
                               id="jobTitle"
                               name="jobTitle"
-                              value={postAJobData.jobTitle}
+                              value={""}
                               onChange={handleChange}
                               
                             />
@@ -498,13 +498,13 @@ function EmployeeComponypostjobs() {
                               placeholder="Enter Experience"
                               id=""
                               name=""
-                              value={postAJobData.jobTitle}
+                              value={""}
                               onChange={handleChange}
                               
                             />
                           </div>
                           {errors.jobTitle && (
-                            <p className="text-danger">{errors.jobTitle}</p>
+                            <p className="text-danger">{errors}</p>
                           )}
                         </div>
                         <div className="col-12 ">
