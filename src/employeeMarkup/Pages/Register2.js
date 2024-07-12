@@ -158,7 +158,7 @@ const notify = (data) => toast.warning(data);
       });
 
       localStorage.setItem("employeeLoginToken", res.data.data);
-      showToastSuccess("Please check your email");
+      showToastSuccess("Please, check your email inbox to complete the registration");
 
       // Send email to the user upon successful registration
       await sendConfirmationEmail(registerValues.email);
@@ -171,26 +171,33 @@ const notify = (data) => toast.warning(data);
   };
 
   // Function to send confirmation email
-  const sendConfirmationEmail = async (email) => {
+  const sendConfirmationEmail = async (email, token) => {
     try {
-      await axios.post(
-        "YOUR_BACKEND_EMAIL_SENDING_ENDPOINT",
-        { email },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const encodedEmail = encodeURIComponent(email); // Encode email
+      const encodedToken = encodeURIComponent(token); // Encode token
+  
+      const verificationLink = `https://api.novajobs.us/api/employee/verify-account/${encodedToken}?email=${encodedEmail}`;
+      const emailBody = {
+        to: email,
+        subject: "Confirm Your Email",
+        body: `Please click on the following link to confirm your email: ${verificationLink}`,
+      };
+  
+      await axios.post("YOUR_BACKEND_EMAIL_SENDING_ENDPOINT", emailBody, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log("Email sent successfully");
     } catch (error) {
       console.error("Error sending email:", error);
     }
   };
+  
 
   const verifyAccount = async () => {
     try {
-      const response = await axios.get(`/api/user/verify-account/${token}`);
+      const response = await axios.get(`/api/employee/verify-account/${token}`);
       console.log("Account verified successfully:", response.data);
       // Handle success, maybe show a success message or redirect the user
     } catch (error) {
@@ -198,11 +205,11 @@ const notify = (data) => toast.warning(data);
       // Handle error, maybe show an error message to the user
     }
   };
-
+  
   // Call verifyAccount when component mounts
   useEffect(() => {
     verifyAccount();
-  }, []); 
+  }, []);
   {
     /*
   const runAi = async (e) => {

@@ -154,7 +154,7 @@ function Register2(props) {
       });
   
       localStorage.setItem("jobSeekerLoginToken", res.data.data);
-      showToastSuccess("Please check your email");
+      showToastSuccess("Please, check your email inbox to complete the registration");
   
       // Send confirmation email with verification link
       await sendConfirmationEmail(registerValues.email, res.data.token);

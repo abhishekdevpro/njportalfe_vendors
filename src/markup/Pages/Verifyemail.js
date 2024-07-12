@@ -5,26 +5,24 @@ import { showToastError, showToastSuccess } from "../../utils/toastify";
 
 function VerifyEmail() {
   const navigate = useNavigate();
-  const { token} = useParams();
+  const { token } = useParams();
 
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-       
-        
         const response = await axios.get(`https://api.novajobs.us/api/jobseeker/verify-account/${token}`);
         console.log(response)
-        if (response.data.success.token) {
-          showToastSuccess(response,"Email verified successfully");
-          navigate("/");
-        } else {
-          showToastError("Verification failed");
+        if (response) { 
+          showToastSuccess("Email verified successfully");
           navigate("/user/login");
+        } else {
+          showToastError("Email verification failed");
+          navigate("/user/register-2");
         }
       } catch (error) {
         console.error("Verification Error:", error);
         showToastError("Invalid token or email");
-        navigate("/user/login");
+        navigate("/user/register-2");
       }
     };
 
