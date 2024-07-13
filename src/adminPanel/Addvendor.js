@@ -13,23 +13,16 @@ const Addvendor = () => {
     email: '',
     phone: '',
     password: '',
+    description: '',
     company_name: '',
-    created_on: '', // Created On field
-    website: '', // Website field
-    authorized_person: '', // Authorized Person field
-    public_view_link: '', // Public View link field
-    alternative_number: '', // Alternative Number field
-    company_linkedin: '', // Company Linkedin field
-    access: [], // Checkbox access options
+    access: [] // Initialize access property
   });
-  
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
   
     if (type === 'checkbox') {
-      const isChecked = checked;
-      const updatedAccess = isChecked
+      const updatedAccess = checked
         ? [...formData.access, name]
         : formData.access.filter((item) => item !== name);
   
@@ -38,16 +31,17 @@ const Addvendor = () => {
       setFormData({ ...formData, [name]: value });
     }
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
     try {
-      const response = await fetch('https://api.novajobs.us/api/admin/auth/vendor/register', {
+      const token = localStorage.getItem('authToken');
+      const response = await fetch('https://api.novajobs.us/api/admin/create-vendor', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': token // Include the token without 'Bearer' prefix
         },
         body: JSON.stringify(formData),
       });
@@ -71,7 +65,7 @@ const Addvendor = () => {
             <Sidebar />
           </Col>
           <Col md={10} className=''>
-            <h4 className='ms-5 ps-5 m-4'>Vendor registration</h4>
+            <h4 className='ms-5 ps-5 m-4'>Add Vendor </h4>
             <Form onSubmit={handleSubmit} className='ms-5 ps-5'>
               <div className='d-flex gap-5'>
               <Form.Group controlId="formFirstName">
@@ -156,167 +150,25 @@ const Addvendor = () => {
               </Form.Group>
               
             </div>
-              <div className='d-flex gap-5'>
-              <Form.Group controlId="formCreatedOn">
-  <Form.Label className='mx-5'>Created On</Form.Label>
-  <Form.Control
-  className=' px-5 py-4 mx-5'
-    type="date"
-    name="created_on"
-    value={formData.created_on}
-    onChange={handleChange}
-    required
-  />
-</Form.Group>
 
-<Form.Group controlId="formWebsite">
-  <Form.Label className='mx-5'>Website</Form.Label>
-  <Form.Control
-  className='w-100 p-4 mx-5'
-    type="url"
-    placeholder="Enter website URL"
-    name="website"
-    value={formData.website}
-    onChange={handleChange}
-  />
-</Form.Group>
-              </div>
 
-<div className='d-flex gap-5'>
-<Form.Group controlId="formAuthorizedPerson">
-  <Form.Label className='mx-5'>Authorized Person</Form.Label>
-  <Form.Control
-  className='w-100 p-4 mx-5'
-    type="text"
-    placeholder="Enter authorized person"
-    name="authorized_person"
-    value={formData.authorized_person}
-    onChange={handleChange}
-  />
-</Form.Group>
+            <Form.Group controlId="formdescription">
+                <Form.Label className='mx-5'>Description</Form.Label>
+                <Form.Control
+                className='w-100 p-4 mx-5'
+                  type="text"
+                  placeholder="Enter company name"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
 
-<Form.Group controlId="formPublicViewLink">
-  <Form.Label className='mx-5'>Public View Link</Form.Label>
-  <Form.Control
-  className='w-100 p-4 mx-5'
-    type="url"
-    placeholder="Enter public view link"
-    name="public_view_link"
-    value={formData.public_view_link}
-    onChange={handleChange}
-  />
-</Form.Group>
-</div>
-
-<div className='d-flex gap-5'><Form.Group controlId="formAlternativeNumber">
-  <Form.Label className='mx-5'>Alternative Number</Form.Label>
-  <Form.Control
-  className='w-100 p-4 mx-5'
-    type="tel"
-    placeholder="Enter alternative number"
-    name="alternative_number"
-    value={formData.alternative_number}
-    onChange={handleChange}
-  />
-</Form.Group>
-
-<Form.Group controlId="formCompanyLinkedin">
-  <Form.Label className='mx-5'>Company Linkedin</Form.Label>
-  <Form.Control
-  className='w-100 p-4 mx-5'
-    type="url"
-    placeholder="Enter company LinkedIn URL"
-    name="company_linkedin"
-    value={formData.company_linkedin}
-    onChange={handleChange}
-  />
-</Form.Group></div>
-
-<div className='d-flex gap-5'><Form.Group controlId="formAccess">
-  <Form.Label className='mx-5'>Access</Form.Label>
-  <Form.Check
-  className='w-100 my-3 mx-5'
-    type="checkbox"
-    label="Jobs posting"
-    name="A"
-    checked={formData.access.includes('A')}
-    onChange={handleChange}
-  />
-  <Form.Check
-  className='w-100 my-3 mx-5'
-    type="checkbox"
-    label="Bulk Upload"
-    name="A+"
-    checked={formData.access.includes('A+')}
-    onChange={handleChange}
-  />
-  <Form.Check
-   className='w-100 my-3 mx-5'
-    type="checkbox"
-    label="Job seeker"
-    name="B"
-    checked={formData.access.includes('B')}
-    onChange={handleChange}
-  />
-  <Form.Check
-   className='w-100 my-3 mx-5'
-    type="checkbox"
-    label="Job seeker Bulk upload"
-    name="B+"
-    checked={formData.access.includes('B+')}
-    onChange={handleChange}
-  />
-  <Form.Check
-   className='w-100 my-3 mx-5'
-    type="checkbox"
-    label="Search Jobs"
-    name="C"
-    checked={formData.access.includes('C')}
-    onChange={handleChange}
-  />
-  <Form.Check
-   className='w-100 my-3 mx-5'
-    type="checkbox"
-    label="Dashboard"
-    name="D"
-    checked={formData.access.includes('D')}
-    onChange={handleChange}
-  />
-</Form.Group>
-
-<Form.Group controlId="formWhiteLabelPlans">
-  <Form.Label className='mx-5' >White Label Plans</Form.Label>
-  
-  <Form.Check
-   className='w-100 my-3 mx-5'
-    type="checkbox"
-    label="Skill Test"
-    name="skill_test"
-    checked={formData.access.includes('skill_test')}
-    onChange={handleChange}
-  />
-  <Form.Check
-   className='w-100 my-3 mx-5'
-    type="checkbox"
-    label="Resume Builder"
-    name="resume_builder"
-    checked={formData.access.includes('resume_builder')}
-    onChange={handleChange}
-  />
-  <Form.Check
-   className='w-100 my-3 mx-5'
-    type="checkbox"
-    label="Jobseeker access"
-    name="jobseeker_access"
-    checked={formData.access.includes('jobseeker_access')}
-    onChange={handleChange}
-  />
- 
-</Form.Group></div>
 
 
               <Button variant="primary" type="submit" className='mb-3'>
-                Register
+                ADD
               </Button>
             </Form>
           </Col>
