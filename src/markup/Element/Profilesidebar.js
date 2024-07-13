@@ -75,7 +75,7 @@ function Profilesidebar({ data }) {
               </li>
               <li>
                 <Link
-                  to={`https://ai-resume-iota.vercel.app/${token}`}
+                  to={`https://airesume.novajobs.us/${token}`}
                   className={data === "resume" ? "active" : null}
                   onClick={() => setSidebarOpen(false)}
                 >
