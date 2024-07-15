@@ -230,7 +230,7 @@ function EmployeeHomepage() {
             <Owltestimonial />
           </div>
         </div>
-        <div
+        {/*<div
           className="section-full content-inner-2 overlay-white-middle"
           style={{
             backgroundImage: "url( " + bnr3 + ")",
@@ -335,7 +335,7 @@ function EmployeeHomepage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </div>

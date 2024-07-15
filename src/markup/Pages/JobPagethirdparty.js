@@ -39,40 +39,41 @@ function JobPagethirdparty() {
       {localStorage.getItem("jobSeekerLoginToken") && <FixedHeader />}
 
       <div>
-        {showSkeleton ? (
-          <div className="bg-white w-100 ">
-            <TwoBoxWithLinesSkeleton />
-          </div>
-        ) : (
-          <div className="flex flex-wrap gap-4 p-4">
-            {jobs.length > 0 ? (
-              jobs.map((job, index) => (
-                <div key={index} className="border p-4 rounded-md shadow-md w-96 rounded-5 m-3" style={{backgroundColor: "#f5f5f5" }}>
-                  <h2 className="text-lg font-semibold">{job.MatchedObjectDescriptor.PositionTitle}</h2>
-                  <p>{job.MatchedObjectDescriptor.OrganizationName}</p>
-                  <p>{job.MatchedObjectDescriptor.DepartmentName}</p>
-                  <p>{job.MatchedObjectDescriptor.PositionLocationDisplay}</p>
-                  <p>{job.MatchedObjectDescriptor.OrganizationName}</p>
-                  {/* Check if PositionLocation is an array or object and render accordingly */}
-                  {Array.isArray(job.MatchedObjectDescriptor.PositionLocation) ? (
-                    job.MatchedObjectDescriptor.PositionLocation.map((location, locIndex) => (
-                      <div key={locIndex}>
-                       <p>{location.LocationName}</p>
-                        <p>{location.CityName}, {location.CountryCode}</p>
-                      </div>
-                    ))
-                  ) : (
-                    <p>{job.MatchedObjectDescriptor.PositionLocation}</p>
-                  )}
-                  <a href={job.MatchedObjectDescriptor.ApplyURI[0]} className="text-blue-600 hover:underline site-button ">Apply Now</a>
+  {showSkeleton ? (
+    <div className="bg-white w-100">
+      <TwoBoxWithLinesSkeleton />
+    </div>
+  ) : (
+    <div className="flex flex-wrap gap-4 p-4">
+      {jobs.length > 0 ? (
+        jobs.map((job, index) => (
+          <div key={index} className="border p-4 rounded-md shadow-md w-96 rounded-5 m-3" style={{backgroundColor: "#f5f5f5" }}>
+            <h2 className="text-lg font-semibold">{job.MatchedObjectDescriptor.PositionTitle}</h2>
+            <p>{job.MatchedObjectDescriptor.OrganizationName}</p>
+            <p>{job.MatchedObjectDescriptor.DepartmentName}</p>
+            <p>{job.MatchedObjectDescriptor.PositionLocationDisplay}</p>
+            <p>{job.MatchedObjectDescriptor.OrganizationName}</p>
+            {/* Check if PositionLocation is an array or object and render accordingly */}
+            {Array.isArray(job.MatchedObjectDescriptor.PositionLocation) ? (
+              job.MatchedObjectDescriptor.PositionLocation.slice(0, 1).map((location, locIndex) => (
+                <div key={locIndex}>
+                  <p>{location.LocationName}</p>
+                  <p>{location.CityName}, {location.CountryCode}</p>
                 </div>
               ))
             ) : (
-              <div>No jobs found.</div>
+              <p>{job.MatchedObjectDescriptor.PositionLocation}</p>
             )}
+            <a href={job.MatchedObjectDescriptor.ApplyURI[0]} className="text-blue-600 hover:underline site-button">Apply Now</a>
           </div>
-        )}
-      </div>
+        ))
+      ) : (
+        <div>No jobs found.</div>
+      )}
+    </div>
+  )}
+</div>
+
 
       <Footer />
     </>

@@ -203,9 +203,9 @@ function Jobsappliedjob() {
                 <div className="col-xl-9 col-lg-8 m-b30 browse-job">
                   <div className="job-bx-title  clearfix">
                     <h5 className="font-weight-700 pull-left text-uppercase">
-                      Applied Jobs
+                      2269 Jobs Found
                     </h5>
-                    {/**<div className="float-right">
+                    <div className="float-right">
                       <span className="select-title">Sort by freshness</span>
                       <select className="custom-btn">
                         <option>Last 2 Months</option>
@@ -213,12 +213,9 @@ function Jobsappliedjob() {
                         <option>Last Weeks</option>
                         <option>Last 3 Days</option>
                       </select>
-                    </div> */}
+                    </div>
                   </div>
-                  <div className="d-flex justify-content-center"
-                    ><h1>🚧  Applied Jobs  coming soon</h1></div>
-                  {/*
-{skeleton === true ? (
+                  {skeleton === true ? (
                     <JobPageSkeleton />
                   ) : (
                     <div>
@@ -234,7 +231,7 @@ function Jobsappliedjob() {
                                 <div className="post-bx">
                                   <div className="job-post-info m-a0">
                                     <h4>
-                                      <Link to={`/user/job`}>
+                                      <Link to={"/user/job-detail"}>
                                         {item.job_detail.job_title}
                                       </Link>
                                     </h4>
@@ -261,8 +258,8 @@ function Jobsappliedjob() {
                                         <li>{item.job_workplace_types.name}</li>
                                       ) : null}
                                     </ul>
-                                     <p>{item.job_detail.job_description}</p> 
-                                     <ul>
+                                    {/* <p>{item.job_detail.job_description}</p> */}
+                                    {/* <ul>
       <li>
         <Link to={"/user/company-profile"}>
           @company-name
@@ -275,7 +272,7 @@ function Jobsappliedjob() {
       <li>
         <i className="fa fa-money"></i> 25,000
       </li>
-    </ul> 
+    </ul> */}
                                     <div className="job-time m-t15 m-b10">
                                       {item.job_detail.skills_arr ? (
                                         <div>
@@ -433,7 +430,7 @@ function Jobsappliedjob() {
                                                   </form>
                                                 </Tab.Pane>
                                                 <Tab.Pane eventKey="additional-info">
-                                                
+                                                  {/* Additional Info Form */}
                                                   <form className="col-12 p-a0">
                                                     <h6 className="font-weight-600">
                                                       Additional info
@@ -519,7 +516,7 @@ function Jobsappliedjob() {
                                                   </form>
                                                 </Tab.Pane>
                                                 <Tab.Pane eventKey="resume-info">
-                                                
+                                                  {/* Additional Info Form */}
                                                   <form className="col-12 p-a0">
                                                     <h6 className="font-weight-600">
                                                       Resume info
@@ -590,7 +587,7 @@ function Jobsappliedjob() {
                                                   handleClose();
                                                   handleSubmit();
                                                 }}
-                                              
+                                                // onClick={handleClose}
                                               >
                                                 Submit
                                               </button>
@@ -640,7 +637,6 @@ function Jobsappliedjob() {
                       </li>
                     </ul>
                   </div>
-                   */}
                 </div>
               </div>
             </div>

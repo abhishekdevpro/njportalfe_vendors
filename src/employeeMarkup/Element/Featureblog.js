@@ -20,9 +20,14 @@ function Featureblog() {
     <div className="section-full content-inner bg-gray">
       <div className="container">
         <div className="row">
+        <div className="align-self-end float-end">
+              <Link to={"/employee/browse-candidates"} className="site-button button-sm float-end">
+                Browse All Featured Jobseekers  <i className="fa fa-long-arrow-right"></i>
+              </Link>
+            </div>
           <div className="col-lg-12 section-head text-center">
-            <h2 className="m-b5">Featured States</h2>
-            <h6 className="fw4 m-b0">20+ Featured States Added Jobs</h6>
+            <h2 className="m-b5">Featured Jobseekers</h2>
+            <h6 className="fw4 m-b0">100+ Featured Jobseekers Added </h6>
           </div>
         </div>
         <div className="row">
@@ -37,7 +42,7 @@ function Featureblog() {
               >
                 <div className="city-info">
                   <h5>Alabama</h5>
-                  <span>765 Jobs</span>
+                  <span>765 Jobseekerseekers</span>
                 </div>
               </div>
             </div>
@@ -53,7 +58,7 @@ function Featureblog() {
               >
                 <div className="city-info">
                   <h5>California</h5>
-                  <span>352 Jobs</span>
+                  <span>352 Jobseekers</span>
                 </div>
               </div>
             </div>
@@ -69,7 +74,7 @@ function Featureblog() {
               >
                 <div className="city-info">
                   <h5>Hawali</h5>
-                  <span>893 Jobs</span>
+                  <span>893 Jobseekers</span>
                 </div>
               </div>
             </div>
@@ -85,7 +90,7 @@ function Featureblog() {
               >
                 <div className="city-info">
                   <h5>Ohio</h5>
-                  <span>502 Jobs</span>
+                  <span>502 Jobseekers</span>
                 </div>
               </div>
             </div>
@@ -101,7 +106,7 @@ function Featureblog() {
               >
                 <div className="city-info">
                   <h5>Vergina</h5>
-                  <span>765 Jobs</span>
+                  <span>765 Jobseekers</span>
                 </div>
               </div>
             </div>
@@ -117,7 +122,7 @@ function Featureblog() {
               >
                 <div className="city-info">
                   <h5>Indiana</h5>
-                  <span>352 Jobs</span>
+                  <span>352 Jobseekers</span>
                 </div>
               </div>
             </div>
@@ -133,7 +138,7 @@ function Featureblog() {
               >
                 <div className="city-info">
                   <h5>Georgia</h5>
-                  <span>893 Jobs</span>
+                  <span>893 Jobseekers</span>
                 </div>
               </div>
             </div>
@@ -149,7 +154,7 @@ function Featureblog() {
               >
                 <div className="city-info">
                   <h5>Colorado</h5>
-                  <span>502 Jobs</span>
+                  <span>502 Jobseekers</span>
                 </div>
               </div>
             </div>

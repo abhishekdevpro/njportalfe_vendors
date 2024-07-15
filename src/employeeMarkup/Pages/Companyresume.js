@@ -205,7 +205,7 @@ function EmployeeCompanyresume() {
                             <div className="d-flex m-b20">
                               <div className="job-post-info">
                                 <h5 className="m-b0">
-                                  <Link to={"/employee/jobs-profile"}>
+                                  <Link to={"#"}>
                                     {item.title}
                                   </Link>
                                 </h5>

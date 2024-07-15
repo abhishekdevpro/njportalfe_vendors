@@ -268,7 +268,7 @@ function Homepage() {
             <Owltestimonial />
           </div>
         </div>
-        <div
+       {/*<div
           className="section-full content-inner-2 overlay-white-middle"
           style={{
             backgroundImage: "url( " + bnr3 + ")",
@@ -281,62 +281,67 @@ function Homepage() {
             <div className="section-head text-black text-center">
               <h2 className="m-b0">Membership Plans</h2>
               <p>
-                Unlock the full potential of our wide services. Your journey
-                starts with a Free Plan...
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy.
               </p>
             </div>
-            <div className="section-content box-sort-in button-example m-t80 ">
+            <div className="section-content box-sort-in button-example m-t80">
               <div className="pricingtable-row">
-                <div className="row max-w1000 m-auto justify-content-center ">
-                <div className="col-12 col-md-4 ">
-  <div className="pricingtable-wrapper style2 bg-white text-center">
-    <div className="pricingtable-inner">
-      <div className="pricingtable-price">
-        <h4 className="font-weight-300 m-t10 m-b0">Basic</h4>
-        <div className="pricingtable-bx">
-          <span>Free</span>
-        </div>
-      </div>
-      <p className="pb-4">
-        Jumpstart your AI Powered career transformation with our free Plan, all
-        at no cost.
-      </p>
-    
-    </div>
-  </div>
-</div>
-
-<div className="col-12 col-md-4">
-                    <div
-                      className="pricingtable-wrapper style2  text-white"
-                      style={{ height: "300px" ,backgroundColor:"#1C2957"}}
-                    >
+                <div className="row max-w1000 m-auto">
+                <div className="col-12 col-md-4">
+                    <div className="pricingtable-wrapper style2 bg-white">
                       <div className="pricingtable-inner">
                         <div className="pricingtable-price">
-                          <h4 className="font-weight-300 m m-b0">
-                            Freemium
-                          </h4>
-                          <div className="pricingtable-bx text-break">
-                            {" "}
-                            {/* $ <span>29</span> / Per Installation{" "} */}
-                            <span>Free To use</span>
+                          <h4 className="font-weight-300 m-t10 m-b0">Basic</h4>
+                          <div className="pricingtable-bx">
+                            <span>Free</span>
                           </div>
                         </div>
-                        <p className="text-break">
-                          Explore our freemium plan, with pay as you go option.
+                        <p>
+                          Lorem ipsum dolor sit amet adipiscing elit sed do
+                          eiusmod tempors labore et dolore magna siad enim
+                          aliqua
                         </p>
-                        {/*<div className="m-t20">
+                        <div className="m-t20">
                           <Link
-                            to={"/user/register-2"}
+                            to={"/employee/register"}
+                            className="site-button radius-xl"
+                          >
+                            <span className="p-lr30">Sign Up</span>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-12 col-md-4">
+                    <div className="pricingtable-wrapper style2 bg-primary text-white active">
+                      <div className="pricingtable-inner">
+                        <div className="pricingtable-price">
+                          <h4 className="font-weight-300 m-t10 m-b0">
+                            Professional
+                          </h4>
+                          <div className="pricingtable-bx">
+                            {" "}
+                            $ <span>29</span> / Per Installation{" "}
+                          </div>
+                        </div>
+                        <p>
+                          Lorem ipsum dolor sit amet adipiscing elit sed do
+                          eiusmod tempors labore et dolore magna siad enim
+                          aliqua
+                        </p>
+                        <div className="m-t20">
+                          <Link
+                            to={"/employee/register"}
                             className="site-button white radius-xl"
                           >
                             <span className="text-primary p-lr30">Sign Up</span>
                           </Link>
-                        </div> */}
+                        </div>
                       </div>
                     </div>
                   </div>
-                  {/* <div className="col-sm-12 col-md-4 col-lg-4 p-lr0">
+                  <div className="col-12 col-md-4">
                     <div className="pricingtable-wrapper style2 bg-white">
                       <div className="pricingtable-inner">
                         <div className="pricingtable-price">
@@ -355,7 +360,7 @@ function Homepage() {
                         </p>
                         <div className="m-t20">
                           <Link
-                            to={"/user/register"}
+                            to={"/employee/register"}
                             className="site-button radius-xl"
                           >
                             <span className="p-lr30">Sign Up</span>
@@ -363,12 +368,12 @@ function Homepage() {
                         </div>
                       </div>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </div>

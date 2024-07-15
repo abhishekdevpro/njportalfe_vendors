@@ -546,7 +546,7 @@ function EmployeeBrowsecandidates() {
                                       <div className="job-post-company ">
                                       <span>
                                           <img
-                                            src={testImg}
+                                           src={require("./../../images/logo/icon1.png")}
                                             alt=""
                                            
                                           />

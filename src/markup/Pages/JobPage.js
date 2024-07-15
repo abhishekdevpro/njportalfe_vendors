@@ -1025,9 +1025,13 @@ function JobPage() {
                                       </button>
                                     ) : (
                                       <button
-                                        className="site-button btn btn-primary"
-                                        onClick={handleShow}
-                                      >
+                                        className=" site-button btn btn-primary "
+                                        onClick={() => {
+                                          handleClose();
+                                          submitApplication();
+                                        }}
+                                        // onClick={handleClose} yehi h formal submit
+                                      > 
                                         Apply
                                       </button>
                                     )}
@@ -1192,91 +1196,64 @@ function JobPage() {
                                     
                                      
                                       
-                                        <Tab.Pane eventKey="contact-info">
-                                          <form className="col-12 p-a0">
-                                            {selectedJob.screen_questions
-                                              .screen_question_keywords !==
-                                            null ? (
-                                              <div>
-                                                
-                                                {selectedJob.screen_questions.screen_question_keywords.map(
-                                                  (item, index) => (
-                                                    <div key={index}>
-                                                       <div
-                                        style={{
-                                          fontSize: "20px",
-                                          paddingBottom: "10px",
-                                        }}
-                                      >
-                                        Screening questions
-                                      </div>
-                                                      <h4>{item.name}</h4>
-                                                      <div>
-                                                        {item.screen_questions.map(
-                                                          (
-                                                            ques,
-                                                            questionIndex
-                                                          ) => (
-                                                            <div
-                                                              key={
-                                                                questionIndex
-                                                              }
-                                                              style={{
-                                                                paddingBottom:
-                                                                  "30px",
-                                                              }}
-                                                            >
-                                                              <h5>
-                                                                {ques.name}
-                                                              </h5>
-                                                              {ques.screen_questions_options.map(
-                                                                (option) => (
-                                                                  <Form.Check
-                                                                    type="radio"
-                                                                    label={
-                                                                      option.option
-                                                                    }
-                                                                    id={
-                                                                      option.option
-                                                                    }
-                                                                    className="site-button"
-                                                                    name={
-                                                                      ques.name
-                                                                    }
-                                                                    style={{
-                                                                      marginRight:
-                                                                        "30px",
-                                                                      padding:
-                                                                        "10px 30px",
-                                                                    }}
-                                                                    onClick={() => {
-                                                                      dispatch(
-                                                                        setJobSeekerAnswer(
-                                                                          {
-                                                                            index:
-                                                                              index,
-                                                                            questionIndex:
-                                                                              questionIndex,
-                                                                            answer:
-                                                                              option.option,
-                                                                          }
-                                                                        )
-                                                                      );
-                                                                    }}
-                                                                  />
-                                                                )
-                                                              )}
-                                                            </div>
-                                                          )
-                                                        )}
-                                                      </div>
-                                                    </div>
-                                                  )
-                                                )}
-                                              </div>
-                                            ) : null}
-                                          </form>
-                                        </Tab.Pane>
+                                <Tab.Pane eventKey="contact-info">
+  <form className="col-12 p-a0">
+    {selectedJob.screen_questions &&
+    selectedJob.screen_questions.screen_question_keywords ? (
+      <div>
+        <div style={{ fontSize: "20px", paddingBottom: "10px" }}>
+          Screening questions
+        </div>
+        {selectedJob.screen_questions.screen_question_keywords.map(
+          (item, index) => (
+            <div key={index}>
+              <h4>{item.name}</h4>
+              {item.screen_questions ? (
+                <div>
+                  {item.screen_questions.map((ques, questionIndex) => (
+                    <div
+                      key={questionIndex}
+                      style={{ paddingBottom: "30px" }}
+                    >
+                      <h5>{ques.name}</h5>
+                      {ques.screen_questions_options ? (
+                        ques.screen_questions_options.map((option, optionIndex) => (
+                          <Form.Check
+                            key={optionIndex}
+                            type="radio"
+                            label={option.option}
+                            id={`${ques.id}-${optionIndex}`}
+                            className="site-button"
+                            name={ques.name}
+                            style={{
+                              marginRight: "30px",
+                              padding: "10px 30px",
+                            }}
+                            onClick={() => {
+                              dispatch(
+                                setJobSeekerAnswer({
+                                  index: index,
+                                  questionIndex: questionIndex,
+                                  answer: option.option,
+                                })
+                              );
+                            }}
+                          />
+                        ))
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          )
+        )}
+      </div>
+    ) : null}
+  </form>
+</Tab.Pane>
+
+
                                        {/* <Tab.Pane eventKey="additional-info">
                                           
                                           <form className="col-12 p-a0">

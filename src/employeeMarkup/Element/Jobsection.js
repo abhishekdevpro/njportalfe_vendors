@@ -92,9 +92,7 @@ function Jobsection() {
                           {item?.jobskkers_detail?.first_name}{" "}
                           {item?.jobskkers_detail?.last_name}
                         </h4>
-                        <ul>
-                          <li>{item?.jobskkers_detail?.email}</li>
-                        </ul>
+                        
                         <ul>
                           <li>
                             <i className="fa fa-map-marker"></i>
@@ -104,7 +102,7 @@ function Jobsection() {
                           </li>
 
                           <li>
-                            <i className="fa fa-clock-o"></i>{" "}
+                            <i className="fa fa-clock-o"></i>{" "}Published {""}
                             {moment(
                               item?.jobskkers_detail?.created_at
                             ).fromNow()}
@@ -179,6 +177,9 @@ function Jobsection() {
               </div>
             </div>
           </div>
+
+
+          
           <div className="col-lg-3">
             <div className="sticky-top">
               <div className="candidates-are-sys m-b30">
