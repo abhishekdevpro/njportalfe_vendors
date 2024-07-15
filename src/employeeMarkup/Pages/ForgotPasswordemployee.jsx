@@ -18,7 +18,7 @@ function ForgotPasswordemployee(props) {
     formData.append("email", email);
     await axios({
       method: "POST",
-      url: "https://api.novajobs.us/api/employee/forgot-password",
+      url: "https://api.novajobs.us/api/employeer/forgot-password",
       headers: {
         "Content-Type": "Application/json",
       },
