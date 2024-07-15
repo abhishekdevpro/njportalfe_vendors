@@ -14,6 +14,7 @@ const Sidebar = () => {
   const [showTeamSubmenu4, setShowTeamSubmenu4] = useState(false);
   const [showTeamSubmenu5, setShowTeamSubmenu5] = useState(false);
   const [showTeamSubmenu6, setShowTeamSubmenu6] = useState(false);
+  const [showTeamSubmenu7, setShowTeamSubmenu7] = useState(false);
 
   const navLinkStyle = (path) => ({
     display: 'flex',
@@ -36,6 +37,7 @@ const Sidebar = () => {
     if (location.pathname.startsWith('/admin/jobseekers')) setShowTeamSubmenu1(true);
     if (location.pathname.startsWith('/admin/employee')) setShowTeamSubmenu2(true);
     if (location.pathname.startsWith('/admin/wallet')) setShowTeamSubmenu6(true);
+    if (location.pathname.startsWith('/admin/CompanyNameAdmin')) setShowTeamSubmenu6(true);
   }, [location.pathname]);
 
   const handleTeamClick = () => {
@@ -58,6 +60,9 @@ const Sidebar = () => {
   };
   const handleTeamClick6 = () => {
     setShowTeamSubmenu6(!showTeamSubmenu6);
+  };
+  const handleTeamClick7 = () => {
+    setShowTeamSubmenu7(!showTeamSubmenu7);
   };
 
   return (
@@ -190,6 +195,30 @@ const Sidebar = () => {
         {showTeamSubmenu2 && (
           <>
             <Nav.Link as={NavLink} to="/admin/employeelist" style={navLinkStyle("/admin/employeelist")} className='ps-5'>
+              <FaUsers style={iconStyle} /> List All
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/admin/team/addemployers" style={navLinkStyle("/admin/team/addemployers")} className='ps-5'>
+              <FaUsers style={iconStyle} /> Add Employers
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/admin/team/bulkUploademployers" style={navLinkStyle("/admin/team/bulkUploademployers")} className='ps-5'>
+              <FaUsers style={iconStyle} /> Bulk Upload
+            </Nav.Link>
+          </>
+        )}
+      </div>
+
+      <div>
+        <Nav.Link
+          onClick={handleTeamClick7}
+          as={NavLink} to="/admin/CompanyNameAdmin"
+          style={navLinkStyle("/admin/CompanyNameAdmin")}
+          className='ps-4'
+        >
+          <FaUserTie style={iconStyle} /> Company
+        </Nav.Link>
+        {showTeamSubmenu7 && (
+          <>
+            <Nav.Link as={NavLink} to="/admin/CompanyListAdmin" style={navLinkStyle("/admin/CompanyListAdmin")} className='ps-5'>
               <FaUsers style={iconStyle} /> List All
             </Nav.Link>
             <Nav.Link as={NavLink} to="/admin/team/addemployers" style={navLinkStyle("/admin/team/addemployers")} className='ps-5'>

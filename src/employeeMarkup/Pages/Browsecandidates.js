@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faPhone, faMapMarkerAlt, faCalendarAlt, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+
 import { Link } from "react-router-dom";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
@@ -331,21 +334,17 @@ function EmployeeBrowsecandidates() {
   return (
     <>
       <Header />
-     
-                    <div className="d-flex justify-content-center p-5 m-5" style={{height:"500%"}}
-                    ><h1>🚧 coming soon</h1></div>
-
-                    {/*<div className="page-content bg-white">
+      <div className="page-content bg-white">
         <div
           className="dez-bnr-inr overlay-black-middle"
           style={{ backgroundImage: "url(" + bnr + ")" }}
         >
           <PageTitle motherName="Home" activeName="Browse Candidates" />
         </div>
-        <div className="section-full browse-job-find">
-          <div className="container">
+        <div className="section-full browse-job-find ">
+          <div className="container ">
             <div className="find-job-bx">
-              <div className="dezPlaceAni p-t50 p-b20">
+              <div className="dezPlaceAni p-t50 p-b20 border shadow rounded-3">
                 <div className="d-flex justify-content-center ">
                   <div className="col-lg-3 col-md-5">
                     <div className="form-group">
@@ -375,11 +374,11 @@ function EmployeeBrowsecandidates() {
                       <span className="input-group-text">
                         <i className="fa fa-search"></i>
                       </span>
-                    </div> 
+                    </div> */}
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-3 col-md-5">
+                  <div className="col-lg-2 col-md-5">
                     <div className="form-group">
                       <label htmlFor="experience"></label>
                       <div className="input-group">
@@ -405,11 +404,15 @@ function EmployeeBrowsecandidates() {
                             );
                           })}
                         </select>
-                        
+                        {/* <div className="input-group-append">
+                      <span className="input-group-text">
+                        <i className="fa fa-map-marker"></i>
+                      </span>
+                    </div> */}
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-3 col-md-5">
+                  <div className="col-lg-2 col-md-5">
                     <div className="form-group">
                       <label htmlFor="state_id"></label>
                       <div className="input-group">
@@ -431,11 +434,15 @@ function EmployeeBrowsecandidates() {
                             );
                           })}
                         </select>
-                       
+                        {/* <div className="input-group-append">
+                      <span className="input-group-text">
+                        <i className="fa fa-dollar"></i>
+                      </span>
+                    </div> */}
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-3 col-md-5">
+                  <div className="col-lg-2 col-md-5">
                     <div className="form-group">
                       <label htmlFor="salary"></label>
                       <div className="input-group">
@@ -457,24 +464,46 @@ function EmployeeBrowsecandidates() {
                             );
                           })}
                         </select>
-                        <div className="input-group-append">
-                      <span className="input-group-text">
-                        <i className="fa fa-dollar"></i>
-                      </span>
-                    </div> 
+                        
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-2 col-md-5">
+                    <div className="form-group">
+                      <label htmlFor="salary"></label>
+                      <div className="input-group">
+                      <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleGetReq();
+                    }}
+                    className="border-0 site-button d-flex align-items-center "
+                    style={{ cursor: "pointer", outline: "none", gap: "7px" }}
+                  >
+                    <FaSearch />
+                    Find Job
+                  </button>
+                        
+                        
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  className="row d-flex justify-content-center mb-3 "
-                  style={{ gap: "12px" }}
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+                  className="row d-flex   mb-3 "
+                  style={{ gap: "10px" ,marginLeft:'155px'}}
                 >
                   <div
-                    className=" w-75 d-flex flex-column   p-2 "
+                    className=" w-75 d-flex ms-5 p-2  shadow rounded-2"
                     style={{
-                      backgroundColor: "#f5f5f5",
-                      alignItems: "center",
+                     
+                      
                     }}
                   >
                     <input
@@ -489,44 +518,23 @@ function EmployeeBrowsecandidates() {
                       style={{ outline: "none" }}
                     />
                   </div>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleGetReq();
-                    }}
-                    className="border-0 site-button d-flex align-items-center "
-                    style={{ cursor: "pointer", outline: "none", gap: "7px" }}
-                  >
-                    <FaSearch />
-                    Search
-                  </button>
+                  
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
         {browseCandidateData ? (
-          <div className="content-block">
+          <div className="content-block ">
             <div className="section-full bg-white browse-job p-b50">
               {showSkeleton === true ? (
                 <div className="bg-white w-100 ">
                   <TwoBoxWithLinesSkeleton />
                 </div>
               ) : (
-                <div className="container">
+                <div className="container ">
                   <div className="row">
-                    <div className="col-xl-4 col-lg-5 m-b30">
+                    <div className="col-xl-10">
                       <div className="sticky-top">
                         {browseCandidateData ? (
-                          <div className="candidate-info company-info">
-                            <ul
-                              className="job-list-container"
-                              style={{
-                                maxHeight: "calc(100vh - 200px)",
-                                overflowY: "auto",
-                                boxShadow: "0 0 10px 0 rgba(0, 24, 128, 0.1)",
-                              }}
-                            >
+                          <div className="company-info">
+                             <ul className="post-job-bx browse-job ">
                               {browseCandidateData.map((item, index) => (
                                 <div key={index}>
                                   <li>
@@ -534,46 +542,26 @@ function EmployeeBrowsecandidates() {
                                       to="#"
                                       onClick={() => handleSelectJob(item)}
                                     >
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          width: "100%",
-                                          position: "relative",
-                                        }}
-                                      >
-                                        <div
-                                          style={{
-                                            width: "30%",
-                                          }}
-                                        >
+                                      <div className="post-bx d-flex mb-3">
+                                      <div className="job-post-company ">
+                                      <span>
                                           <img
                                             src={testImg}
                                             alt=""
-                                            style={{
-                                              width: "80px",
-                                              height: "80px",
-                                            }}
+                                           
                                           />
+                                           </span>
                                         </div>
-                                        <div
-                                          style={{
-                                            width: "80%",
-                                            overflow: "hidden",
-                                          }}
-                                        >
-                                          {item.jobskkers_detail.first_name ||
+                                        <div className="job-post-info ">
+                                         <div className="text-black mb-2" style={{fontWeight:"700",fontSize: '25px'}}>
+                                          
+                                         {item.jobskkers_detail.proffesional_title ||
                                             (item.jobskkers_detail
                                               .last_name && (
-                                              <p
-                                                className="mb-0"
-                                                style={{
-                                                  color: "#1c2957",
-                                                  fontSize: "20px",
-                                                }}
-                                              >
+                                              <p>
                                                 {
                                                   item.jobskkers_detail
-                                                    .first_name
+                                                    .proffesional_title
                                                 }{" "}
                                                 {
                                                   item.jobskkers_detail
@@ -581,101 +569,107 @@ function EmployeeBrowsecandidates() {
                                                 }
                                               </p>
                                             ))}
-                                          {item.jobskkers_detail.skills_arr ? (
-                                            <div
-                                              className="d-flex flex-row mb-0 "
-                                              style={{ gap: "7px" }}
-                                            >
-                                              {item.jobskkers_detail.skills_arr.map(
-                                                (item, index) => (
-                                                  <p
-                                                    className="mb-0 "
-                                                    key={index}
-                                                  >
-                                                    {item}
-                                                  </p>
-                                                )
-                                              )}
-                                            </div>
-                                          ) : null}
-                                          <div
-                                            className=" gap-0 align-items-center joblist"
-                                            style={{
-                                              gap: "0px",
-                                              height: "auto",
-                                            }}
-                                          >
-                                           
-                                            
-                                            <div
-                                              className="d-flex "
-                                              style={{
-                                                justifyContent: "start",
-                                                gap: "10px",
-                                              }}
-                                            >
-                                              <div>
-                                                {item.jobskkers_detail
-                                                  .state_id && (
-                                                  <p
-                                                    style={{
-                                                      margin: "0px",
-                                                      fontWeight: 700,
-                                                    }}
-                                                  >
-                                                    {
-                                                      item?.jobskkers_detail
-                                                        ?.states?.name
-                                                    }
-                                                  </p>
-                                                )}
-                                              </div>
-                                              <div>
-                                                {item.jobskkers_detail
-                                                  .city_id && (
-                                                  <p
-                                                    style={{
-                                                      margin: "0px",
-                                                      fontWeight: 700,
-                                                    }}
-                                                  >
-                                                    {
-                                                      item?.jobskkers_detail
-                                                        ?.cities?.name
-                                                    }
-                                                  </p>
-                                                )}
-                                              </div>
-                                            </div>
-                                            <div>
-                                              {item.jobskkers_detail
-                                                .created_at && (
-                                                <p
-                                                  style={{
-                                                    margin: "0px",
-                                                    fontWeight: "600",
-                                                  }}
-                                                >
-                                                  {moment(
-                                                    item.jobskkers_detail
-                                                      .created_at
-                                                  ).fromNow()}
-                                                </p>
-                                              )}
-                                            </div>
-                                          </div>
+                                         </div>
+                                          
+                                         
+
+<div className="gap-0 align-items-center joblist d-flex gap-4 text-black mb-4" style={{ gap: "0px", height: "auto", fontSize: '15px' }}>
+  
+
+  <div className="d-flex" style={{ justifyContent: "start", gap: "10px" }}>
+    <div>
+      {item.jobskkers_detail.state_id && (
+        <p style={{ margin: "0px"}}>
+          <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" style={{color:'#1C2957'}} />
+          {item?.jobskkers_detail?.states?.name}
+        </p>
+      )}
+    </div>
+    
+    <div>
+      {item.jobskkers_detail.city_id && (
+        <p style={{ margin: "0px",  }}>
+          {item?.jobskkers_detail?.cities?.name}
+        </p>
+      )}
+    </div>
+  </div>
+
+  <div>
+    {item.jobskkers_detail.ai_resume_parse_data.jobsMyResumeData.desiredCareerProfile.employmentType && (
+    <p style={{ margin: "0px" }}>
+      <FontAwesomeIcon icon={faEnvelope} className="mr-2 " style={{color:'#1C2957'}} />
+      {item.jobskkers_detail.ai_resume_parse_data.jobsMyResumeData.desiredCareerProfile.employmentType}
+    </p>
+  )}
+    </div>
+  <div>
+    {item.jobskkers_detail.created_at && (
+      <p style={{ margin: "0px", fontWeight: "600" }}>
+        <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" style={{color:'#1C2957'}}/>Published {" "}
+        {moment(item.jobskkers_detail.created_at).fromNow()}
+      </p>
+    )}
+  </div>
+</div>
+                                          <div className="" >
+  {item.jobskkers_detail.skills_arr ? (
+    <div className="row mt-3">
+      {item.jobskkers_detail.skills_arr.map((skill, index) => (
+        <div className="col-4 col-md-2 mb-1 text-break" key={index}>
+          <span className="badge badge-info p-2" style={{backgroundColor:'#52597B'}}>{skill}</span>
+        </div>
+      ))}
+      
+    </div>
+    
+  ) : null}
+</div><label className="like-btn">
+                      <input type="checkbox" />
+                      <span className="checkmark"></span>
+                    </label>
+                    
+<div className="d-flex mt-3">
+                      <div className="job-time mr-auto d-flex">
+                        <ul>
+                          <li>Experience :</li>
+                        </ul>
+                        <Link to={"#"}>
+                          <span>
+                            {item?.jobskkers_detail?.experience_in_month}
+                          </span>
+                        </Link>
+                      </div>
+                      <div
+                        className="d-flex align-items-center "
+                        style={{ gap: "7px" }}
+                      >
+                        <div className="salary-bx">
+                          <span>{item?.jobskkers_detail?.expected_salary}</span>
+                        </div>
+                      </div>
+                    </div>
                                         </div>
                                       </div>
                                     </Link>
+                                    
                                   </li>
                                 </div>
                               ))}
+                              <label className="like-btn">
+                      <input type="checkbox" />
+                      <span className="checkmark"></span>
+                    </label>
                             </ul>
+                            
                           </div>
+                          
                         ) : null}
                       </div>
                     </div>
-                    {selectedJob && (
+                  
+
+{/*  {selectedJob && (
                       <div className="col-xl-8 col-lg-7 m-b30 job-bx ">
                         <div
                           className="d-flex flex-column "
@@ -691,7 +685,13 @@ function EmployeeBrowsecandidates() {
                               </h3>
                             </Link>
                             <div className="job-details-content">
-                             
+                              {selectedJob.jobskkers_detail.email &&
+                                selectedJob.jobskkers_detail.phone && (
+                                  <p className="mb-0">
+                                    {selectedJob.jobskkers_detail.email} |{" "}
+                                    {selectedJob.jobskkers_detail.phone}
+                                  </p>
+                                )}
                               {selectedJob.jobskkers_detail.skills_arr ? (
                                 <div
                                   className="d-flex flex-column "
@@ -872,7 +872,7 @@ function EmployeeBrowsecandidates() {
                               ).fromNow()}
                             </p>
                           )}
-                          <div className="d-flex justify-content-start align-items-center">
+                          {/* <div className="d-flex justify-content-start align-items-center">
                           {selectedJob.job_detail.is_job_applied ? (
                             <button
                               className="radius-xl site-button"
@@ -944,7 +944,8 @@ function EmployeeBrowsecandidates() {
                         </div> 
                         </div>
                       </div>
-                    )}
+                    )} */}
+
                   </div>
                 </div>
               )}
@@ -959,7 +960,7 @@ function EmployeeBrowsecandidates() {
             />
           </div>
         )}
-      </div> */}
+      </div>
       <Footer />
     </>
   );

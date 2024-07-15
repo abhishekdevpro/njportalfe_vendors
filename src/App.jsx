@@ -162,7 +162,8 @@ import Listvendor from "./adminPanel/Listvendor";
 import Jobslist from "./adminPanel/Joblist";
 import Jobseekerlist from "./adminPanel/Jobseekerlist";
 import Employeelist from "./adminPanel/Employeelist";
-
+import CompanyListAdmin from "./adminPanel/CompanyListAdmin";
+import CompanyNameAdmin from "./adminPanel/CompanyNameAdmin";
 
 
 import VerifyEmail from "./vendor/VerifyEmail";
@@ -211,6 +212,8 @@ function App() {
               <Route path="/admin/team/list-number" element={<PrivateRouteadmin><Listnumber /></PrivateRouteadmin>} />
               <Route path="/admin/listalljobs" element={<PrivateRouteadmin><Jobslist /></PrivateRouteadmin>} />
               <Route path="/admin/listalljobseeker" element={<PrivateRouteadmin><Jobseekerlist /></PrivateRouteadmin>} />
+              <Route path="/admin/CompanyListAdmin" element={<PrivateRouteadmin><CompanyListAdmin /></PrivateRouteadmin>} />
+              <Route path="/admin/CompanyNameAdmin" element={<PrivateRouteadmin><CompanyNameAdmin /></PrivateRouteadmin>} />
 
 
 
