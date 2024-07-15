@@ -20,11 +20,18 @@ function Featureblog() {
     <div className="section-full content-inner bg-gray">
       <div className="container">
         <div className="row">
+        <div className="align-self-end float-end">
+              <Link to={"/user/job"} className="site-button button-sm float-end">
+                Browse Jobs in other State  <i className="fa fa-long-arrow-right"></i>
+              </Link>
+            </div>
           <div className="col-lg-12 section-head text-center">
             <h2 className="m-b5">Featured States</h2>
             <h6 className="fw4 m-b0">20+ Featured States Added Jobs</h6>
           </div>
+          
         </div>
+       
         <div className="row">
           <div className="col-lg-3 col-sm-6 col-md-6 m-b30">
             <div onClick={() => handleLocationSelect("alabama")}>
