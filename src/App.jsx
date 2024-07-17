@@ -180,6 +180,7 @@ import Vendorbulkuploadjobopeneing from "./vendor/Vendorbulkuploadjobopeneing co
 import Vendorbulkuploadjobseeker from "./vendor/Vendorbulkuploadjobseeker";
 import Vendorregistration from "./vendor/Vendorregistration";
 import JobPagethirdparty from "./markup/Pages/JobPagethirdparty";
+import Instructor from "./InstructorPanel/Instructor";
 function App() {
   const dispatch = useDispatch();
 
@@ -1113,6 +1114,9 @@ function App() {
 
         <Route path="candidate-listing" element={<EmployeeJobPage />} />
         <Route path="*" element={<EmployeeError404 />} />
+      </Route>
+      <Route path="/instructor">
+          <Route path="" element={ <Instructor />}/>
       </Route>
     </Routes>
   );
