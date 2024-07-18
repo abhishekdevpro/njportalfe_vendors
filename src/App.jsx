@@ -321,9 +321,9 @@ function App() {
         <Route
           path="company/:id"
           element={
-            <UserPrivateRoute>
+            
               <CompanyPage />
-            </UserPrivateRoute>
+            
           }
         />
         <Route
@@ -1079,9 +1079,9 @@ function App() {
         <Route
           path="profilepage/:id"
           element={
-            <EmployeePrivateRoute>
+           
               <ProfilePage />
-            </EmployeePrivateRoute>
+           
           }
         />
 {/* edgvhdsbbv */}

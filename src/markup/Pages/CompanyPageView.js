@@ -15,17 +15,13 @@ const CompanyPage = () => {
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
   };
-  const token = localStorage.getItem("jobSeekerLoginToken");
 
   const { id } = useParams();
+
   const handleGetRequest = () => {
     axios({
       method: "GET",
       url: `https://api.novajobs.us/api/jobseeker/companies/${id}`,
-
-      headers: {
-        Authorization: token,
-      },
     })
       .then((response) => {
         console.log(response);
@@ -35,15 +31,13 @@ const CompanyPage = () => {
         console.log(error);
       });
   };
+
   const navigate = useNavigate();
+
   const handleGetJobRequest = () => {
     axios({
       method: "GET",
       url: "https://api.novajobs.us/api/jobseeker/job-lists?company_id=1",
-
-      headers: {
-        Authorization: token,
-      },
     })
       .then((response) => {
         console.log(response);
@@ -58,6 +52,25 @@ const CompanyPage = () => {
     handleGetJobRequest();
     handleGetRequest();
   }, []);
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "https://api.novajobs.us/api/jobseeker/companies?page_size=6",
+      
+    })
+      .then((res) => {
+        console.log(res.data.data, "job seekers data");
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response.data.message);
+        showToastError(err?.response?.data?.message);
+      });
+  }, []);
+
   return (
     <>
       {companyData ? (
@@ -83,7 +96,7 @@ const CompanyPage = () => {
                                 borderRadius: "0%",
                                 marginInlineStart: "25px",
                               }}
-                              src="/static/media/pic1.63e5cf4e.jpg"
+                              src={companyData.logo}
                               alt="Profile"
                               className="profile-picture"
                             />
@@ -95,21 +108,21 @@ const CompanyPage = () => {
                               </h2>
                             ) : null}
                             {companyData.tagline ? (
-                              <h6 className="mb-0">{companyData.tagline}</h6>
+                              <h6 className="mb-0">{companyData.company_industry.name}</h6>
                             ) : null}
                             {companyData.country.name ||
                             companyData.state.name ||
                             companyData.city.name ||
                             companyData.zip_code ? (
-                              <p className="mb-0">
+                              <p className="my-3">
                                 <strong
                                   style={{
                                     fontWeight: "900",
                                   }}
                                 >
-                                  {companyData.country.name},
-                                  {companyData.state.name},
-                                  {companyData.city.name},{" "}
+                                  🏠︎   {companyData.city.name},{" "}
+                                  {companyData.state.name},{" "}
+                                  {companyData.country.name}{" "}
                                   {companyData.zip_code}
                                 </strong>
                               </p>
@@ -208,7 +221,7 @@ const CompanyPage = () => {
                                               className="mb-0 "
                                               onClick={() => {
                                                 navigate(
-                                                  `/user/job-detail/${item.job_detail.id}`
+                                                  `/user/job`
                                                 );
                                               }}
                                             >
@@ -396,185 +409,48 @@ const CompanyPage = () => {
                       </div>
                     </div>
                     <div className=" col-lg-4 col-md-4 col-sm-12 col-12">
-                      <div
+                    <div
                         className="mt-4 profile-summary"
-                        style={{ padding: "10px 30px" }}
-                      >
+                        style={{ padding: "10px 30px" }}>
                         <div className="candidate-info company-info">
-                          <h6 className="mb-2 mt-2">
-                            Pages people also viewed
-                          </h6>
-                          <div
-                            className="job-list-container mt-2"
-                            style={{ borderBottom: "1px solid gray" }}
-                          >
-                            <div className="d-flex justify-content-start aligns-item-center ">
-                              <div>
-                                <i
-                                  className="fa fa-user-o"
-                                  aria-hidden="true"
-                                ></i>
-                              </div>
-                              <div className="ml-2">
-                                <h6 className="mb-0 d-flex justify-content-between align-items-center">
-                                  ABC
-                                </h6>
-                                <p
-                                  className="mb-0"
-                                  style={{ color: "#1c2957" }}
-                                >
-                                  IT Services and IT Consulting
-                                </p>
-                                <p
-                                  className="mb-0"
-                                  style={{ color: "#1c2957" }}
-                                >
-                                  5,329,878 followers
-                                </p>
-                                <div className="job-time m-t15 m-b10">
-                                  <a className="mr-1" href="#">
-                                    <span
-                                      style={{
-                                        padding: "5px 15px",
-                                        borderRadius: "100px",
-                                      }}
-                                    >
-                                      + Follow
-                                    </span>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className="job-list-container mt-2"
-                            style={{ borderBottom: "1px solid gray" }}
-                          >
-                            <div className="d-flex justify-content-start aligns-item-center ">
-                              <div>
-                                <i
-                                  className="fa fa-user-o"
-                                  aria-hidden="true"
-                                ></i>
-                              </div>
-                              <div className="ml-2">
-                                <h6 className="mb-0 d-flex justify-content-between align-items-center">
-                                  ABC
-                                </h6>
-                                <p
-                                  className="mb-0"
-                                  style={{ color: "#1c2957" }}
-                                >
-                                  IT Services and IT Consulting
-                                </p>
-                                <p
-                                  className="mb-0"
-                                  style={{ color: "#1c2957" }}
-                                >
-                                  5,329,878 followers
-                                </p>
-                                <div className="job-time m-t15 m-b10">
-                                  <a className="mr-1" href="#">
-                                    <span
-                                      style={{
-                                        padding: "5px 15px",
-                                        borderRadius: "100px",
-                                      }}
-                                    >
-                                      + Follow
-                                    </span>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className="job-list-container mt-2"
-                            style={{ borderBottom: "1px solid gray" }}
-                          >
-                            <div className="d-flex justify-content-start aligns-item-center ">
-                              <div>
-                                <i
-                                  className="fa fa-user-o"
-                                  aria-hidden="true"
-                                ></i>
-                              </div>
-                              <div className="ml-2">
-                                <h6 className="mb-0 d-flex justify-content-between align-items-center">
-                                  ABC
-                                </h6>
-                                <p
-                                  className="mb-0"
-                                  style={{ color: "#1c2957" }}
-                                >
-                                  IT Services and IT Consulting
-                                </p>
-                                <p
-                                  className="mb-0"
-                                  style={{ color: "#1c2957" }}
-                                >
-                                  5,329,878 followers
-                                </p>
-                                <div className="job-time m-t15 m-b10">
-                                  <a className="mr-1" href="#">
-                                    <span
-                                      style={{
-                                        padding: "5px 15px",
-                                        borderRadius: "100px",
-                                      }}
-                                    >
-                                      + Follow
-                                    </span>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className="job-list-container mt-2"
-                            style={{ borderBottom: "1px solid gray" }}
-                          >
-                            <div className="d-flex justify-content-start aligns-item-center ">
-                              <div>
-                                <i
-                                  className="fa fa-user-o"
-                                  aria-hidden="true"
-                                ></i>
-                              </div>
-                              <div className="ml-2">
-                                <h6 className="mb-0 d-flex justify-content-between align-items-center">
-                                  ABC
-                                </h6>
-                                <p
-                                  className="mb-0"
-                                  style={{ color: "#1c2957" }}
-                                >
-                                  IT Services and IT Consulting
-                                </p>
-                                <p
-                                  className="mb-0"
-                                  style={{ color: "#1c2957" }}
-                                >
-                                  5,329,878 followers
-                                </p>
-                                <div className="job-time m-t15 m-b10">
-                                  <a className="mr-1" href="#">
-                                    <span
-                                      style={{
-                                        padding: "5px 15px",
-                                        borderRadius: "100px",
-                                      }}
-                                    >
-                                      + Follow
-                                    </span>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                          <h6 className="mb-4 mt-2">Other similar Companies</h6>
+                          {data.map((item, index) => (
+               <ul
+               key={index}
+               onClick={() => navigate(`/employee/profilepage/${item?.jobskkers_detail?.id}`)}
+               style={{ cursor: "pointer" }}
+             >
+                  <div className="post-bx m-2"  style={{ borderBottom: "1px solid gray" }}>
+                    <div className="d-flex m-b30">
+                      <div className="job-post-company" style={{width:'50px'}}>
+                      <span>
+                        <img
+                            alt="profile"
+                            src={item?.logo || 'path-to-default-image.jpg'}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                            
+                            }}
+                          />
+                        </span>
+                      </div>
+                      <div className="job-post-info" >
+                        <h4 style={{fontSize:"20px"}}>
+                           {item?.company_name}
+                        </h4>
+                        <h4 style={{fontSize:"20px"}}>
+                           {item?.company_industry.name}
+                        </h4>
                       </div>
                     </div>
+                   
+                    
+                  </div>
+                </ul>
+              ))}
+                        </div>
+                      </div>
+                      </div>
                   </div>
                 </div>
               </div>

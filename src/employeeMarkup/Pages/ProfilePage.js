@@ -35,7 +35,6 @@ const ProfilePage = () => {
       await axios({
         url: `https://api.novajobs.us/api/employeer/job-seekers/${id}`,
         method: "GET",
-        headers: { Authorization: token },
       })
         .then((res) => {
           console.log(res);
@@ -58,9 +57,7 @@ const ProfilePage = () => {
     axios({
       method: "GET",
       url: "https://api.novajobs.us/api/employeer/job-seekers?page_size=10",
-      headers: {
-        Authorization: token,
-      },
+      
     })
       .then((res) => {
         console.log(res.data.data, "job seekers data");
@@ -156,9 +153,11 @@ const ProfilePage = () => {
                             userData.jobskkers_detail.states.name ||
                             userData.jobskkers_detail.cities.name ? (
                               <h6 className="mb-0">
-                               🏠︎ {userData.jobskkers_detail.countries.name} ,
-                                {userData.jobskkers_detail.states.name} ,
-                                {userData.jobskkers_detail.cities.name}
+                               🏠︎   {userData.jobskkers_detail.cities.name},  {" "}
+                                {userData.jobskkers_detail.states.name}, {" "}
+                               {userData.jobskkers_detail.countries.name}
+                               
+                              
                               </h6>
                             ) : null}
                             <div className="post-bx mt-3">
@@ -254,7 +253,7 @@ const ProfilePage = () => {
                                 fontSize: "13px",
                                 lineHeight: "20px",
                               }}>
-                              Hire Fast, Activate Premium Now
+                             
                             </p>
                             <div className="d-flex justify-content-around aligns-item-center ">
                               
@@ -272,7 +271,7 @@ const ProfilePage = () => {
                                 fontSize: "15px",
                                 lineHeight: "20px",
                               }}>
-                              See who's viewed your profile in the last 90 days
+                              Hire Fast, Activate Premium Now
                             </p>
                             <div className="job-time m-t15 m-b10">
                               <a className="mr-1" href="#" onClick={handleLinkClick}>
