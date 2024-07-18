@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import Header2 from "../Layout/Header2";
 import Footer from "../Layout/Footer";
 import FixedHeader from "../Layout/fixedHeader";
@@ -10,16 +12,37 @@ function Jobreferral() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [remark, setRemark] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log({ name, phone, email, remark });
-    // Reset form
-    setName("");
-    setPhone("");
-    setEmail("");
-    setRemark("");
+    setLoading(true);
+
+    const token = localStorage.getItem('jobSeekerLoginToken');
+    const referralData = { name, phone, email, remark };
+
+    try {
+      const response = await axios.post("https://api.novajobs.us/api/jobseeker/add-referral", referralData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token,
+        },
+      });
+
+      if (response.status === 200) {
+        toast.success("Referral added successfully!");
+        setName("");
+        setPhone("");
+        setEmail("");
+        setRemark("");
+      } else {
+        toast.error("Failed to add referral. Please try again.");
+      }
+    } catch (err) {
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -86,7 +109,9 @@ function Jobreferral() {
                           required
                         />
                       </div>
-                      <button type="submit" className="btn btn-primary">Submit</button>
+                      <button type="submit" className="btn btn-primary" disabled={loading}>
+                        {loading ? "Submitting..." : "Submit"}
+                      </button>
                     </form>
                    
                   </div>
@@ -97,6 +122,7 @@ function Jobreferral() {
         </div>
       </div>
       <Footer />
+      <ToastContainer />
     </>
   );
 }

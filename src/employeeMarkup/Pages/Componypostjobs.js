@@ -478,8 +478,8 @@ function EmployeeComponypostjobs() {
                               type="text"
                               className="form-control"
                               placeholder="Enter Salary"
-                              id="jobTitle"
-                              name="jobTitle"
+                              id=""
+                              name=""
                               value={""}
                               onChange={handleChange}
                               
