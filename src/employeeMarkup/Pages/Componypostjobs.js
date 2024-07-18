@@ -29,6 +29,7 @@ function EmployeeComponypostjobs() {
 
   const postAJobSkills = useSelector((state) => state.postAJobSlice.skillsData);
   const [jobCategories, setJobCategories] = useState([]);
+  const [experiencelevel, setexperiencelevel] = useState([]);
   const [description, setDescription] = useState(false);
   const selelctedQuestions = useSelector(
     (state) =>
@@ -156,6 +157,32 @@ function EmployeeComponypostjobs() {
     ));
   };
   
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "https://api.novajobs.us/api/employeer/experience-level",
+      headers: {
+        Authorization: token,
+      },
+    })
+     .then((res) => {
+        setexperiencelevel(res.data.data); 
+        console.log('console h',res.data.data)// Update jobCategories state here
+      })
+      .catch((err) => {
+        console.log("Error fetching job categories:", err);
+      });
+  }, [token]);
+  
+  
+  // Function to render job categories as dropdown options
+  const renderexperiencelevel = () => {
+    return experiencelevel.map((category) => (
+      <option key={category.id} value={category.id}>
+        {category.name}
+      </option>
+    ));
+  };
   
 
   const getJob = async () => {
@@ -406,7 +433,15 @@ function EmployeeComponypostjobs() {
       } else {
         updatedErrors = { ...errors, jobCategory: "" };
       }
+    } else if (name === "experiencelevel") {
+      // Validate job category (assuming it should not be empty)
+      if (value.trim() === "") {
+        updatedErrors = { ...errors, experiencelevel: "experiencelevel is required." };
+      } else {
+        updatedErrors = { ...errors, experiencelevel: "" };
+      }
     }
+    
   
     setErrors(updatedErrors); // Update errors state first
   
@@ -489,23 +524,21 @@ function EmployeeComponypostjobs() {
                             <p className="text-danger">{errors.jobTitle}</p>
                           )}
                         </div>
-                        <div className="col-6 ">
-                          <div className="form-group">
-                            <label htmlFor="">Experience</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter Experience"
-                              id="experience"
-                              name="experience"
-                              
-                              onChange={handleChange}
-                              
-                            />
-                          </div>
-                          {errors.jobTitle && (
-                            <p className="text-danger">{errors}</p>
-                          )}
+                        <div className="col-6"> 
+                        <div className="form-group">
+    <label htmlFor="experiencelevel">Experience</label>
+    <Form.Control
+  as="select"
+  custom
+  name="experiencelevel"
+  id="experiencelevel"
+  value={postAJobData.experiencelevel}
+  onChange={handleChange}
+>
+  {renderexperiencelevel()}
+</Form.Control>
+
+  </div>
                         </div>
                         <div className="col-12 ">
                           <div className="form-group">

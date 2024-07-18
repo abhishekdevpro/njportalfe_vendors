@@ -78,7 +78,7 @@ const ProfilePage = () => {
       {userData ? (
         <div>
           <Header2 />
-          <div className="page-content bg-white">
+          <div className="page-content bg-white break-all">
             <div className="content-block">
               <div className="section-full bg-white p-t50 p-b20">
                 <div className="container">
