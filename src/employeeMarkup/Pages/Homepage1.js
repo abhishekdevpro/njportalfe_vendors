@@ -100,7 +100,7 @@ function EmployeeHomepage() {
                         fontSize: "14px",
                       }}
                     >
-                      List Your Profile, Check Your Resume Score, Search Jobs, with Advance Filters and Power of AI
+                      List your profile, check your resume score, search jobs, with advance filters and power of AI
 
                     </p>
                     <Link
@@ -150,7 +150,7 @@ function EmployeeHomepage() {
                         fontSize: "14px",
                       }}
                     >
-                      List Your Company, Post Jobs, Search Talent, with Advanced Filters and Power of AI{" "}
+                      List your company, post jobs, search talent with advanced filters and power of AI{" "}
                     </p>
                     <Link
                       to={"/employee/register-2"}

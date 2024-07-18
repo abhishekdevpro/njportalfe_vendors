@@ -1,167 +1,126 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-var img1 = require("./../../images/city/pic1.jpg");
-var img2 = require("./../../images/city/pic2.jpg");
-var img3 = require("./../../images/city/pic3.jpg");
-var img4 = require("./../../images/city/pic4.jpg");
-var img5 = require("./../../images/city/pic5.jpg");
-var img6 = require("./../../images/city/pic6.jpg");
-var img7 = require("./../../images/city/pic7.jpg");
-var img8 = require("./../../images/city/pic8.jpg");
+import Carousel from 'react-bootstrap/Carousel';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function Featureblog() {
   const navigate = useNavigate();
+
   const handleLocationSelect = (location) => {
-    localStorage.setItem("location", location);
-    navigate("/employee/browse-candidates");
+    localStorage.setItem("selectedLocation", location);
+    navigate("/user/job");
   };
+
+  // Define an array of state objects with name, image, and job count
+  const states = [
+    { name: "Alabama", jobs: 765, image: require("./../../images/city/pic1.jpg") },
+    { name: "Alaska", jobs: 300, image: require("./../../images/city/pic2.jpg") },
+    { name: "Arizona", jobs: 500, image: require("./../../images/city/pic3.jpg") },
+    { name: "Arkansas", jobs: 400, image: require("./../../images/city/pic4.jpg") },
+    { name: "California", jobs: 900, image: require("./../../images/city/pic5.jpg") },
+    { name: "Colorado", jobs: 600, image: require("./../../images/city/pic6.jpg") },
+    { name: "Connecticut", jobs: 200, image: require("./../../images/city/pic7.jpg") },
+    { name: "Delaware", jobs: 150, image: require("./../../images/city/pic8.jpg") },
+    { name: "Florida", jobs: 600, image: require("./../../images/city/pic1.jpg") },
+    { name: "Georgia", jobs: 500, image: require("./../../images/city/pic2.jpg") },
+    { name: "Hawaii", jobs: 450, image: require("./../../images/city/pic3.jpg") },
+    { name: "Idaho", jobs: 300, image: require("./../../images/city/pic4.jpg") },
+    { name: "Illinois", jobs: 800, image: require("./../../images/city/pic5.jpg") },
+    { name: "Indiana", jobs: 700, image: require("./../../images/city/pic6.jpg") },
+    { name: "Iowa", jobs: 250, image: require("./../../images/city/pic7.jpg") },
+    { name: "Kansas", jobs: 200, image: require("./../../images/city/pic8.jpg") },
+    { name: "Kentucky", jobs: 765, image: require("./../../images/city/pic1.jpg") },
+    { name: "Louisiana", jobs: 300, image: require("./../../images/city/pic2.jpg") },
+    { name: "Maine", jobs: 500, image: require("./../../images/city/pic3.jpg") },
+    { name: "Maryland", jobs: 400, image: require("./../../images/city/pic4.jpg") },
+    { name: "Massachusetts", jobs: 900, image: require("./../../images/city/pic5.jpg") },
+    { name: "Michigan", jobs: 600, image: require("./../../images/city/pic6.jpg") },
+    { name: "Minnesota", jobs: 200, image: require("./../../images/city/pic7.jpg") },
+    { name: "Mississippi", jobs: 150, image: require("./../../images/city/pic8.jpg") },
+    { name: "Missouri", jobs: 600, image: require("./../../images/city/pic1.jpg") },
+    { name: "Montana", jobs: 500, image: require("./../../images/city/pic2.jpg") },
+    { name: "Nebraska", jobs: 450, image: require("./../../images/city/pic3.jpg") },
+    { name: "Nevada", jobs: 300, image: require("./../../images/city/pic4.jpg") },
+    { name: "New Hampshire", jobs: 800, image: require("./../../images/city/pic5.jpg") },
+    { name: "New Jersey", jobs: 700, image: require("./../../images/city/pic6.jpg") },
+    { name: "New Mexico", jobs: 250, image: require("./../../images/city/pic7.jpg") },
+    { name: "New York", jobs: 200, image: require("./../../images/city/pic8.jpg") },
+    { name: "North Carolina", jobs: 700, image: require("./../../images/city/pic6.jpg") },
+    { name: "North Dakota", jobs: 250, image: require("./../../images/city/pic7.jpg") },
+    { name: "Ohio", jobs: 200, image: require("./../../images/city/pic8.jpg") },
+    { name: "Oklahoma", jobs: 700, image: require("./../../images/city/pic6.jpg") },
+    { name: "Oregon", jobs: 250, image: require("./../../images/city/pic7.jpg") },
+    { name: "Pennsylvania", jobs: 200, image: require("./../../images/city/pic8.jpg") },
+    { name: "Rhode Island", jobs: 700, image: require("./../../images/city/pic6.jpg") },
+    { name: "South Carolina", jobs: 250, image: require("./../../images/city/pic7.jpg") },
+    { name: "South Dakota", jobs: 200, image: require("./../../images/city/pic8.jpg") },
+    { name: "Tennessee", jobs: 700, image: require("./../../images/city/pic6.jpg") },
+    { name: "Texas", jobs: 250, image: require("./../../images/city/pic7.jpg") },
+    { name: "Utah", jobs: 200, image: require("./../../images/city/pic8.jpg") },
+    { name: "Vermont", jobs: 700, image: require("./../../images/city/pic6.jpg") },
+    { name: "Virginia", jobs: 250, image: require("./../../images/city/pic7.jpg") },
+    { name: "Washington", jobs: 200, image: require("./../../images/city/pic8.jpg") },
+    { name: "West Virginia", jobs: 700, image: require("./../../images/city/pic6.jpg") },
+ 
+   
+    // Add more states as needed
+  ];
+
+  // Function to chunk array into smaller arrays of size n
+  const chunkArray = (arr, size) => {
+    return Array.from({ length: Math.ceil(arr.length / size) }, (_, index) =>
+      arr.slice(index * size, index * size + size)
+    );
+  };
+
+  // Chunk the states array into arrays of 8 states per slide
+  const chunkedStates = chunkArray(states, 8);
 
   return (
     <div className="section-full content-inner bg-gray">
       <div className="container">
         <div className="row">
-        <div className="align-self-end float-end">
-              <Link to={"/employee/browse-candidates"} className="site-button button-sm float-end">
-                Browse All Featured Jobseekers  <i className="fa fa-long-arrow-right"></i>
-              </Link>
-            </div>
+          <div className="align-self-end float-end">
+            <Link to={"/user/job"} className="site-button button-sm float-end">
+              Browse Jobs in other State  <i className="fa fa-long-arrow-right"></i>
+            </Link>
+          </div>
           <div className="col-lg-12 section-head text-center">
-            <h2 className="m-b5">Featured Jobseekers</h2>
-            <h6 className="fw4 m-b0">100+ Featured Jobseekers Added </h6>
+            <h2 className="m-b5">Featured States</h2>
+            <h6 className="fw4 m-b0">20+ Featured States Added Jobs</h6>
           </div>
         </div>
-        <div className="row">
-          <div className="col-lg-3 col-sm-6 col-md-6 m-b30">
-            <div onClick={() => handleLocationSelect("alabama")}>
-              <div
-                className="city-bx align-items-end d-flex"
-                style={{
-                  backgroundImage: "url(" + img1 + ")",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="city-info">
-                  <h5>Alabama</h5>
-                  <span>765 Jobseekerseekers</span>
-                </div>
+
+        <Carousel>
+          {/* Loop through chunkedStates to create Carousel Items */}
+          {chunkedStates.map((slideStates, slideIndex) => (
+            <Carousel.Item key={slideIndex} className=" p-3" style={{backgroundColor:'#FFD5D5'}}>
+              <div className="row ">
+                {slideStates.map((state, index) => (
+                  <div key={index} className="col-lg-3 col-sm-6 col-md-6 m-b30 ">
+                    <div onClick={() => handleLocationSelect(state.name.toLowerCase())}>
+                      <div
+                        className="city-bx align-items-end d-flex"
+                        style={{
+                          backgroundImage: `url(${state.image})`,
+                          cursor: "pointer",
+                        }}>
+                        <div className="city-info">
+                          <h5>{state.name}</h5>
+                          <span>{state.jobs} Jobs</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-          </div>
-          <div className="col-lg-3 col-sm-6 col-md-6 m-b30">
-            <div onClick={() => handleLocationSelect("california")}>
-              <div
-                className="city-bx align-items-end  d-flex"
-                style={{
-                  backgroundImage: "url(" + img2 + ")",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="city-info">
-                  <h5>California</h5>
-                  <span>352 Jobseekers</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3 col-sm-6 col-md-6 m-b30">
-            <div onClick={() => handleLocationSelect("hawali")}>
-              <div
-                className="city-bx align-items-end  d-flex"
-                style={{
-                  backgroundImage: "url(" + img3 + ")",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="city-info">
-                  <h5>Hawali</h5>
-                  <span>893 Jobseekers</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3 col-sm-6 col-md-6 m-b30">
-            <div onClick={() => handleLocationSelect("ohio")}>
-              <div
-                className="city-bx align-items-end  d-flex"
-                style={{
-                  backgroundImage: "url(" + img4 + ")",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="city-info">
-                  <h5>Ohio</h5>
-                  <span>502 Jobseekers</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3 col-sm-6 col-md-6 m-b30">
-            <div onClick={() => handleLocationSelect("Vergina")}>
-              <div
-                className="city-bx align-items-end  d-flex"
-                style={{
-                  backgroundImage: "url(" + img5 + ")",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="city-info">
-                  <h5>Vergina</h5>
-                  <span>765 Jobseekers</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3 col-sm-6 col-md-6 m-b30">
-            <div onClick={() => handleLocationSelect("indiana")}>
-              <div
-                className="city-bx align-items-end  d-flex"
-                style={{
-                  backgroundImage: "url(" + img6 + ")",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="city-info">
-                  <h5>Indiana</h5>
-                  <span>352 Jobseekers</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3 col-sm-6 col-md-6 m-b30">
-            <div onClick={() => handleLocationSelect("georgia")}>
-              <div
-                className="city-bx align-items-end  d-flex"
-                style={{
-                  backgroundImage: "url(" + img7 + ")",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="city-info">
-                  <h5>Georgia</h5>
-                  <span>893 Jobseekers</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3 col-sm-6 col-md-6 m-b30">
-            <div onClick={() => handleLocationSelect("colorado")}>
-              <div
-                className="city-bx align-items-end  d-flex"
-                style={{
-                  backgroundImage: "url(" + img8 + ")",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="city-info">
-                  <h5>Colorado</h5>
-                  <span>502 Jobseekers</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
       </div>
     </div>
   );
 }
+
 export default Featureblog;

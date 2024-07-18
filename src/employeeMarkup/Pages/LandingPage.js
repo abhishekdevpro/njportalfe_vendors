@@ -158,7 +158,7 @@ const LandingPage = () => {
         <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img2} alt="Service 2" className="img-fluid" />
-            <p style={{ fontSize: '20px' }}>AI-Based Job Portal:</p>
+            <p style={{ fontSize: '20px' }}>AI-Based Job Portal</p>
             <ul>
               <li>Jobseeker Login</li>
               <li>Employer Login</li>
@@ -183,7 +183,7 @@ const LandingPage = () => {
       <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img8} alt="Service 4" className="img-fluid" />
-            <p style={{ fontSize: '20px' }}>Range Of Services:</p>
+            <p style={{ fontSize: '20px' }}>Range Of Services</p>
             <ul>
               <li>AI Jobs Portal</li>
               <li>Edtech Portal</li>
@@ -219,7 +219,7 @@ const LandingPage = () => {
         <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img6} alt="Service 6" className="img-fluid" />
-            <p style={{ fontSize: '20px' }}>Robust Vendor Panel:</p>
+            <p style={{ fontSize: '20px' }}>Robust Vendor Panel</p>
             <ul>
               <li>Bulk CV upload</li>
               <li>Bulk Opening upload</li>
@@ -244,7 +244,7 @@ const LandingPage = () => {
         <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
           <div className="service-div">
             <img src={img9} alt="Service 7" className="img-fluid" />
-            <p style={{ fontSize: '20px' }}>UltraAura:</p>
+            <p style={{ fontSize: '20px' }}>UltraAura</p>
             <ul>
               <li>Learn from Experts</li>
               <li>Online Sessions</li>

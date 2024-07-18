@@ -180,8 +180,7 @@ import Vendorbulkuploadjobopeneing from "./vendor/Vendorbulkuploadjobopeneing co
 import Vendorbulkuploadjobseeker from "./vendor/Vendorbulkuploadjobseeker";
 import Vendorregistration from "./vendor/Vendorregistration";
 import JobPagethirdparty from "./markup/Pages/JobPagethirdparty";
-import Instructor from "./InstructorPanel/Instructor";
-import AddCourseForm from "./InstructorPanel/Courses/AddCourseForm";
+
 function App() {
   const dispatch = useDispatch();
 

@@ -152,12 +152,12 @@ const ProfilePage = () => {
       )}
     </div>
 
-                            {userData.jobskkers_detail.countries.name ||
+    {userData.jobskkers_detail.countries.name ||
                             userData.jobskkers_detail.states.name ||
                             userData.jobskkers_detail.cities.name ? (
                               <h6 className="mb-0">
-                                {userData.jobskkers_detail.countries.name} |
-                                {userData.jobskkers_detail.states.name} |
+                               🏠︎ {userData.jobskkers_detail.countries.name} ,
+                                {userData.jobskkers_detail.states.name} ,
                                 {userData.jobskkers_detail.cities.name}
                               </h6>
                             ) : null}
