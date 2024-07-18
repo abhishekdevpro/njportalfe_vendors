@@ -473,14 +473,14 @@ function EmployeeComponypostjobs() {
                         </div>
                         <div className="col-6 ">
                           <div className="form-group">
-                            <label htmlFor="jobTitle">Salary</label>
+                            <label htmlFor="">Salary</label>
                             <input
                               type="text"
                               className="form-control"
                               placeholder="Enter Salary"
-                              id=""
-                              name=""
-                              value={""}
+                              id="salary"
+                              name="salary"
+                              
                               onChange={handleChange}
                               
                             />
@@ -491,14 +491,14 @@ function EmployeeComponypostjobs() {
                         </div>
                         <div className="col-6 ">
                           <div className="form-group">
-                            <label htmlFor="jobTitle">Experience</label>
+                            <label htmlFor="">Experience</label>
                             <input
                               type="text"
                               className="form-control"
                               placeholder="Enter Experience"
-                              id=""
-                              name=""
-                              value={""}
+                              id="experience"
+                              name="experience"
+                              
                               onChange={handleChange}
                               
                             />

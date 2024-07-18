@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone, faMapMarkerAlt, faCalendarAlt, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
 import { FaSave, FaSearch, FaTimes } from "react-icons/fa";
@@ -330,6 +330,7 @@ function EmployeeBrowsecandidates() {
   const getSingleCity = (cityId) => {
     return cities.find((city) => city.id === cityId)?.name || "";
   };
+const navigate = useNavigate();
 
   return (
     <>
@@ -536,6 +537,13 @@ function EmployeeBrowsecandidates() {
                           <div className="company-info">
                              <ul className="post-job-bx browse-job ">
                               {browseCandidateData.map((item, index) => (
+                                <li
+                                key={index}
+                                onClick={() =>
+                                  navigate(`/employee/profilepage/${item?.jobskkers_detail?.id}`)
+                                }
+                                style={{ cursor: "pointer" }}
+                              >
                                 <div key={index}>
                                   <li>
                                     <Link
@@ -654,7 +662,7 @@ function EmployeeBrowsecandidates() {
                                     </Link>
                                     
                                   </li>
-                                </div>
+                                </div> </li>
                               ))}
                               <label className="like-btn">
                       <input type="checkbox" />

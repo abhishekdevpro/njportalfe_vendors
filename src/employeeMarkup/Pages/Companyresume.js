@@ -1,21 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import Header2 from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 import CompanySideBar from "../Layout/companySideBar";
 
-const postResume = [
-  { id: 1, title: "Tammy Dixon", jobTitle: "UX / UI Designer", skills: ["PHP", "Angular", "Bootstrap"] },
-  { id: 2, title: "John Doe", jobTitle: "Frontend Developer", skills: ["React", "JavaScript", "CSS"] },
-  { id: 3, title: "Ali Tufan", jobTitle: "Backend Developer", skills: ["Node.js", "MongoDB", "Express"] },
-  { id: 4, title: "David Kamal", jobTitle: "Full Stack Developer", skills: ["PHP", "Angular", "Node.js"] },
-  { id: 5, title: "Tammy Dixon", jobTitle: "UX / UI Designer", skills: ["Photoshop", "Illustrator", "CSS"] },
-  { id: 6, title: "John Doe", jobTitle: "Frontend Developer", skills: ["Vue", "JavaScript", "HTML"] },
-  { id: 7, title: "David Kamal", jobTitle: "Full Stack Developer", skills: ["PHP", "Vue", "Node.js"] },
-  { id: 8, title: "Ali Tufan", jobTitle: "Backend Developer", skills: ["Python", "Django", "PostgreSQL"] },
-];
-
 function EmployeeCompanyresume() {
+  const [resumes, setResumes] = useState([]);
   const [selectedJobTitle, setSelectedJobTitle] = useState("All");
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [shortlisted, setShortlisted] = useState([]);
@@ -23,6 +14,33 @@ function EmployeeCompanyresume() {
   const [view, setView] = useState("all");
   const [skillsDropdownOpen, setSkillsDropdownOpen] = useState(false);
   const [jobTitleDropdownOpen, setJobTitleDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("employeeLoginToken"); // or wherever you store your token
+        const response = await axios.get("https://api.novajobs.us/api/employeer/jobs-applicants", {
+          headers: {
+            Authorization: token, // Assuming the token does not need 'Bearer'
+          },
+        });
+        // Check if the response data is an array
+        if (Array.isArray(response.data.data)) {
+          // Map through the response data and extract job seekers' details
+          const formattedResumes = response.data.data.map(item => item.jobskkers_detail);
+          setResumes(formattedResumes);
+        } else {
+          setResumes([]);
+          console.error("Unexpected response format:", response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching resumes:", error);
+        setResumes([]); // Set resumes to an empty array in case of error
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleJobTitleChange = (event) => {
     setSelectedJobTitle(event.target.value);
@@ -58,7 +76,7 @@ function EmployeeCompanyresume() {
   };
 
   const handleSchedule = (id) => {
-    const scheduledCandidate = postResume.find((item) => item.id === id);
+    const scheduledCandidate = resumes.find((item) => item.id === id);
     scheduledCandidate.meetLink = `https://meet.google.com/?authuser=0`;
     if (!shortlisted.includes(id)) {
       setShortlisted([...shortlisted, id]);
@@ -68,23 +86,23 @@ function EmployeeCompanyresume() {
     }
   };
 
-  const jobTitles = ["All", ...new Set(postResume.map((item) => item.jobTitle))];
+  const jobTitles = ["All", ...new Set(resumes.map((item) => item.proffesional_title))];
   const skills = [
-    ...new Set(postResume.flatMap((item) => item.skills)),
+    ...new Set(resumes.flatMap((item) => item.ai_resume_parse_data.jobsMyResumeData.skillsValue.skills.split(', '))),
   ];
 
   const filteredResumes =
     selectedJobTitle === "All"
-      ? postResume
-      : postResume.filter((item) => item.jobTitle === selectedJobTitle);
+      ? resumes
+      : resumes.filter((item) => item.proffesional_title === selectedJobTitle);
 
   const skillFilteredResumes = selectedSkills.length
     ? filteredResumes.filter((item) =>
-        selectedSkills.every((skill) => item.skills.includes(skill))
+        selectedSkills.every((skill) => item.ai_resume_parse_data.jobsMyResumeData.skillsValue.skills.includes(skill))
       )
     : filteredResumes;
 
-  const allCount = postResume.length;
+  const allCount = resumes.length;
   const shortlistedCount = shortlisted.length;
   const rejectedCount = rejected.length;
 
@@ -92,9 +110,9 @@ function EmployeeCompanyresume() {
   if (view === "all") {
     displayedResumes = skillFilteredResumes;
   } else if (view === "shortlisted") {
-    displayedResumes = postResume.filter((item) => shortlisted.includes(item.id));
+    displayedResumes = resumes.filter((item) => shortlisted.includes(item.id));
   } else if (view === "rejected") {
-    displayedResumes = postResume.filter((item) => rejected.includes(item.id));
+    displayedResumes = resumes.filter((item) => rejected.includes(item.id));
   }
 
   return (
@@ -198,105 +216,90 @@ function EmployeeCompanyresume() {
                       </div>
                     </div>
                     <br/>
-                    <ul className="post-job-bx browse-job-grid post-resume row">
-                      {displayedResumes.map((item, index) => (
-                        <li className="col-lg-6 col-md-6" key={index}>
-                          <div className="post-bx">
-                            <div className="d-flex m-b20">
-                              <div className="job-post-info">
-                                <h5 className="m-b0">
-                                  <Link to={"#"}>
-                                    {item.title}
-                                  </Link>
-                                </h5>
-                                <p className="m-b5 font-13">
-                                  <Link to={"#"} className="text-primary">
-                                    {item.jobTitle}
-                                  </Link>{" "}
-                                  at Atract Solutions
-                                </p>
-                                <ul>
-                                  <li>
-                                    <i className="fa fa-map-marker"></i>
-                                    Sacramento, California
-                                  </li>
-                                  <li>
-                                    <i className="fa fa-money"></i> $ 2500
-                                  </li>
-                                </ul>
+                    {displayedResumes.length === 0 ? (
+                      <div className="text-center">
+                        <p className="m-0">There are no applicants available now!</p>
+                      </div>
+                    ) : (
+                      <ul className="post-job-bx browse-job-grid post-resume row">
+                        {displayedResumes.map((item, index) => (
+                          <li className="col-lg-6 col-md-6" key={index}>
+                            <div className="post-bx">
+                              <div className="d-flex m-b20">
+                                <div className="job-post-info">
+                                  <h5 className="m-b0">
+                                    <Link to={"#"}>
+                                      {item.first_name} {item.last_name}
+                                    </Link>
+                                  </h5>
+                                  <p className="m-b5 font-13">
+                                    <Link to={"#"} className="text-primary">
+                                      {item.proffesional_title}
+                                    </Link>
+                                  </p>
+                                  <ul>
+                                    <li>
+                                      <i className="fa fa-map-marker"></i> {item.country_id}
+                                    </li>
+                                    <li>
+                                      <i className="fa fa-bookmark-o"></i> {item.age} years old
+                                    </li>
+                                    <li>
+                                      <i className="fa fa-clock-o"></i>{" "}
+                                      {item.experience_in_month} months experience
+                                    </li>
+                                    <li>
+                                      <i className="fa fa-envelope"></i> {item.email}
+                                    </li>
+                                  </ul>
+                                </div>
                               </div>
-                            </div>
-                            <div className="job-time m-t15 m-b10">
-                              {item.skills.map((skill, skillIndex) => (
-                                <Link to={"#"} className="mr-1" key={skillIndex}>
-                                                                   <span>{skill}</span>
-                                </Link>
-                              ))}
-                            </div>
-                            <div className="">
-                              <button
-                                type="button"
-                                className="btn btn-outline-success"
-                                onClick={() => handleShortlist(item.id)}
-                              >
-                                {shortlisted.includes(item.id)
-                                  ? "Unshortlist"
-                                  : "Shortlist"}
-                              </button>{" "}
-                              <button
-                                type="button"
-                                className="btn btn-outline-danger"
-                                onClick={() => handleReject(item.id)}
-                              >
-                                {rejected.includes(item.id) ? "Unreject" : "Reject"}
-                              </button>{" "}
-                              <button
-                                type="button"
-                                className="btn btn-outline-primary"
-                                onClick={() => handleSchedule(item.id)}
-                              >
-                                Schedule
-                              </button>
-                            </div>
-                            {item.meetLink && (
-                              <div className="m-t10">
-                                <a
-                                  href={item.meetLink}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="btn btn-outline-info"
+                              <div className="job-time m-t15 m-b10">
+                                <Link
+                                  to={"#"}
+                                  className="mr-2"
+                                  onClick={() => handleShortlist(item.id)}
                                 >
-                                  Click here for Google Meet Link
-                                </a>
+                                  <span
+                                    className={`p-2 ${shortlisted.includes(item.id) ? "badge badge-warning" : "badge badge-primary"
+                                      }`}
+                                  >
+                                    {shortlisted.includes(item.id) ? "Shortlisted" : "Shortlist"}
+                                  </span>
+                                </Link>
+                                <Link
+                                  to={"#"}
+                                  className="mr-2"
+                                  onClick={() => handleReject(item.id)}
+                                >
+                                  <span
+                                    className={`p-2 ${rejected.includes(item.id) ? "badge badge-warning" : "badge badge-danger"
+                                      }`}
+                                  >
+                                    {rejected.includes(item.id) ? "Rejected" : "Reject"}
+                                  </span>
+                                </Link>
+                                <Link
+                                  to={"#"}
+                                  className="mr-2"
+                                  onClick={() => handleSchedule(item.id)}
+                                >
+                                  <span className="p-2 badge badge-info">Schedule Interview</span>
+                                </Link>
+                                {item.meetLink && (
+                                  <Link to={item.meetLink} target="_blank">
+                                    <span className="p-2 badge badge-info">Meet Link</span>
+                                  </Link>
+                                )}
                               </div>
-                            )}
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="pagination-bx float-right">
-                      <ul className="pagination">
-                        <li className="previous">
-                          <Link to={"#"}>
-                            <i className="ti-arrow-left"></i> Prev
-                          </Link>
-                        </li>
-                        <li className="active">
-                          <Link to={"#"}>1</Link>
-                        </li>
-                        <li>
-                          <Link to={"#"}>2</Link>
-                        </li>
-                        <li>
-                          <Link to={"#"}>3</Link>
-                        </li>
-                        <li className="next">
-                          <Link to={"#"}>
-                            Next <i className="ti-arrow-right"></i>
-                          </Link>
-                        </li>
+                              <Link to={"#"} className="job-links">
+                                View Resume
+                              </Link>
+                            </div>
+                          </li>
+                        ))}
                       </ul>
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>
