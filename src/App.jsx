@@ -712,7 +712,7 @@ function App() {
           }
         />
         <Route
-          path="company-resume"
+          path="company-resume/:id"
           element={
             <EmployeePrivateRoute>
               <EmployeeCompanyresume />

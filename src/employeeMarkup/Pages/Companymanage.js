@@ -50,7 +50,7 @@ function EmployeeCompanymanage() {
           setRecordsAvailable(false);
         }
 
-        setBtn("Edit Job");
+        setBtn(" ");
         setSkeleton(false);
       })
       .catch((err) => {
@@ -244,16 +244,17 @@ function EmployeeCompanymanage() {
                       onClick={() => navigate(`/employee/company-post-jobs/${item.job_detail.id}`)}
                       className="px-3 py-2 site-button text-white border-0"
                       style={{ cursor: "pointer" }}
-                    >
+                    >Edit Jobs
                       {btn}
                     </button>
-                    <Link
-                      to={"/employee/company-resume"}
+                    <button
+                      onClick={() => navigate(`/employee/company-resume/${item.job_detail.id}`)}
                       className="px-3 py-2 site-button text-white border-0"
-                    >
-                      <i className="fa fa-id-card-o mr-1" aria-hidden="true"></i>
+                      style={{ cursor: "pointer" }}
+                    ><i className="fa fa-id-card-o mr-1" aria-hidden="true"></i>
                       <span>Applicants</span>
-                    </Link>
+                      {btn}
+                    </button>
                     <button
                       className="px-3 py-2 site-button text-white border-0 bg-danger"
                       style={{ cursor: "pointer", backgroundColor: "red" }}
