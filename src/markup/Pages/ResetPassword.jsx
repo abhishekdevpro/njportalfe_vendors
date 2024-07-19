@@ -40,7 +40,7 @@ function ResetPassword(props) {
           "jobSeekerLoginToken",
           response?.data?.data?.token
         );
-        navigate("/user");
+        navigate("/user/login");
       })
       .catch((err) => {
         console.log(err);

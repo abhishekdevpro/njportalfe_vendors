@@ -29,7 +29,7 @@ function EmployeeComponypostjobs() {
 
   const postAJobSkills = useSelector((state) => state.postAJobSlice.skillsData);
   const [jobCategories, setJobCategories] = useState([]);
-  const [experiencelevel, setexperiencelevel] = useState([]);
+  const [experience_level_id, setexperience_level_id] = useState([]);
   const [description, setDescription] = useState(false);
   const selelctedQuestions = useSelector(
     (state) =>
@@ -69,42 +69,7 @@ function EmployeeComponypostjobs() {
     );
     setDescription(false);
   }
-// Fetch job categories from API
 
-  // const renderSection = (section) => {
-  //   if (section.startsWith("**")) {
-  //     if (section.includes(":")) {
-  //       const [title, content] = section
-  //         .split(":")
-  //         .map((part) => part.trim().replace(/\*\*/g, ""));
-  //       return (
-  //         <div>
-  //           <h2>{title}</h2>
-  //           <p>{content}</p>
-  //         </div>
-  //       );
-  //     }
-  //     return <h2>{section.replace(/\*\*/g, "").trim()}</h2>;
-  //   } else if (section.startsWith("*")) {
-  //     const listItems = section
-  //       .split("\n")
-  //       .map((item) => item.replace("*", "").trim());
-  //     return (
-  //       <ul>
-  //         {listItems.map((item) => (
-  //           <li key={item}>{item}</li>
-  //         ))}
-  //       </ul>
-  //     );
-  //   }
-  //   dispatch(
-  //     setPostAJobData({
-  //       ...postAJobData,
-
-  //       description: `<p>${section.trim()}</p>`,
-  //     })
-  //   );
-  // };
 
   const [countries, setCountries] = useState([
     {
@@ -166,7 +131,7 @@ function EmployeeComponypostjobs() {
       },
     })
      .then((res) => {
-        setexperiencelevel(res.data.data); 
+        setexperience_level_id(res.data.data); 
         console.log('console h',res.data.data)// Update jobCategories state here
       })
       .catch((err) => {
@@ -176,8 +141,8 @@ function EmployeeComponypostjobs() {
   
   
   // Function to render job categories as dropdown options
-  const renderexperiencelevel = () => {
-    return experiencelevel.map((category) => (
+  const renderexperience_level_id = () => {
+    return experience_level_id.map((category) => (
       <option key={category.id} value={category.id}>
         {category.name}
       </option>
@@ -206,6 +171,7 @@ function EmployeeComponypostjobs() {
             selectedState: res.data.data.job_detail.state_id,
             selectedCountry: res.data.data.job_detail.country_id,
             job_title: res.data.data.job_detail.job_title,
+            salary: res.data.data.job_detail.salary
           })
         );
         dispatch(setSkillsData(res.data.data.job_detail.skills_arr));
@@ -256,7 +222,12 @@ function EmployeeComponypostjobs() {
         country_id: Number(postAJobData.selectedCountry),
         state_id: Number(postAJobData.selectedState),
         city_id: Number(postAJobData.selectedCity),
+        experience_level_id: Number(postAJobData.experience_level_id),
         is_publish: 1,
+        salary:postAJobData.salary,
+       
+        
+        
         screen_questions: {
           screen_question_keywords: selelctedQuestions,
         },
@@ -377,6 +348,10 @@ function EmployeeComponypostjobs() {
     getCountry();
   }, []);
 
+  
+
+  
+  
   useEffect(() => {
     // console.log(selectedCountry);
     dispatch(
@@ -390,6 +365,8 @@ function EmployeeComponypostjobs() {
     getState();
   }, [postAJobData.selectedCountry]);
 
+
+
   useEffect(() => {
     dispatch(
       setPostAJobData({
@@ -399,6 +376,19 @@ function EmployeeComponypostjobs() {
     );
     getCities();
   }, [postAJobData.selectedState]);
+
+
+  useEffect(() => {
+    dispatch(
+      setPostAJobData({
+        ...postAJobData,
+        selectedCity: 0,
+      })
+    );
+    getCities();
+  }, [postAJobData.selectedState]);
+
+  
 
   useEffect(() => {
     if (postAJobData.jobTitle !== "") {
@@ -433,12 +423,12 @@ function EmployeeComponypostjobs() {
       } else {
         updatedErrors = { ...errors, jobCategory: "" };
       }
-    } else if (name === "experiencelevel") {
+    } else if (name === "experience_level_id") {
       // Validate job category (assuming it should not be empty)
       if (value.trim() === "") {
-        updatedErrors = { ...errors, experiencelevel: "experiencelevel is required." };
+        updatedErrors = { ...errors, experience_level_id: "experience_level_id is required." };
       } else {
-        updatedErrors = { ...errors, experiencelevel: "" };
+        updatedErrors = { ...errors, experience_level_id: "" };
       }
     }
     
@@ -508,14 +498,14 @@ function EmployeeComponypostjobs() {
                         </div>
                         <div className="col-6 ">
                           <div className="form-group">
-                            <label htmlFor="">Salary</label>
+                            <label htmlFor="salary">Salary</label>
                             <input
                               type="text"
                               className="form-control"
                               placeholder="Enter Salary"
                               id="salary"
                               name="salary"
-                              
+                              value={postAJobData.salary}
                               onChange={handleChange}
                               
                             />
@@ -526,16 +516,16 @@ function EmployeeComponypostjobs() {
                         </div>
                         <div className="col-6"> 
                         <div className="form-group">
-    <label htmlFor="experiencelevel">Experience</label>
+    <label htmlFor="experience_level_id">Experience</label>
     <Form.Control
   as="select"
   custom
-  name="experiencelevel"
-  id="experiencelevel"
-  value={postAJobData.experiencelevel}
+  name="experience_level_id"
+  id="experience_level_id"
+  value={postAJobData.experience_level_id}
   onChange={handleChange}
 >
-  {renderexperiencelevel()}
+  {renderexperience_level_id()}
 </Form.Control>
 
   </div>

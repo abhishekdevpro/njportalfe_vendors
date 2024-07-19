@@ -221,7 +221,7 @@ function EmployeeCompanymanage() {
                     )}
                     {(item.cities.name || item.states.name || item.countries.name) && (
                       <p style={{ color: "#232323" }} className="mb-2">
-                        <i className="fa fa-map-marker"></i>
+                        <i className="fa fa-map-marker"></i>{" "}
                         {item.cities.name && <span>{item.cities.name}{" | "}</span>}
                         {item.states.name && <span>{item.states.name}{" | "}</span>}
                         {item.countries.name && <span>{item.countries.name}</span>}

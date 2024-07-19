@@ -30,16 +30,16 @@ function ResetPasswordemployee(props) {
   
     await axios({
       method: "POST",
-      url: "https://api.novajobs.us/api/employee/reset-password",
+      url: "https://api.novajobs.us/api/employeer/reset-password",
       data: formData,
     })
       .then((response) => {
         console.log(response, "login");
         localStorage.setItem(
-          "jobSeekerLoginToken",
+          "employeeLoginToken",
           response?.data?.data?.token
         );
-        navigate("/user/login");
+        navigate("/employee/login");
       })
       .catch((err) => {
         console.log(err);
