@@ -8,7 +8,8 @@ import {
 
 import loginbg from "../../images/login/loginbg.jpeg";
 import axios from "axios";
-import { showToastError } from "../../utils/toastify";
+import { showToastError, showToastSuccess } from "../../utils/toastify";
+import { ToastContainer } from "react-toastify";
 
 function ResetPasswordemployee(props) {
    const { token } = useParams();
@@ -39,12 +40,13 @@ function ResetPasswordemployee(props) {
           "employeeLoginToken",
           response?.data?.data?.token
         );
+        showToastSuccess(response?.data?.data?.token)
         navigate("/employee/login");
       })
       .catch((err) => {
         console.log(err);
         console.log(err.response.data.message);
-        showToastError(err?.response?.data?.message);
+        showToastError("Something went wrong, Please Enter vaild password ");
       });
   };
   
@@ -57,7 +59,7 @@ function ResetPasswordemployee(props) {
           backgroundImage: "url(" + loginbg + ")",
           backgroundSize: "cover",
         }}
-      >
+      ><ToastContainer/>
         <div className="section-full">
           <div className="container">
             <div className="row">
