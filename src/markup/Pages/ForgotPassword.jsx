@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import loginbg from "../../images/login/loginbg.jpeg";
 import axios from "axios";
-import { showToastError } from "../../utils/toastify";
+import { showToastError, showToastSuccess } from "../../utils/toastify";
+import { ToastContainer } from "react-toastify";
 
 function ForgotPassword(props) {
   const [email, setEmail] = useState("demo@example.com");
@@ -26,6 +27,7 @@ function ForgotPassword(props) {
     })
       .then((response) => {
         console.log(response);
+      showToastSuccess(response?.data?.message)
         navigate("/user/login");
       })
       .catch((err) => {
@@ -43,7 +45,7 @@ function ForgotPassword(props) {
           backgroundImage: "url(" + loginbg + ")",
           backgroundSize: "cover",
         }}
-      >
+      ><ToastContainer/>
         <div className="section-full">
           <div className="container">
             <div className="row">

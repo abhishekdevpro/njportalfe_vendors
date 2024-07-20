@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { showToastError, showToastSuccess } from "../../utils/toastify";
+import { ToastContainer } from "react-toastify";
 
 function VerifyEmail() {
   const navigate = useNavigate();
@@ -30,7 +31,9 @@ function VerifyEmail() {
   }, [token, navigate]);
 
   return (
-    <div>Verifying...</div>
+    <div>Verifying...
+      <ToastContainer/>
+    </div>
   );
 }
 

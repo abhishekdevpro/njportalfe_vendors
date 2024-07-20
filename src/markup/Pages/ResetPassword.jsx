@@ -46,7 +46,7 @@ function ResetPassword(props) {
       .catch((err) => {
         console.log(err);
         console.log(err.response.data.message);
-        showToastError("Something went wrong, Please Enter vaild password ");
+        showToastError(err?.response?.data?.message);
       });
   };
   

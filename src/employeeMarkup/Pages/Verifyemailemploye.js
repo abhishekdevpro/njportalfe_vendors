@@ -21,7 +21,7 @@ function VerifyEmailemployee() {
           navigate("/employee/login");
         } else {
           showToastError("Email verification failed");
-          navigate("/employee/register-2");
+          navigate("/employee/login");
         }
       } catch (error) {
         console.error("Verification Error:", error);
