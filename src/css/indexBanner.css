@@ -143,6 +143,7 @@
   }
   
   .hover-text {
+    font-size: smaller;
     visibility: hidden;
     width: 400px;
     background-color: rgba(0, 0, 0, 0.7);
@@ -152,9 +153,9 @@
     padding: 5px ;
     position: absolute;
     z-index: 1;
-    bottom: -20%;
-    left: 10%;
-    margin-right: -430px;
+    top: -100%;
+    right: 10%;
+    margin-right: -130px;
     margin-left: 220px;
     opacity: 0;
     transition: opacity 0.3s;
