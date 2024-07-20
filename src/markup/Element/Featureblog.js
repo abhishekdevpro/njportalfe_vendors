@@ -89,7 +89,7 @@ function Featureblog() {
           </div>
           <div className="col-lg-12 section-head text-center">
             <h2 className="m-b5">Featured States</h2>
-            <h6 className="fw4 m-b0">20+ Featured States Added Jobs</h6>
+            <h6 className="fw4 m-b0">Featured States </h6>
           </div>
         </div>
 
