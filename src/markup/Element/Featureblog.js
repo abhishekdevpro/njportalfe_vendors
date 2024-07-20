@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 function Featureblog() {
   const navigate = useNavigate();
@@ -12,7 +11,6 @@ function Featureblog() {
     navigate("/user/job");
   };
 
-  // Define an array of state objects with name, image, and job count
   const states = [
     { name: "Alabama", jobs: 765, image: require("./../../images/city/pic1.jpg") },
     { name: "Alaska", jobs: 300, image: require("./../../images/city/pic2.jpg") },
@@ -62,9 +60,6 @@ function Featureblog() {
     { name: "Virginia", jobs: 250, image: require("./../../images/city/pic7.jpg") },
     { name: "Washington", jobs: 200, image: require("./../../images/city/pic8.jpg") },
     { name: "West Virginia", jobs: 700, image: require("./../../images/city/pic6.jpg") },
- 
-   
-    // Add more states as needed
   ];
 
   // Function to chunk array into smaller arrays of size n
@@ -74,16 +69,22 @@ function Featureblog() {
     );
   };
 
-  // Chunk the states array into arrays of 8 states per slide
-  const chunkedStates = chunkArray(states, 8);
-
+  
+   const chunkedStates = chunkArray(states, 8);
+   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+   useEffect(() => {
+     const handleResize = () => setIsMobile(window.innerWidth <= 768);
+     window.addEventListener("resize", handleResize);
+     return () => window.removeEventListener("resize", handleResize);
+   }, []);
+ 
   return (
     <div className="section-full content-inner bg-gray">
       <div className="container">
         <div className="row">
           <div className="align-self-end float-end">
             <Link to={"/user/job"} className="site-button button-sm float-end">
-              Browse Jobs in other State  <i className="fa fa-long-arrow-right"></i>
+              Browse Jobs in other State <i className="fa fa-long-arrow-right"></i>
             </Link>
           </div>
           <div className="col-lg-12 section-head text-center">
@@ -93,34 +94,55 @@ function Featureblog() {
         </div>
 
         <Carousel>
-          {/* Loop through chunkedStates to create Carousel Items */}
-          {chunkedStates.map((slideStates, slideIndex) => (
-            <Carousel.Item key={slideIndex} className=" p-3" style={{backgroundColor:'#FFD5D5'}}>
-              <div className="row ">
-                {slideStates.map((state, index) => (
-                  <div key={index} className="col-lg-3 col-sm-6 col-md-6 m-b30 ">
-                    <div onClick={() => handleLocationSelect(state.name.toLowerCase())}>
-                      <div
-                        className="city-bx align-items-end d-flex"
-                        style={{
-                          backgroundImage: `url(${state.image})`,
-                          cursor: "pointer",
-                        }}>
-                        <div className="city-info">
-                          <h5>{state.name}</h5>
-                          <span>{state.jobs} Jobs</span>
+          {isMobile
+            ? chunkedStates.flat().map((state, index) => (
+                <Carousel.Item key={index} className="p-3" style={{ backgroundColor: '#FFD5D5' }}>
+                  <div className="row justify-content-center">
+                    <div className="col-12 m-b30">
+                      <div onClick={() => handleLocationSelect(state.name.toLowerCase())}>
+                        <div
+                          className="city-bx align-items-end d-flex"
+                          style={{
+                            backgroundImage: `url(${state.image})`,
+                            cursor: "pointer",
+                          }}>
+                          <div className="city-info">
+                            <h5>{state.name}</h5>
+                            <span>{state.jobs} Jobs</span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </Carousel.Item>
-          ))}
+                </Carousel.Item>
+              ))
+            : chunkedStates.map((slideStates, slideIndex) => (
+                <Carousel.Item key={slideIndex} className="p-3" style={{ backgroundColor: '#FFD5D5' }}>
+                  <div className="row">
+                    {slideStates.map((state, index) => (
+                      <div key={index} className="col-lg-3 col-sm-6 col-md-6 m-b30">
+                        <div onClick={() => handleLocationSelect(state.name.toLowerCase())}>
+                          <div
+                            className="city-bx align-items-end d-flex"
+                            style={{
+                              backgroundImage: `url(${state.image})`,
+                              cursor: "pointer",
+                            }}>
+                            <div className="city-info">
+                              <h5>{state.name}</h5>
+                              <span>{state.jobs} Jobs</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Carousel.Item>
+              ))}
         </Carousel>
       </div>
     </div>
   );
-}
+};
 
 export default Featureblog;
