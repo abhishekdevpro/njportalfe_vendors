@@ -28,7 +28,7 @@ function ForgotPasswordemployee(props) {
       .then((response) => {
         console.log(response);
         showToastSuccess(response?.data?.message)
-        navigate("/employee/login");
+        navigate("/employee/forgot-password");
       })
       .catch((err) => {
         console.log(err);

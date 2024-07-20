@@ -83,7 +83,7 @@ function Profilesidebar({ data }) {
                   <span>AI Resume Builder</span>
                 </Link>
               </li>
-              <li>
+              {/*<li>
                 <Link
                   to={"/user/jobs-my-resume"}
                   className={data === "resume" ? "active" : null}
@@ -92,7 +92,7 @@ function Profilesidebar({ data }) {
                   <i className="fa fa-file-text-o" aria-hidden="true"></i>
                   <span>My Resume</span>
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   to={"/user/jobs-saved-jobs"}

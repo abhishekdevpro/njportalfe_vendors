@@ -18,7 +18,7 @@ function VerifyEmailemployee() {
         console.log(response)
         if (response.data) { 
           showToastSuccess("Email verified successfully");
-          navigate("/employee/login");
+          navigate("/employee");
         } else {
           showToastError("Email verification failed");
           navigate("/employee/login");

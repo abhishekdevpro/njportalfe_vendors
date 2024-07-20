@@ -57,7 +57,9 @@ const ProfilePage = () => {
     axios({
       method: "GET",
       url: "https://api.novajobs.us/api/employeer/job-seekers?page_size=10",
-      
+      headers: {
+        Authorization: token,
+      },
     })
       .then((res) => {
         console.log(res.data.data, "job seekers data");

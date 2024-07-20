@@ -23,7 +23,21 @@ const LandingPage = () => {
   //const handleShow = () => setShow(true);
   const navigate = useNavigate();
 
+  const handleShow1 = () => setShow(true);
+
   const handleShow = () => {
+    window.location.href = '/';
+  };
+  const handleShow2 = () => {
+    window.location.href = '/employee/login';
+  };
+  const handleShow3 = () => {
+    window.location.href = 'user/login';
+  };
+  const handleShow4 = () => {
+    window.location.href = '/aboutus';
+  };
+  const handleShow5 = () => {
     window.location.href = 'https://ultraaura.education/';
   };
 
@@ -152,7 +166,7 @@ const LandingPage = () => {
               <li>Assignment</li>
               <li>HR Solutions</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>Interested?</button>
+            <button className="site-button" onClick={handleShow2}>Interested?</button>
           </div>
         </div>
         <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
@@ -177,7 +191,7 @@ const LandingPage = () => {
               <li>Skill Badge Option</li>
 
             </ul>
-            <button className="site-button" onClick={handleShow}>Interested?</button>
+            <button className="site-button" onClick={handleShow3}>Interested?</button>
           </div>
         </div>
       <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
@@ -189,7 +203,7 @@ const LandingPage = () => {
               <li>Edtech Portal</li>
               <li>White Label services</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>Interested?</button>
+            <button className="site-button" onClick={handleShow4}>Interested?</button>
           </div>
         </div> 
         <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
@@ -201,7 +215,7 @@ const LandingPage = () => {
               <li>Skill Based Match</li>
               <li>Auto JD Writing ..</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>Interested?</button>
+            <button className="site-button" onClick={handleShow2}>Interested?</button>
           </div>
         </div>
         <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
@@ -225,7 +239,7 @@ const LandingPage = () => {
               <li>Bulk Opening upload</li>
               <li>Use Nova Services</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>Interested?</button>
+            <button className="site-button" onClick={handleShow1}>Interested?</button>
           </div>
         </div>
         <div className="col-12 col-md-4 mb-4 d-flex justify-content-center">
@@ -237,7 +251,7 @@ const LandingPage = () => {
               <li>Secure Chats</li>
               <li>Vendor Login</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>Interested?</button>
+            <button className="site-button" onClick={handleShow1}>Interested?</button>
           </div>
         </div>
         
@@ -250,7 +264,7 @@ const LandingPage = () => {
               <li>Online Sessions</li>
               <li>Certifications</li>
             </ul>
-            <button className="site-button" onClick={handleShow}>Interested?</button>
+            <button className="site-button" onClick={handleShow5}>Interested?</button>
           </div>
         </div>
       </div>
