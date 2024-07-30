@@ -104,11 +104,11 @@ function Jobsection() {
               <h2 className="m-b5">Recent Jobs</h2>
               <h6 className="fw4 m-b0">20+ Recently Added Jobs</h6>
             </div>
-            <div className="align-self-end mx-2">
+            {/*<div className="align-self-end mx-2">
               <Link to={"/user/jobthirdparty"} className="site-button button-sm">
                 Thirdparty
               </Link>
-            </div>
+            </div> */}
             <div className="align-self-end">
               <Link to={"/user/job"} className="site-button button-sm">
                 Browse All Jobs <i className="fa fa-long-arrow-right"></i>
