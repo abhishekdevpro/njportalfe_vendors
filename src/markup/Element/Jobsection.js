@@ -153,8 +153,10 @@ function Jobsection() {
                                 </li>
                               ) : null}
                               <li>
+                                {console.log("time",item.job_detail.updated_at)}
                                 <i className="fa fa-clock-o"></i>{" "}
-                                {moment(item.job_detail.updated_at).fromNow()}
+                                 30 July 2024
+                                {/* {moment(item.job_detail.updated_at).fromNow()} */}
                               </li>
                             </ul>
                             {item.job_detail.skills_arr ? (

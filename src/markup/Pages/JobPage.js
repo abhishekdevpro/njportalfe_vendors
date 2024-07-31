@@ -1014,7 +1014,9 @@ function JobPage() {
                                     {selectedJob.job_detail.job_title}
                                   </h3>
                                 </Link></div>
-                                <div>{localStorage.getItem("jobSeekerLoginToken") ? (
+                                <div
+                                  className="d-flex justify-content-center align-items-center mt-4"
+                                >{localStorage.getItem("jobSeekerLoginToken") ? (
                                   <>
                                     {selectedJob.job_detail.is_job_applied ? (
                                       <button
