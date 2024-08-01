@@ -268,7 +268,7 @@ function App() {
             </UserPrivateRoute>
           }
         />
-        <Route path="job" element={<JobPage />} />
+        <Route path="job/:id" element={<JobPage />} />
         <Route path="jobthirdparty" element={<JobPagethirdparty />} />
         <Route
           path="applicant-job"

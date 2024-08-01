@@ -366,7 +366,7 @@ function Footer() {
                       required
                     />
                     <div className="input-group-append">
-                      <button type="submit" className="custom-button btn-primary ">
+                      <button type="submit" className="btn btn-primary ">
                         Subscribe
                       </button>
                     </div>

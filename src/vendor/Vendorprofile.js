@@ -45,12 +45,13 @@ function VendorCompanyprofile() {
 
 
   const token = localStorage.getItem("vendorToken");
+  console.log(token)
 
   useEffect(() => {
     // Fetch industries from API
     axios({
       method: "GET",
-      url: "https://api.novajobs.us/api/employeer/company-industry",
+      url: "https://api.novajobs.us/api/admin/company-industry",
       headers: {
         Authorization: token, // Assuming you have token stored
       },
@@ -63,7 +64,8 @@ function VendorCompanyprofile() {
         showToastError(err?.response?.data?.message);
       });
   }, [token]); // Added token as dependency to ensure useEffect runs on token change
-
+ console.log("Industrycheck",industries)
+  
   // Function to update company data
   const updateCompanyData = async () => {
     // Ensure required fields are filled
@@ -73,8 +75,8 @@ function VendorCompanyprofile() {
     }
 
     axios({
-      method: "put",
-      url: `https://api.novajobs.us/api/employeer/company`,
+      method: "post",
+      url: `https://api.novajobs.us/api/admin/company`,
       headers: {
         Authorization: token,
       },
@@ -136,7 +138,7 @@ function VendorCompanyprofile() {
   const getCountry = async () => {
     axios({
       method: "get",
-      url: "https://api.novajobs.us/api/employeer/countries",
+      url: "https://api.novajobs.us/api/admin/countries",
       headers: {
         Authorization: token,
       },
@@ -152,7 +154,7 @@ function VendorCompanyprofile() {
   const getState = async () => {
     axios({
       method: "get",
-      url: `https://api.novajobs.us/api/employeer/stats/${selectedCountry}`,
+      url: `https://api.novajobs.us/api/admin/stats/${selectedCountry}`,
       headers: {
         Authorization: token,
       },
@@ -168,7 +170,7 @@ function VendorCompanyprofile() {
   const getCities = async () => {
     axios({
       method: "get",
-      url: `https://api.novajobs.us/api/employeer/cities/${selectedStates}`,
+      url: `https://api.novajobs.us/api/admin/cities/${selectedStates}`,
       headers: {
         Authorization: token,
       },
@@ -195,7 +197,6 @@ function VendorCompanyprofile() {
     console.log(selectedStates);
     getCities();
   }, [selectedStates]);
-
   const handleLogout = () => {
     // Clear authentication token or perform necessary logout actions
     localStorage.removeItem('vendorToken');
