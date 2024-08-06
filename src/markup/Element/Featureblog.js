@@ -78,71 +78,71 @@ function Featureblog() {
      return () => window.removeEventListener("resize", handleResize);
    }, []);
  
-  return (
-    <div className="section-full content-inner bg-gray">
-      <div className="container">
-        <div className="row">
-          <div className="align-self-end float-end">
-            <Link to={"/user/job"} className="site-button button-sm float-end">
-              Browse Jobs in other State <i className="fa fa-long-arrow-right"></i>
-            </Link>
-          </div>
-          <div className="col-lg-12 section-head text-center">
-            <h2 className="m-b5">Featured States</h2>
-            <h6 className="fw4 m-b0">Featured States </h6>
-          </div>
-        </div>
+  // return (
+  //   <div className="section-full content-inner bg-gray">
+  //     <div className="container">
+  //       <div className="row">
+  //         <div className="align-self-end float-end">
+  //           <Link to={"/user/job"} className="site-button button-sm float-end">
+  //             Browse Jobs in other State <i className="fa fa-long-arrow-right"></i>
+  //           </Link>
+  //         </div>
+  //         <div className="col-lg-12 section-head text-center">
+  //           <h2 className="m-b5">Featured States</h2>
+  //           <h6 className="fw4 m-b0">Featured States </h6>
+  //         </div>
+  //       </div>
 
-        <Carousel>
-          {isMobile
-            ? chunkedStates.flat().map((state, index) => (
-                <Carousel.Item key={index} className="p-3" style={{ backgroundColor: '#FFD5D5' }}>
-                  <div className="row justify-content-center">
-                    <div className="col-12 m-b30">
-                      <div onClick={() => handleLocationSelect(state.name.toLowerCase())}>
-                        <div
-                          className="city-bx align-items-end d-flex"
-                          style={{
-                            backgroundImage: `url(${state.image})`,
-                            cursor: "pointer",
-                          }}>
-                          <div className="city-info">
-                            <h5>{state.name}</h5>
-                           {/* <span>{state.jobs} Jobs</span> */}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Carousel.Item>
-              ))
-            : chunkedStates.map((slideStates, slideIndex) => (
-                <Carousel.Item key={slideIndex} className="p-3" style={{ backgroundColor: '#FFD5D5' }}>
-                  <div className="row">
-                    {slideStates.map((state, index) => (
-                      <div key={index} className="col-lg-3 col-sm-6 col-md-6 m-b30">
-                        <div onClick={() => handleLocationSelect(state.name.toLowerCase())}>
-                          <div
-                            className="city-bx align-items-end d-flex"
-                            style={{
-                              backgroundImage: `url(${state.image})`,
-                              cursor: "pointer",
-                            }}>
-                            <div className="city-info">
-                              <h5>{state.name}</h5>
-                                   {/* <span>{state.jobs} Jobs</span> */}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </Carousel.Item>
-              ))}
-        </Carousel>
-      </div>
-    </div>
-  );
+  //       <Carousel>
+  //         {isMobile
+  //           ? chunkedStates.flat().map((state, index) => (
+  //               <Carousel.Item key={index} className="p-3" style={{ backgroundColor: '#FFD5D5' }}>
+  //                 <div className="row justify-content-center">
+  //                   <div className="col-12 m-b30">
+  //                     <div onClick={() => handleLocationSelect(state.name.toLowerCase())}>
+  //                       <div
+  //                         className="city-bx align-items-end d-flex"
+  //                         style={{
+  //                           backgroundImage: `url(${state.image})`,
+  //                           cursor: "pointer",
+  //                         }}>
+  //                         <div className="city-info">
+  //                           <h5>{state.name}</h5>
+  //                          {/* <span>{state.jobs} Jobs</span> */}
+  //                         </div>
+  //                       </div>
+  //                     </div>
+  //                   </div>
+  //                 </div>
+  //               </Carousel.Item>
+  //             ))
+  //           : chunkedStates.map((slideStates, slideIndex) => (
+  //               <Carousel.Item key={slideIndex} className="p-3" style={{ backgroundColor: '#FFD5D5' }}>
+  //                 <div className="row">
+  //                   {slideStates.map((state, index) => (
+  //                     <div key={index} className="col-lg-3 col-sm-6 col-md-6 m-b30">
+  //                       <div onClick={() => handleLocationSelect(state.name.toLowerCase())}>
+  //                         <div
+  //                           className="city-bx align-items-end d-flex"
+  //                           style={{
+  //                             backgroundImage: `url(${state.image})`,
+  //                             cursor: "pointer",
+  //                           }}>
+  //                           <div className="city-info">
+  //                             <h5>{state.name}</h5>
+  //                                  {/* <span>{state.jobs} Jobs</span> */}
+  //                           </div>
+  //                         </div>
+  //                       </div>
+  //                     </div>
+  //                   ))}
+  //                 </div>
+  //               </Carousel.Item>
+  //             ))}
+  //       </Carousel>
+  //     </div>
+  //   </div>
+  // );
 };
 
 export default Featureblog;

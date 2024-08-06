@@ -223,37 +223,6 @@ function Homepage() {
             </div>
           </div>
         </div>
-        <div className="section-full job-categories content-inner-2 bg-white">
-          <div className="container">
-            <div className="section-head d-flex head-counter clearfix">
-              <div className="mr-auto text-break">
-                <h2 className="m-b5">Popular Categories</h2>
-                <h6 className="fw3">
-                  8+ Categories waiting for your application
-                </h6>
-              </div>
-             {/* <div className="head-counter-bx text-break">
-                <h2 className="m-b5 counter">
-                  <CountUp end={100} duration={5} />+
-                </h2>
-                <h6 className="fw3">Jobs Posted</h6>
-              </div>
-              <div className="head-counter-bx">
-                <h2 className="m-b5 counter">
-                  <CountUp end={100} duration={5} />+
-                </h2>
-                <h6 className="fw3">Employers Listed</h6>
-              </div>
-              <div className="head-counter-bx">
-                <h2 className="m-b5 counter">
-                  <CountUp end={100} duration={5} />%
-                </h2>
-                <h6 className="fw3 text-break">AI Verified Opportunities</h6>
-              </div> */}
-            </div>
-            <Jobcategories />
-          </div>
-        </div>
         <Featureblog />
         <Jobsection />
         <div
