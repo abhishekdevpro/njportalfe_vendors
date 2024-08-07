@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import Logout from "./Logout";
-import "../Layout/Headerjobseeker.css"
+import "../Layout/Headerjobseeker.css";
 
 import logo2 from "./../../images/logo.png";
 var bnr3 = require("./../../images/background/bg3.jpg");
@@ -95,7 +95,6 @@ class UserHeader extends Component {
                 </div>
                       )}
                     </div> */}
-               
 
                 <div
                   className="header-nav navbar-collapse collapse myNavbar justify-content-start"
@@ -103,11 +102,11 @@ class UserHeader extends Component {
                 >
                   <div className="logo-header mostion d-md-block d-lg-none">
                     <Link to={"/"} className="dez-page">
-                    <img
-                      src={require("./../../images/logo/NovaUS.png")}
-                      className="logo"
-                      alt="img"
-                    />
+                      <img
+                        src={require("./../../images/logo/NovaUS.png")}
+                        className="logo"
+                        alt="img"
+                      />
                     </Link>
                   </div>
                   <ul className="nav navbar-nav align-items-center ">
@@ -140,7 +139,7 @@ class UserHeader extends Component {
                       }}
                       className=""
                     >
-                      <Link to={"/user/job"}>Job Page</Link>
+                      <Link to={"/user"}>Job Page</Link>
                     </li>
                     {localStorage.getItem("jobSeekerLoginToken") ? (
                       <li>

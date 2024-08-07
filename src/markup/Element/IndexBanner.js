@@ -161,7 +161,7 @@ At Hyper V Solutions, our SBE certification underscores our commitment to suppor
                       type="submit"
                       onClick={(e) => {
                         e.preventDefault();
-                        window.location.href = "/user/job";
+                        window.location.href = "/user";
                       }}
                       className="site-button btn-block"
                     >

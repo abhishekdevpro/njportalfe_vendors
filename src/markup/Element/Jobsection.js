@@ -110,11 +110,11 @@ function Jobsection() {
                 Thirdparty
               </Link>
             </div> */}
-            <div className="align-self-end">
+            {/* <div className="align-self-end">
               <Link to={"/user/job"} className="site-button button-sm">
                 Browse All Jobs <i className="fa fa-long-arrow-right"></i>
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className="row">
             <div className="col-lg-9">
