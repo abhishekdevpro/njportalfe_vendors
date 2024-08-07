@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 import Homepage from "./markup/Pages/Homepage1";

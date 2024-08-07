@@ -1,4 +1,4 @@
-import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 //import * as serviceWorker from './serviceWorker';
@@ -8,7 +8,7 @@ import { store } from "./store/store";
 import reportWebVitals from "./reportWebVitals";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import 'bootstrap-icons/font/bootstrap-icons.css';
 // import SimpleReactLightbox from "simple-react-lightbox";
 
 //ReactDOM.render(<App />, document.getElementById('root'));

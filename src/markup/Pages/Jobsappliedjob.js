@@ -203,7 +203,7 @@ function Jobsappliedjob() {
                 <div className="col-xl-9 col-lg-8 m-b30 browse-job">
                   <div className="job-bx-title  clearfix">
                     <h5 className="font-weight-700 pull-left text-uppercase">
-                      2269 Jobs Found
+                      Applied Jobs 
                     </h5>
                     <div className="float-right">
                       <span className="select-title">Sort by freshness</span>
