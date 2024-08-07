@@ -100,7 +100,8 @@ At Hyper V Solutions, our SBE certification underscores our commitment to suppor
               <form className="dezPlaceAni">
                 <div className="row">
                   <div className="col-lg-10 col-12 ">
-                    <div className="form-group">
+                    <div className="form-group d-flex">
+
                       <label htmlFor="searchJob">
                         Job Title, Keywords, or Phrase
                       </label>
@@ -113,12 +114,50 @@ At Hyper V Solutions, our SBE certification underscores our commitment to suppor
                           onChange={this.handleChange}
                           value={this.state.searchJob}
                         />
+                       
+                      </div>
+                      
+                      
+                      
+                      <div className="col-lg-3 col-md-6">
+                    <div className="form-group">
+                      <Form.Control as="select" custom className="select-btn">
+                        <option>Select Sector</option>
+                        <option>Construction</option>
+                        <option>Corodinator</option>
+                        <option>Employer</option>
+                        <option>Financial Career</option>
+                        <option>Information Technology</option>
+                        <option>Marketing</option>
+                        <option>Quality check</option>
+                        <option>Real Estate</option>
+                        <option>Sales</option>
+                        <option>Supporting</option>
+                        <option>Teaching</option>
+                      </Form.Control>
+                    </div>
+                  </div>
+
+                      <div className="input-group">
+                        
+                      <label htmlFor="Location">
+                       Location
+                      </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="Location"
+                          id="Location"
+                          
+                        />
                         <div className="input-group-append">
                           <span className="input-group-text">
                             <i className="fa fa-search"></i>
                           </span>
                         </div>
                       </div>
+                      
+
                     </div>
                   </div>
                     {/* <div className="col-lg-3 col-md-6">
@@ -156,12 +195,12 @@ At Hyper V Solutions, our SBE certification underscores our commitment to suppor
                       </Form.Control>
                     </div>
                   </div> */}
-                  <div className="col-lg-2 col-md-6">
+                  <div className="col-lg-2 col-md-4">
                     <button
                       type="submit"
                       onClick={(e) => {
                         e.preventDefault();
-                        window.location.href = "/user";
+                        window.location.href = "/user/job/1";
                       }}
                       className="site-button btn-block"
                     >

@@ -57,18 +57,7 @@ function IndexBanner() {
         <div className="dez-bnr-inr-entry align-m">
           <div className="find-job-bx ">
             <div className="d-flex align-items-center " style={{ gap: "7px" }}>
-              {/* <Link to={"/#"} className="site-button button-sm">
-                  Find Jobs
-                </Link>
-                <Link to={"/#"} className="site-button button-sm">
-                  Resume AI Score
-                </Link>
-                <Link to={"/#"} className="site-button button-sm">
-                  SignUp Free
-                </Link>
-                <Link to={"/#"} className="site-button button-sm">
-                  My Dashboard
-                </Link> */}
+              
               <div className="hover-3d">
                 <h2> An AI-Enabled 360 Degree Job Portal</h2>
               </div>

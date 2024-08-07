@@ -7,8 +7,6 @@ import { ToastContainer, toast } from "react-toastify";
 import { setJobApplicationData } from "../../store/reducers/jobApplicationSlice";
 import TwoBoxWithLinesSkeleton from "../skeleton/twoBoxLines";
 
-// Add your other imports like ToastContainer and other components
-
 function Jobsection() {
   const dispatch = useDispatch();
   const token = localStorage.getItem("employeeLoginToken");
@@ -17,6 +15,8 @@ function Jobsection() {
   );
   const [skeleton, setSkeleton] = useState(true);
   const [logo, setLogo] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   const fetchJobApplicationData = async () => {
     try {
@@ -28,16 +28,10 @@ function Jobsection() {
           },
         }
       );
-      console.log(response, "resData");
-
-      // Sort the job application data by updated_at in descending order
-      console.log(response.data.data,"Check")
       const sortedData = response.data.data.sort(
         (a, b) =>
           new Date(b.job_detail.updated_at) - new Date(a.job_detail.updated_at)
       );
-      console.log("sorteddata",sortedData)
-
       dispatch(setJobApplicationData(sortedData));
       setSkeleton(false);
     } catch (error) {
@@ -62,11 +56,8 @@ function Jobsection() {
 
   useEffect(() => {
     getLogo(); // Fetch logo on component mount
+    fetchJobApplicationData(); // Fetch job application data on component mount
   }, []); // Empty dependency array ensures it runs only once
-
-  useEffect(() => {
-    fetchJobApplicationData();
-  }, []);
 
   const showToastMessage = () => {
     toast("Login To Continue");
@@ -81,16 +72,20 @@ function Jobsection() {
         data: {
           job_id: id,
         },
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      });
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // Pagination logic
+  const indexOfLastJob = currentPage * itemsPerPage;
+  const indexOfFirstJob = indexOfLastJob - itemsPerPage;
+  const currentJobs = jobApplicationData.slice(indexOfFirstJob, indexOfLastJob);
+  const totalPages = Math.ceil(jobApplicationData.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -105,22 +100,12 @@ function Jobsection() {
               <h2 className="m-b5">Recent Jobs</h2>
               <h6 className="fw4 m-b0">20+ Recently Added Jobs</h6>
             </div>
-            {/*<div className="align-self-end mx-2">
-              <Link to={"/user/jobthirdparty"} className="site-button button-sm">
-                Thirdparty
-              </Link>
-            </div> */}
-            {/* <div className="align-self-end">
-              <Link to={"/user/job"} className="site-button button-sm">
-                Browse All Jobs <i className="fa fa-long-arrow-right"></i>
-              </Link>
-            </div> */}
           </div>
           <div className="row">
             <div className="col-lg-9">
               {jobApplicationData ? (
                 <ul className="post-job-bx browse-job">
-                  {jobApplicationData.map((item, index) => (
+                  {currentJobs.map((item, index) => (
                     <li key={index}>
                       <div className="post-bx">
                         <div className="d-flex m-b30">
@@ -132,7 +117,6 @@ function Jobsection() {
                               />
                             </span>
                           </div>
-                          {console.log(logo, "logo this is logo")}
                           <div className="job-post-info">
                             <h4>
                               <Link
@@ -141,13 +125,11 @@ function Jobsection() {
                                   state: { job: jobApplicationData },
                                 }}
                               >
-                                {" "}
-                                {item.job_detail.job_title}{" "}
+                                {item.job_detail.job_title}
                               </Link>
                             </h4>
                             <h6>{item.companies.company_name}</h6>
                             <ul>
-                          
                               <li>
                                 <i className="fa fa-map-marker"></i>{" "}
                                 {item.cities.name}, {item.states.name},{" "}
@@ -160,26 +142,20 @@ function Jobsection() {
                                 </li>
                               ) : null}
                               <li>
-                                {console.log(
-                                  "time",
-                                  item.job_detail.updated_at
-                                )}
                                 <i className="fa fa-clock-o"></i> 
                                 {moment(item.job_detail.created_at).fromNow()}
                               </li>
                             </ul>
                             {item.job_detail.skills_arr ? (
                               <div className="mx-1">
-                                {item.job_detail.skills_arr.map(
-                                  (skill, index) => (
-                                    <span
-                                      key={index}
-                                      className="badge badge-primary m-2"
-                                    >
-                                      {skill}
-                                    </span>
-                                  )
-                                )}
+                                {item.job_detail.skills_arr.map((skill, index) => (
+                                  <span
+                                    key={index}
+                                    className="badge badge-primary m-2"
+                                  >
+                                    {skill}
+                                  </span>
+                                ))}
                               </div>
                             ) : null}
                           </div>
@@ -226,6 +202,32 @@ function Jobsection() {
                   ))}
                 </ul>
               ) : null}
+              {/* Pagination Controls */}
+              <div className="pagination">
+                <button
+                className="btn border"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handlePageChange(index + 1)}
+                    className={currentPage === index + 1 ? "active btn mx-1" : "btn border mx-1"}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="btn border "
+                >
+                  Next
+                </button>
+              </div>
             </div>
             <div className="col-lg-3">
               <div className="sticky-top">
@@ -246,7 +248,6 @@ function Jobsection() {
                       </p>
                     </div>
                     <div className="testimonial-detail">
-                      {" "}
                       <strong className="testimonial-name">
                         Amanda V.
                       </strong>{" "}
@@ -274,4 +275,5 @@ function Jobsection() {
     </div>
   );
 }
+
 export default Jobsection;

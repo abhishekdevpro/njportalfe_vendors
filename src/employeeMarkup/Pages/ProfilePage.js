@@ -1,305 +1,358 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Footer from '../Layout/Footer';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../css/Profile.css";
 import Header2 from "../Layout/Header2";
-import logo from "../../assests/logocompanyprofile.jpg"
+import Footer from "../Layout/Footer";
+import axios from "axios";
+import { showToastError } from "../../utils/toastify";
+import { useEffect } from "react";
+import coverImg from "../../images/blue.jpg";
+import moment from "moment";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import photo1 from "../../assests/photo1.jpg"
-import photo2 from "../../assests/photo2.jpg"
-import photo3 from "../../assests/photo3.jpg"
-
-const employersInfo = [
-  {
-    id: '1',
-    img: 'https://via.placeholder.com/150',
-    name: 'Nova Home Care - Leading home care services of USA',
-    location: 'SC, USA',
-    jobType: 'HomeCare',
-    phone: '123 456 7890',
-    email: 'info@novahome.care',
-    jobNumber: 10,
-  },
-  // Add more employers if needed
-];
-
-const MetaComponent = ({ meta }) => (
-  <head>
-    <title>{meta.title}</title>
-    <meta name="description" content={meta.description} />
-  </head>
-);
-
-const LoginPopup = () => (
-  <div className="modal fade" id="loginPopup" tabIndex="-1" aria-hidden="true">
-    <div className="modal-dialog">
-      <div className="modal-content">
-        {/* Login popup content */}
-      </div>
-    </div>
-  </div>
-);
-
-const DefaulHeader = () => (
-  <header className="bg-primary text-white p-3">
-    <div className="container">
-      <h1>Default Header</h1>
-    </div>
-  </header>
-);
-
-const MobileMenu = () => (
-  <div className="d-lg-none bg-secondary text-white p-3">
-    <div className="container">
-      <h2>Mobile Menu</h2>
-    </div>
-  </div>
-);
-
-const JobDetailsDescriptions = () => (
-  <div className='text-start px-5'>
-      <h4 className='text-start px-5'>About Company</h4>
-      <p className='text-start px-5'>
-      <strong>Skilled Elderly Management </strong>
-We provide exceptional, personalized care for the elderly. Our professional team ensures comfort and well-being, focusing on dignity and respect to enhance their quality of life.
-Security & Safety
-24X7 Medical Support
-Best Care Takers
-Relaxing Environment
-Know More
-      </p>
-      <h5><strong className='text-start px-5 mt-3'>
-       Our Services
-      </strong></h5>
-      <div className="row images-outer px-5 d-flex justify-content-center  gap-4 my-4">
-       <img src={photo1} style={{width:"240px"}} alt="" />
-       <img src={photo2} style={{width:"240px"}} alt="" />
-       <img src={photo3} style={{width:"240px"}} alt="" />
-      </div>
-
-      <ul  className='px-5 mx-5 my-3'>
-        <li>Security and Safety</li>
-        <li>Care Taking</li>
-        <li >House Keeping</li>
-      </ul>
-     
-  </div>
-);
-
-const RelatedJobs = () => (
-  <div className=" mb-4 border-0 col-lg-12 ms-5">
-    <div className="card-body border rounded-4 d-flex">
-   
-        
-        <div className=" me-3  col-lg-2">
-          <img 
-            src="https://superio-appdir.vercel.app/_next/image?url=%2Fimages%2Fresource%2Femployers-single-4.png&w=256&q=75" 
-            alt="resource" 
-            className="img-fluid" 
-            style={{ width: '100px', height: '100px' }}
-          />
-        </div>
-
-        <div className="col-lg-9">
-
-        <div className="d-flex justify-content-between">
-      <h4 className="mb-2 ">ios developer</h4> 
-        <button className="btn btn-outline-secondary">
-          <i className="bi bi-bookmark"></i>
-        </button>
-      </div>
-
-          <ul className="list-unstyled mb-2 d-flex gap-3">
-            <li className="mb-1">
-              <i className="bi bi-briefcase me-2"></i>
-              segment
-            </li>
-            <li className="mb-1">
-              <i className="bi bi-geo-alt me-2"></i>
-              london
-            </li>
-            <li className="mb-1">
-              <i className="bi bi-clock me-2"></i>
-              11 hours
-            </li>
-            <li className="mb-1">
-              <i className="bi bi-currency-dollar me-2"></i>
-              35$ - 45$
-            </li>
-          </ul>
-        </div>
-
-   
-     
-    </div>
-  </div>
-);
-
-const randomLatitude = -15.812898768599155;
-const randomLongitude = 104.14392380381247;
-
-
-const MapJobFinder = () => (
-  <div style={{ height: "300px", background: "#e9ecef" }}>
-    <iframe
-      width="100%"
-      height="300"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31571676.56496063!2d-124.84897487781247!3d37.275120302365075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c05555555555%3A0x4b1c9b0aaf10b10!2sUnited%20States!5e0!3m2!1sen!2sus!4v1613954061167!5m2!1sen!2sus"
-      style={{ border: 0 }}
-      allowFullScreen=""
-      loading="lazy"
-    ></iframe>
-  </div>
-);
-
-const Social = () => (
-  <div>
-    <a href="#">Facebook</a> | <a href="#">Twitter</a>
-  </div>
-);
-
-const PrivateMessageBox = () => (
-  <div>
-    <textarea className="form-control" placeholder="Write a message"></textarea>
-  </div>
-);
-
-const FooterDefault = () => (
-  <footer className="bg-dark text-white p-3 mt-5">
-    <div className="container">
-      <p>Footer content</p>
-    </div>
-  </footer>
-);
-
-const metadata = {
-  title: "Employers Single Dynamic V1 || Superio - Job Board ReactJs Template",
-  description: "Superio - Job Board ReactJs Template",
-};
 
 const ProfilePage = () => {
- 
-  const { id } = useParams();
-  const employer = employersInfo.find((item) => item.id === id) || employersInfo[0];
 
+  const token = localStorage.getItem("employeeLoginToken");
+  const [userData, setUserData] = useState(null);
+  const { id } = useParams();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleLinkClick = (e) => {
+    e.preventDefault();
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+
+  const getUser = async () => {
+    try {
+      await axios({
+        url: `https://api.novajobs.us/api/employeer/job-seekers/${id}`,
+        method: "GET",
+      })
+        .then((res) => {
+          console.log(res);
+          setUserData(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, [id]);
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "https://api.novajobs.us/api/employeer/job-seekers?page_size=10",
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((res) => {
+        console.log(res.data.data, "job seekers data");
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response.data.message);
+        showToastError(err?.response?.data?.message);
+      });
+  }, []);
+  const navigate = useNavigate();
   return (
     <>
-     <Header2/>
-      <section className=" border my-">
-      <div className="  border-0  py-4  py-5" style={{backgroundColor:"#F6F9FD"}}>
-  <div className="c d-flex justify-content-between px-5">
-    <div className="d-flex align-items-center">
-      <img src={logo} alt="logo" className="mr-3" style={{ width: '200px', height: '100px' }} />
-      <div className="ms-3">
-        <h4 className="d-flex float-left ">{employer?.name}</h4><br/><br/>
-        <ul className="list-inline font-fs font-bold" style={{fontWeight:"600"}}>
-          <li className="list-inline-item"><i className="bi bi-geo-alt"></i> {employer?.location} |</li>
-          <li className="list-inline-item"><i className="bi bi-briefcase"></i> {employer?.jobType} |</li>
-          <li className="list-inline-item"><i className="bi bi-telephone"></i> {employer?.phone} |</li>
-          <li className="list-inline-item"><i className="bi bi-envelope"></i> {employer?.email}</li>
-        </ul>
-        <ul className="list-inline d-flex float-left">
-          <li className="list-inline-item badge rounded-pill text-bg-info text-white p-2 px-4">Open Jobs – {employer.jobNumber}</li>
-        </ul>
-      </div>
-    </div>
-    <div className="m-5 "><a href="mailto:info@hypervsolutions.net">
-      <button className="btn btn-primary p-3 px-5 rounded-3 mx-2" data-bs-toggle="modal" data-bs-target="#privateMessage">
-      
-        Private Message
-      </button></a>
-      <button className="btn btn-outline-primary ml-2 p-3 t" >
-        <i className="bi bi-bookmark " ></i>
-      </button>
-    </div>
-  </div>
-</div>
+      {userData ? (
+        <div>
+          <Header2 />
+          <div className="page-content bg-white break-all">
+            <div className="content-block">
+              <div className="section-full bg-white p-t50 p-b20">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-xl-9 col-lg-8 col-md-8 col-sm-12 col-12">
+                      <div className="profile-summary">
+                        <div className="p-content">
+                          <div className="profile-card">
+                            <img
+                              src={coverImg}
+                              alt="Profile"
+                              className="cover-picture"
+                            />
+                            <img
+                              src={userData?.jobskkers_detail?.photo}
+                              alt="Profile"
+                              roundedCircle
+                              className="profile-picture"
+                            />
+                          </div>
+                          <div style={{ padding: "10px 30px" }}>
+                            {userData.jobskkers_detail.first_name   ||
+                             userData.jobskkers_detail.proffesional_title ? (
+                              <h2 className="mb-0">
+                                {userData.jobskkers_detail.proffesional_title}{" "}
+                                
+                              </h2>
+                            ) : null}
+                           
+                          
 
-<div className='d-flex justify-content-center bg-secondary-subtle text-secondary-emphasis mb-5'>
-<ul className="list-inline font-fs font-bold d-flex justify-content-center gap-5 pt-4" style={{fontWeight:"600"}}>
-          <li className="list-inline-item border-top-0 border-end-0 border-start-0 border-5 "> <h5>About</h5></li>
-          <li className="list-inline-item"><h5> Jobs</h5> </li>
-          <li className="list-inline-item"><h5> Employees</h5> </li>
-          <li className="list-inline-item"><h5> Offices</h5></li>
-        </ul>
-
-</div>
-        <div className="row ">
-          <div className="col-lg-8 float-start">
-            <JobDetailsDescriptions />
-          <div className='m-5 '></div>
-           <h3 className='ms-5 ps-5 mt-5'>Jobs Available</h3>
-          
-          
-
-           
-            <div className="mt-5 col-lg-11 mx-5 mb-5">
-             
-              <RelatedJobs />
-              <RelatedJobs />
-              <RelatedJobs />
-            </div>
-          </div>
-           <div className="col-lg-3">
-    <div className=" mb-4 p-2 border-0" style={{ backgroundColor: "#F5F7FC",fontSize:"14px" }}>
-      <div className="card-body">
-        
-        <ul className="list-unstyled mb-4 ">
-          <li className="d-flex justify-content-between mb-3 ">
-            <strong >Primary industry:</strong>
-            <span><i className="bi bi-briefcase me-2"></i> Software</span>
-          </li>
-          <li className="d-flex justify-content-between mb-3">
-            <strong>Company size:</strong>
-            <span><i className="bi bi-people-fill me-2"></i> 50-100</span>
-          </li>
-          <li className="d-flex justify-content-between mb-3">
-            <strong>Founded in:</strong>
-            <span><i className="bi bi-calendar mb-3"></i> 2023</span>
-          </li>
-          <li className="d-flex justify-content-between mb-3">
-            <strong>Phone:</strong>
-            <span><i className="bi bi-telephone me-2"></i> {employer?.phone}</span>
-          </li>
-          <li className="d-flex justify-content-between mb-3">
-            <strong>Email:</strong>
-            <span><i className="bi bi-envelope me-3"></i>info@novahome.care</span>
-          </li>
-          <li className="d-flex justify-content-between mb-3">
-            <strong>Location:</strong>
-            <span><i className="bi bi-geo-alt me-3"></i> {employer?.location}</span>
-          </li>
-          <li className="d-flex justify-content-between mb-3">
-            <strong>Social media:</strong>
-            <span><i className="bi bi-facebook me-2"></i>
-             <i className="bi bi-twitter me-2"></i>
-             <i className="bi bi-instagram me-2"></i>
-             <i className="bi bi-linkdin me-2"></i>
-             </span>
-            
-          </li>
-        </ul>
-        <a
-          href={`http://www.${employer?.name}.com`}
-          className="btn btn-primary p-2 px-5 rounded-3 border-0 mx-2 text-primary text-center"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ backgroundColor: "#A9C5ED" }}
-        >
-          www.novahome.care
+                            
+                           <div className="relative">
+      <div className="job-time m-t15 m-b10">
+        <a className="mr-1" href="#" onClick={handleLinkClick}>
+          <span style={{ padding: "5px 15px", borderRadius: "100px" }}>Message</span>
+        </a>
+        <a className="mr-1" href="#" onClick={handleLinkClick}>
+          <span style={{ padding: "5px 15px", borderRadius: "100px" }}>View Contact</span>
+        </a>
+        <a className="mr-1" href="#" onClick={handleLinkClick}>
+          <span style={{ padding: "5px 15px", borderRadius: "100px" }}>View Email ID</span>
         </a>
       </div>
-    </div>
-    <div className=" border-0 " style={{ backgroundColor: "#F5F7FC" }}>
-      <div className="card-body">
-        <h4 className="card-title flaot-start">Job Location</h4>
-        <MapJobFinder latitude={randomLatitude} longitude={randomLongitude} />
-      </div>
-    </div>
-  </div>
+
+      {isModalOpen && (
+        <div className="modal show d-block " style={{ backdropFilter: 'blur(2px)' }}>
+          <div className="modal-dialog ">
+            <div className="modal-content rounded-3 mt-5 ">
+              <div className="modal-header rounded-3">
+                <h5 className="modal-title ">Please Subscribe</h5>
+                <button type="button" className="close" onClick={handleCloseModal}>
+                  <span>&times;</span>
+                </button>
+              </div>
+              <div className="modal-body text-center">
+                <h5>Hire Fast, Activate Premium Now</h5>
+                <p>To access this feature, please subscribe to our service.</p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleCloseModal}>
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
-      <Footer />
+      )}
+    </div>
+
+    {userData.jobskkers_detail.countries.name ||
+                            userData.jobskkers_detail.states.name ||
+                            userData.jobskkers_detail.cities.name ? (
+                              <h6 className="mb-0">
+                               🏠︎   {userData.jobskkers_detail.cities.name},  {" "}
+                                {userData.jobskkers_detail.states.name}, {" "}
+                               {userData.jobskkers_detail.countries.name}
+                               
+                              
+                              </h6>
+                            ) : null}
+                            <div className="post-bx mt-3">
+                              <div className="job-post-info m-a0">
+                                {userData.jobskkers_detail.ai_resume_parse_data
+                                  .jobsMyResumeData.resumeHeadline ? (
+                                  <div className="posted-info clearfix">
+                                    <p className="m-tb0 text-primary ">
+                                      {
+                                        userData.jobskkers_detail
+                                          .ai_resume_parse_data.jobsMyResumeData
+                                          .resumeHeadline
+                                      }
+                                    </p>
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="mt-4 profile-summary"
+                        style={{ padding: "10px 30px" }}>
+                        <div className="candidate-info company-info">
+                          {userData.jobskkers_detail.ai_resume_parse_data
+                            .jobsMyResumeData.employmentData ? (
+                            <div className="job-list-container">
+                              <h4 className="mb-2 mt-4">Education</h4>
+                              {userData.jobskkers_detail.ai_resume_parse_data.jobsMyResumeData.employmentData.map(
+                                (item) => (
+                                  <div className="d-flex justify-content-start aligns-item-center ">
+                                    <div>
+                                      <i
+                                        className="fa fa-user-o"
+                                        aria-hidden="true"></i>
+                                    </div>
+                                    <div className="ml-2">
+                                      <h6 className="mb-0 d-flex justify-content-between align-items-center">
+                                        {item.jobTitle}
+                                      </h6>
+                                      <h6 className="mb-0 d-flex justify-content-between align-items-center">
+                                        {item.company}
+                                      </h6>
+                                      <p
+                                        className="mb-0"
+                                        style={{ color: "#1c2957" }}>
+                                        {item.jobDescription}
+                                      </p>
+                                      <div className="job-time m-t15 m-b10"></div>
+                                    </div>
+                                  </div>
+                                )
+                              )}
+                            </div>
+                          ) : null}
+                        </div>
+                        <div className="candidate-info company-info">
+                          {userData.jobskkers_detail.ai_resume_parse_data
+                            .jobsMyResumeData.skillsData ? (
+                            <div className="job-list-container">
+                              <h4 className="mb-2 mt-4">Skills</h4>
+                              <div className="job-time m-t15 m-b10">
+                                {userData.jobskkers_detail.ai_resume_parse_data.jobsMyResumeData.skillsData.map(
+                                  (item) => (
+                                    <a className="mr-1" href="#">
+                                      <span
+                                        style={{
+                                          padding: "5px 15px",
+                                          borderRadius: "100px",
+                                        }}>
+                                        {item}
+                                      </span>
+                                    </a>
+                                  )
+                                )}
+                              </div>
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12 ">
+                      <div
+                        className=" profile-summary"
+                        style={{ padding: "10px 30px" }}>
+                        <div className="candidate-info company-info">
+                          <div className="job-list-container text-center">
+                            <p
+                              className=""
+                              style={{
+                                color: "#1c2957",
+                                fontSize: "13px",
+                                lineHeight: "20px",
+                              }}>
+                             
+                            </p>
+                            <div className="d-flex justify-content-around aligns-item-center ">
+                              
+                              <div>
+                                <i
+                                  className="fa fa-user-o"
+                                  aria-hidden="true"></i>
+                              </div>
+                            </div>
+
+                            <p
+                              className="mb-2 mt-2"
+                              style={{
+                                color: "#1c2957",
+                                fontSize: "15px",
+                                lineHeight: "20px",
+                              }}>
+                              Hire Fast, Activate Premium Now
+                            </p>
+                            <div className="job-time m-t15 m-b10">
+                              <a className="mr-1" href="#" onClick={handleLinkClick}>
+                                <span
+                                  style={{
+                                    padding: "5px 15px",
+                                    borderRadius: "100px",
+                                    
+                                  }}>
+                                  Try for free
+                                </span>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="mt-4 profile-summary"
+                        style={{ padding: "10px 30px" }}>
+                        <div className="candidate-info company-info">
+                          <h6 className="mb-4 mt-2">Other similar profiles</h6>
+                          {data.map((item, index) => (
+               <ul
+               key={index}
+               onClick={() => navigate(`/employee/profilepage/${item?.jobskkers_detail?.id}`)}
+               style={{ cursor: "pointer" }}
+             >
+                  <div className="post-bx" style={{fontSize:"10px"}}>
+                    <div className="d-flex m-b30">
+                      <div className="job-post-company" style={{width:'50px'}}>
+                        <span>
+                        <img
+                            alt="profile"
+                            src={item?.jobskkers_detail?.photo || 'path-to-default-image.jpg'}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                            
+                            }}
+                          />
+                        </span>{console.log(item?.jobskkers_detail?.photo,'data is comming')}
+                      </div>
+                      <div className="job-post-info" >
+                        <h4 style={{fontSize:"20px"}}>
+                           {item?.jobskkers_detail?.proffesional_title}
+                        </h4>
+                        
+                        <ul>
+                          <li>
+                            <i className="fa fa-map-marker"></i>{" "}
+                            {item?.jobskkers_detail?.cities?.name}{", "}
+                            {item?.jobskkers_detail?.states?.name}{", "}
+                            {item?.jobskkers_detail?.countries?.name}
+                          </li>
+
+                         
+                        </ul>
+                        
+                        
+                      </div>
+                    </div>
+                   
+                    
+                  </div>
+                </ul>
+              ))}
+
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Footer />
+        </div>
+      ) : null}
     </>
   );
 };

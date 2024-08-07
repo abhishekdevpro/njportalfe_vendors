@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Profilepagehome from "./markup/Layout/Profilepagehome";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect } from "react";
@@ -191,6 +191,7 @@ function App() {
       <Route path="/" element={<Homepage />} />
       <Route path="services" element={<LandingPage />} />
       <Route path="aboutus" element={<Aboutus1 />} />
+      <Route path="Profilepagehome" element={<Profilepagehome />} />
       <Route path="/*" element={<Error404 />} />
      
       

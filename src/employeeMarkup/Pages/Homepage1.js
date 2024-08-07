@@ -27,35 +27,7 @@ function EmployeeHomepage() {
       <Header />
       <div className="page-content">
         <IndexBanner />
-        {/* <div className="section-full job-categories content-inner-2 bg-white">
-          <div className="container">
-            <div className="section-head d-flex head-counter clearfix">
-              <div className="mr-auto">
-                <h2 className="m-b5">Popular Categories</h2>
-                <h6 className="fw3">20+ Categories work wating for you</h6>
-              </div>
-              <div className="head-counter-bx">
-                <h2 className="m-b5 counter">
-                  <CountUp end={1800} duration={5} />
-                </h2>
-                <h6 className="fw3">Jobs Posted</h6>
-              </div>
-              <div className="head-counter-bx">
-                <h2 className="m-b5 counter">
-                  <CountUp end={4500} duration={5} />
-                </h2>
-                <h6 className="fw3">Tasks Posted</h6>
-              </div>
-              <div className="head-counter-bx">
-                <h2 className="m-b5 counter">
-                  <CountUp end={1500} duration={5} />
-                </h2>
-                <h6 className="fw3">Freelancers</h6>
-              </div>
-            </div>
-            <Jobcategories />
-          </div>
-        </div> */}
+       
         <div
           className="section-full p-tb70 overlay-black-dark text-white text-center bg-img-fix"
           style={{ backgroundImage: "url(" + bnr2 + ")" }}
@@ -183,18 +155,12 @@ function EmployeeHomepage() {
             <br />
             other Job Sites.
           </h2>
-          {/* <p
-            style={{ textAlign: "center", lineHeight: "1.4em", margin: "0px" }}
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque unde
-            fugiat aspernatur officia?
-            <br /> Eveniet cumque saepe, praesentium consectetur recusandae
-            dignissimos et quia molestiae.
-          </p> */}
+        
 
           <div className="two-box-container">
+            
             <div className="card">
-              <div className="card-icon">
+              <div className="card-icon ">
                 <FaRegFileAlt />
               </div>
               <h3>Check Resume Score</h3>
@@ -230,112 +196,7 @@ function EmployeeHomepage() {
             <Owltestimonial />
           </div>
         </div>
-        {/*<div
-          className="section-full content-inner-2 overlay-white-middle"
-          style={{
-            backgroundImage: "url( " + bnr3 + ")",
-            backgroundPosition: "bottom",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "100%",
-          }}
-        >
-          <div className="container">
-            <div className="section-head text-black text-center">
-              <h2 className="m-b0">Membership Plans</h2>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy.
-              </p>
-            </div>
-            <div className="section-content box-sort-in button-example m-t80">
-              <div className="pricingtable-row">
-                <div className="row max-w1000 m-auto">
-                <div className="col-12 col-md-4">
-                    <div className="pricingtable-wrapper style2 bg-white">
-                      <div className="pricingtable-inner">
-                        <div className="pricingtable-price">
-                          <h4 className="font-weight-300 m-t10 m-b0">Basic</h4>
-                          <div className="pricingtable-bx">
-                            <span>Free</span>
-                          </div>
-                        </div>
-                        <p>
-                          Lorem ipsum dolor sit amet adipiscing elit sed do
-                          eiusmod tempors labore et dolore magna siad enim
-                          aliqua
-                        </p>
-                        <div className="m-t20">
-                          <Link
-                            to={"/employee/register"}
-                            className="site-button radius-xl"
-                          >
-                            <span className="p-lr30">Sign Up</span>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12 col-md-4">
-                    <div className="pricingtable-wrapper style2 bg-primary text-white active">
-                      <div className="pricingtable-inner">
-                        <div className="pricingtable-price">
-                          <h4 className="font-weight-300 m-t10 m-b0">
-                            Professional
-                          </h4>
-                          <div className="pricingtable-bx">
-                            {" "}
-                            $ <span>29</span> / Per Installation{" "}
-                          </div>
-                        </div>
-                        <p>
-                          Lorem ipsum dolor sit amet adipiscing elit sed do
-                          eiusmod tempors labore et dolore magna siad enim
-                          aliqua
-                        </p>
-                        <div className="m-t20">
-                          <Link
-                            to={"/employee/register"}
-                            className="site-button white radius-xl"
-                          >
-                            <span className="text-primary p-lr30">Sign Up</span>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12 col-md-4">
-                    <div className="pricingtable-wrapper style2 bg-white">
-                      <div className="pricingtable-inner">
-                        <div className="pricingtable-price">
-                          <h4 className="font-weight-300 m-t10 m-b0">
-                            Extended
-                          </h4>
-                          <div className="pricingtable-bx">
-                            {" "}
-                            $ <span>29</span> / Per Installation{" "}
-                          </div>
-                        </div>
-                        <p>
-                          Lorem ipsum dolor sit amet adipiscing elit sed do
-                          eiusmod tempors labore et dolore magna siad enim
-                          aliqua
-                        </p>
-                        <div className="m-t20">
-                          <Link
-                            to={"/employee/register"}
-                            className="site-button radius-xl"
-                          >
-                            <span className="p-lr30">Sign Up</span>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
+        
       </div>
       <Footer />
     </div>
