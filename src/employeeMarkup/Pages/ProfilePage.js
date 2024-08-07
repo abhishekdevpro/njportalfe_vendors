@@ -4,15 +4,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from '../Layout/Footer';
 import Header2 from "../Layout/Header2";
 import logo from "../../assests/logocompanyprofile.jpg"
+
+import photo1 from "../../assests/photo1.jpg"
+import photo2 from "../../assests/photo2.jpg"
+import photo3 from "../../assests/photo3.jpg"
+
 const employersInfo = [
   {
     id: '1',
     img: 'https://via.placeholder.com/150',
-    name: 'Nova Home Care',
-    location: 'London, UK',
-    jobType: 'Accounting / Finance',
+    name: 'Nova Home Care - Leading home care services of USA',
+    location: 'SC, USA',
+    jobType: 'HomeCare',
     phone: '123 456 7890',
-    email: 'info@company.com',
+    email: 'info@novahome.care',
     jobNumber: 10,
   },
   // Add more employers if needed
@@ -55,43 +60,29 @@ const JobDetailsDescriptions = () => (
   <div className='text-start px-5'>
       <h4 className='text-start px-5'>About Company</h4>
       <p className='text-start px-5'>
-        Moody’s Corporation, often referred to as Moody’s, is an American
-        business and financial services company. It is the holding company for
-        Moody’s Investors Service (MIS), an American credit rating agency, and
-        Moody’s Analytics (MA), an American provider of financial analysis
-        software and services.
+      <strong>Skilled Elderly Management </strong>
+We provide exceptional, personalized care for the elderly. Our professional team ensures comfort and well-being, focusing on dignity and respect to enhance their quality of life.
+Security & Safety
+24X7 Medical Support
+Best Care Takers
+Relaxing Environment
+Know More
       </p>
-      <p className='text-start px-5'>
-        Moody’s was founded by John Moody in 1909 to produce manuals of
-        statistics related to stocks and bonds and bond ratings. Moody’s was
-        acquired by Dun & Bradstreet in 1962. In 2000, Dun & Bradstreet spun off
-        Moody’s Corporation as a separate company that was listed on the NYSE
-        under MCO. In 2007, Moody’s Corporation was split into two operating
-        divisions, Moody’s Investors Service, the rating agency, and Moody’s
-        Analytics, with all of its other products.
-      </p>
-      <div className="row images-outer px-5 d-flex gap-2 my-4">
-       <img src="https://superio-appdir.vercel.app/images/resource/employers-single-1.png" style={{width:"200px"}} alt="" />
-       <img src="https://superio-appdir.vercel.app/_next/image?url=%2Fimages%2Fresource%2Femployers-single-2.png&w=256&q=75" style={{width:"200px"}} alt="" />
-       <img src="https://superio-appdir.vercel.app/_next/image?url=%2Fimages%2Fresource%2Femployers-single-3.png&w=256&q=75" style={{width:"200px"}} alt="" />
-       <img src="https://superio-appdir.vercel.app/_next/image?url=%2Fimages%2Fresource%2Femployers-single-4.png&w=256&q=75" style={{width:"200px"}} alt="" />
+      <h5><strong className='text-start px-5 mt-3'>
+       Our Services
+      </strong></h5>
+      <div className="row images-outer px-5 d-flex justify-content-center  gap-4 my-4">
+       <img src={photo1} style={{width:"240px"}} alt="" />
+       <img src={photo2} style={{width:"240px"}} alt="" />
+       <img src={photo3} style={{width:"240px"}} alt="" />
       </div>
-      <p className='text-start px-5'>
-        Moody’s Corporation, often referred to as Moody’s, is an American
-        business and financial services company. It is the holding company for
-        Moody’s Investors Service (MIS), an American credit rating agency, and
-        Moody’s Analytics (MA), an American provider of financial analysis
-        software and services.
-      </p>
-      <p className='text-start px-5'>
-        Moody’s was founded by John Moody in 1909 to produce manuals of
-        statistics related to stocks and bonds and bond ratings. Moody’s was
-        acquired by Dun & Bradstreet in 1962. In 2000, Dun & Bradstreet spun off
-        Moody’s Corporation as a separate company that was listed on the NYSE
-        under MCO. In 2007, Moody’s Corporation was split into two operating
-        divisions, Moody’s Investors Service, the rating agency, and Moody’s
-        Analytics, with all of its other products.
-      </p>
+
+      <ul  className='px-5 mx-5 my-3'>
+        <li>Security and Safety</li>
+        <li>Care Taking</li>
+        <li >House Keeping</li>
+      </ul>
+     
   </div>
 );
 
@@ -147,9 +138,17 @@ const RelatedJobs = () => (
 const randomLatitude = -15.812898768599155;
 const randomLongitude = 104.14392380381247;
 
+
 const MapJobFinder = () => (
   <div style={{ height: "300px", background: "#e9ecef" }}>
-    Map content...
+    <iframe
+      width="100%"
+      height="300"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31571676.56496063!2d-124.84897487781247!3d37.275120302365075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c05555555555%3A0x4b1c9b0aaf10b10!2sUnited%20States!5e0!3m2!1sen!2sus!4v1613954061167!5m2!1sen!2sus"
+      style={{ border: 0 }}
+      allowFullScreen=""
+      loading="lazy"
+    ></iframe>
   </div>
 );
 
@@ -187,7 +186,7 @@ const ProfilePage = () => {
     <>
      <Header2/>
       <section className=" border my-">
-      <div className=" mb-4 border-0  p-4 " style={{backgroundColor:"#F6F9FD"}}>
+      <div className="  border-0  py-4  py-5" style={{backgroundColor:"#F6F9FD"}}>
   <div className="c d-flex justify-content-between px-5">
     <div className="d-flex align-items-center">
       <img src={logo} alt="logo" className="mr-3" style={{ width: '200px', height: '100px' }} />
@@ -204,10 +203,11 @@ const ProfilePage = () => {
         </ul>
       </div>
     </div>
-    <div className="m-5 ">
+    <div className="m-5 "><a href="mailto:info@hypervsolutions.net">
       <button className="btn btn-primary p-3 px-5 rounded-3 mx-2" data-bs-toggle="modal" data-bs-target="#privateMessage">
+      
         Private Message
-      </button>
+      </button></a>
       <button className="btn btn-outline-primary ml-2 p-3 t" >
         <i className="bi bi-bookmark " ></i>
       </button>
@@ -215,12 +215,21 @@ const ProfilePage = () => {
   </div>
 </div>
 
+<div className='d-flex justify-content-center bg-secondary-subtle text-secondary-emphasis mb-5'>
+<ul className="list-inline font-fs font-bold d-flex justify-content-center gap-5 pt-4" style={{fontWeight:"600"}}>
+          <li className="list-inline-item border-top-0 border-end-0 border-start-0 border-5 "> <h5>About</h5></li>
+          <li className="list-inline-item"><h5> Jobs</h5> </li>
+          <li className="list-inline-item"><h5> Employees</h5> </li>
+          <li className="list-inline-item"><h5> Offices</h5></li>
+        </ul>
+
+</div>
         <div className="row ">
           <div className="col-lg-8 float-start">
             <JobDetailsDescriptions />
+          <div className='m-5 '></div>
+           <h3 className='ms-5 ps-5 mt-5'>Jobs Available</h3>
           
-           <h3 className='ms-5 ps-5'>3 Others jobs available</h3>
-           <p  className='ms-5 ps-5' >2024 jobs live - 293 added today.</p>
           
 
            
@@ -242,11 +251,11 @@ const ProfilePage = () => {
           </li>
           <li className="d-flex justify-content-between mb-3">
             <strong>Company size:</strong>
-            <span><i className="bi bi-people-fill me-2"></i> 501-1,000</span>
+            <span><i className="bi bi-people-fill me-2"></i> 50-100</span>
           </li>
           <li className="d-flex justify-content-between mb-3">
             <strong>Founded in:</strong>
-            <span><i className="bi bi-calendar mb-3"></i> 2011</span>
+            <span><i className="bi bi-calendar mb-3"></i> 2023</span>
           </li>
           <li className="d-flex justify-content-between mb-3">
             <strong>Phone:</strong>
@@ -254,7 +263,7 @@ const ProfilePage = () => {
           </li>
           <li className="d-flex justify-content-between mb-3">
             <strong>Email:</strong>
-            <span><i className="bi bi-envelope me-3"></i> {employer?.email}</span>
+            <span><i className="bi bi-envelope me-3"></i>info@novahome.care</span>
           </li>
           <li className="d-flex justify-content-between mb-3">
             <strong>Location:</strong>
@@ -272,12 +281,12 @@ const ProfilePage = () => {
         </ul>
         <a
           href={`http://www.${employer?.name}.com`}
-          className="btn btn-primary p-2 px-5 rounded-3 border-0 mx-2 text-primary"
+          className="btn btn-primary p-2 px-5 rounded-3 border-0 mx-2 text-primary text-center"
           target="_blank"
           rel="noopener noreferrer"
           style={{ backgroundColor: "#A9C5ED" }}
         >
-          www.{employer?.name}.com
+          www.novahome.care
         </a>
       </div>
     </div>
