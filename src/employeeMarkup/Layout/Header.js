@@ -192,10 +192,11 @@ class EmployeeHeader extends Component {
                     </li> */}
                     {localStorage.getItem("employeeLoginToken") ? (
                        <li>
-                       <Link to={"#"}>
-                         Dashboard <i className="fa fa-chevron-down"></i>
+                       <Link 
+                        to={"/employee/company-profile"} >
+                         Dashboard
                        </Link>
-                       <ul className="sub-menu">
+                      {/* <ul className="sub-menu">
                          <li>
                            <Link
                              to={"/employee/company-profile"}
@@ -215,13 +216,13 @@ class EmployeeHeader extends Component {
                            </Link>
                          </li>
  
-                         {/* <li>
+                         <li>
                            <Link
                              to={"/employee/company-manage-job"}
                              className="dez-page">
                              Manage jobs <span className="new-page">New</span>
                            </Link>
-                         </li> */}
+                         </li> 
                          <li>
                            <Link
                              to={"/employee/company-transactions"}
@@ -246,7 +247,7 @@ class EmployeeHeader extends Component {
                              Messages
                            </Link>
                          </li>
-                       </ul>
+                       </ul> */}
                      </li>
                     ) : (
                       ''

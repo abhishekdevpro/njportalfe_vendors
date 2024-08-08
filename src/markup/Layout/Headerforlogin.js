@@ -144,10 +144,10 @@ class Headerforlogin extends Component {
                     </li>
                     {localStorage.getItem("jobSeekerLoginToken") ? (
                       <li>
-                        <Link to={"#"}>
-                          Dashboard <i className="fa fa-chevron-down"></i>
+                        <Link to={"/user/jobs-profile"}>
+                          Dashboard 
                         </Link>
-                        <ul className="sub-menu">
+                        {/*<ul className="sub-menu">
                           <li>
                             <Link
                               to={"/user/jobs-profile"}
@@ -207,7 +207,7 @@ class Headerforlogin extends Component {
                               Messages <span className="new-page">New</span>
                             </Link>
                           </li>
-                        </ul>
+                        </ul> */}
                       </li>
                     ) : null}
                     {/* <li>

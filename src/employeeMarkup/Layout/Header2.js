@@ -182,51 +182,9 @@ class EmployeeHeader2 extends Component {
                     
                     <li>
                       <Link to={"#"}>
-                        Dashboard<i className="fa fa-chevron-down"></i>
+                        Dashboard
                       </Link>
-                      <ul className="sub-menu">
-                        <li>
-                          <Link
-                            to={"/employee/company-profile"}
-                            className="dez-page">
-                            Company Profile{" "}
-                            <span className="new-page">New</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to={"/employee/company-resume"}
-                            className="dez-page">
-                            Employer Resume{" "}
-                            <span className="new-page">New</span>
-                          </Link>
-                        </li>
-
-                        {/* <li>
-                          <Link
-                            to={"/employee/company-manage-job/jobs"}
-                            className="dez-page">
-                            Manage jobs <span className="new-page">New</span>
-                          </Link>
-                        </li> */}
-                        <li>
-                          <Link
-                            to={"/employee/company-transactions"}
-                            className="dez-page">
-                            Transactions <span className="new-page">New</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to={"/employee/browse-candidates"}
-                            className="dez-page"
-                            onClick={() => {
-                              localStorage.removeItem("profession_title");
-                            }}>
-                            Browse Candidates
-                          </Link>
-                        </li>
-                      </ul>
+                     
                     </li>
                     {/* <li>
                       <Link to={"#"}>

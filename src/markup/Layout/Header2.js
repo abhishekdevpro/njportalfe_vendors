@@ -150,7 +150,7 @@ class UserHeader2 extends Component {
                         Dashboard<i className="fa fa-chevron-down"></i>
                       </Link>
                       <ul className="sub-menu">
-                        <li>
+                        {/* <li>
                           <Link to={"/user/jobs-profile"} className="dez-page">
                             My Profile<span className="new-page">New</span>
                           </Link>
@@ -196,7 +196,7 @@ class UserHeader2 extends Component {
                             <span className="new-page">New</span>
                           </Link>
                         </li>
-                         {/* <li>
+                         <li>
                       <Link to={"#"}>
                         For Employers <i className="fa fa-chevron-down"></i>
                       </Link>

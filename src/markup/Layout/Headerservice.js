@@ -144,8 +144,8 @@ class Headerservice extends Component {
                     </li>
                     {localStorage.getItem("jobSeekerLoginToken") ? (
                       <li>
-                        <Link to={"#"}>
-                          Dashboard <i className="fa fa-chevron-down"></i>
+                        <Link to={"/user/jobs-profile"}>
+                          Dashboard 
                         </Link>
                         <ul className="sub-menu">
                           <li>
