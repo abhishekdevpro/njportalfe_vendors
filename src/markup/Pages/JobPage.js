@@ -7,7 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import { Tab, Nav, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { showToastError } from "../../utils/toastify";
+import { showToastError, showToastSuccess } from "../../utils/toastify";
 import FixedHeader from "../Layout/fixedHeader";
 import {
   setJobApplicationData,
@@ -27,6 +27,7 @@ import TwoBoxWithLinesSkeleton from "../skeleton/twoBoxLines";
 import { useParams } from "react-router-dom";
 import SkeletonImg from "../../images/jobpage/No data-pana.png";
 import { FaSearch, FaBars } from 'react-icons/fa';
+import { ToastContainer } from "react-toastify";
 function JobPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -269,22 +270,26 @@ function JobPage() {
   };
 
   const submitApplication = async () => {
-    try {
       await axios({
-        url: "https://api.novajobs.us/api/jobseeker/jobs-applied",
+       url: "https://api.novajobs.us/api/jobseeker/jobs-applied",
         method: "POST",
-        headers: { Authorization: token },
-        data: {
-          job_id: selectedJob.job_detail.id,
-          screen_questions: screeningQuestion,
-        },
-      });
-      // fetchJobApplicationData();
-    } catch (err) {
-      console.log(err);
-      showToastError(err?.response?.data?.message);
-    }
-  };
+      headers: {
+           Authorization: token,
+         },
+         data: {
+           job_id: selectedJob.job_detail.id,
+           screen_questions: screeningQuestion,
+         },
+       })
+         .then((res) => {
+           showToastSuccess("Job applied succesfully")
+         })
+         .catch((err) => {
+           console.log(err);
+           console.log(err.response.data.message);
+           showToastError(err?.response?.data?.message);
+         });
+     };
 
   console.log("SelectedJob", selectedJob);
   console.log("JobApplicationData", jobApplicationData);
@@ -800,7 +805,7 @@ function JobPage() {
     <>
       <Header />
       {localStorage.getItem("jobSeekerLoginToken") ? <FixedHeader /> : null}
-
+<ToastContainer/>
       <div>
         {showSkeleton === true ? (
           <div className="bg-white w-100 ">

@@ -88,7 +88,7 @@ function Featureblog() {
       <div className="container">
         <div className="row">
           <div className="align-self-end float-end">
-            <Link to={"/user/job"} className="site-button button-sm float-end">
+            <Link to={"/user/job/2"} className="site-button button-sm float-end">
               Browse Jobs in other State <i className="fa fa-long-arrow-right"></i>
             </Link>
           </div>

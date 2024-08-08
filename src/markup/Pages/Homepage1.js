@@ -95,7 +95,7 @@ function Homepage() {
                       List your profile, check your resume score, search jobs, with advanced filters and the power of AI
                     </p>
                     <Link
-                      to={"/user/job"}
+                      to={"/user/job/2"}
                       style={{ color: "white" }}
                     >
                       <button

@@ -81,9 +81,11 @@ function SkillTest() {
   return (
     <>
       {loader === true ? (
-        <div>
-          <Preloader />
-        </div>
+        <h1>
+
+          Please Upload your CV. to take Skill test
+          {/*   <Preloader /> */}
+        </h1>
       ) : (
         <div>
           <Header2 />

@@ -76,7 +76,7 @@ function EmployeeHomepage() {
 
                     </p>
                     <Link
-                      to={"/user/job"}
+                      to={"/user/job/2"}
                       style={{ color: "white" }}
                     >
                      <button type="button" className="btn text-white hoverlogo-3d" style={{backgroundColor:"#080F3A"}}>Apply Now</button>
