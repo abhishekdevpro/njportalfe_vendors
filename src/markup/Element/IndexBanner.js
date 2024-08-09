@@ -1,34 +1,26 @@
-import React, { Component, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import React, { Component } from "react";
 import { Form } from "react-bootstrap";
-import { TypeAnimation } from 'react-type-animation';
+import { TypeAnimation } from "react-type-animation";
 import "../../css/indexBanner.css";
 import SBELogo from "../../assests/SBE-Logo.png";
-import NewDBELogo from '../../assests/New-dbe-logo.png';
+import NewDBELogo from "../../assests/New-dbe-logo.png";
 var bnr1 = require("./../../images/main-slider/slide2.jpg");
 
 class IndexBanner extends Component {
   componentDidMount() {
-    var i = 0;
-    // Placeholder Animation Start
     var inputSelector = document.querySelectorAll("input, textarea");
-    for (i = 0; i < inputSelector.length; i++) {
-      inputSelector[i].addEventListener("focus", function (event) {
-        return this.parentElement.parentElement.classList.add("focused");
+    inputSelector.forEach((input) => {
+      input.addEventListener("focus", function () {
+        this.parentElement.parentElement.classList.add("focused");
       });
-    }
-    for (i = 0; i < inputSelector.length; i++) {
-      inputSelector[i].addEventListener("blur", function (event) {
-        var inputValue = this.value;
-        if (inputValue === "") {
-          this.parentElement.parentElement.classList.remove("filled");
-          this.parentElement.parentElement.classList.remove("focused");
+      input.addEventListener("blur", function () {
+        if (this.value === "") {
+          this.parentElement.parentElement.classList.remove("filled", "focused");
         } else {
           this.parentElement.parentElement.classList.add("filled");
         }
       });
-    }
-    // Placeholder Animation End
+    });
   }
 
   constructor(props) {
@@ -46,7 +38,6 @@ class IndexBanner extends Component {
   };
 
   render() {
-    console.log(this.state.searchJob);
     return (
       <div
         className="dez-bnr-inr dez-bnr-inr-md"
@@ -54,38 +45,20 @@ class IndexBanner extends Component {
       >
         <div className="container">
           <div className="dez-bnr-inr-entry align-m">
-            <div className="find-job-bx ">
-           {/* <span className="d-flex justify-content-around mb-4" style={{ width: '280px' }}>
-  <span className="m-2 hover-container">
-    <img src={SBELogo} alt="SBE Logo" style={{ height: '90px' }} />
-    <span className="hover-text">Small Business Enterprise (SBE) Certification
-At Hyper V Solutions, our SBE certification underscores our commitment to supporting small businesses and fostering local economic growth. This certification enables us to engage in various opportunities, promoting innovation and collaboration within our community.
-</span>
-  </span>
-  <span className="m-2 hover-container">
-    <img src={NewDBELogo} alt="New DBE Logo" style={{ height: '90px' }} />
-    <span className="hover-text">Disadvantaged Business Enterprise (DBE) Certification
-    Our DBE certification at Hyper V Solutions highlights our dedication to diversity and inclusion. This certification allows us to participate in projects that prioritize equal opportunities for minority and disadvantaged businesses, driving positive change and fostering a more equitable business</span>
-  </span>
-</span> */}
-
-              <div
-                className="d-flex align-items-center "
-                style={{ gap: "px" }}
-              >
-                
+            <div className="find-job-bx">
+              <div className="d-flex align-items-center">
                 <div className="hover-3d">
-                  <h2> An AI-Enabled HR Job Portal</h2>
+                  <h2>An AI-Enabled HR Job Portal</h2>
                 </div>
               </div>
               <h2>
                 <TypeAnimation
                   sequence={[
-                    " Search Jobs",
+                    "Search Jobs",
                     1000,
                     "Check Resume AI Score",
                     1000,
-                    " Make AI Resume",
+                    "Make AI Resume",
                     1000,
                     "Connect with Employers",
                     1000,
@@ -99,32 +72,28 @@ At Hyper V Solutions, our SBE certification underscores our commitment to suppor
               </h2>
               <form className="dezPlaceAni">
                 <div className="row">
-                  <div className="col-lg-10 col-12 ">
-                    <div className="form-group d-flex">
-
+                  <div className="col-lg-4 col-md-6 col-12">
+                    <div className="form-group">
                       <label htmlFor="searchJob">
                         Job Title, Keywords, or Phrase
                       </label>
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="searchJob"
-                          id="searchJob"
-                          onChange={this.handleChange}
-                          value={this.state.searchJob}
-                        />
-                       
-                      </div>
-                      
-                      
-                      
-                      <div className="col-lg-3 col-md-6">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="searchJob"
+                        id="searchJob"
+                        onChange={this.handleChange}
+                        value={this.state.searchJob}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="col-lg-3 col-md-6 col-12">
                     <div className="form-group">
                       <Form.Control as="select" custom className="select-btn">
                         <option>Select Sector</option>
                         <option>Construction</option>
-                        <option>Corodinator</option>
+                        <option>Coordinator</option>
                         <option>Employer</option>
                         <option>Financial Career</option>
                         <option>Information Technology</option>
@@ -138,17 +107,15 @@ At Hyper V Solutions, our SBE certification underscores our commitment to suppor
                     </div>
                   </div>
 
+                  <div className="col-lg-3 col-md-6 col-12">
+                    <div className="form-group">
+                      <label htmlFor="Location">Location</label>
                       <div className="input-group">
-                        
-                      <label htmlFor="Location">
-                       Location
-                      </label>
                         <input
                           type="text"
                           className="form-control"
                           name="Location"
                           id="Location"
-                          
                         />
                         <div className="input-group-append">
                           <span className="input-group-text">
@@ -156,46 +123,10 @@ At Hyper V Solutions, our SBE certification underscores our commitment to suppor
                           </span>
                         </div>
                       </div>
-                      
+                    </div>
+                  </div>
 
-                    </div>
-                  </div>
-                    {/* <div className="col-lg-3 col-md-6">
-                    <div className="form-group">
-                      <label>Email address</label>
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder=""
-                        />
-                        <div className="input-group-append">
-                          <span className="input-group-text">
-                            <i className="fa fa-map-marker"></i>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-6">
-                    <div className="form-group">
-                      <Form.Control as="select" custom className="select-btn">
-                        <option>Select Sector</option>
-                        <option>Construction</option>
-                        <option>Corodinator</option>
-                        <option>Employer</option>
-                        <option>Financial Career</option>
-                        <option>Information Technology</option>
-                        <option>Marketing</option>
-                        <option>Quality check</option>
-                        <option>Real Estate</option>
-                        <option>Sales</option>
-                        <option>Supporting</option>
-                        <option>Teaching</option>
-                      </Form.Control>
-                    </div>
-                  </div> */}
-                  <div className="col-lg-2 col-md-4">
+                  <div className="col-lg-2 col-md-6 col-12">
                     <button
                       type="submit"
                       onClick={(e) => {
@@ -216,4 +147,5 @@ At Hyper V Solutions, our SBE certification underscores our commitment to suppor
     );
   }
 }
+
 export default IndexBanner;
