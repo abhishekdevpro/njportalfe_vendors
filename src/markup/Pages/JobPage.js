@@ -270,26 +270,31 @@ function JobPage() {
   };
 
   const submitApplication = async () => {
-      await axios({
-       url: "https://api.novajobs.us/api/jobseeker/jobs-applied",
-        method: "POST",
-      headers: {
-           Authorization: token,
-         },
-         data: {
-           job_id: selectedJob.job_detail.id,
-           screen_questions: screeningQuestion,
-         },
-       })
-         .then((res) => {
-           showToastSuccess("Job applied succesfully")
-         })
-         .catch((err) => {
-           console.log(err);
-           console.log(err.response.data.message);
-           showToastError(err?.response?.data?.message);
-         });
-     };
+    if (selectedJob && selectedJob.job_apply_url) {
+      // Redirect to the job_apply_url
+      window.location.href = selectedJob.job_apply_url;
+    } else {
+      try {
+        await axios({
+          url: "https://api.novajobs.us/api/jobseeker/jobs-applied",
+          method: "POST",
+          headers: {
+            Authorization: token,
+          },
+          data: {
+            job_id: selectedJob.job_detail.id,
+            screen_questions: screeningQuestion,
+          },
+        });
+        showToastSuccess("Job applied successfully");
+      } catch (err) {
+        console.log(err);
+        console.log(err.response.data.message);
+        showToastError(err?.response?.data?.message);
+      }
+    }
+  };
+  
 
   console.log("SelectedJob", selectedJob);
   console.log("JobApplicationData", jobApplicationData);

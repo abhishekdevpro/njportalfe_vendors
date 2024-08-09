@@ -203,31 +203,46 @@ function Jobsection() {
                 </ul>
               ) : null}
               {/* Pagination Controls */}
-              <div className="pagination">
-                <button
-                className="btn border"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </button>
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handlePageChange(index + 1)}
-                    className={currentPage === index + 1 ? "active btn mx-1" : "btn border mx-1"}
-                  >
-                    {index + 1}
-                  </button>
-                ))}
-                <button
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className="btn border "
-                >
-                  Next
-                </button>
-              </div>
+              <div className="pagination d-flex flex-wrap justify-content-center">
+  <button
+    className="btn btn-outline-primary me-2 mb-2"
+    onClick={() => handlePageChange(currentPage - 1)}
+    disabled={currentPage === 1}
+  >
+    Previous
+  </button>
+  
+  {Array.from({ length: totalPages }, (_, index) => {
+    if (index < 5 || (index === totalPages - 1 && totalPages > 5)) {
+      return (
+        <button
+          key={index}
+          onClick={() => handlePageChange(index + 1)}
+          className={`btn ${currentPage === index + 1 ? "btn-primary" : "btn-outline-secondary"} me-2 mb-2`}
+        >
+          {index + 1}
+        </button>
+      );
+    } else if (index === 5 && totalPages > 5) {
+      return (
+        <span key="ellipsis" className="me-2 mb-2">
+          ...
+        </span>
+      );
+    } else {
+      return null;
+    }
+  })}
+
+  <button
+    onClick={() => handlePageChange(currentPage + 1)}
+    disabled={currentPage === totalPages}
+    className="btn btn-outline-primary mb-2"
+  >
+    Next
+  </button>
+</div>
+
             </div>
             <div className="col-lg-3">
               <div className="sticky-top">
