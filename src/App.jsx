@@ -227,10 +227,10 @@ function App() {
               <Route path="/vendor/login" element={<Vendorlogin />} />
         <Route  path="/vendor/vendorprofile" element={ <PrivateRoutevendor> <VendorCompanyprofile />  </PrivateRoutevendor> }  />
         <Route path="/vendor/vendorcompanySideBar" element={<PrivateRoutevendor><VendorCompanySideBar /> </PrivateRoutevendor>} />
-        <Route path="/vendor/vendorcomponypostjobs" element={<PrivateRoutevendor><VendorComponypostjobs /></PrivateRoutevendor>} />
+        <Route path="/vendor/vendorcomponypostjobs/:id" element={<PrivateRoutevendor><VendorComponypostjobs /></PrivateRoutevendor>} />
         <Route path="/vendor/vendorwallet" element={<PrivateRoutevendor><Vendorwallet /></PrivateRoutevendor>} />
-        <Route path="/vendor/vendorcompanymanage" element={<PrivateRoutevendor><VendorCompanymanage /></PrivateRoutevendor>} />
-        <Route path="/vendor/vendorapplicant" element={<PrivateRoutevendor><Vendorapplicant /></PrivateRoutevendor>} />
+        <Route path="/vendor/vendorcompanymanage/:id" element={<PrivateRoutevendor><VendorCompanymanage /></PrivateRoutevendor>} />
+        <Route path="/vendor/vendorapplicant/:id" element={<PrivateRoutevendor><Vendorapplicant /></PrivateRoutevendor>} />
         <Route path="/vendor/vendorchangepasswordpage" element={<PrivateRoutevendor><VendorChangepasswordpage /></PrivateRoutevendor>} />
         <Route path="/vendor/vendorbulkuploadjobopeneing" element={<PrivateRoutevendor><Vendorbulkuploadjobopeneing /></PrivateRoutevendor>} />
         <Route path="/vendor/vendorbulkuploadjobseeker" element={<PrivateRoutevendor><Vendorbulkuploadjobseeker /></PrivateRoutevendor>} />

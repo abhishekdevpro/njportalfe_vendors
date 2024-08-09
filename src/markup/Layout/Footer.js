@@ -403,7 +403,7 @@ function Footer() {
                     ["Cookies & Advertising", "Data Privacy Framework", "Help Data Sharing"],
                     ["International Transfer", "Online Interview Scams", "Resume Security", "Retention Period"],
                     ["Scope Privacy Notice", "Security Bug Reporting", "Security Center Account Management", "Email Scams"],
-                    ["General Contact Information", "How It Works For Candidates", "How It Works For Employees", "Novajobs US Information"]
+                    ["General Contact Information", "How It Works For Candidates", "How It Works For Employees"]
                   ].map((column, index) => (
                     <div key={index} className="col-md-4 col-sm-6 mb-3">
                       <ul className="list-3">

@@ -30,35 +30,40 @@ function VendorCompanymanage() {
   const [rejectWithNote, setRejectWithNote] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState(null);
+  const [recordsAvailable, setRecordsAvailable] = useState(true);
 
-
-  useEffect(() => {
-    fetchPublishedJobs();
-  }, []);
-
-  
-
-  
   const fetchPublishedJobs = () => {
     axios({
       method: "GET",
-      url: "https://api.novajobs.us/api/admin/vendor-lists?is_publish=1",
+      url: "https://api.novajobs.us/api/admin/job-lists?is_publish=1",
       headers: {
         Authorization: token,
       },
     })
       .then((response) => {
-        console.log(response.data.data, "published");
-        setData(response.data.data);
-        setBtn("Edit Job");
+        const jobData = response.data.data;
+        console.log(jobData, "published");
+        
+        if (jobData && jobData.length > 0) {
+          setData(jobData);
+          setRecordsAvailable(true);
+        } else {
+          setRecordsAvailable(false);
+        }
+
+        setBtn(" ");
         setSkeleton(false);
       })
       .catch((err) => {
         console.log(err);
-        console.log(err.response.data.message);
-        
+        console.log(err.response?.data?.message);
+        setRecordsAvailable(false);
       });
   };
+
+  useEffect(() => {
+    fetchPublishedJobs();
+  }, []);
   
   
   const handleRepostJob = (id) => {
@@ -66,7 +71,7 @@ function VendorCompanymanage() {
 
     axios({
       method: "PUT",
-      url: `https://api.novajobs.us/api/employeer/job-post/${id}`,
+      url: `https://api.novajobs.us/api/admin/job-post/${id}`,
       headers: {
         Authorization: token,
       },
@@ -134,7 +139,7 @@ function VendorCompanymanage() {
 
   return (
     <div className="position-relative">
-    <Navbar bg="white" variant="white" className='py-3 border-bottom'>
+       <Navbar bg="white" variant="white" className='py-3 border-bottom'>
       <Navbar.Brand as={Link} to="/">
         <img
           style={{ width: "110px" }}
@@ -186,201 +191,170 @@ function VendorCompanymanage() {
                         </div>
                       </div>
                     </div>
-                    {skeleton === true ? (
-                      <JobPageSkeleton />
-                    ) : (
-                      <ul className="post-job-bx browse-job">
-                        {data.map((item, index) => {
-                          const formattedDate = moment(
-                            item.vendors_detail.created_at
-                          ).format("MMMM-DD-YYYY");
-                          return (
-                            <li key={index} className="position-relative">
-                              <div className="post-bx d-flex w-100 justify-content-between ">
-                                <div className="job-post-info m-a0">
-                                {console.log('yehi h console',item.vendors_detail)}
-                                  {item.company_detail.company_name ? (
-                                    <h4 className="mb-0">
-                                      <a href="/react/demo/job-detail">
-                                        {item.company_detail.company_name}
-                                      </a>
-                                    </h4>
-                                  ) : null}
-                                  
-                                 
-                                  {item.vendors_detail.cities.name ||
-                                  item.vendors_detail.states.name ||
-                                  item.vendors_detail.countries.name ? (
-                                    <p
-                                      style={{ color: "#232323" }}
-                                      className="mb-2 "
-                                    >
-                                      {" "}
-                                      <i className="fa fa-map-marker"></i>{" "}
-                                      {item.vendors_detail.cities.name ? (
-                                        <span>
-                                          {item.vendors_detail.cities.name} {" | "}
-                                        </span>
-                                      ) : null}{" "}
-                                      {item.vendors_detail.states.name ? (
-                                        <span>
-                                          {item.vendors_detail.states.name}
-                                          {" | "}
-                                        </span>
-                                      ) : null}{" "}
-                                      {item.vendors_detail.countries.name ? (
-                                        <span>{item.vendors_detail.countries.name}</span>
-                                      ) : null}
-                                    </p>
-                                  ) : null}
-                                   {item.vendors_detail.created_at ? (
-                                    <p className="mb-0">
-                                      <span className="text-black mr-2">Posted on* </span>
-                                      {moment(item.vendors_detail.created_at).format("MMMM DD, YYYY")}
-                                    </p>
-                                  ) : (
-                                    <p className="mb-0">
-                                      <span className="text-black mr-2">Posted on* </span>
-                                      {moment(item.vendors_detail.created_at).format("MMMM DD, YYYY")}
-                                    </p>
-                                  )}
-
-
-                                </div>
-                                <div
-                                  className="d-flex flex-row justify-content-center align-items-center "
-                                  style={{ gap: "12px" }}
-                                >
-                                   
-                                  <button
-                                    onClick={() => {
-                                      // handlePutReq(item.job_detail.id);
-                                      navigate(
-                                        `/employee/company-post-jobs/${item.vendors_detail.id}`
-                                      );
-                                    }}
-                                    className="px-3 py-2 site-button text-white border-0"
-                                    style={{
-                                      
-                                      cursor: "pointer",
-                                    }}
-                                  >
-                                    {btn}
-                                  </button>
-                                  
-                                  {showOptions === index ? (
-                                    <FaX
-                                      onClick={() => handleShowOptions(index)}
-                                      style={{ cursor: "pointer" }}
-                                    />
-                                  ) : (
-                                    
-                                    <Link
-                                    to={"/vendor/vendorapplicant"}
-                                    className="px-3 py-2 site-button text-white border-0"
-                                  >
-                                    <i className="fa fa-id-card-o mr-1" aria-hidden="true"></i>
-                                    <span>Applicants</span>
-                                  </Link>
-                                  
-                                  )}
-                                    <button
-                                  className="px-3 py-2 site-button text-white border-0 bg-danger"
-                                  style={{
-                                    cursor: "pointer",
-                                    backgroundColor: "red",
-                                  }}
-                                  onClick={() => handleRepostJob(item.vendors_detail.id)}
-                                >
-                                  Refresh
-                                </button>
-
-                                </div>
-                                
-                              </div>
-                              
-                              
-                              
-                              <button
-  className="px-3 py-2 site-button text-white border-0 float-right mb-2"
-  style={{
-    cursor: "pointer",
-  }}
-  onClick={() => handleShareClick(item.vendors_detail.id)}
->
-  Share
-</button>
-
-
-      {showModal && selectedJobId === item.vendors_detail.id && (
-                                <div className="modal" >
-                                  <div className="modal-content text-white text-center"  style={{ backgroundColor: "#1C2957" }}>
-                                    <div> 
-                                      Share on
-                                    <span className="close float-right" onClick={closeModal}>
-                                      &times;
-                                    </span>
-                                    </div>
-                                    <br />
-                                    {/* LinkedIn share */}
-                                   <div className="d-flex justify-content-evenly">
-                                   <a
-                                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-                                        `${window.location.origin}/user/job-detail/${item.vendors_detail.id}`
-                                      )}`}
-                                      className="text-white text-center"
-                                      style={{width:'40px'}}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                       <FaLinkedin size={40} style={{ marginRight: '5px' }} />
-                                       LinkedIn
-                                    </a>
-                                    {/* WhatsApp share */}
-                                    <a
-                                      href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                                        `${window.location.origin}/user/job-detail/${item.vendors_detail.id}`
-                                      )}`}
-                                      className="text-white text-center"
-                                      style={{ width:'40px'}}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      <FaWhatsapp size={40} style={{ marginRight: '5px' }} />
-                                      WhatsApp
-                                    </a>
-                                   </div> <br />
-                                    {/* Copy link */}
-                                    <div   >
-                                      <input style={{width:'300px'}}
-                                        type="text"
-                                        value={`${window.location.origin}/user/job-detail/${item.vendors_detail.id}`}
-                                        readOnly
-                                      />
-                                      <button
-                                        onClick={() => {
-                                          navigator.clipboard.writeText(
-                                            `${window.location.origin}/user/job-detail/${item.vendors_detail.id}`
-                                          );
-                                          alert("Link copied!");
-                                        }}
-                                      >
-                                        Copy Link
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                                  
-                            </li>
-                            
-                          );
-                          
-                        })}
-                        
-                      </ul>
-                      
+                    <div>
+      {skeleton ? (
+        <JobPageSkeleton />
+      ) : recordsAvailable ? (
+        <ul className="post-job-bx browse-job">
+          {data.map((item, index) => {
+            const formattedDate = moment(item.job_detail.created_at).format("MMMM-DD-YYYY");
+            return (
+              <li key={index} className="position-relative">
+                <div className="post-bx d-flex w-100 justify-content-between">
+                  <div className="job-post-info m-a0">
+                    {console.log('yehi h console', item.job_detail)}
+                    {item.job_detail.job_title && (
+                      <h4 className="mb-0">
+                        <a href="/react/demo/job-detail">
+                          {item.job_detail.job_title}
+                        </a>
+                      </h4>
                     )}
+                    {(item.job_category.name || item.job_type.name || item.job_workplace_types.name) && (
+                      <div className="d-flex">
+                        {item.job_category.name && (
+                          <p>{item.job_category.name}{" | "}</p>
+                        )}
+                        {item.job_type.name && (
+                          <p>{item.job_type.name}{" | "}</p>
+                        )}
+                        {item.job_detail.skills_arr && (
+                          <div className="mx-1">
+                            {item.job_detail.skills_arr.map((skill, index) => (
+                              <span key={index} className="badge badge-primary mr-1 mb-1">
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        {item.job_workplace_types.name && (
+                          <p>{item.job_workplace_types.name}</p>
+                        )}
+                      </div>
+                    )}
+                    {item.experience_level.name && (
+                      <p className="mb-2">
+                        Experience: {item.experience_level.name}
+                      </p>
+                    )}
+                    {(item.cities.name || item.states.name || item.countries.name) && (
+                      <p style={{ color: "#232323" }} className="mb-2">
+                        <i className="fa fa-map-marker"></i>{" "}
+                        {item.cities.name && <span>{item.cities.name}{" | "}</span>}
+                        {item.states.name && <span>{item.states.name}{" | "}</span>}
+                        {item.countries.name && <span>{item.countries.name}</span>}
+                      </p>
+                    )}
+                    {item.job_detail.reposted_at ? (
+                      <p className="mb-0">
+                        <span className="text-black mr-2">Posted on* </span>
+                        {moment(item.job_detail.reposted_at).format("MMMM DD, YYYY")}
+                      </p>
+                    ) : (
+                      <p className="mb-0">
+                        <span className="text-black mr-2">Posted on* </span>
+                        {moment(item.job_detail.created_at).format("MMMM DD, YYYY")}
+                      </p>
+                    )}
+                  </div>
+                  <div className="d-flex flex-row justify-content-center align-items-center" style={{ gap: "12px" }}>
+                    <button
+                      onClick={() => navigate(`/vendor/vendorcomponypostjobs/${item.job_detail.id}`)}
+                      className="px-3 py-2 site-button text-white border-0"
+                      style={{ cursor: "pointer" }}
+                    >Edit Jobs
+                      {btn}
+                    </button>
+                    <button
+                      onClick={() => navigate(`/vendor/vendorapplicant/${item.job_detail.id}`)}
+                      className="px-3 py-2 site-button text-white border-0"
+                      style={{ cursor: "pointer" }}
+                    ><i className="fa fa-id-card-o mr-1" aria-hidden="true"></i>
+                      <span>Applicants</span>
+                      {btn}
+                    </button>
+                    <button
+                      className="px-3 py-2 site-button text-white border-0 bg-danger"
+                      style={{ cursor: "pointer", backgroundColor: "red" }}
+                      onClick={() => handleRepostJob(item.job_detail.id)}
+                    >
+                      Refresh
+                    </button>
+                  </div>
+                </div>
+                <button
+                  className="px-3 py-2 site-button text-white border-0 float-right mb-2"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleShareClick(item.job_detail.id)}
+                >
+                  Share
+                </button>
+                {showModal && selectedJobId === item.job_detail.id && (
+                  <div className="modal">
+                    <div className="modal-content text-white text-center" style={{ backgroundColor: "#1C2957" }}>
+                      <div>
+                        Share on
+                        <span className="close float-right" onClick={closeModal}>
+                          &times;
+                        </span>
+                      </div>
+                      <br />
+                      <div className="d-flex justify-content-evenly">
+                        <a
+                          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+                            `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+                          )}`}
+                          className="text-white text-center"
+                          style={{ width: '40px' }}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaLinkedin size={40} style={{ marginRight: '5px' }} />
+                          LinkedIn
+                        </a>
+                        <a
+                          href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                            `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+                          )}`}
+                          className="text-white text-center"
+                          style={{ width: '40px' }}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaWhatsapp size={40} style={{ marginRight: '5px' }} />
+                          WhatsApp
+                        </a>
+                      </div>
+                      <br />
+                      <div>
+                        <input
+                          style={{ width: '300px' }}
+                          type="text"
+                          value={`${window.location.origin}/user/job-detail/${item.job_detail.id}`}
+                          readOnly
+                        />
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(
+                              `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+                            );
+                            alert("Link copied!");
+                          }}
+                        >
+                          Copy Link
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p>Records not available</p>
+      )}
+    </div>
 
                     <div className="pagination-bx m-t30 float-right">
                       <ul className="pagination">
@@ -415,10 +389,7 @@ function VendorCompanymanage() {
                         <div className="modal-content">
                           <div className="modal-header">
                             <div className="logo-img">
-                              <img
-                                alt=""
-                                src={require("../images/logo/icon2.png")}
-                              />
+                              
                             </div>
                             <h5 className="modal-title">Company Name</h5>
                             <button
@@ -468,7 +439,7 @@ function VendorCompanymanage() {
           </div>
         </div>
       </div>
-      
+      <Footer />
       {tabs === "scheduleInterview" ? (
         <div
           style={{
@@ -754,7 +725,6 @@ function VendorCompanymanage() {
           </div>
         </div>
       ) : null}
-      <Footer/>
     </div>
   );
 }

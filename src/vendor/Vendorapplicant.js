@@ -1,29 +1,68 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Navbar, Nav, Badge } from 'react-bootstrap';
-
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 import VendorCompanySideBar from "./Vendorsidebar";
 import Footer from "../markup/Layout/Footer";
-
-const postResume = [
-  { id: 1, title: "Tammy Dixon", jobTitle: "UX / UI Designer", skills: ["PHP", "Angular", "Bootstrap"] },
-  { id: 2, title: "John Doe", jobTitle: "Frontend Developer", skills: ["React", "JavaScript", "CSS"] },
-  { id: 3, title: "Ali Tufan", jobTitle: "Backend Developer", skills: ["Node.js", "MongoDB", "Express"] },
-  { id: 4, title: "David Kamal", jobTitle: "Full Stack Developer", skills: ["PHP", "Angular", "Node.js"] },
-  { id: 5, title: "Tammy Dixon", jobTitle: "UX / UI Designer", skills: ["Photoshop", "Illustrator", "CSS"] },
-  { id: 6, title: "John Doe", jobTitle: "Frontend Developer", skills: ["Vue", "JavaScript", "HTML"] },
-  { id: 7, title: "David Kamal", jobTitle: "Full Stack Developer", skills: ["PHP", "Vue", "Node.js"] },
-  { id: 8, title: "Ali Tufan", jobTitle: "Backend Developer", skills: ["Python", "Django", "PostgreSQL"] },
-];
+import { Navbar, Nav, Badge } from 'react-bootstrap';
 
 function Vendorapplicant() {
+  const [resumes, setResumes] = useState([]);
   const [selectedJobTitle, setSelectedJobTitle] = useState("All");
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [shortlisted, setShortlisted] = useState([]);
   const [rejected, setRejected] = useState([]);
+  const [scheduled, setScheduled] = useState([]);
   const [view, setView] = useState("all");
   const [skillsDropdownOpen, setSkillsDropdownOpen] = useState(false);
   const [jobTitleDropdownOpen, setJobTitleDropdownOpen] = useState(false);
+  const { id } = useParams();
+  const [status, setStatus] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("vendorToken");
+        let endpoint = `https://api.novajobs.us/api/admin/jobs-applicants/${id}`;
+        
+        if (view === "shortlisted") {
+          endpoint += `?job_applied_status_id=1`;
+        } else if (view === "rejected") {
+          endpoint += `?job_applied_status_id=2`;
+        } else if (view === "scheduled") {
+          endpoint += `?job_applied_status_id=3`;
+        }
+
+        const response = await axios.get(endpoint, {
+          headers: {
+            Authorization: token,
+          },
+        });
+
+        if (response.data.status === "success") {
+          const formattedResumes = response.data.data.job_applicants_info.map(item => ({
+            id: item.jobskkers_detail.id,
+            first_name: item.jobskkers_detail.first_name,
+            last_name: item.jobskkers_detail.last_name,
+            job_title: item.job_detail.job_title,
+            address: item.jobskkers_detail.country_id, // Example field, adjust based on actual data
+            time: item.jobskkers_detail.created_at,
+            created_at: item.jobskkers_detail.created_at,
+            resume_link: item.jobskkers_detail.resume_file_path,
+            skills: item.jobskkers_detail.ai_resume_parse_data.jobsMyResumeData.skillsValue.skills || "", // Adjusted field
+          }));
+          setResumes(formattedResumes);
+        } else {
+          setResumes([]);
+          console.error("Error:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching resumes:", error);
+        setResumes([]);
+      }
+    };
+
+    fetchData();
+  }, [id, view]);
 
   const handleJobTitleChange = (event) => {
     setSelectedJobTitle(event.target.value);
@@ -36,7 +75,31 @@ function Vendorapplicant() {
     );
   };
 
+  const takeAction = async (jobId, jobSeekerId, job_applied_status_id, createdAt) => {
+    try {
+      const token = localStorage.getItem("vendorToken");
+      await axios.put(
+        `https://api.novajobs.us/api/admin/action-applicants-job/${jobId}/${jobSeekerId}`,
+        { job_applied_status_id, createdAt },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+    } catch (error) {
+      console.error(`Error taking action (${job_applied_status_id}) on job seeker ${jobSeekerId}:`, error);
+    }
+  };
+
   const handleShortlist = (id) => {
+    const jobId = id; // Replace with the correct job ID
+    const jobSeekerId = id; // Replace with the correct job seeker ID
+    const createdAt = new Date().toISOString(); // Add the current date and time
+    const job_applied_status_id = 1; // Shortlisted status
+
+    takeAction(jobId, jobSeekerId, job_applied_status_id, createdAt);
+
     if (shortlisted.includes(id)) {
       setShortlisted(shortlisted.filter((shortlistId) => shortlistId !== id));
     } else {
@@ -44,10 +107,20 @@ function Vendorapplicant() {
       if (rejected.includes(id)) {
         setRejected(rejected.filter((rejectId) => rejectId !== id));
       }
+      if (scheduled.includes(id)) {
+        setScheduled(scheduled.filter((scheduleId) => scheduleId !== id));
+      }
     }
   };
 
   const handleReject = (id) => {
+    const jobId = id; // Replace with the correct job ID
+    const jobSeekerId = id; // Replace with the correct job seeker ID
+    const createdAt = new Date().toISOString(); // Add the current date and time
+    const job_applied_status_id = 2; // Rejected status
+
+    takeAction(jobId, jobSeekerId, job_applied_status_id, createdAt);
+
     if (rejected.includes(id)) {
       setRejected(rejected.filter((rejectId) => rejectId !== id));
     } else {
@@ -55,29 +128,42 @@ function Vendorapplicant() {
       if (shortlisted.includes(id)) {
         setShortlisted(shortlisted.filter((shortlistId) => shortlistId !== id));
       }
+      if (scheduled.includes(id)) {
+        setScheduled(scheduled.filter((scheduleId) => scheduleId !== id));
+      }
     }
   };
 
   const handleSchedule = (id) => {
-    const scheduledCandidate = postResume.find((item) => item.id === id);
-    scheduledCandidate.meetLink = `https://meet.google.com/?authuser=0`;
-    if (!shortlisted.includes(id)) {
-      setShortlisted([...shortlisted, id]);
+    const jobId = id; // Replace with the correct job ID
+    const jobSeekerId = id; // Replace with the correct job seeker ID
+    const createdAt = new Date().toISOString(); // Add the current date and time
+    const job_applied_status_id = 3; // Scheduled status
+
+    takeAction(jobId, jobSeekerId, job_applied_status_id, createdAt);
+
+    if (scheduled.includes(id)) {
+      setScheduled(scheduled.filter((scheduleId) => scheduleId !== id));
+    } else {
+      setScheduled([...scheduled, id]);
+      if (shortlisted.includes(id)) {
+        setShortlisted(shortlisted.filter((shortlistId) => shortlistId !== id));
+      }
       if (rejected.includes(id)) {
         setRejected(rejected.filter((rejectId) => rejectId !== id));
       }
     }
   };
 
-  const jobTitles = ["All", ...new Set(postResume.map((item) => item.jobTitle))];
+  const jobTitles = ["All", ...new Set(resumes.map((item) => item.job_title))];
   const skills = [
-    ...new Set(postResume.flatMap((item) => item.skills)),
+    ...new Set(resumes.flatMap((item) => item.skills.split(', '))),
   ];
 
   const filteredResumes =
     selectedJobTitle === "All"
-      ? postResume
-      : postResume.filter((item) => item.jobTitle === selectedJobTitle);
+      ? resumes
+      : resumes.filter((item) => item.job_title === selectedJobTitle);
 
   const skillFilteredResumes = selectedSkills.length
     ? filteredResumes.filter((item) =>
@@ -85,22 +171,25 @@ function Vendorapplicant() {
       )
     : filteredResumes;
 
-  const allCount = postResume.length;
+  const allCount = resumes.length;
   const shortlistedCount = shortlisted.length;
   const rejectedCount = rejected.length;
+  const scheduledCount = scheduled.length;
 
   let displayedResumes = [];
   if (view === "all") {
     displayedResumes = skillFilteredResumes;
   } else if (view === "shortlisted") {
-    displayedResumes = postResume.filter((item) => shortlisted.includes(item.id));
+    displayedResumes = resumes.filter((item) => shortlisted.includes(item.id));
   } else if (view === "rejected") {
-    displayedResumes = postResume.filter((item) => rejected.includes(item.id));
+    displayedResumes = resumes.filter((item) => rejected.includes(item.id));
+  } else if (view === "scheduled") {
+    displayedResumes = resumes.filter((item) => scheduled.includes(item.id));
   }
 
   return (
     <>
-    
+     
       <div className="page-content bg-white">
       <Navbar bg="white" variant="white" className='py-3 border-bottom'>
       <Navbar.Brand as={Link} to="/">
@@ -129,7 +218,7 @@ function Vendorapplicant() {
                   <div className="job-bx clearfix">
                     <div className="job-bx-title clearfix">
                       <h5 className="font-weight-700 pull-left text-uppercase">
-                        Applicant
+                        Applicants
                       </h5>
                       <Link
                         to={"/employee/company-manage-job/jobs"}
@@ -138,41 +227,11 @@ function Vendorapplicant() {
                         Back
                       </Link>
                     </div>
-                    <div className="d-flex gap-4">
-                      <div className="filter-container">
-                        <label htmlFor="jobTitleFilter">Filter by Job Title: </label>
-                        <div className="dropdown">
-                          <button
-                            className="btn btn-secondary dropdown-toggle"
-                            type="button"
-                            id="jobTitleDropdownButton"
-                            aria-haspopup="true"
-                            aria-expanded={jobTitleDropdownOpen}
-                            onClick={() => setJobTitleDropdownOpen(!jobTitleDropdownOpen)}
-                          >
-                            {selectedJobTitle === "All" ? "Select Job Title" : selectedJobTitle}
-                          </button>
-                          <div
-                            className={`dropdown-menu ${jobTitleDropdownOpen ? "show" : ""}`}
-                            aria-labelledby="jobTitleDropdownButton"
-                          >
-                            {jobTitles.map((title, index) => (
-                              <div
-                                key={index}
-                                className="dropdown-item"
-                                onClick={() => {
-                                  setSelectedJobTitle(title);
-                                  setJobTitleDropdownOpen(false);
-                                }}
-                              >
-                                {title}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="filter-container">
-                        <label htmlFor="skillsFilter">Filter by Skills: </label>
+                   
+
+                    <div className="d-flex justify-content-between my-3 ">
+                    <div className="filter-container">
+                       
                         <div className="dropdown">
                           <button
                             className="btn btn-secondary dropdown-toggle"
@@ -182,21 +241,23 @@ function Vendorapplicant() {
                             aria-expanded={skillsDropdownOpen}
                             onClick={() => setSkillsDropdownOpen(!skillsDropdownOpen)}
                           >
-                            Select Skills
+                            {selectedSkills.length ? selectedSkills.join(", ") : "Select Skills"}
                           </button>
                           <div
                             className={`dropdown-menu ${skillsDropdownOpen ? "show" : ""}`}
                             aria-labelledby="skillsDropdownButton"
                           >
                             {skills.map((skill, index) => (
-                              <div key={index} className="dropdown-item checkbox">
-                                <label>
-                                  <input
-                                    type="checkbox"
-                                    value={skill}
-                                    onChange={handleSkillsChange}
-                                    checked={selectedSkills.includes(skill)}
-                                  />
+                              <div key={index} className="form-check">
+                                <input
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  id={`skill${index}`}
+                                  value={skill}
+                                  checked={selectedSkills.includes(skill)}
+                                  onChange={handleSkillsChange}
+                                />
+                                <label className="form-check-label" htmlFor={`skill${index}`}>
                                   {skill}
                                 </label>
                               </div>
@@ -204,117 +265,70 @@ function Vendorapplicant() {
                           </div>
                         </div>
                       </div>
-                      <div className="view-buttons gap-4 mt-4 pt-2">
-                        <button onClick={() => setView("all")} className="btn btn-outline-info">
-                          All ({allCount})
-                        </button>{" "}
-                        <button onClick={() => setView("shortlisted")} className="btn btn-outline-success mx-2 ">
-                          Shortlisted ({shortlistedCount})
-                        </button>{" "}
-                        <button onClick={() => setView("rejected")} className="btn btn-outline-danger">
-                          Rejected ({rejectedCount})
-                        </button>
-                      </div>
+                      <button
+                        className={`btn btn-primary ${view === "all" ? "active" : ""}`}
+                        onClick={() => setView("all")}
+                      >
+                        All ({allCount})
+                      </button>
+                      <button
+                        className={`btn btn-success ${view === "shortlisted" ? "active" : ""}`}
+                        onClick={() => setView("shortlisted")}
+                      >
+                        Shortlisted ({shortlistedCount})
+                      </button>
+                      <button
+                        className={`btn btn-danger ${view === "rejected" ? "active" : ""}`}
+                        onClick={() => setView("rejected")}
+                      >
+                        Rejected ({rejectedCount})
+                      </button>
+                      <button
+                        className={`btn btn-info ${view === "scheduled" ? "active" : ""}`}
+                        onClick={() => setView("scheduled")}
+                      >
+                        Scheduled ({scheduledCount})
+                      </button>
                     </div>
-                    <br/>
-                    <ul className="post-job-bx browse-job-grid post-resume row">
-                      {displayedResumes.map((item, index) => (
-                        <li className="col-lg-6 col-md-6" key={index}>
-                          <div className="post-bx">
-                            <div className="d-flex m-b20">
-                              <div className="job-post-info">
-                                <h5 className="m-b0">
-                                  <Link to={"/employee/jobs-profile"}>
-                                    {item.title}
-                                  </Link>
-                                </h5>
-                                <p className="m-b5 font-13">
-                                  <Link to={"#"} className="text-primary">
-                                    {item.jobTitle}
-                                  </Link>{" "}
-                                  at Atract Solutions
-                                </p>
-                                <ul>
-                                  <li>
-                                    <i className="fa fa-map-marker"></i>
-                                    Sacramento, California
-                                  </li>
-                                  <li>
-                                    <i className="fa fa-money"></i> $ 2500
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                            <div className="job-time m-t15 m-b10">
-                              {item.skills.map((skill, skillIndex) => (
-                                <Link to={"#"} className="mr-1" key={skillIndex}>
-                                                                   <span>{skill}</span>
-                                </Link>
-                              ))}
-                            </div>
-                            <div className="">
-                              <button
-                                type="button"
-                                className="btn btn-outline-success"
-                                onClick={() => handleShortlist(item.id)}
-                              >
-                                {shortlisted.includes(item.id)
-                                  ? "Unshortlist"
-                                  : "Shortlist"}
-                              </button>{" "}
-                              <button
-                                type="button"
-                                className="btn btn-outline-danger"
-                                onClick={() => handleReject(item.id)}
-                              >
-                                {rejected.includes(item.id) ? "Unreject" : "Reject"}
-                              </button>{" "}
-                              <button
-                                type="button"
-                                className="btn btn-outline-primary"
-                                onClick={() => handleSchedule(item.id)}
-                              >
-                                Schedule
-                              </button>
-                            </div>
-                            {item.meetLink && (
-                              <div className="m-t10">
-                                <a
-                                  href={item.meetLink}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="btn btn-outline-info"
-                                >
-                                  Click here for Google Meet Link
-                                </a>
-                              </div>
-                            )}
+
+                    <div className="clearfix">
+                      {displayedResumes.map((item) => (
+                        <div
+                          key={item.id}
+                          className="job-bx bg-light clearfix border rounded p-4 mb-3"
+                        >
+                          <div className="job-info">
+                           
+                            <p className="font-weight-700" style={{fontSize:'25px',fontWeight:"600"}}>{item.job_title}</p>
+                            <h5 >{item.first_name} {item.last_name}</h5>
+                            <p>Skills: {item.skills}</p>
+                            <p>
+                              Resume Link: <a href={item.resume_link} target="_blank" rel="noopener noreferrer">View Resume</a>
+                            </p>
+                            <p>Applied on: {new Date(item.created_at).toLocaleDateString()}</p>
                           </div>
-                        </li>
+                          <div className="job-actions mt-3">
+                            <button
+                              className="btn btn-success"
+                              onClick={() => handleShortlist(item.id)}
+                            >
+                              {shortlisted.includes(item.id) ? "Unshortlist" : "Shortlist"}
+                            </button>
+                            <button
+                              className="btn btn-danger ml-2"
+                              onClick={() => handleReject(item.id)}
+                            >
+                              {rejected.includes(item.id) ? "Unreject" : "Reject"}
+                            </button>
+                            <button
+                              className="btn btn-primary ml-2"
+                              onClick={() => handleSchedule(item.id)}
+                            >
+                              {scheduled.includes(item.id) ? "Unschedule" : "Schedule"}
+                            </button>
+                          </div>
+                        </div>
                       ))}
-                    </ul>
-                    <div className="pagination-bx float-right">
-                      <ul className="pagination">
-                        <li className="previous">
-                          <Link to={"#"}>
-                            <i className="ti-arrow-left"></i> Prev
-                          </Link>
-                        </li>
-                        <li className="active">
-                          <Link to={"#"}>1</Link>
-                        </li>
-                        <li>
-                          <Link to={"#"}>2</Link>
-                        </li>
-                        <li>
-                          <Link to={"#"}>3</Link>
-                        </li>
-                        <li className="next">
-                          <Link to={"#"}>
-                            Next <i className="ti-arrow-right"></i>
-                          </Link>
-                        </li>
-                      </ul>
                     </div>
                   </div>
                 </div>
@@ -323,7 +337,7 @@ function Vendorapplicant() {
           </div>
         </div>
       </div>
-     <Footer/>
+      <Footer />
     </>
   );
 }

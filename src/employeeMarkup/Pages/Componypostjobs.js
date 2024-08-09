@@ -24,7 +24,12 @@ import { showToastError , showToastSuccess} from "../../utils/toastify";
 
 import { useEffect } from "react";
 import CompanySideBar from "../Layout/companySideBar";
+
+
 function EmployeeComponypostjobs() {
+
+
+  
   const postAJobData = useSelector((state) => state.postAJobSlice.postAJobData);
 
   const postAJobSkills = useSelector((state) => state.postAJobSlice.skillsData);

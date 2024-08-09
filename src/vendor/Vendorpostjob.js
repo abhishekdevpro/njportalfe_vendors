@@ -24,11 +24,15 @@ import { showToastError , showToastSuccess} from "../utils/toastify";
 import { useEffect } from "react";
 import VendorCompanySideBar from "./Vendorsidebar";
 import Footer from "../markup/Layout/Footer";
+
+
 function VendorComponypostjobs() {
+
   const postAJobData = useSelector((state) => state.postAJobSlice.postAJobData);
 
   const postAJobSkills = useSelector((state) => state.postAJobSlice.skillsData);
   const [jobCategories, setJobCategories] = useState([]);
+  const [experience_level_id, setexperience_level_id] = useState([]);
   const [description, setDescription] = useState(false);
   const selelctedQuestions = useSelector(
     (state) =>
@@ -68,42 +72,7 @@ function VendorComponypostjobs() {
     );
     setDescription(false);
   }
-// Fetch job categories from API
 
-  // const renderSection = (section) => {
-  //   if (section.startsWith("**")) {
-  //     if (section.includes(":")) {
-  //       const [title, content] = section
-  //         .split(":")
-  //         .map((part) => part.trim().replace(/\*\*/g, ""));
-  //       return (
-  //         <div>
-  //           <h2>{title}</h2>
-  //           <p>{content}</p>
-  //         </div>
-  //       );
-  //     }
-  //     return <h2>{section.replace(/\*\*/g, "").trim()}</h2>;
-  //   } else if (section.startsWith("*")) {
-  //     const listItems = section
-  //       .split("\n")
-  //       .map((item) => item.replace("*", "").trim());
-  //     return (
-  //       <ul>
-  //         {listItems.map((item) => (
-  //           <li key={item}>{item}</li>
-  //         ))}
-  //       </ul>
-  //     );
-  //   }
-  //   dispatch(
-  //     setPostAJobData({
-  //       ...postAJobData,
-
-  //       description: `<p>${section.trim()}</p>`,
-  //     })
-  //   );
-  // };
 
   const [countries, setCountries] = useState([
     {
@@ -156,11 +125,37 @@ function VendorComponypostjobs() {
     ));
   };
   
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "https://api.novajobs.us/api/admin/experience-level",
+      headers: {
+        Authorization: token,
+      },
+    })
+     .then((res) => {
+        setexperience_level_id(res.data.data); 
+        console.log('console h',res.data.data)// Update jobCategories state here
+      })
+      .catch((err) => {
+        console.log("Error fetching job categories:", err);
+      });
+  }, [token]);
+  
+  
+  // Function to render job categories as dropdown options
+  const renderexperience_level_id = () => {
+    return experience_level_id.map((category) => (
+      <option key={category.id} value={category.id}>
+        {category.name}
+      </option>
+    ));
+  };
   
 
   const getJob = async () => {
     await axios({
-      url: `https://api.novajobs.us/api/admin/vendor-lists/${id}`,
+      url: `https://api.novajobs.us/api/admin/job-lists/${id}`,
       method: "get",
       headers: {
         Authorization: token,
@@ -179,6 +174,7 @@ function VendorComponypostjobs() {
             selectedState: res.data.data.job_detail.state_id,
             selectedCountry: res.data.data.job_detail.country_id,
             job_title: res.data.data.job_detail.job_title,
+            salary: res.data.data.job_detail.salary
           })
         );
         dispatch(setSkillsData(res.data.data.job_detail.skills_arr));
@@ -229,7 +225,12 @@ function VendorComponypostjobs() {
         country_id: Number(postAJobData.selectedCountry),
         state_id: Number(postAJobData.selectedState),
         city_id: Number(postAJobData.selectedCity),
+        experience_level_id: Number(postAJobData.experience_level_id),
         is_publish: 1,
+        salary:postAJobData.salary,
+       
+        
+        
         screen_questions: {
           screen_question_keywords: selelctedQuestions,
         },
@@ -350,6 +351,10 @@ function VendorComponypostjobs() {
     getCountry();
   }, []);
 
+  
+
+  
+  
   useEffect(() => {
     // console.log(selectedCountry);
     dispatch(
@@ -363,6 +368,8 @@ function VendorComponypostjobs() {
     getState();
   }, [postAJobData.selectedCountry]);
 
+
+
   useEffect(() => {
     dispatch(
       setPostAJobData({
@@ -372,6 +379,19 @@ function VendorComponypostjobs() {
     );
     getCities();
   }, [postAJobData.selectedState]);
+
+
+  useEffect(() => {
+    dispatch(
+      setPostAJobData({
+        ...postAJobData,
+        selectedCity: 0,
+      })
+    );
+    getCities();
+  }, [postAJobData.selectedState]);
+
+  
 
   useEffect(() => {
     if (postAJobData.jobTitle !== "") {
@@ -406,7 +426,15 @@ function VendorComponypostjobs() {
       } else {
         updatedErrors = { ...errors, jobCategory: "" };
       }
+    } else if (name === "experience_level_id") {
+      // Validate job category (assuming it should not be empty)
+      if (value.trim() === "") {
+        updatedErrors = { ...errors, experience_level_id: "experience_level_id is required." };
+      } else {
+        updatedErrors = { ...errors, experience_level_id: "" };
+      }
     }
+    
   
     setErrors(updatedErrors); // Update errors state first
   
@@ -432,26 +460,7 @@ function VendorComponypostjobs() {
   };
   return (
     <>
-     
       <div className="page-content bg-white">
-      <Navbar bg="white" variant="white" className='py-3 border-bottom'>
-      <Navbar.Brand as={Link} to="/">
-        <img
-          style={{ width: "110px" }}
-          src={require("../images/logo/NovaUS.png")}
-          className="logo"
-          alt="img"
-        />
-      </Navbar.Brand>
-
-
-        <Nav className="ml-auto align-items-center">
-         
-
-          
-        </Nav>
-    
-    </Navbar>
         <div className="content-block">
           <div className="section-full bg-white p-t50 p-b20">
             <div className="container">
@@ -491,14 +500,14 @@ function VendorComponypostjobs() {
                         </div>
                         <div className="col-6 ">
                           <div className="form-group">
-                            <label htmlFor="jobTitle">Salary</label>
+                            <label htmlFor="salary">Salary</label>
                             <input
                               type="text"
                               className="form-control"
                               placeholder="Enter Salary"
-                              id="jobTitle"
-                              name="jobTitle"
-                              value={postAJobData.jobTitle}
+                              id="salary"
+                              name="salary"
+                              value={postAJobData.salary}
                               onChange={handleChange}
                               
                             />
@@ -507,23 +516,21 @@ function VendorComponypostjobs() {
                             <p className="text-danger">{errors.jobTitle}</p>
                           )}
                         </div>
-                        <div className="col-6 ">
-                          <div className="form-group">
-                            <label htmlFor="jobTitle">Experience</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Enter Experience"
-                              id=""
-                              name=""
-                              value={postAJobData.jobTitle}
-                              onChange={handleChange}
-                              
-                            />
-                          </div>
-                          {errors.jobTitle && (
-                            <p className="text-danger">{errors.jobTitle}</p>
-                          )}
+                        <div className="col-6"> 
+                        <div className="form-group">
+    <label htmlFor="experience_level_id">Experience</label>
+    <Form.Control
+  as="select"
+  custom
+  name="experience_level_id"
+  id="experience_level_id"
+  value={postAJobData.experience_level_id}
+  onChange={handleChange}
+>
+  {renderexperience_level_id()}
+</Form.Control>
+
+  </div>
                         </div>
                         <div className="col-12 ">
                           <div className="form-group">
@@ -894,7 +901,7 @@ function VendorComponypostjobs() {
           </div>
         </div>
       </div>
-<Footer/>
+      <Footer />
     </>
   );
 }

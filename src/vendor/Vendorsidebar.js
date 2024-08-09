@@ -23,7 +23,7 @@ const VendorCompanySideBar = ({ active }) => {
     // Clear authentication token or perform necessary logout actions
     localStorage.removeItem('vendorToken');
     // Redirect to admin login screen
-    <Navigate to="/admin/login" />
+    <Navigate to="/vendor/login" />
     return ;
   };
 
@@ -33,7 +33,7 @@ const VendorCompanySideBar = ({ active }) => {
   const dispatch = useDispatch();
   const postJob = async () => {
     await axios({
-      url: "https://api.novajobs.us/api/employeer/job-post",
+      url: "https://api.novajobs.us/api/admin/job-post",
       method: "POST",
       headers: {
         Authorization: token,
@@ -58,7 +58,7 @@ const VendorCompanySideBar = ({ active }) => {
           })
         );
         // dispatch(setSkillsData(res.data.data.skills_arr))
-        navigate(`/employee/company-post-jobs/${res.data.data.id}`);
+        navigate(`/vendor/vendorcomponypostjobs/${res.data.data.id}`);
       })
       .catch((err) => {
         console.log(err, "joy");
@@ -112,7 +112,7 @@ const VendorCompanySideBar = ({ active }) => {
     e.preventDefault();
     axios({
       method: "PUT",
-      url: "https://api.novajobs.us/api/employeer/company-logo",
+      url: "https://api.novajobs.us/api/admin/company-logo",
       headers: {
         Authorization: token,
       },
@@ -197,7 +197,7 @@ const VendorCompanySideBar = ({ active }) => {
           <ul>
           <li>
               <Link
-                to={"/"}
+           
                 className={active === "company" ? "" : null}
               >
                 <i className="fa fa-user-o" aria-hidden="true"></i>
@@ -234,22 +234,14 @@ const VendorCompanySideBar = ({ active }) => {
             </li>
             <li>
               <Link
-                to={"/vendor/vendorcompanymanage"}
+                to={"/vendor/vendorcompanymanage/jobs"}
                 className={active === "company-manage-job" ? "active" : null}
               >
                 <i className="fa fa-briefcase" aria-hidden="true"></i>
                 <span>Manage jobs</span>
               </Link>
             </li>
-            <li>
-              <Link
-                to={"/vendor/vendorapplicant"}
-                className={active === "company-resume" ? "active" : null}
-              >
-                <i className="fa fa-id-card-o" aria-hidden="true"></i>
-                <span>Applicants</span>
-              </Link>
-            </li>
+           
             <li>
             <Link
   to={"/vendor/vendorbulkuploadjobopeneing"}
