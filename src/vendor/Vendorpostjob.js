@@ -472,11 +472,7 @@ function VendorComponypostjobs() {
                       <h5 className="font-weight-700 pull-left text-uppercase">
                         Post A Job
                       </h5>
-                      <Link
-                        to={"/employee/company-profile"}
-                        className="site-button right-arrow button-sm float-right">
-                        Back
-                      </Link>
+                     
                     </div>
                     <form>
                       <div className="row">
@@ -810,11 +806,11 @@ function VendorComponypostjobs() {
                         </p>
                         <p className="text-center ">
                           Limits may apply to free job posts.
-                          <Link to={"/employee/term-of-use-nova-jobs"}>
+                       
                           <span style={{ color: "#0a66c2", fontWeight: "600" }}>
                             View Our Policy
                           </span>
-                        </Link>
+                    
                           
                         </p>
                       </div>

@@ -215,7 +215,7 @@ const VendorCompanySideBar = ({ active }) => {
             </li>
             <li>
               <Link
-                className={active === "postJob" ? "active" : null}
+                className={active === "vendorcomponypostjobs" ? "active" : null}
                 onClick={postJob}
                   to={"/vendor/vendorcomponypostjobs"}
               >

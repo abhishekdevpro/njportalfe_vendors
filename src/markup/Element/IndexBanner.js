@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form } from "react-bootstrap";
 import { TypeAnimation } from "react-type-animation";
 import "../../css/indexBanner.css";
-import SBELogo from "../../assests/SBE-Logo.png";
+import SBELogo from "../../assests/SBE-Logo1.png";
 import NewDBELogo from "../../assests/New-dbe-logo.png";
 var bnr1 = require("./../../images/main-slider/slide2.jpg");
 
@@ -44,12 +44,16 @@ class IndexBanner extends Component {
         style={{ backgroundImage: "url(" + bnr1 + ")" }}
       >
         <div className="container">
+
           <div className="dez-bnr-inr-entry align-m">
             <div className="find-job-bx">
-              <div className="d-flex align-items-center">
-                <div className="hover-3d">
-                  <h2>An AI-Enabled HR Job Portal</h2>
+              <div className="d-flex gap-4 align-items-center">
+                <div className="hover-3d align-items-center" style={{width:"250px"}}>
+                  <h2 className="py-4">An AI-Enabled <br/>
+                    HR Job Portal</h2>
                 </div>
+               <div className="align-items-center"> 
+                <img src={SBELogo} style={{width:"220px", height:"190px"}} className="d-flex align-items-center"/></div>
               </div>
               <h2>
                 <TypeAnimation

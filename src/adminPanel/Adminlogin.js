@@ -61,7 +61,7 @@ const Adminlogin = () => {
                 required
               />
             </Form.Group>
-            <Form.Group controlId="formPhone" className="mt-3">
+          {/*  <Form.Group controlId="formPhone" className="mt-3">
               <Form.Label>Phone*</Form.Label>
               <Form.Control
                 type="tel"
@@ -71,7 +71,7 @@ const Adminlogin = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 required
               />
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group controlId="formPassword" className="mt-3">
               <Form.Label>Password*</Form.Label>
               <div className="password-input-group">

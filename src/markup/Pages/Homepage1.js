@@ -195,7 +195,7 @@ function Homepage() {
                 <FaRegFileAlt />
               </div>
               <h3>Check Resume Score</h3>
-              <p>Our AI Gives Immediate Score On Your Resume.</p>
+              <p className="text-primary">Our AI Gives Immediate Score On Your Resume.</p>
             </div>
             <div
               className="card"
@@ -212,7 +212,7 @@ function Homepage() {
                 <FaRegFilePdf />
               </div>
               <h3>Build Your Public Profile</h3>
-              <p>Add Your Details To Reach leading Companies.</p>
+              <p className="text-primary">Add Your Details To Reach leading Companies.</p>
             </div>
             <div
               className="card"
@@ -229,7 +229,7 @@ function Homepage() {
                 <FaRegUser />
               </div>
               <h3>AI Skill Testing Tool</h3>
-              <p>AI Skill Testing Tool & Earn Rewards.</p>
+              <p className="text-primary">AI Skill Testing Tool & Earn Rewards.</p>
             </div>
           </div>
         </div>

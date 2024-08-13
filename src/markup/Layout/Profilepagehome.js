@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from './Footer';
 import Header2 from "./Header2";
@@ -235,9 +235,11 @@ const Profilepagehome = () => {
            
             <div className="mt-5 col-lg-11 mx-5 mb-5">
              
-              <RelatedJobs />
-              <RelatedJobs />
-              <RelatedJobs />
+             <Link to="/user/job/1">
+             <RelatedJobs />
+             </Link>
+              
+            
             </div>
           </div>
            <div className="col-lg-3">
