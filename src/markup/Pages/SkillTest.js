@@ -83,7 +83,7 @@ function SkillTest() {
       {loader === true ? (
         <h1>
 
-          Please Upload your CV. to take Skill test
+          Please Wait for While...
           {/*   <Preloader /> */}
         </h1>
       ) : (

@@ -4,6 +4,7 @@ import { TypeAnimation } from "react-type-animation";
 import "../../css/indexBanner.css";
 import SBELogo from "../../assests/SBE-Logo1.png";
 import NewDBELogo from "../../assests/New-dbe-logo.png";
+import { Link } from "react-router-dom";
 var bnr1 = require("./../../images/main-slider/slide2.jpg");
 
 class IndexBanner extends Component {
@@ -52,8 +53,11 @@ class IndexBanner extends Component {
                   <h2 className="py-4">An AI-Enabled <br/>
                     HR Job Portal</h2>
                 </div>
-               <div className="align-items-center"> 
-                <img src={SBELogo} style={{width:"220px", height:"190px"}} className="d-flex align-items-center"/></div>
+               <div className="align-items-center">
+                <Link to="https://novahome.care/">
+                <img src={SBELogo} style={{width:"220px", height:"190px"}} className="d-flex align-items-center"/>
+                </Link> 
+                </div>
               </div>
               <h2>
                 <TypeAnimation
