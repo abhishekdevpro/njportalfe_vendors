@@ -108,18 +108,7 @@ function Homepage() {
                     </Link>
                   </div>
                 </div>
-                <div
-                  className="blue-box"
-                  onMouseEnter={() => setHoveredBox("blue")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                  style={{
-                    backgroundColor: hoveredBox === "blue" ? "#007bff" : "#0056b3", // Change color on hover
-                    transition: "background-color 0.3s ease",
-                    padding: "20px",
-                    borderRadius: "8px",
-                    boxShadow: hoveredBox === "blue" ? "0 4px 8px rgba(0,0,0,0.2)" : "none",
-                  }}
-                >
+                <div className="blue-box">
                   <div
                     style={{
                       display: "flex",
@@ -138,6 +127,7 @@ function Homepage() {
                       }}
                     >
                       <FaRegEdit />
+
                       <h3
                         style={{
                           fontSize: "17px",
@@ -149,6 +139,7 @@ function Homepage() {
                         Are you an Employer?
                       </h3>
                     </div>
+
                     <p
                       style={{
                         margin: "0px",
@@ -156,19 +147,13 @@ function Homepage() {
                         fontSize: "14px",
                       }}
                     >
-                      List your company, post jobs, search talent with advanced filters and the power of AI
+                      List your company, post jobs, search talent with advanced filters and power of AI{" "}
                     </p>
                     <Link
-                      to={"/employee/register-2"}
+                      to={"/user/register-2"}
                       style={{ color: "white" }}
                     >
-                      <button
-                        type="button"
-                        className="btn btn-danger hoverlogo-3d"
-                        style={{ backgroundColor: "#c82333" }}
-                      >
-                        Search Talent
-                      </button>
+                      <button type="button" class="btn btn-danger hoverlogo-3d">Search Talent</button>
                     </Link>
                   </div>
                 </div>

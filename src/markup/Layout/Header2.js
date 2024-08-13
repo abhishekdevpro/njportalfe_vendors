@@ -140,17 +140,15 @@ class UserHeader2 extends Component {
                         localStorage.removeItem("title_keyword");
                       }}
                       className="">
-                      <Link to={"/user/job"}>Job Page</Link>
+                      <Link to={"/user/job/1"}>Job Page</Link>
                     </li>
-                    <li className="">
-                      <Link to={"/services"}>services </Link>
-                    </li>
+                    
                     <li>
                       <Link to={"#"}>
-                        Dashboard<i className="fa fa-chevron-down"></i>
+                        Dashboard
                       </Link>
-                      <ul className="sub-menu">
-                        {/* <li>
+                      {/* <ul className="sub-menu">
+                        <li>
                           <Link to={"/user/jobs-profile"} className="dez-page">
                             My Profile<span className="new-page">New</span>
                           </Link>
@@ -480,8 +478,8 @@ class UserHeader2 extends Component {
                           </Link>
                         </li>
                       </ul>
-                    </li> */}
-                      </ul>
+                    </li> 
+                      </ul>*/}
                     </li>
                   </ul>
                 </div>

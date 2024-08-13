@@ -9,7 +9,7 @@ function Featureblog() {
 
   const handleLocationSelect = (location) => {
     localStorage.setItem("selectedLocation", location);
-    navigate("/user/job");
+    navigate("/user/job/2");
   };
 
   // Define an array of state objects with name, image, and job count

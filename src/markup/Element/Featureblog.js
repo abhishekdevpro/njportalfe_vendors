@@ -8,7 +8,7 @@ function Featureblog() {
 
   const handleLocationSelect = (location) => {
     localStorage.setItem("selectedLocation", location);
-    navigate("/user/job");
+    navigate("/user/job/2");
   };
 
   const states = [
