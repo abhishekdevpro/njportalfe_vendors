@@ -6,6 +6,7 @@ import loginbg from "../../images/login/loginbg.jpeg";
 import axios from "axios";
 import { showToastError, showToastSuccess } from "../../utils/toastify";
 import { ToastContainer } from "react-toastify";
+import Footer from "./Footer";
 
 function ForgotPasswordemployee(props) {
   const [email, setEmail] = useState("demo@example.com");
@@ -153,7 +154,9 @@ function ForgotPasswordemployee(props) {
             </div>
           </div>
         </footer>
+
       </div>
+      <Footer/>
     </div>
   );
 }
