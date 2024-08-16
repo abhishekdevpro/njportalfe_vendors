@@ -84,43 +84,35 @@ class IndexBanner extends Component {
         <div className="container">
           <div className="dez-bnr-inr-entry align-m">
             <div className="find-job-bx">
-              <div className="d-flex gap-4 align-items-center">
-                <div className="hover-3d align-items-center rounded-4">
-                  <h2 className="py-2">An AI-Enabled HR Job Portal</h2>
-                </div>
-                <div className="hover-3d align-items-center rounded-4 p-4">
-                  <div style={styles.sliderBox}>
-                    <div style={styles.sliderText}>
-                      {this.sentences.map((sentence, index) => (
-                        <p
-                          key={index}
-                          onClick={() => this.handleSentenceClick(sentence.url)}
-                          style={{
-                            ...styles.sentence,
-                            opacity: index === currentIndex ? 1 : 0,
-                            transform:
-                              index === currentIndex
-                                ? "translateX(0)"
-                                : "translateX(100%)",
-                            cursor: "pointer", // Add cursor pointer for clickable effect
-                          }}
-                        >
-                          {sentence.text}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="align-items-center">
-                  {/* <Link to="https://novahome.care/">
-                    <img
-                      src={SBELogo}
-                      style={{ width: "220px", height: "190px" }}
-                      className="d-flex align-items-center"
-                    />
-                  </Link> */}
-                </div>
-              </div>
+
+              
+            <div className="d-sm-flex gap-4 align-items-center flex-row">
+  <div className="hover-3d align-items-center rounded-4">
+    <h2 className="py-2">An AI-Enabled HR Job Portal</h2>
+  </div>
+  <div className="hover-3d align-items-center rounded-4 p-4">
+    <div style={styles.sliderBox}>
+      <div style={styles.sliderText}>
+        {this.sentences.map((sentence, index) => (
+          <p
+            key={index}
+            onClick={() => this.handleSentenceClick(sentence.url)}
+            style={{
+              ...styles.sentence,
+              opacity: index === currentIndex ? 1 : 0,
+              transform:
+                index === currentIndex ? "translateX(0)" : "translateX(100%)",
+              cursor: "pointer",
+            }}
+          >
+            {sentence.text}
+          </p>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
               <h2>
                 <TypeAnimation
                   sequence={[
