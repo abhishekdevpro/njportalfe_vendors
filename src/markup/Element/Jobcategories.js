@@ -323,7 +323,7 @@ function Jobcategories() {
   const navigate = useNavigate();
   const handleSelectedTitle = (category) => {
     localStorage.setItem("jobCategory", category);
-    navigate("/user/job");
+    navigate("/user/job/2");
   };
   const token = localStorage.getItem("jobSeekerLoginToken");
   const [categories, setCategories] = useState([]);

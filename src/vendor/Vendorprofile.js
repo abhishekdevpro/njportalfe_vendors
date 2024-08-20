@@ -698,9 +698,9 @@ function VendorCompanyprofile() {
     };
 
     console.log("Payload:", payload); // Log the payload for debugging
-    console.log("URL:", "https://api.novajobs.us/api/admin/companies"); // Log the URL for debugging
+    console.log("URL:", "https://api.novajobs.us/api/admin/company"); // Log the URL for debugging
 
-    axios.post("https://api.novajobs.us/api/admin/companies", payload, {
+    axios.post("https://api.novajobs.us/api/admin/company", payload, {
       headers: {
         Authorization: token,
       },

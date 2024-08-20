@@ -140,7 +140,7 @@ class Headerforlogin extends Component {
                       }}
                       className=""
                     >
-                      <Link to={"/user/job"}>Job Page</Link>
+                      <Link to={"/user/job/2"}>Job Page</Link>
                     </li>
                     {localStorage.getItem("jobSeekerLoginToken") ? (
                       <li>

@@ -162,11 +162,11 @@ function VendorComponypostjobs() {
       },
     })
       .then((res) => {
-        console.log(res.data.data.companies.company_name, "joy");
+        console.log(res.data.data.company.company_name, "joy");
         dispatch(
           setPostAJobData({
             jobTitle: res.data.data.job_detail.job_title,
-            company: res.data.data.companies.company_name,
+            company: res.data.data.company.company_name,
             workplaceType: res.data.data.job_detail.workplace_type_id,
             jobType: res.data.data.job_detail.job_type_id,
             description: res.data.data.job_detail.job_description,
@@ -806,10 +806,15 @@ function VendorComponypostjobs() {
                         </p>
                         <p className="text-center ">
                           Limits may apply to free job posts.
-                       
-                          <span style={{ color: "#0a66c2", fontWeight: "600" }}>
+                       <Link
+                       to="/employee/privacy-rights"
+                       >
+
+<span style={{ color: "#0a66c2", fontWeight: "600" }}>
                             View Our Policy
                           </span>
+                       </Link>
+                          
                     
                           
                         </p>
