@@ -80,18 +80,14 @@ const SavedJobs = () => {
   };
 
   return (
-    <div className="section-full bg-white content-inner-2">
+    <div className="section-full bg-white c">
       <div className="container">
-        <div className="d-flex job-title-bx section-head">
-          <div className="mr-auto">
-            <h2 className="m-b5">Recent Jobs</h2>
-            <h6 className="fw4 m-b0">20+ Recently Added Jobs</h6>
+        <div className="d-flex ">
+          <div className="">
+         
+        
           </div>
-          <div className="align-self-end">
-            <Link to={"/user/job/2"} className="site-button button-sm">
-              Browse All Jobs <i className="fa fa-long-arrow-right"></i>
-            </Link>
-          </div>
+          
         </div>
         <div className="row">
           {skeleton === true ? (

@@ -200,8 +200,8 @@ function VendorComponypostjobs() {
       data: {
         keyword: postAJobData.jobTitle,
         title: postAJobData.jobTitle,
-        workplace_type: postAJobData.workplaceType,
-        job_type: postAJobData.jobType,
+        workplace_type: Number(postAJobData.workplaceType),
+        job_type: Number(postAJobData.jobType),
         company: postAJobData.company,
       },
     }).then((res) => {
@@ -294,6 +294,7 @@ function VendorComponypostjobs() {
         setCities([]);
       });
   };
+  console.log(postAJobData.selectedCountry,'trdt')
 
   const getState = async () => {
     await axios({
