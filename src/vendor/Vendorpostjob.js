@@ -202,7 +202,7 @@ function VendorComponypostjobs() {
         title: postAJobData.jobTitle,
         workplace_type: Number(postAJobData.workplaceType),
         job_type: Number(postAJobData.jobType),
-        company: postAJobData.company,
+        company: toString(postAJobData.company),
       },
     }).then((res) => {
       console.log(res.data.data.description);

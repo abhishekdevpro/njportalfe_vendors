@@ -224,17 +224,20 @@ function App() {
 
               <Route path="/vendor/verify" component={<VerifyEmail/>} />
 
-              <Route path="/vendor/login" element={<Vendorlogin />} />
-        <Route  path="/vendor/vendorprofile" element={ <PrivateRoutevendor> <VendorCompanyprofile />  </PrivateRoutevendor> }  />
-        <Route path="/vendor/vendorcompanySideBar" element={<PrivateRoutevendor><VendorCompanySideBar /> </PrivateRoutevendor>} />
-        <Route path="/vendor/vendorcomponypostjobs/:id" element={<PrivateRoutevendor><VendorComponypostjobs /></PrivateRoutevendor>} />
-        <Route path="/vendor/vendorwallet" element={<PrivateRoutevendor><Vendorwallet /></PrivateRoutevendor>} />
-        <Route path="/vendor/vendorcompanymanage/:id" element={<PrivateRoutevendor><VendorCompanymanage /></PrivateRoutevendor>} />
-        <Route path="/vendor/vendorapplicant/:id" element={<PrivateRoutevendor><Vendorapplicant /></PrivateRoutevendor>} />
-        <Route path="/vendor/vendorchangepasswordpage" element={<PrivateRoutevendor><VendorChangepasswordpage /></PrivateRoutevendor>} />
-        <Route path="/vendor/vendorbulkuploadjobopeneing" element={<PrivateRoutevendor><Vendorbulkuploadjobopeneing /></PrivateRoutevendor>} />
-        <Route path="/vendor/vendorbulkuploadjobseeker" element={<PrivateRoutevendor><Vendorbulkuploadjobseeker /></PrivateRoutevendor>} />
-        <Route path="/vendor/vendorregistration" element={<Vendorregistration />} />
+             
+        <Route path="/vendor">
+        <Route path="login" element={<Vendorlogin />} />
+        <Route  path="vendorprofile" element={ <PrivateRoutevendor> <VendorCompanyprofile />  </PrivateRoutevendor> }  />
+        <Route path="vendorcompanySideBar" element={<PrivateRoutevendor><VendorCompanySideBar /> </PrivateRoutevendor>} />
+        <Route path="vendorcomponypostjobs/:id" element={<PrivateRoutevendor><VendorComponypostjobs /></PrivateRoutevendor>} />
+        <Route path="vendorwallet" element={<PrivateRoutevendor><Vendorwallet /></PrivateRoutevendor>} />
+        <Route path="vendorcompanymanage/:id" element={<PrivateRoutevendor><VendorCompanymanage /></PrivateRoutevendor>} />
+        <Route path="vendorapplicant/:id" element={<PrivateRoutevendor><Vendorapplicant /></PrivateRoutevendor>} />
+        <Route path="vendorchangepasswordpage" element={<PrivateRoutevendor><VendorChangepasswordpage /></PrivateRoutevendor>} />
+        <Route path="vendorbulkuploadjobopeneing" element={<PrivateRoutevendor><Vendorbulkuploadjobopeneing /></PrivateRoutevendor>} />
+        <Route path="vendorbulkuploadjobseeker" element={<PrivateRoutevendor><Vendorbulkuploadjobseeker /></PrivateRoutevendor>} />
+        <Route path="vendorregistration" element={<Vendorregistration />} />
+        </Route>
 
 
       <Route path="/user">

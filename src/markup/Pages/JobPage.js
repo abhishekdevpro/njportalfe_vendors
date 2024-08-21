@@ -62,6 +62,8 @@ function JobPage() {
   const [job_type, setJobType] = useState([{ id: 0, name: "" }]);
   const [jobCategories, setJobCategories] = useState([{ id: 0, name: "" }]);
   const [activeDropDown, setActiveDropDown] = useState("");
+  const[category,Setcategory]= useState("");
+
 
   useEffect(() => {
     const fetchJobApplicationData = async () => {
@@ -109,6 +111,7 @@ function JobPage() {
     getExperience();
     getWorkplaceType();
     getJobTyes();
+    getcategory();
   }, []);
 
   useEffect(() => {
@@ -207,6 +210,23 @@ function JobPage() {
       console.log(err, "job type error");
     }
   };
+
+  
+
+  
+
+  const getcategory = async () =>{
+
+    try{
+      const res =await axios.get("https://api.novajobs.us/api/jobseeker/job-categories",{
+        header:{
+          Authorization:token},
+        })
+        Setcategory(res.data.data);
+      }catch(err){
+        console.log(err,'error')
+      }
+    }
 
   const getWorkplaceType = async () => {
     try {
@@ -851,11 +871,11 @@ function JobPage() {
                         </select>
                       ) : null} */}
                         <label htmlFor="jobCategory">Choose Category</label>
-                        {jobCategories ? (
+                        {category ? (
                           <select
                             type="text"
                             className={`form-control dropdown-menu-job_page ${
-                              jobApplicationValues.jobCategory === ""
+                              jobApplicationValues.category === ""
                                 ? null
                                 : "active_dropDown"
                             }`}
@@ -864,10 +884,10 @@ function JobPage() {
                             onChange={(e) => {
                               handleChange(e);
                             }}
-                            value={jobApplicationValues.jobCategory}
+                            value={jobApplicationValues.category}
                           >
                             <option value="">Select a Category</option>
-                            {jobCategories.map((item, index) => {
+                            {category.map((item, index) => {
                               return (
                                 <option
                                   key={index}
@@ -915,35 +935,33 @@ function JobPage() {
 
                     <div className="col-lg-2  col-md-5 col-12  ">
                       <div className="form-group">
-                        <label htmlFor="city_id">City:</label>
-                        {cities ? (
-                          <select
-                            type="text"
-                            className={`form-control dropdown-menu-job_page ${
-                              jobApplicationValues.city_id === 0
-                                ? null
-                                : "active_dropDown"
-                            }`}
-                            // placeholder="London"
-                            id="city_id"
-                            name="city_id"
-                            onChange={handleChange}
-                            value={jobApplicationValues.city_id}
-                          >
-                            <option value="" className="option">
-                              Select A City
-                            </option>
+  <label htmlFor="city_id">City:</label>
+  {cities && cities.length > 0 ? (
+    <select
+      type="text"
+      className={`form-control dropdown-menu-job_page ${
+        jobApplicationValues.city_id === 0 ? null : "active_dropDown"
+      }`}
+      id="city_id"
+      name="city_id"
+      onChange={handleChange}
+      value={jobApplicationValues.city_id}
+    >
+      <option value="" className="option">
+        Select A City
+      </option>
 
-                            {cities.map((item, index) => {
-                              return (
-                                <option key={index} value={item.id}>
-                                  {item.name}
-                                </option>
-                              );
-                            })}
-                          </select>
-                        ) : null}
-                      </div>
+      {cities.map((item, index) => (
+        <option key={index} value={item.id}>
+          {item.name}
+        </option>
+      ))}
+    </select>
+  ) : (
+    <p className="border border-black p-2 rounded-1 fw-light text-black option">Select the State first</p>
+  )}
+</div>
+
                     </div>
 
                     <div className="col-lg-2  col-md-5 col-12 ">

@@ -217,7 +217,7 @@ const VendorCompanySideBar = ({ active }) => {
               <Link
                 className={active === "vendorcomponypostjobs" ? "active" : null}
                 onClick={postJob}
-                  to={"/vendor/vendorcomponypostjobs"}
+                 // to={"/vendor/vendorcomponypostjobs"}
               >
                 <i className="fa fa-file-text-o" aria-hidden="true"></i>
                 <span>Post A Job</span>
