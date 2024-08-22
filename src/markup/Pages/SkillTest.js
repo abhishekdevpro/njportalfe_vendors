@@ -47,7 +47,7 @@ function SkillTest() {
   useEffect(() => {
     axios({
       method: "GET",
-      url: "https://api.novajobs.us/api/jobseeker/user-skills",
+      url: "https://api.novajobs.uasdasds/api/jobseeker/user-skills",
       headers: {
         Authorization: token,
         "Content-type": "application/json",
@@ -100,7 +100,11 @@ function SkillTest() {
                     <div className="col-xl-9 col-lg-9 m-b30 mx-2">
                       <div className="job-bx job-profile">
                         {skeleton === true ? (
-                          <LoadingBox />
+                         <h1>
+
+                         Please update the skill then check...
+                         {/*   <Preloader /> */}
+                       </h1>
                         ) : (
                           <div className="row" >
                             <div className="job-bx-title  clearfix">
