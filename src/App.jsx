@@ -183,6 +183,7 @@ import Vendorbulkuploadjobseeker from "./vendor/Vendorbulkuploadjobseeker";
 import Vendorregistration from "./vendor/Vendorregistration";
 import JobPagethirdparty from "./markup/Pages/JobPagethirdparty";
 
+import Transactions from "./markup/Pages/Transactions";
 function App() {
   const dispatch = useDispatch();
 
@@ -193,7 +194,10 @@ function App() {
       <Route path="aboutus" element={<Aboutus1 />} />
       <Route path="Profilepagehome" element={<Profilepagehome />} />
       <Route path="/*" element={<Error404 />} />
-     
+      <Route path="about-us" element={<Aboutus />} />
+      <Route  path="accessibility-center" element={ <AccessibilityCenter /> }/>
+      <Route  path="transaction" element={ <Transactions /> }/>
+
       
       <Route path="/admin/login" element={<Adminlogin />} />
         <Route  path="/admin/dashboard" element={ <PrivateRouteadmin> <Dashboard />  </PrivateRouteadmin> }  />
@@ -420,14 +424,7 @@ function App() {
             </UserPrivateRoute>
           }
         />
-        <Route
-          path="about-us"
-          element={
-            <UserPrivateRoute>
-              <Aboutus />
-            </UserPrivateRoute>
-          }
-        />
+        
         <Route path="job-detail/:id" element={<Jobdetail />} />
         <Route
           path="companies"
@@ -1058,14 +1055,7 @@ function App() {
             // </EmployeePrivateRoute>
           }
         />
-        <Route
-          path="accessibility-center"
-          element={
-            // <EmployeePrivateRoute>
-            <AccessibilityCenter />
-            // </EmployeePrivateRoute>
-          }
-        />
+       
         <Route
           path="howitworks-for-employee"
           element={
