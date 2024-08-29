@@ -126,9 +126,34 @@ class UserHeader extends Component {
                       </ul> */}
                     </li>
 
-                    <li className="">
-                      <Link to={"/services"}>services </Link>
-                    </li>
+                   
+                    <li className="nav-item jobseeker-hover" style={{ position: 'relative' }}>
+     
+        <Link
+          style={{ color: "white" }}
+          to="/services"
+          className="nav-link site-button"
+        >
+          services
+        </Link>
+      
+      {!localStorage.getItem("jobSeekerLoginToken") && (
+        <div className="popup rounded-4 m-2 ">
+        <div className="d-flex gap-2 m-3 ">
+        <Link to="/about-us" className="btn btn-primary " style={{backgroundColor:'#1C2957'}}>
+            AI-Resume Builder
+          </Link>
+          <br />
+         
+        </div>
+        </div>
+      )}
+       
+                  
+              
+    </li>
+
+                    
                     <li className="">
                       <Link to={"/aboutus"}>About Us </Link>
                     </li>
