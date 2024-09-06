@@ -197,8 +197,9 @@ const VendorCompanySideBar = ({ active }) => {
           <ul>
           <li>
               <Link
-           
-                className={active === "company" ? "" : null}
+          
+                to={"/vendor/vendorplan"}
+                className={active === "vendorplan" ? "" : null}
               >
                 <i className="fa fa-user-o" aria-hidden="true"></i>
                 <span>Plan</span>

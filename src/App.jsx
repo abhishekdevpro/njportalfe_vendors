@@ -184,6 +184,7 @@ import Vendorregistration from "./vendor/Vendorregistration";
 import JobPagethirdparty from "./markup/Pages/JobPagethirdparty";
 
 import Transactions from "./markup/Pages/Transactions";
+import Vendorplan from "./vendor/Vendorplan";
 function App() {
   const dispatch = useDispatch();
 
@@ -240,7 +241,9 @@ function App() {
         <Route path="vendorchangepasswordpage" element={<PrivateRoutevendor><VendorChangepasswordpage /></PrivateRoutevendor>} />
         <Route path="vendorbulkuploadjobopeneing" element={<PrivateRoutevendor><Vendorbulkuploadjobopeneing /></PrivateRoutevendor>} />
         <Route path="vendorbulkuploadjobseeker" element={<PrivateRoutevendor><Vendorbulkuploadjobseeker /></PrivateRoutevendor>} />
+        <Route path="vendorplan" element={<PrivateRoutevendor><Vendorplan/></PrivateRoutevendor>}/>
         <Route path="vendorregistration" element={<Vendorregistration />} />
+        
         </Route>
 
 
