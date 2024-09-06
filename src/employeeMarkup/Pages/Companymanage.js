@@ -267,70 +267,68 @@ function EmployeeCompanymanage() {
                   </div>
                 </div>
                 <button
-                  className="px-3 py-2 site-button text-white border-0 float-right mb-2"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleShareClick(item.job_detail.id)}
-                >
-                  Share
-                </button>
-                {showModal && selectedJobId === item.job_detail.id && (
-                  <div className="modal">
-                    <div className="modal-content text-white text-center" style={{ backgroundColor: "#1C2957" }}>
-                      <div>
-                        Share on
-                        <span className="close float-right" onClick={closeModal}>
-                          &times;
-                        </span>
-                      </div>
-                      <br />
-                      <div className="d-flex justify-content-evenly">
-                        <a
-                          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-                            `${window.location.origin}/user/job-detail/${item.job_detail.id}`
-                          )}`}
-                          className="text-white text-center"
-                          style={{ width: '40px' }}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <FaLinkedin size={40} style={{ marginRight: '5px' }} />
-                          LinkedIn
-                        </a>
-                        <a
-                          href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                            `${window.location.origin}/user/job-detail/${item.job_detail.id}`
-                          )}`}
-                          className="text-white text-center"
-                          style={{ width: '40px' }}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <FaWhatsapp size={40} style={{ marginRight: '5px' }} />
-                          WhatsApp
-                        </a>
-                      </div>
-                      <br />
-                      <div>
-                        <input
-                          style={{ width: '300px' }}
-                          type="text"
-                          value={`${window.location.origin}/user/job-detail/${item.job_detail.id}`}
-                          readOnly
-                        />
-                        <button
-                          onClick={() => {
-                            navigator.clipboard.writeText(
-                              `${window.location.origin}/user/job-detail/${item.job_detail.id}`
-                            );
-                            alert("Link copied!");
-                          }}
-                        >
-                          Copy Link
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
+  className="px-3 py-2 site-button text-white border-0 float-right mb-2"
+  style={{ cursor: "pointer" }}
+  onClick={() => handleShareClick(item.job_detail.id)}
+>
+  Share
+</button>
+{showModal && selectedJobId === item.job_detail.id && (
+  <Modal show={showModal} onHide={closeModal} centered>
+    <Modal.Body style={{ backgroundColor: "#00B4D8", color: "white" }}>
+      <div className="d-flex justify-content-between">
+        <h5 className="text-white">Share on</h5>
+        <FaX style={{ cursor: "pointer" }} onClick={closeModal} />
+      </div>
+      <div className="d-flex justify-content-evenly my-4">
+        <a
+          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+            `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+          )}`}
+          className="text-white"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaLinkedin size={40} />
+          LinkedIn
+        </a>
+        <a
+          href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+            `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+          )}`}
+          className="text-white"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaWhatsapp size={40} />
+          WhatsApp
+        </a>
+      </div>
+      <div className="text-center">
+        <input
+          style={{ width: '300px' }}
+          className="py-2 rounded-2 p-1"
+          type="text"
+          value={`${window.location.origin}/user/job-detail/${item.job_detail.id}`}
+          readOnly
+        />
+        <button
+         className="p-2 rounded-2 site-button text-white border-0 float-right "
+          onClick={() => {
+            
+            navigator.clipboard.writeText(
+              `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+            );
+            alert("Link copied!");
+          }}
+        >
+          Copy Link
+        </button>
+      </div>
+    </Modal.Body>
+  </Modal>
+)}
+
               </li>
             );
           })}

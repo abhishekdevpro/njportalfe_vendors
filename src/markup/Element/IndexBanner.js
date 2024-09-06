@@ -137,9 +137,10 @@ class IndexBanner extends Component {
                   <div className="col-lg-4 col-md-6 col-12">
                     <div className="form-group">
                       <label htmlFor="searchJob">
-                        Job Title, Keywords, or Phrase
+                       
                       </label>
                       <input
+                      placeholder=" Job Title, Keywords, or Phrase"
                         type="text"
                         className="form-control"
                         name="searchJob"
