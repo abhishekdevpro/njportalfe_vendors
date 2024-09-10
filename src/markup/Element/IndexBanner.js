@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Modal, Button } from "react-bootstrap";
 import { TypeAnimation } from "react-type-animation";
 import "../../css/indexBanner.css";
-import SBELogo from "../../assests/SBE-Logo1.png";
-import NewDBELogo from "../../assests/New-dbe-logo.png";
-import { Link } from "react-router-dom";
+
 var bnr1 = require("./../../images/main-slider/slide2.jpg");
 
 class IndexBanner extends Component {
@@ -13,6 +11,7 @@ class IndexBanner extends Component {
     this.state = {
       searchJob: "",
       currentIndex: 0,
+      showModal: false, // Modal visibility state
     };
   }
 
@@ -73,8 +72,37 @@ class IndexBanner extends Component {
     },
   ];
 
+  // Handle Modal Show/Hide
+  handleShow = (e) => {
+    e.preventDefault(); // Prevent form submission or unintended behavior
+    this.setState({ showModal: true });
+    this.loadChatbot();
+  };
+
+  handleClose = () => {
+    this.setState({ showModal: false });
+  };
+
+  // Function to dynamically load the chatbot
+  loadChatbot = () => {
+    if (!document.getElementById("chatling-embed-script")) {
+      console.log("Loading chatbot script..."); // Debugging
+      const configScript = document.createElement("script");
+      configScript.innerHTML = `window.chtlConfig = { chatbotId: "8171453563" }`;
+      document.body.appendChild(configScript);
+  
+      const embedScript = document.createElement("script");
+      embedScript.src = "https://chatling.ai/js/embed.js";
+      embedScript.async = true;
+      embedScript.setAttribute("data-id", "8171453563");
+      embedScript.id = "chatling-embed-script";
+      document.body.appendChild(embedScript);
+    }
+  };
+  
+
   render() {
-    const { currentIndex } = this.state;
+    const { currentIndex, showModal } = this.state;
 
     return (
       <div
@@ -84,34 +112,34 @@ class IndexBanner extends Component {
         <div className="container">
           <div className="dez-bnr-inr-entry align-m">
             <div className="find-job-bx">
-
-              
-            <div className="d-sm-flex gap-4 align-items-center flex-row">
-  <div className="hover-3d align-items-center rounded-4">
-    <h2 className="py-2">An AI-Enabled HR Job Portal</h2>
-  </div>
-  <div className="hover-3d align-items-center rounded-4 p-4">
-    <div style={styles.sliderBox}>
-      <div style={styles.sliderText}>
-        {this.sentences.map((sentence, index) => (
-          <p
-            key={index}
-            onClick={() => this.handleSentenceClick(sentence.url)}
-            style={{
-              ...styles.sentence,
-              opacity: index === currentIndex ? 1 : 0,
-              transform:
-                index === currentIndex ? "translateX(0)" : "translateX(100%)",
-              cursor: "pointer",
-            }}
-          >
-            {sentence.text}
-          </p>
-        ))}
-      </div>
-    </div>
-  </div>
-</div>
+              <div className="d-sm-flex gap-4 align-items-center flex-row">
+                <div className="hover-3d align-items-center rounded-4">
+                  <h2 className="py-2">An AI-Enabled HR Job Portal</h2>
+                </div>
+                <div className="hover-3d align-items-center rounded-4 p-4">
+                  <div style={styles.sliderBox}>
+                    <div style={styles.sliderText}>
+                      {this.sentences.map((sentence, index) => (
+                        <p
+                          key={index}
+                          onClick={() => this.handleSentenceClick(sentence.url)}
+                          style={{
+                            ...styles.sentence,
+                            opacity: index === currentIndex ? 1 : 0,
+                            transform:
+                              index === currentIndex
+                                ? "translateX(0)"
+                                : "translateX(100%)",
+                            cursor: "pointer",
+                          }}
+                        >
+                          {sentence.text}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <h2>
                 <TypeAnimation
@@ -132,15 +160,12 @@ class IndexBanner extends Component {
                   repeat={Infinity}
                 />
               </h2>
-              <form className="dezPlaceAni">
+              <form className="dezPlaceAni rounded-4">
                 <div className="row">
                   <div className="col-lg-4 col-md-6 col-12">
                     <div className="form-group">
-                      <label htmlFor="searchJob">
-                       
-                      </label>
                       <input
-                      placeholder=" Job Title, Keywords, or Phrase"
+                        placeholder=" Job Title, Keywords, or Phrase"
                         type="text"
                         className="form-control"
                         name="searchJob"
@@ -182,7 +207,13 @@ class IndexBanner extends Component {
                         />
                         <div className="input-group-append">
                           <span className="input-group-text">
-                            <i className="fa fa-search"></i>
+                            <i
+                              className="fa fa-search"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                window.location.href = "/user/job/1";
+                              }}
+                            ></i>
                           </span>
                         </div>
                       </div>
@@ -190,19 +221,44 @@ class IndexBanner extends Component {
                   </div>
 
                   <div className="col-lg-2 col-md-6 col-12">
-                    <button
-                      type="submit"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        window.location.href = "/user/job/1";
-                      }}
-                      className="site-button btn-block"
+                    <Button
+                      type="button" // Changed to "button" to prevent form submission
+                      onClick={this.handleShow}
+                      className="site-button btn-block rounded-4"
                     >
-                      Find Job
-                    </button>
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/512/10873/10873632.png"
+                        style={{ width: "30px" }}
+                        alt="AI Assist"
+                      />{" "}
+                      AI Assist
+                    </Button>
                   </div>
                 </div>
               </form>
+
+              {/* Modal for Chatbot */}
+              <Modal show={showModal} onHide={this.handleClose} size="lg" centered>
+                <Modal.Header closeButton>
+                  <Modal.Title>AI Chat Assistant</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div
+                    id="chatbot-container"
+                    style={{
+                      height: "500px", // Adjust as needed
+                      overflow: "hidden",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <div id="chatbot" style={{ width: "100%", height: "100%" }}>
+                      {/* Chatbot will be embedded here */}
+                    </div>
+                  </div>
+                </Modal.Body>
+              </Modal>
             </div>
           </div>
         </div>
@@ -224,6 +280,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+
     position: "absolute",
     top: 0,
     left: 0,
@@ -235,9 +292,9 @@ const styles = {
     position: "absolute",
     transition: "opacity 1s ease, transform 1s ease",
     whiteSpace: "nowrap",
-    fontSize: "1.5rem",
+    fontSize: "20px",
     fontWeight: "bold",
-    textAlign: "center",
+    color: "white",
   },
 };
 
