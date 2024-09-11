@@ -91,7 +91,8 @@ const SavedJobs = () => {
         </div>
         <div className="row">
           {skeleton === true ? (
-            <JobPageSkeleton />
+            
+            <div>Please wait Or Check have saved any job?<JobPageSkeleton /> </div>
           ) : (
             <div className="col-lg-12">
               {jobApplicationData ? (

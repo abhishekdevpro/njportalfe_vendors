@@ -244,6 +244,97 @@ function Homepage() {
               <h2 className="m-b5">Testimonials</h2>
             </div>
             <Owltestimonial />
+
+            
+          </div>
+        </div>
+
+        <div
+          className="d-flex flex-column bg-white align-items-center my-5"
+          style={{ gap: "20px", padding: "20px" }}
+        >
+          <h2
+            className="m-0"
+            style={{
+              fontSize: "28px",
+              fontWeight: "600",
+              lineHeight: "1.3em",
+              textAlign: "center",
+              color: "#09213c",
+            }}
+          >
+             Our Partners
+          </h2>
+          <div className="two-box-container my-3">
+            <div
+              className="card"
+              style={{
+                padding: "20px",
+                borderRadius: "8px",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                transition: "transform 0.3s ease",
+                height:"220px"
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+              onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+            >
+              <div className="card-icon">
+              <img src="https://ultraaura.education/static/media/scope.e082ae7a0491759feb4b.jpg"/>
+              </div>
+              <h3>Scope              </h3>
+              <p className="" style={{fontWeight:"800"}}>Empowering Citizens of South Florida… 
+                Innovative education and employment program for a 
+                stronger Hallandale Beach  community.</p>
+                <button class="btn btn-primary " type="button" >Learn More</button>
+            </div>
+            <div
+              className="card"
+              style={{
+                padding: "20px",
+                borderRadius: "8px",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                transition: "transform 0.3s ease",
+                height:"220px"
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+              onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+            >
+              <div className="card-icon">
+              <img src="https://ultraaura.education/static/media/Agi.34685fda483584baba04.jpg"/>
+              </div>
+              <h3>AGI Tax Experts</h3>
+              <p className="" style={{fontWeight:"800"}}>
+                Launch your career with AGI Tax Experts! Comprehensive
+                 training and placement opportunities
+                  available through our portal</p>
+                  <button class="btn btn-primary " type="button" >Learn More</button>
+            </div>
+         
+            <div
+              className="card"
+              style={{
+                padding: "20px",
+                borderRadius: "8px",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                transition: "transform 0.3s ease",
+                height:"220px"
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+              onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+            >
+              <div className="card-icon">
+                <img src="https://idfy-eia3.vercel.app/assets/logo5-DddCxhI1.jpg"/>
+              </div>
+              <h3>NOVA Home Care</h3>
+              <p className="" style={{fontWeight:"800"}}>
+                Elevate your career with top-notch training and placement.
+                 Transform lives and secure your future with us.
+               
+                 </p>
+               
+                 <button class="btn btn-primary " type="button" >Learn More</button>
+            </div>
+            
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from './Footer';
@@ -57,6 +58,7 @@ const MobileMenu = () => (
 );
 
 const JobDetailsDescriptions = () => (
+  
   <div className='text-start px-5'>
       <h4 className='text-start px-5'>About Company</h4>
       <p className='text-start px-5'>
@@ -66,7 +68,7 @@ Security & Safety
 24X7 Medical Support
 Best Care Takers
 Relaxing Environment
-Know More
+
       </p>
       <h5><strong className='text-start px-5 mt-3'>
        Our Services
@@ -179,6 +181,8 @@ const metadata = {
 
 const Profilepagehome = () => {
  
+  const [activeTab, setActiveTab] = useState('about');
+
   const { id } = useParams();
   const employer = employersInfo.find((item) => item.id === id) || employersInfo[0];
 
@@ -215,16 +219,61 @@ const Profilepagehome = () => {
   </div>
 </div>
 
-<div className='d-flex justify-content-center bg-secondary-subtle text-secondary-emphasis mb-5'>
-<ul className="list-inline font-fs font-bold d-flex justify-content-center gap-5 pt-4" style={{fontWeight:"600"}}>
-          <li className="list-inline-item border-top-0 border-end-0 border-start-0 border-5 "> <h5>About</h5></li>
-          <li className="list-inline-item"><h5> Jobs</h5> </li>
-          <li className="list-inline-item"><h5> Employees</h5> </li>
-          <li className="list-inline-item"><h5> Offices</h5></li>
+
+
+<div className="bg-gray-200 p">
+        <div className="max-w-4xl mx-auto ">
+        <ul className="list-inline font-fs bg-secondary-subtle text-secondary-emphasis font-bold d-flex justify-content-center gap-3 pt-2" id="myTab" role="tablist" style={{fontWeight:"600"}}>
+          <li className="nav-item" role="presentation" style={{fontWeight:"600"}}>
+            <a
+              className={`nav-link ${activeTab === 'about' ? 'active p-3 border-top-0 border-end-0 border-start-0 border-5' : 'p-3'}`}
+              id="about-tab"
+              data-bs-toggle="tab"
+              href="#about"
+              role="tab"
+              aria-controls="about"
+              aria-selected={activeTab === 'about'}
+              onClick={() => setActiveTab('about')}
+              
+            >
+              About
+            </a>
+          </li>
+          <li className="nav-item" role="presentation">
+            <a
+              className={`nav-link ${activeTab === 'jobs' ? 'active p-3 border-top-0 border-end-0 border-start-0 border-5' : 'p-3'}`}
+              id="jobs-tab"
+              data-bs-toggle="tab"
+              href="#jobs"
+              role="tab"
+              aria-controls="jobs"
+              aria-selected={activeTab === 'jobs'}
+              onClick={() => setActiveTab('jobs')}
+            >
+              Jobs
+            </a>
+          </li>
+      
+          <li className="nav-item" role="presentation">
+            <a
+              className={`nav-link ${activeTab === 'offices' ? 'active p-3 border-top-0 border-end-0 border-start-0 border-5' : 'p-3'}`}
+              id="offices-tab"
+              data-bs-toggle="tab"
+              href="#offices"
+              role="tab"
+              aria-controls="offices"
+              aria-selected={activeTab === 'offices'}
+              onClick={() => setActiveTab('offices')}
+            >
+              Offices
+            </a>
+          </li>
         </ul>
 
-</div>
-        <div className="row ">
+          <div className="p-4">
+            {activeTab === 'about' && (
+              <>
+               <div className="row ">
           <div className="col-lg-8 float-start">
             <JobDetailsDescriptions />
           <div className='m-5 '></div>
@@ -282,7 +331,7 @@ const Profilepagehome = () => {
           </li>
         </ul>
         <a
-          href={`http://www.${employer?.name}.com`}
+          href={`http://www.novahome.care`}
           className="btn btn-primary p-2 px-5 rounded-3 border-0 mx-2 text-primary text-center"
           target="_blank"
           rel="noopener noreferrer"
@@ -300,6 +349,31 @@ const Profilepagehome = () => {
     </div>
   </div>
         </div>
+              </>
+            )}
+            {activeTab === 'jobs' && (
+              <div>
+                <h3 className="text-xl font-semibold">Jobs Section Content</h3>
+                {/* Add content for the Jobs tab here */}
+              </div>
+            )}
+            {activeTab === 'employees' && (
+              <div>
+                <h3 className="text-xl font-semibold">Employees Section Content</h3>
+                {/* Add content for the Employees tab here */}
+              </div>
+            )}
+            {activeTab === 'offices' && (
+              <div>
+                <h3 className="text-xl font-semibold">Offices Section Content</h3>
+                {/* Add content for the Offices tab here */}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      
       </section>
       <Footer />
     </>
