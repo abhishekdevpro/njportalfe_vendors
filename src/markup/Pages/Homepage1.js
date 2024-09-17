@@ -9,6 +9,7 @@ import Featureblog from "./../Element/Featureblog";
 import Jobsection from "./../Element/Jobsection";
 import Owltestimonial from "./../Element/Owlblog1";
 import "../../css/indexBanner.css";
+import HeroSection from './Components/Herosection'
 import {
   FaEdit,
   FaFileAlt,
@@ -33,6 +34,7 @@ function Homepage() {
     <div className="page-wraper">
       <Header />
       <div className="page-content">
+      <HeroSection />
         <IndexBanner />
         <div
           className="section-full p-tb70 overlay-black-dark text-white text-center bg-img-fix"
