@@ -71,7 +71,7 @@ function EmployeeLogin(props) {
       .then((response) => {
         console.log(response, "login");
         localStorage.setItem("employeeLoginToken", response?.data?.data?.token);
-        navigate("/employee");
+        navigate("/employee/company-profile");
       })
       .catch((err) => {
         console.log(err);

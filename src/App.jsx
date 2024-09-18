@@ -102,7 +102,7 @@ import EmployeeBlogdetailgrid from "./employeeMarkup/Pages/Blogdetailgrid";
 import EmployeeBlogdetailgridsidebar from "./employeeMarkup/Pages/Blogdetailgridsidebar";
 import EmployeeBlogleftimg from "./employeeMarkup/Pages/Blogleftimg";
 import EmployeeBlogdetail from "./employeeMarkup/Pages/Blogdetail";
-import JobPage from "./markup/Pages/JobPage";
+import JobPage from "./markup/Pages/JobPage"
 import ProfilePage from "./employeeMarkup/Pages/ProfilePage";
 import SkillTest from "./markup/Pages/SkillTest";
 import EducationPage from "./markup/Pages/EducationPage";

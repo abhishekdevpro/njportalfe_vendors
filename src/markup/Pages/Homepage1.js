@@ -35,7 +35,7 @@ function Homepage() {
       <Header />
       <div className="page-content">
       <HeroSection />
-        <IndexBanner />
+        {/* <IndexBanner /> */}
         <div
           className="section-full p-tb70 overlay-black-dark text-white text-center bg-img-fix"
           style={{ backgroundImage: "url(" + bnr2 + ")" }}
