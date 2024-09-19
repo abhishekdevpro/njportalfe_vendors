@@ -11,7 +11,7 @@ import bgimg from './bg-img.jpg';
 const Container = styled.div`
   min-height: 100vh;
   background-image: url(${bgimg});
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   display: flex;
   flex-direction: column;

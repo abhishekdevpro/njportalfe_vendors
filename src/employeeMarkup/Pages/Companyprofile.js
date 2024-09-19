@@ -37,7 +37,7 @@ function EmployeeCompanyprofile() {
   const [twitter, setTwitter] = useState("");
   const [googleBusiness, setGoogleBusiness] = useState("");
   const [glassdoor, setGlassdor] = useState("");
-
+  const [services, setServices] = useState([{ title: '', image: null }]);
   const [industries, setIndustries] = useState([]);
 
   const token = localStorage.getItem("employeeLoginToken");
@@ -192,6 +192,38 @@ function EmployeeCompanyprofile() {
     getCities();
   }, [selectedStates]);
 
+  // ... (previous useEffect hooks and functions)
+
+  const addService = () => {
+    setServices([...services, { title: "", image: null }]);
+  };
+
+  const removeService = (index) => {
+    const updatedServices = services.filter((_, i) => i !== index);
+    setServices(updatedServices);
+  };
+
+  const handleServiceChange = (index, field, value) => {
+    const updatedServices = services.map((service, i) => {
+      if (i === index) {
+        return { ...service, [field]: value };
+      }
+      return service;
+    });
+    setServices(updatedServices);
+  };
+
+  const handleImageUpload = (index, event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        handleServiceChange(index, 'image', reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <>
       <Header2 />
@@ -320,6 +352,56 @@ function EmployeeCompanyprofile() {
                               required
                             /> */}
                             <TextEditor />
+                          </div>
+                        </div>
+                        <div className="col-lg-12 col-md-12">
+                          <div className="form-group">
+                            <label>Services</label>
+                            {services.map((service, index) => (
+                              <div key={index} className="row mb-3">
+                                <div className="col-lg-6 col-md-6">
+                                  <div className="form-group">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      placeholder="Service Title"
+                                      value={service.title}
+                                      onChange={(e) => handleServiceChange(index, 'title', e.target.value)}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-lg-5 col-md-5">
+                                  <div className="form-group">
+                                    <input
+                                      type="file"
+                                      className="form-control-file"
+                                      onChange={(e) => handleImageUpload(index, e)}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-lg-1 col-md-1">
+                                  <button 
+                                    type="button" 
+                                    className="site-button button-sm red"
+                                    onClick={() => removeService(index)}
+                                  >
+                                    <i className="fa fa-trash"></i>
+                                  </button>
+                                </div>
+                                {service.image && (
+                                  <div className="col-lg-12 col-md-12 mt-2">
+                                    <img src={service.image} alt="Service" className="img-fluid" style={{maxHeight: '100px'}} />
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                            <button 
+                              type="button" 
+                              className="site-button button-sm"
+                              onClick={addService}
+                            >
+                              Add Service
+                            </button>
                           </div>
                         </div>
                         <div className="col-lg-6 col-md-6">
