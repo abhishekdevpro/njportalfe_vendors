@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CompanySideBar from "../Layout/companySideBar";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import TextEditor from "../Element/Editor";
 
 function EmployeeCompanyprofile() {
   const companyData = useSelector(
@@ -307,17 +308,18 @@ function EmployeeCompanyprofile() {
                             </Form.Control>
                           </div>
                         </div>
-                        <div className="col-lg-6 col-md-6">
+                        <div className="col-lg-12 col-md-6">
                           <div className="form-group">
                             <label>Company Description</label>
-                            <input
+                            {/* <input
                               className="form-control"
                               placeholder="Company Description"
                               onChange={(e) => setDescription(e.target.value)}
                               value={description}
                               rows="3"
                               required
-                            />
+                            /> */}
+                            <TextEditor />
                           </div>
                         </div>
                         <div className="col-lg-6 col-md-6">
@@ -469,6 +471,7 @@ function EmployeeCompanyprofile() {
                             />
                           </div>
                         </div>
+                        
                        
                         <div className="col-lg-12 col-md-12">
                           <div className="clearfix font-bold">
