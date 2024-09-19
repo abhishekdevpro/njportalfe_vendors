@@ -181,6 +181,7 @@ const VendorCompanySideBar = ({ active }) => {
             </div>
             
           </div>
+          {console.log(companyDetail?.company_name,"datahi")}
           <div className="candidate-title text-center candidate-detail text-break">
               <h4 className="m-b5">
                 <Link to={"#"}>{companyDetail?.company_name}</Link>

@@ -82,7 +82,7 @@ class UserHeader2 extends Component {
             <div className="main-bar clearfix">
               <div className="container clearfix">
                 <div className="logo-header mostion">
-                  <Link to={"/user"}>
+                  <Link to={"/"}>
                     <img
                       src={require("./../../images/logo/NovaUS.png")}
                       className="logo"
