@@ -419,8 +419,10 @@ function Jobprofile() {
       onChange={handleToggle}
       className="form-check-input"
     />
+    
     <span className="slider"></span>
-  </label>
+     
+  </label >
 </ToggleSwitch>
 
                       </div>

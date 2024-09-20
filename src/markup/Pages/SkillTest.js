@@ -33,7 +33,7 @@ function SkillTest() {
       },
     })
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response.data.data,"sktQ");
         setLoader(false);
 
         navigate("/user/education-page");
@@ -47,14 +47,14 @@ function SkillTest() {
   useEffect(() => {
     axios({
       method: "GET",
-      url: "https://api.novajobs.uasdasds/api/jobseeker/user-skills",
+      url: "https://api.novajobs.us/api/jobseeker/user-skills",
       headers: {
         Authorization: token,
         "Content-type": "application/json",
       },
     })
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response.data.data,"resume data");
         setCardData(response.data.data);
 
         setSkeleton(false);
@@ -102,7 +102,7 @@ function SkillTest() {
                         {skeleton === true ? (
                          <h1>
 
-                         Please update the skill then check...
+                         Please upload the Resume then check back...
                          {/*   <Preloader /> */}
                        </h1>
                         ) : (

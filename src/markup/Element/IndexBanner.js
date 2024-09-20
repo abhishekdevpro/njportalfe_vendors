@@ -160,9 +160,9 @@ class IndexBanner extends Component {
                   repeat={Infinity}
                 />
               </h2>
-              <form className="dezPlaceAni rounded-4">
+              <form className="dezPlaceAni rounded-4 ">
                 <div className="row">
-                  <div className="col-lg-4 col-md-6 col-12">
+                  <div className="col-lg-4 col-md-6 col-12 ">
                     <div className="form-group">
                       <input
                         placeholder=" Job Title, Keywords, or Phrase"
