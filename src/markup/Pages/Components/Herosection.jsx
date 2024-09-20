@@ -1,4 +1,89 @@
 
+// import React, { useState } from 'react';
+// import styled from 'styled-components';
+// import { FaSearch, FaTimes } from 'react-icons/fa';
+// import { useNavigate } from 'react-router-dom';
+// import JobseekerForm from './JobseekerForm';
+// import PartnerForm from './Partnersform';
+// import EmployeeForm from './EmployeeForm';
+// import bgimg from './bg-img.jpg';
+
+// const CareerAdvisorPage = () => {
+//   const [selectedOption, setSelectedOption] = useState('');
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const navigate = useNavigate();
+//   const options = ["Jobseeker", "Employer", "Partner"];
+
+//   const handleOptionChange = (option) => {
+//     setSelectedOption(option);
+//     setIsModalOpen(true);
+//   };
+
+//   const closeModal = () => {
+//     setIsModalOpen(false);
+//   };
+
+//   const renderForm = () => {
+//     switch (selectedOption) {
+//       case "Jobseeker":
+//         return <JobseekerForm />;
+//       case "Employer":
+//         return <EmployeeForm />;
+//       case "Partner":
+//         return <PartnerForm />;
+//       default:
+//         return null;
+//     }
+//   };
+
+//   const handleSearch = () => {
+//     navigate('/user/job/1');
+//   };
+
+//   return (
+//     <Container>
+//       <Heading1>Hello, I'm Aria,</Heading1>
+//       <Heading2>Your Personal Career Advisor!</Heading2>
+
+//       <Prompt>Are You?</Prompt>
+//       <OptionWrapper>
+//         {options.map((option, index) => (
+//           <OptionLabel
+//             key={index}
+//             selected={selectedOption === option}
+//             onClick={() => handleOptionChange(option)}
+//           >
+//             {option}
+//           </OptionLabel>
+//         ))}
+//       </OptionWrapper>
+
+//       <SearchContainer>
+//         <SearchInput
+//           type="text"
+//           placeholder="Job Title, Sector ..."
+//         />
+//         <SearchIcon onClick={handleSearch} />
+//       </SearchContainer>
+
+//       {isModalOpen && (
+//         <>
+//           <Overlay onClick={closeModal} />
+//           <Modal>
+//             <CloseButton onClick={closeModal}>
+//               <FaTimes />
+//             </CloseButton>
+//             <ModalTitle>{selectedOption} Form</ModalTitle>
+//             {renderForm()}
+//           </Modal>
+//         </>
+//       )}
+//     </Container>
+//   );
+// };
+
+// export default CareerAdvisorPage;
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaSearch, FaTimes } from 'react-icons/fa';
@@ -7,6 +92,8 @@ import JobseekerForm from './JobseekerForm';
 import PartnerForm from './Partnersform';
 import EmployeeForm from './EmployeeForm';
 import bgimg from './bg-img.jpg';
+
+// ... (keep all the existing styled components)
 
 const Container = styled.div`
   min-height: 100vh;
@@ -220,9 +307,81 @@ const ModalTitle = styled.h3`
   text-align: center;
 `;
 
+const SearchForm = styled.form`
+  width: 100%;
+  max-width: 1000px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+`;
+
+const FormRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const FormGroup = styled.div`
+  flex: 1;
+  min-width: 200px;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+`;
+
+const Select = styled.select`
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+`;
+
+const Button = styled.button`
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #ff6b6b;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #ff8787;
+  }
+
+  img {
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+  }
+`;
+
 const CareerAdvisorPage = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchJob, setSearchJob] = useState('');
+  const [sector, setSector] = useState('');
+  const [location, setLocation] = useState('');
   const navigate = useNavigate();
   const options = ["Jobseeker", "Employer", "Partner"];
 
@@ -248,8 +407,14 @@ const CareerAdvisorPage = () => {
     }
   };
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     navigate('/user/job/1');
+  };
+
+  const handleAIAssist = () => {
+    // Implement AI Assist functionality here
+    console.log("AI Assist clicked");
   };
 
   return (
@@ -270,13 +435,52 @@ const CareerAdvisorPage = () => {
         ))}
       </OptionWrapper>
 
-      <SearchContainer>
-        <SearchInput
-          type="text"
-          placeholder="Job Title, Sector ..."
-        />
-        <SearchIcon onClick={handleSearch} />
-      </SearchContainer>
+      <SearchForm onSubmit={handleSearch}>
+        <FormRow>
+          <FormGroup>
+            <Input
+              type="text"
+              placeholder="Job Title, Keywords, or Phrase"
+              value={searchJob}
+              onChange={(e) => setSearchJob(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Select value={sector} onChange={(e) => setSector(e.target.value)}>
+              <option value="">Select Sector</option>
+              <option value="Construction">Construction</option>
+              <option value="Coordinator">Coordinator</option>
+              <option value="Employer">Employer</option>
+              <option value="Financial Career">Financial Career</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Quality check">Quality check</option>
+              <option value="Real Estate">Real Estate</option>
+              <option value="Sales">Sales</option>
+              <option value="Supporting">Supporting</option>
+              <option value="Teaching">Teaching</option>
+            </Select>
+          </FormGroup>
+          <FormGroup>
+            <Input
+              type="text"
+              placeholder="Location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+          <Button type="button" onClick={handleAIAssist} className="search-button">
+  <img
+    src="https://cdn-icons-png.flaticon.com/512/54/54481.png" // Search icon
+    alt="Search"
+    className="search-icon"
+  />
+  Search
+</Button>
+          </FormGroup>
+        </FormRow>
+      </SearchForm>
 
       {isModalOpen && (
         <>

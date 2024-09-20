@@ -1,9 +1,235 @@
 
+// import React, { useState } from 'react';
+// import styled from 'styled-components';
+// import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+// import { useNavigate } from 'react-router-dom';
+
+
+// const JobseekerForm = () => {
+//   const [step, setStep] = useState(0);
+//   const navigate = useNavigate();
+
+//   const [formData, setFormData] = useState({
+//     hasSpecificJob: null,
+//     jobTitle: '',
+//     workMode: '',
+//     location: '',
+//     salaryExpectation: '',
+//     salaryCurrency: 'USD',
+//     salaryFrequency: 'yearly',
+//   });
+  
+//   const [errors, setErrors] = useState({});
+//   const [showSummary, setShowSummary] = useState(false);
+
+//   const steps = [
+//     {
+//       question: 'Do you have a specific job title in mind?',
+//       options: [
+//         { label: 'Yes - help me find it', value: true },
+//         { label: 'No - let\'s explore', value: false },
+//       ],
+//       field: 'hasSpecificJob',
+//     },
+//     { question: 'What job title are you looking for?', type: 'input', field: 'jobTitle' },
+//     {
+//       question: 'What work mode do you prefer?',
+//       options: ['Remote', 'Hybrid', 'On-site'],
+//       field: 'workMode',
+//     },
+//     { question: 'Where are you looking to work?', type: 'input', field: 'location' },
+//     { 
+//       question: 'What is your salary expectation?', 
+//       type: 'salary', 
+//       fields: ['salaryExpectation', 'salaryCurrency', 'salaryFrequency'], 
+//     },
+//   ];
+
+//   const resetForm = () => {
+//     setStep(0);
+//     setFormData({
+//       hasSpecificJob: null,
+//       jobTitle: '',
+//       workMode: '',
+//       location: '',
+//       salaryExpectation: '',
+//       salaryCurrency: 'USD',
+//       salaryFrequency: 'yearly',
+//     });
+//     setErrors({});
+//     setShowSummary(false);
+//     navigate('/user/login');
+//   };
+
+//   const handleInputChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//     setErrors({ ...errors, [e.target.name]: '' });
+//   };
+
+//   const handleOptionSelect = (value, field) => {
+//     setFormData({ ...formData, [field]: value });
+//     setErrors({ ...errors, [field]: '' });
+//   };
+
+//   const validateStep = () => {
+//     const currentStep = steps[step];
+//     const fields = Array.isArray(currentStep.fields) ? currentStep.fields : [currentStep.field];
+//     let isValid = true;
+
+//     fields.forEach((field) => {
+//       if (!formData[field]) {
+//         setErrors((prev) => ({ ...prev, [field]: 'This field is required' }));
+//         isValid = false;
+//       }
+//     });
+
+//     return isValid;
+//   };
+
+//   const nextStep = () => {
+//     if (validateStep()) {
+//       if (step < steps.length - 1) {
+//         setStep(step + 1);
+//       } else {
+//         setShowSummary(true);
+//       }
+//     }
+//   };
+
+//   const prevStep = () => {
+//     if (step > 0) setStep(step - 1);
+//   };
+
+//   const closeSummary = () => {
+//     setShowSummary(false);
+//     resetForm();
+//   };
+
+//   const renderStep = () => {
+//     const currentStep = steps[step];
+//     if (currentStep.options) {
+//       return (
+//         <div>
+//           {currentStep.options.map((option, index) => (
+//             <OptionButton
+//               key={index}
+//               onClick={() => handleOptionSelect(option.value || option, currentStep.field)}
+//               selected={formData[currentStep.field] === (option.value || option)}
+//             >
+//               {option.label || option}
+//             </OptionButton>
+//           ))}
+//         </div>
+//       );
+//     } else if (currentStep.type === 'salary') {
+//       return (
+//         <div>
+//           <InputGroup>
+//             <Input
+//               type="number"
+//               name="salaryExpectation"
+//               value={formData.salaryExpectation}
+//               onChange={handleInputChange}
+//               error={errors.salaryExpectation}
+//               placeholder="Enter amount"
+//             />
+//             <Select
+//               name="salaryCurrency"
+//               value={formData.salaryCurrency}
+//               onChange={handleInputChange}
+//             >
+//               <option value="USD">USD</option>
+//               <option value="EUR">EUR</option>
+//               <option value="GBP">GBP</option>
+//             </Select>
+//           </InputGroup>
+//           <Select
+//             name="salaryFrequency"
+//             value={formData.salaryFrequency}
+//             onChange={handleInputChange}
+//           >
+//             <option value="yearly">per year</option>
+//             <option value="monthly">per month</option>
+//             <option value="weekly">per week</option>
+//             <option value="hourly">per hour</option>
+//           </Select>
+//         </div>
+//       );
+//     } else {
+//       return (
+//         <Input
+//           type="text"
+//           name={currentStep.field}
+//           value={formData[currentStep.field] || ''}
+//           onChange={handleInputChange}
+//           error={errors[currentStep.field]}
+//           placeholder="Enter your answer"
+//         />
+//       );
+//     }
+//   };
+
+//   return (
+//     <FormContainer>
+//       <FormCard>
+//         <QuestionTitle>{steps[step].question}</QuestionTitle>
+//         {renderStep()}
+//         {errors[steps[step].field] && (
+//           <ErrorMessage>{errors[steps[step].field]}</ErrorMessage>
+//         )}
+//         <ButtonContainer>
+//           <Button secondary onClick={prevStep} disabled={step === 0}>
+//             <ChevronLeft size={20} />
+//             Back
+//           </Button>
+//           <Button primary onClick={nextStep}>
+//             {step < steps.length - 1 ? (
+//               <>
+//                 Next
+//                 <ChevronRight size={20} />
+//               </>
+//             ) : (
+//               'Submit'
+//             )}
+//           </Button>
+//         </ButtonContainer>
+//       </FormCard>
+
+//       {showSummary && (
+//         <Modal>
+//           <ModalContent>
+//             <ModalHeader>
+//               <ModalTitle>Application Summary</ModalTitle>
+//               <button onClick={closeSummary}>
+//                 <X size={24} />
+//               </button>
+//             </ModalHeader>
+//             {Object.entries(formData)
+//               .filter(([key]) => key !== "hasSpecificJob")
+//               .map(([key, value]) => (
+//                 <div key={key}>
+//                   <strong>{key.replace(/([A-Z])/g, ' $1').toUpperCase()}:</strong> {value.toString()}
+//                 </div>
+//               ))}
+//             <SuccessMessage>
+//               <p><strong>Success</strong></p>
+//               <p>Your application has been submitted successfully!</p>
+//             </SuccessMessage>
+//           </ModalContent>
+//         </Modal>
+//       )}
+//     </FormContainer>
+//   );
+// };
+
+// export default JobseekerForm;
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+// ... (previous styled components remain unchanged)
 const FormContainer = styled.div`
   background-color: white;
   max-width: 32rem;
@@ -140,6 +366,17 @@ const SuccessMessage = styled.div`
   border-radius: 0.5rem;
 `;
 
+const SkipButton = styled.button`
+  color: white;
+  background-color: #3b82f6;
+  font-size: 1rem;
+  text-decoration: none;
+  margin:0.5rem auto;
+  padding:0.5rem;
+  border:none;
+
+`;
+
 const JobseekerForm = () => {
   const [step, setStep] = useState(0);
   const navigate = useNavigate();
@@ -165,18 +402,21 @@ const JobseekerForm = () => {
         { label: 'No - let\'s explore', value: false },
       ],
       field: 'hasSpecificJob',
+      skippable: false,
     },
-    { question: 'What job title are you looking for?', type: 'input', field: 'jobTitle' },
+    { question: 'What job title are you looking for?', type: 'input', field: 'jobTitle', skippable: true },
     {
       question: 'What work mode do you prefer?',
       options: ['Remote', 'Hybrid', 'On-site'],
       field: 'workMode',
+      skippable: true,
     },
-    { question: 'Where are you looking to work?', type: 'input', field: 'location' },
+    { question: 'Where are you looking to work?', type: 'input', field: 'location', skippable: true },
     { 
       question: 'What is your salary expectation?', 
       type: 'salary', 
-      fields: ['salaryExpectation', 'salaryCurrency', 'salaryFrequency'], 
+      fields: ['salaryExpectation', 'salaryCurrency', 'salaryFrequency'],
+      skippable: true,
     },
   ];
 
@@ -208,6 +448,8 @@ const JobseekerForm = () => {
 
   const validateStep = () => {
     const currentStep = steps[step];
+    if (currentStep.skippable) return true;
+    
     const fields = Array.isArray(currentStep.fields) ? currentStep.fields : [currentStep.field];
     let isValid = true;
 
@@ -233,6 +475,17 @@ const JobseekerForm = () => {
 
   const prevStep = () => {
     if (step > 0) setStep(step - 1);
+  };
+
+  const skipStep = () => {
+    const currentStep = steps[step];
+    const fields = Array.isArray(currentStep.fields) ? currentStep.fields : [currentStep.field];
+    
+    fields.forEach((field) => {
+      setFormData((prev) => ({ ...prev, [field]: 'Skipped' }));
+    });
+
+    nextStep();
   };
 
   const closeSummary = () => {
@@ -311,6 +564,9 @@ const JobseekerForm = () => {
         {renderStep()}
         {errors[steps[step].field] && (
           <ErrorMessage>{errors[steps[step].field]}</ErrorMessage>
+        )}
+        {steps[step].skippable && (
+          <SkipButton onClick={skipStep}>Skip this question</SkipButton>
         )}
         <ButtonContainer>
           <Button secondary onClick={prevStep} disabled={step === 0}>
