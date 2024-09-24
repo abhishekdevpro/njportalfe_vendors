@@ -1,89 +1,4 @@
 
-// import React, { useState } from 'react';
-// import styled from 'styled-components';
-// import { FaSearch, FaTimes } from 'react-icons/fa';
-// import { useNavigate } from 'react-router-dom';
-// import JobseekerForm from './JobseekerForm';
-// import PartnerForm from './Partnersform';
-// import EmployeeForm from './EmployeeForm';
-// import bgimg from './bg-img.jpg';
-
-// const CareerAdvisorPage = () => {
-//   const [selectedOption, setSelectedOption] = useState('');
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const navigate = useNavigate();
-//   const options = ["Jobseeker", "Employer", "Partner"];
-
-//   const handleOptionChange = (option) => {
-//     setSelectedOption(option);
-//     setIsModalOpen(true);
-//   };
-
-//   const closeModal = () => {
-//     setIsModalOpen(false);
-//   };
-
-//   const renderForm = () => {
-//     switch (selectedOption) {
-//       case "Jobseeker":
-//         return <JobseekerForm />;
-//       case "Employer":
-//         return <EmployeeForm />;
-//       case "Partner":
-//         return <PartnerForm />;
-//       default:
-//         return null;
-//     }
-//   };
-
-//   const handleSearch = () => {
-//     navigate('/user/job/1');
-//   };
-
-//   return (
-//     <Container>
-//       <Heading1>Hello, I'm Aria,</Heading1>
-//       <Heading2>Your Personal Career Advisor!</Heading2>
-
-//       <Prompt>Are You?</Prompt>
-//       <OptionWrapper>
-//         {options.map((option, index) => (
-//           <OptionLabel
-//             key={index}
-//             selected={selectedOption === option}
-//             onClick={() => handleOptionChange(option)}
-//           >
-//             {option}
-//           </OptionLabel>
-//         ))}
-//       </OptionWrapper>
-
-//       <SearchContainer>
-//         <SearchInput
-//           type="text"
-//           placeholder="Job Title, Sector ..."
-//         />
-//         <SearchIcon onClick={handleSearch} />
-//       </SearchContainer>
-
-//       {isModalOpen && (
-//         <>
-//           <Overlay onClick={closeModal} />
-//           <Modal>
-//             <CloseButton onClick={closeModal}>
-//               <FaTimes />
-//             </CloseButton>
-//             <ModalTitle>{selectedOption} Form</ModalTitle>
-//             {renderForm()}
-//           </Modal>
-//         </>
-//       )}
-//     </Container>
-//   );
-// };
-
-// export default CareerAdvisorPage;
-
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaSearch, FaTimes } from 'react-icons/fa';
@@ -92,21 +7,31 @@ import JobseekerForm from './JobseekerForm';
 import PartnerForm from './Partnersform';
 import EmployeeForm from './EmployeeForm';
 import bgimg from './bg-img.jpg';
+import videoSrc  from './herovideo.mp4'
 
 // ... (keep all the existing styled components)
+const Video = styled.video`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: auto; /* Keep the aspect ratio */
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: cover; /* Cover the entire container */
+  transform: translate(-50%, -50%);
+  z-index: 0; /* Video is behind everything */
+`;
 
 const Container = styled.div`
   min-height: 100vh;
-  background-image: url(${bgimg});
-  background-size: cover;
-  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
   position: relative;
-  z-index: 1;
+  overflow: hidden; /* Prevent overflow due to video */
 
   &:before {
     content: '';
@@ -115,8 +40,8 @@ const Container = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+    z-index: 1; /* Overlay above video */
   }
 
   @media (max-width: 768px) {
@@ -131,7 +56,7 @@ const Heading1 = styled.h1`
   margin-bottom: 0.5rem;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-
+  z-index: 2; /* Ensure prompt is above the overlay */
   @media (max-width: 768px) {
     font-size: 2.25rem;
   }
@@ -141,6 +66,7 @@ const Heading1 = styled.h1`
   }
 `;
 
+
 const Heading2 = styled.h2`
   font-size: 2rem;
   color: #ff6b6b;
@@ -148,7 +74,7 @@ const Heading2 = styled.h2`
   margin-bottom: 2rem;
   text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-
+  z-index: 2; /* Ensure prompt is above the overlay */
   @media (max-width: 768px) {
     font-size: 1.5rem;
   }
@@ -165,10 +91,7 @@ const Prompt = styled.p`
   margin-bottom: 2rem;
   text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-
-  @media (max-width: 768px) {
-    font-size: 1.25rem;
-  }
+  z-index: 2; /* Ensure prompt is above the overlay */
 `;
 
 const OptionWrapper = styled.div`
@@ -179,7 +102,7 @@ const OptionWrapper = styled.div`
   margin-bottom: 2rem;
   width: 100%;
   max-width: 800px;
-
+  z-index: 2; /* Ensure prompt is above the overlay */
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -310,13 +233,14 @@ const ModalTitle = styled.h3`
 const SearchForm = styled.form`
   width: 100%;
   max-width: 1000px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.3);
   border-radius: 1rem;
   padding: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
+  z-index: 2; /* Ensure the search form is above the overlay */
+  position: relative; /* Position relative for layering */
 `;
-
 const FormRow = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -375,7 +299,6 @@ const Button = styled.button`
     margin-right: 0.5rem;
   }
 `;
-
 const CareerAdvisorPage = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -419,9 +342,17 @@ const CareerAdvisorPage = () => {
 
   return (
     <Container>
+      <Video
+        autoPlay
+        loop
+        muted
+        src={videoSrc}
+        type="video/mp4"
+      >
+        Your browser does not support the video tag.
+      </Video>
       <Heading1>Hello, I'm Aria,</Heading1>
       <Heading2>Your Personal Career Advisor!</Heading2>
-
       <Prompt>Are You?</Prompt>
       <OptionWrapper>
         {options.map((option, index) => (
@@ -448,17 +379,7 @@ const CareerAdvisorPage = () => {
           <FormGroup>
             <Select value={sector} onChange={(e) => setSector(e.target.value)}>
               <option value="">Select Sector</option>
-              <option value="Construction">Construction</option>
-              <option value="Coordinator">Coordinator</option>
-              <option value="Employer">Employer</option>
-              <option value="Financial Career">Financial Career</option>
-              <option value="Information Technology">Information Technology</option>
-              <option value="Marketing">Marketing</option>
-              <option value="Quality check">Quality check</option>
-              <option value="Real Estate">Real Estate</option>
-              <option value="Sales">Sales</option>
-              <option value="Supporting">Supporting</option>
-              <option value="Teaching">Teaching</option>
+              {/* other options */}
             </Select>
           </FormGroup>
           <FormGroup>
@@ -470,14 +391,14 @@ const CareerAdvisorPage = () => {
             />
           </FormGroup>
           <FormGroup>
-          <Button type="button" onClick={handleAIAssist} className="search-button">
-  <img
-    src="https://cdn-icons-png.flaticon.com/512/54/54481.png" // Search icon
-    alt="Search"
-    className="search-icon"
-  />
-  Search
-</Button>
+            <Button type="button" onClick={handleAIAssist} className="search-button">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/54/54481.png" // Search icon
+                alt="Search"
+                className="search-icon"
+              />
+              Search
+            </Button>
           </FormGroup>
         </FormRow>
       </SearchForm>
