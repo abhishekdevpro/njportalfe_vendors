@@ -205,7 +205,7 @@ function Componypostjobs() {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder="Jaipur, Rajasthan, India"
+                              placeholder="USA, Rajasthan, India"
                               id="location"
                               name="location"
                               onChange={handleChange}
@@ -324,7 +324,7 @@ function Componypostjobs() {
                         <p>
                           987 members with titles similar to Business
                           Development Specialist are actively seeking jobs in
-                          Jaipur.
+                          USA.
                         </p>
                       </div>
                     )}

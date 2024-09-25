@@ -781,7 +781,7 @@ function VendorComponypostjobs() {
                         <p>
                           987 members with titles similar to Business
                           Development Specialist are actively seeking jobs in
-                          Jaipur.
+                          USA.
                         </p>
                       </div>
                     )}

@@ -319,477 +319,34 @@ function JobPage() {
   console.log("SelectedJob", selectedJob);
   console.log("JobApplicationData", jobApplicationData);
 
-  // const {id}  = useParams()
-  // console.log(id,"Parama")
-  // const [selectedJob, setSelectedJob] = useState(null);
-  // const [show, setShow] = useState(false);
-  // const [activeTab, setActiveTab] = useState("contact-info"); // Initial active tab
-  // const [sidebarOpen, setSidebarOpen] = useState(false);
-  // const dispatch = useDispatch();
-  // const jobApplicationData = useSelector(
-  //   (state) => state.jobApplicationSlice.jobApplicationData
-  // );
-  // const token = localStorage.getItem("jobSeekerLoginToken");
-  // const location = useLocation();
-  // const jobFromState = location.state?.job || null;
-
-  // useEffect(() => {
-  //   if (jobFromState) {
-  //     setSelectedJob(jobFromState);
-  //   } else if (jobApplicationData.length > 0) {
-  //     setSelectedJob(jobApplicationData[0]);
-  //   }
-  // }, [jobFromState, jobApplicationData]);
-
-  // const screeningQuestion = useSelector(
-  //   (state) => state.jobApplicationScreeningQues.selectedScreeningQuestions
-  // );
-
-  
-  // const toggleSidebar = () => {
-  //   setSidebarOpen(!sidebarOpen);
-  // };
-
-  // const [showSkeleton, setShowSkeleton] = useState(true);
-  // const navigate = useNavigate();
-  // const toggleFabJobs = async () => {
-  //   try {
-  //     await axios({
-  //       url: "https://api.novajobs.us/api/jobseeker/job-favorites",
-  //       method: "POST",
-  //       headers: { Authorization: token },
-  //       data: {
-  //         job_id: selectedJob.job_detail.id,
-  //       },
-  //     })
-  //       .then((res) => {
-  //         console.log(res);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const fetchJobApplicationData = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       "https://api.novajobs.us/api/jobseeker/job-lists",
-  //       {
-  //         headers: {
-  //           Authorization: token,
-  //         },
-  //       }
-  //     );
-  //     dispatch(setJobApplicationData(response.data.data));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
  
-  // useEffect(() => {
-  //   // New: Set selectedJob based on job title from URL or state
-  //   const searchParams = new URLSearchParams(location.search);
-  //   const jobTitleFromState = location.state?.jobTitle || searchParams.get("jobTitle");
-    
-  //   if (jobTitleFromState) {
-  //     const job = jobApplicationData.find(
-  //       (job) => job.job_detail.job_title === jobTitleFromState
-  //     );
-  //     if (job) setSelectedJob(job);
-  //   }
-  // }, [jobApplicationData, location]);
-
-  // const convertToPlainText = (htmlContent) => {
-  //   const div = document.createElement("div");
-  //   div.innerHTML = htmlContent;
-  //   let plainText = div.innerText || div.textContent || "";
-  //   plainText = plainText.split(/\s+/).slice(0, 30).join(" ");
-  //   return plainText;
-  // };
-
-  // useEffect(() => {
-  //   setSelectedJob(jobApplicationData[0]);
-  //   console.log(jobApplicationData, "error");
-  // }, [jobApplicationData]);
- 
-  // console.log("Job data",selectedJob)
-   
-  // const handleSelectJob = (job) => {
-  //   setSelectedJob(job);
-  // };
-
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
-
-  // const handleNext = () => {
-  //   // Update activeTab state based on the current active tab
-  //   if (activeTab === "contact-info") {
-  //     setActiveTab("additional-info");
-  //   } else if (activeTab === "additional-info") {
-  //     setActiveTab("resume-info");
-  //   } else if (activeTab === "resume-info") {
-  //     setActiveTab("immediate-info");
-  //   }
-  // };
-
-  // const handlePrev = () => {
-  //   // Update activeTab state based on the current active tab
-  //   if (activeTab === "immediate-info") {
-  //     setActiveTab("resume-info");
-  //   } else if (activeTab === "resume-info") {
-  //     setActiveTab("additional-info");
-  //   } else if (activeTab === "additional-info") {
-  //     setActiveTab("contact-info");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const fetchJobApplicationData = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         "https://api.novajobs.us/api/jobseeker/job-lists",
-  //         {
-  //           headers: {
-  //             Authorization: token,
-  //           },
-  //         }
-  //       );
-  //       dispatch(setJobApplicationData(response.data.data));
-  //       setShowSkeleton(false);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchJobApplicationData();
-  // }, [dispatch, token]);
-
-  // const jobApplicationValues = useSelector(
-  //   (state) => state.jobApplicationSlice.jobApplicationValues
-  // );
-
-  // // console.table(jobApplicationValues, "values");
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   if (name === "country_id") {
-  //     const selectedIndex = e.target.selectedIndex;
-  //     const text = e.target.options[selectedIndex].text;
-  //     // console.log(text);
-  //     dispatch(
-  //       setJobApplicationValues({
-  //         ...jobApplicationValues,
-  //         country: text,
-  //         [name]: value,
-  //       })
-  //     );
-  //     return;
-  //   }
-
-  //   if (name === "city_id") {
-  //     const selectedIndex = e.target.selectedIndex;
-  //     const text = e.target.options[selectedIndex].text;
-  //     // console.log(text);
-  //     dispatch(
-  //       setJobApplicationValues({
-  //         ...jobApplicationValues,
-  //         city: text,
-  //         [name]: value,
-  //       })
-  //     );
-  //     return;
-  //   }
-
-  //   if (name === "state_id") {
-  //     const selectedIndex = e.target.selectedIndex;
-  //     const text = e.target.options[selectedIndex].text;
-  //     // console.log(text);
-  //     dispatch(
-  //       setJobApplicationValues({
-  //         ...jobApplicationValues,
-  //         state: text,
-  //         [name]: value,
-  //       })
-  //     );
-  //     return;
-  //   }
-  //   dispatch(
-  //     setJobApplicationValues({ ...jobApplicationValues, [name]: value })
-  //   );
-  // };
-  // const [countries, setCountries] = useState([
-  //   {
-  //     id: 0,
-  //     name: "",
-  //   },
-  // ]);
-
-  // const [states, setStates] = useState([
-  //   {
-  //     id: 0,
-  //     name: "",
-  //   },
-  // ]);
-
-  // const [cities, setCities] = useState([
-  //   {
-  //     id: 0,
-  //     name: "",
-  //   },
-  // ]);
-
-  // const [workplace_type, setWorkplace_type] = useState([
-  //   {
-  //     id: 0,
-  //     name: "",
-  //   },
-  // ]);
-
-  // const [experience, setExperience] = useState([
-  //   {
-  //     id: 0,
-  //     name: "",
-  //   },
-  // ]);
-
-  // const [job_type, setJobType] = useState([
-  //   {
-  //     id: 0,
-  //     name: "",
-  //   },
-  // ]);
-
-  // const [jobCategories, setJobCategories] = useState([
-  //   {
-  //     id: 0,
-  //     name: "",
-  //   },
-  // ]);
-  // const [activeDropDown, setActiveDropDown] = useState("");
-
-  // useEffect(() => {
-  //   if (jobApplicationValues.jobCategory !== "") {
-  //     setActiveDropDown("active_dropDown");
-  //   }
-  // }, [jobApplicationValues.jobCategory]);
-  // const getJobTyes = async () => {
-  //   await axios({
-  //     method: "GET",
-  //     url: "https://api.novajobs.us/api/jobseeker/job-types",
-
-  //     headers: {
-  //       Authorization: token,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       // console.log(res.data.data, "JOBTYPE");
-  //       setJobType(res.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err, "joy");
-  //     });
-  // };
-
-  // const getWorkplaceType = () => {
-  //   axios({
-  //     method: "GET",
-  //     url: "https://api.novajobs.us/api/jobseeker/workplace-types",
-  //     headers: {
-  //       Authorization: token,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       // console.log(response.data.data);
-  //       setWorkplace_type(response.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       console.log(err.response.data.message);
-  //       showToastError(err?.response?.data?.message);
-  //     });
-  // };
-
-  // const getCountry = () => {
-  //   axios({
-  //     method: "GET",
-  //     url: "https://api.novajobs.us/api/jobseeker/countries",
-  //     headers: {
-  //       Authorization: token,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       let country = response.data.data;
-  //       setCountries(country);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       setCities([]);
-  //     });
-  // };
-
-  // const getState = () => {
-  //   axios({
-  //     method: "GET",
-  //     url: `https://api.novajobs.us/api/jobseeker/stats/231`,
-  //     headers: {
-  //       Authorization: token,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       // console.log(response.data.data, "STATE");
-  //       setStates(response.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err, "STATE");
-  //       setStates([]);
-  //       setCities([]);
-  //     });
-  // };
-
-  // const getCities = () => {
-  //   axios({
-  //     method: "GET",
-  //     url: `https://api.novajobs.us/api/jobseeker/cities/${jobApplicationValues.state_id}`,
-  //     headers: {
-  //       Authorization: token,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       // console.log(response, "CITY");
-  //       setCities(response.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err, "CITY");
-  //       setCities([]);
-  //     });
-  // };
-
-  // const getExperience = () => {
-  //   axios({
-  //     method: "GET",
-  //     url: "https://api.novajobs.us/api/jobseeker/experience-level",
-  //     headers: {
-  //       Authorization: token,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       // console.log(response.data.data);
-  //       setExperience(response.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       console.log(err.response.data.message);
-  //       showToastError(err?.response?.data?.message);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   getCountry();
-  //   getExperience();
-  //   getWorkplaceType();
-  //   getJobTyes();
-  // }, []);
-
-  // useEffect(() => {
-  //   dispatch(
-  //     setJobApplicationValues({
-  //       ...jobApplicationValues,
-  //       state_id: 0,
-  //       city_id: 0,
-  //     })
-  //   );
-  //   getState();
-  // }, [jobApplicationValues.country_id]);
-
-  // useEffect(() => {
-  //   dispatch(
-  //     setJobApplicationValues({
-  //       ...jobApplicationValues,
-  //       city_id: 0,
-  //     })
-  //   );
-  //   getCities();
-  // }, [jobApplicationValues.state_id]);
-
-  // useEffect(() => {
-  //   axios({
-  //     method: "GET",
-  //     url: "https://api.novajobs.us/api/jobseeker/job-categories",
-  //     headers: {
-  //       Authorization: token,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       console.log(response.data.data, "jobCategory");
-  //       setJobCategories(response.data.data);
-  //     })
-  //     .catch((err) => console.log(err, "jobCategory"));
-  // }, []);
-
-  // const submitApplication = async () => {
-  //   await axios({
-  //     url: "https://api.novajobs.us/api/jobseeker/jobs-applied",
-  //     method: "POST",
-  //     headers: {
-  //       Authorization: token,
-  //     },
-  //     data: {
-  //       job_id: selectedJob.job_detail.id,
-  //       screen_questions: screeningQuestion,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       // console.log(res);
-  //       fetchJobApplicationData();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       console.log(err.response.data.message);
-  //       showToastError(err?.response?.data?.message);
-  //     });
-  // };
-
-  // const selectedLocation = localStorage.getItem("selectedLocation");
-  // const title_keyword = localStorage.getItem("title_keyword");
   const baseUrl =
     // "https://api.novajobs.us/api/jobseeker/job-lists/?page_size=7&is_publish=1";
     "https://api.novajobs.us/api/jobseeker/job-lists?page_size=7&is_publish=1";
 
   const params = new URLSearchParams();
 
-  // if (jobApplicationValues.search_input) {
-  //   params.append("title_keywords", jobApplicationValues.search_input);
-  // } else if (title_keyword) {
-  //   params.append("title_keywords", title_keyword);
-  // }
+  const handleSearch = () => {
+    const { category, state_id, city_id, workplace_type, job_type, experience_level, title_keywords } = jobApplicationValues;
 
-  // if (jobApplicationValues.state_id) {
-  //   params.append("location", jobApplicationValues.state_id);
-  // } else if (selectedLocation) {
-  //   params.append("location", selectedLocation);
-  // }
+    // Add the selected filters to the URLSearchParams object
+    if (category) params.append("category", category);
+    if (state_id) params.append("state_id", state_id);
+    if (city_id) params.append("city_id", city_id);
+    if (workplace_type) params.append("workplace_type", workplace_type);
+    if (job_type) params.append("job_type", job_type);
+    if (experience_level) params.append("experience_level", experience_level);
+    if (title_keywords) params.append("title_keywords", title_keywords); // Add title_keywords to the params
 
-  // if (jobApplicationValues.workplace_type) {
-  //   params.append("workplace_type", jobApplicationValues.workplace_type);
-  // }
+    // Construct the final URL
+    const url = `${baseUrl}&${params.toString()}`;
+    console.log(url, "this is the url");
 
-  // if (jobApplicationValues.job_type) {
-  //   params.append("job_type", jobApplicationValues.job_type);
-  // }
-  // if (jobApplicationValues.experience_level) {
-  //   params.append("experience_level", jobApplicationValues.experience_level);
-  // }
-  // if (jobApplicationValues.jobCategory) {
-  //   params.append("job_category_id", jobApplicationValues.jobCategory);
-  // } else if (localStorage.getItem("jobCategory")) {
-  //   params.append("job_category_id", localStorage.getItem("jobCategory"));
-  // }
+    // Call the handleGetReq function to perform the search
+    handleGetReq(url);
+  };
 
-  // // const url = `${baseUrl}?${params.toString()}`;
-  const url = `${baseUrl}&${params.toString()}`;
-  console.log(url, "this is the url");
-  const handleGetReq = () => {
+  const handleGetReq = (url) => {
     axios({
       method: "GET",
       url: url,
@@ -803,29 +360,14 @@ function JobPage() {
         } else {
           dispatch(setJobApplicationData([]));
         }
-       
+
         console.log(response, "custom data");
       })
       .catch((err) => {
         console.log(err, "custom err");
       });
   };
-  // useEffect(() => {
-  //   if (
-  //     selectedLocation ||
-  //     title_keyword ||
-  //     localStorage.getItem("jobCategory") !== null
-  //   ) {
-  //     handleGetReq();
-  //   }
-  //   return () => {
-  //     localStorage.removeItem("selectedLocation");
-  //     localStorage.removeItem("title_keyword");
-  //     localStorage.removeItem("jobCategory");
-  //   };
-  // }, []);
-  // console.log("SelectedJob",selectedJob)
-  // console.log("JobApplicationData",jobApplicationData)
+ 
   return (
     <>
       <Header />
@@ -844,32 +386,7 @@ function JobPage() {
   <div className="row justify-content-center align-items-center">
     <div className="col-lg-2 col-md-4 col-sm-6 col-12">
       <div className="form-group">
-                        {/* <label htmlFor="country_id">Country:</label>
-                      {countries ? (
-                        <select
-                          type="text"
-                          className="form-control"
-                          id="country_id"
-                          name="country_id"
-                          onChange={(e) => {
-                            handleChange(e);
-                          }}
-                          value={jobApplicationValues.country_id}
-                        >
-                          <option value="">Select a country</option>
-                          {countries.map((item, index) => {
-                            return (
-                              <option
-                                key={index}
-                                value={item.id}
-                                country={item.name}
-                              >
-                                {item.name}
-                              </option>
-                            );
-                          })}
-                        </select>
-                      ) : null} */}
+                     
                         <label htmlFor="jobCategory">Choose Category</label>
                         {category ? (
                           <select
@@ -1068,20 +585,18 @@ function JobPage() {
                         alignItems: "center",
                       }}
                     >
-                      <input
+                       <input
                         type="text"
-                        name="search_input"
-                        id="search_input"
+                        className="form-control"
+                        id="title_keywords"
+                        name="title_keywords"
                         onChange={handleChange}
-                        value={jobApplicationValues.search_input}
-                        autoComplete="false"
-                        className="w-100 p-2 h-100 bg-transparent border-0"
-                        placeholder="search here..."
-                        style={{ outline: "none" }}
+                        value={jobApplicationValues.title_keywords || ""}
+                        placeholder="Enter job title keywords"
                       />
                     </div>
                     <button
-                      onClick={handleGetReq}
+                         onClick={handleSearch}
                       className="border-0 site-button d-flex align-items-center "
                       style={{
                         cursor: "pointer",

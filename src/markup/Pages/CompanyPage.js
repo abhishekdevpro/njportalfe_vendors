@@ -29,7 +29,7 @@ const CompanyPage = () => {
                                             <div style={{ padding: '10px 30px' }}>
                                                 <h2 className='mb-0'>HITORI TECH</h2>
                                                 <h6 className='mb-0'>Mobile App Development | Web App Development</h6>
-                                                <p className='mb-0'>Software Development . Jaipur, rajasthan . 135 followers . 11-50 employees</p>
+                                                <p className='mb-0'>Software Development . USA, rajasthan . 135 followers . 11-50 employees</p>
 
                                                 <div className="job-time m-t15 m-b10">
                                                     <a className="mr-1" href="#"><span style={{ padding: '5px 15px', borderRadius: '100px' }}>+ Follow</span></a>
@@ -91,7 +91,7 @@ const CompanyPage = () => {
                                                                 Headquarters</h6>
 
                                                             <p className="mb-0" style={{ color: "#1c2957" }}>
-                                                                Jaipur, rajasthan
+                                                                USA, rajasthan
                                                             </p>
 
                                                         </div>
@@ -113,7 +113,7 @@ const CompanyPage = () => {
                                                                             Associate Dev-Ops Internship</h6>
 
                                                                         <p className="" style={{ color: "#1c2957" }}>
-                                                                            Jaipur,Rajasthan,India
+                                                                            USA,Rajasthan,India
                                                                         </p>
 
                                                                     </div>
@@ -138,7 +138,7 @@ const CompanyPage = () => {
                                                                             Associate Dev-Ops Internship</h6>
 
                                                                         <p className="" style={{ color: "#1c2957" }}>
-                                                                            Jaipur,Rajasthan,India
+                                                                            USA,Rajasthan,India
                                                                         </p>
 
                                                                     </div>
@@ -251,7 +251,7 @@ const CompanyPage = () => {
                                                             Associate Dev-Ops Internship</h6>
 
                                                         <p className="" style={{ color: "#1c2957" }}>
-                                                            Jaipur,Rajasthan,India
+                                                            USA,Rajasthan,India
                                                         </p>
 
                                                     </div>
