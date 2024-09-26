@@ -9,7 +9,7 @@ import TwoBoxWithLinesSkeleton from "../skeleton/twoBoxLines";
 
 function Jobsection() {
   const dispatch = useDispatch();
-  const token = localStorage.getItem("employeeLoginToken");
+  const token = localStorage.getItem("jobSeekerLoginToken");
   const jobApplicationData = useSelector(
     (state) => state.jobApplicationSlice.jobApplicationData
   );

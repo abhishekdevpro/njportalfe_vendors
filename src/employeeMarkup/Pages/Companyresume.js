@@ -49,6 +49,8 @@ function EmployeeCompanyresume() {
             created_at: item.jobskkers_detail.created_at,
             resume_link: item.jobskkers_detail.resume_file_path,
             skills: item.jobskkers_detail.ai_resume_parse_data.jobsMyResumeData.skillsValue.skills || "", // Adjusted field
+            phone: item.jobskkers_detail.phone, // Add phone
+  email: item.jobskkers_detail.email 
           }));
           setResumes(formattedResumes);
         } else {
@@ -79,7 +81,7 @@ function EmployeeCompanyresume() {
     try {
       const token = localStorage.getItem("employeeLoginToken");
       await axios.put(
-        `https://api.novajobs.us/api/employeer/action-applicants-job/${jobId}/${jobSeekerId}`,
+        `https://api.novajobs.us/api/employeer/action-applicants-job/${id}/${jobId}`,
         { job_applied_status_id, createdAt },
         {
           headers: {
@@ -282,10 +284,19 @@ function EmployeeCompanyresume() {
                           <div className="job-info">
                            
                             <p className="font-weight-700" style={{fontSize:'25px',fontWeight:"600"}}>{item.job_title}</p>
+                            <Link to={`/employee/profilepage/${item.id}`}>
                             <h5 >{item.first_name} {item.last_name}</h5>
+                                      </Link>
+                                      <p >Phone: {item.phone} <br/> Email: {item.email}</p>
                             <p>Skills: {item.skills}</p>
                             <p>
-                              Resume Link: <a href={item.resume_link} target="_blank" rel="noopener noreferrer">View Resume</a>
+                              <a href={item.resume_link} target="_blank" rel="noopener noreferrer"> <button
+                              className="btn btn-primary"
+
+                            >
+                             View Resume
+                            </button></a>
+                          
                             </p>
                             <p>Applied on: {new Date(item.created_at).toLocaleDateString()}</p>
                           </div>

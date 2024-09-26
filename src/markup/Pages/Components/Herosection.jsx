@@ -8,6 +8,9 @@ import PartnerForm from './Partnersform';
 import EmployeeForm from './EmployeeForm';
 import bgimg from './bg-img.jpg';
 import videoSrc  from './herovideo.mp4'
+import  {  useEffect } from 'react';
+import axios from 'axios';
+
 
 // ... (keep all the existing styled components)
 const Video = styled.video`
@@ -298,14 +301,32 @@ const Button = styled.button`
     vertical-align: middle;
     margin-right: 0.5rem;
   }
+
 `;
+const SearchWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+`;
+
+
+// Import your required styles and components here
+// import Container, SearchForm, FormRow, FormGroup, Input, Select, Button, etc.
+
 const CareerAdvisorPage = () => {
-  const [selectedOption, setSelectedOption] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchJob, setSearchJob] = useState('');
   const [sector, setSector] = useState('');
   const [location, setLocation] = useState('');
+  const [states, setStates] = useState([]);
+  const [categories, setCategories] = useState([]); // For sector dropdown
+  const token = 'your_token_here'; // Add your actual token
   const navigate = useNavigate();
+
+  const [selectedOption, setSelectedOption] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const options = ["Jobseeker", "Employer", "Partner"];
 
   const handleOptionChange = (option) => {
@@ -330,44 +351,88 @@ const CareerAdvisorPage = () => {
     }
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    navigate('/user/job/1');
-  };
+ 
 
   const handleAIAssist = () => {
     // Implement AI Assist functionality here
     console.log("AI Assist clicked");
   };
 
+  // Fetch states for the location dropdown
+  useEffect(() => {
+    const getState = async () => {
+      try {
+        const response = await axios.get(`https://api.novajobs.us/api/jobseeker/stats/231`, {
+          headers: { Authorization: token },
+        });
+        setStates(response.data.data);
+      } catch (err) {
+        console.log(err, "STATE fetch error");
+      }
+    };
+    getState();
+  }, [token]);
+
+  // Fetch categories for the sector dropdown
+  useEffect(() => {
+    const getCategory = async () => {
+      try {
+        const res = await axios.get("https://api.novajobs.us/api/jobseeker/job-categories", {
+          headers: {
+            Authorization: token,
+          },
+        });
+        setCategories(res.data.data);
+      } catch (err) {
+        console.log(err, 'error fetching categories');
+      }
+    };
+    getCategory();
+  }, [token]);
+
+  // Handle the form submission and navigate with query parameters
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (searchJob) params.append("title_keywords", searchJob);
+    if (sector) params.append("sector", sector);
+    if (location) params.append("location", location);
+
+    const searchUrl = `/user/job/1?${params.toString()}`;
+    navigate(searchUrl);
+  };
+
   return (
+
+   
     <Container>
       <Video
-        autoPlay
-        loop
-        muted
-        src={videoSrc}
-        type="video/mp4"
-      >
-        Your browser does not support the video tag.
-      </Video>
-      <Heading1>Hello, I'm Aria,</Heading1>
-      <Heading2>Your Personal Career Advisor!</Heading2>
-      <Prompt>Are You?</Prompt>
-      <OptionWrapper>
-        {options.map((option, index) => (
-          <OptionLabel
-            key={index}
-            selected={selectedOption === option}
-            onClick={() => handleOptionChange(option)}
-          >
-            {option}
-          </OptionLabel>
-        ))}
-      </OptionWrapper>
+      autoPlay
+      loop
+      muted
+      src={videoSrc}
+      type="video/mp4"
+    >
+      Your browser does not support the video tag.
+    </Video>
+    <Heading1>Hello, I'm Aria,</Heading1>
+    <Heading2>Your Personal Career Advisor!</Heading2>
+    <Prompt>Are You?</Prompt>
+    <OptionWrapper>
+      {options.map((option, index) => (
+        <OptionLabel
+          key={index}
+          selected={selectedOption === option}
+          onClick={() => handleOptionChange(option)}
+        >
+          {option}
+        </OptionLabel>
+      ))}
+    </OptionWrapper>
 
       <SearchForm onSubmit={handleSearch}>
         <FormRow>
+          {/* Job title search input */}
           <FormGroup>
             <Input
               type="text"
@@ -376,24 +441,36 @@ const CareerAdvisorPage = () => {
               onChange={(e) => setSearchJob(e.target.value)}
             />
           </FormGroup>
+
+          {/* Sector dropdown populated with API data */}
           <FormGroup>
             <Select value={sector} onChange={(e) => setSector(e.target.value)}>
               <option value="">Select Sector</option>
-              {/* other options */}
+              {categories.map((category) => (
+                <option key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
             </Select>
           </FormGroup>
+
+          {/* Location dropdown populated with state data */}
           <FormGroup>
-            <Input
-              type="text"
-              placeholder="Location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            />
+            <Select value={location} onChange={(e) => setLocation(e.target.value)}>
+              <option value="">Select Location</option>
+              {states.map((state) => (
+                <option key={state.id} value={state.name}>
+                  {state.name}
+                </option>
+              ))}
+            </Select>
           </FormGroup>
+
+          {/* Search button */}
           <FormGroup>
-            <Button type="button" onClick={handleAIAssist} className="search-button">
+            <Button type="submit" className="search-button">
               <img
-                src="https://cdn-icons-png.flaticon.com/512/54/54481.png" // Search icon
+                src="https://cdn-icons-png.flaticon.com/512/54/54481.png"
                 alt="Search"
                 className="search-icon"
               />
@@ -404,17 +481,17 @@ const CareerAdvisorPage = () => {
       </SearchForm>
 
       {isModalOpen && (
-        <>
-          <Overlay onClick={closeModal} />
-          <Modal>
-            <CloseButton onClick={closeModal}>
-              <FaTimes />
-            </CloseButton>
-            <ModalTitle>{selectedOption} Form</ModalTitle>
-            {renderForm()}
-          </Modal>
-        </>
-      )}
+      <>
+        <Overlay onClick={closeModal} />
+        <Modal>
+          <CloseButton onClick={closeModal}>
+            <FaTimes />
+          </CloseButton>
+          <ModalTitle>{selectedOption} Form</ModalTitle>
+          {renderForm()}
+        </Modal>
+      </>
+    )}
     </Container>
   );
 };

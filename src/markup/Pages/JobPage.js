@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate,useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
 import Button from "react-bootstrap/Button";
@@ -28,6 +28,7 @@ import { useParams } from "react-router-dom";
 import SkeletonImg from "../../images/jobpage/No data-pana.png";
 import { FaSearch, FaBars } from 'react-icons/fa';
 import { ToastContainer } from "react-toastify";
+
 function JobPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -62,8 +63,21 @@ function JobPage() {
   const [job_type, setJobType] = useState([{ id: 0, name: "" }]);
   const [jobCategories, setJobCategories] = useState([{ id: 0, name: "" }]);
   const [activeDropDown, setActiveDropDown] = useState("");
-  const[category,Setcategory]= useState("");
+  const [category, Setcategory] = useState("");
 
+  // Extract search params from the URL
+  const queryParams = new URLSearchParams(location.search);
+  const initialSearchParams = {
+    category: queryParams.get('category') || '',
+    state_id: queryParams.get('state_id') || '',
+    city_id: queryParams.get('city_id') || '',
+    workplace_type: queryParams.get('workplace_type') || '',
+    job_type: queryParams.get('job_type') || '',
+    experience_level: queryParams.get('experience_level') || '',
+    title_keywords: queryParams.get('title_keywords') || '',
+  };
+
+  const [searchParams, setSearchParams] = useState(initialSearchParams);
 
   useEffect(() => {
     const fetchJobApplicationData = async () => {
@@ -78,7 +92,7 @@ function JobPage() {
         );
         dispatch(setJobApplicationData(response.data.data));
         setShowSkeleton(false);
-        
+
         // If we have an ID from params, find and set the matching job
         if (id) {
           const matchingJob = response.data.data.find(job => job.s_no.toString() === id);
@@ -92,6 +106,9 @@ function JobPage() {
         } else if (response.data.data.length > 0) {
           setSelectedJob(response.data.data[0]);
         }
+
+        // Perform search based on initial search params
+        handleSearch();
       } catch (error) {
         console.error('Error fetching job data:', error);
       }
@@ -110,8 +127,8 @@ function JobPage() {
     getCountry();
     getExperience();
     getWorkplaceType();
-    getJobTyes();
-    getcategory();
+    getJobTypes();
+    getCategory();
   }, []);
 
   useEffect(() => {
@@ -200,7 +217,7 @@ function JobPage() {
     }
   };
 
-  const getJobTyes = async () => {
+  const getJobTypes = async () => {
     try {
       const res = await axios.get("https://api.novajobs.us/api/jobseeker/job-types", {
         headers: { Authorization: token },
@@ -211,22 +228,18 @@ function JobPage() {
     }
   };
 
-  
-
-  
-
-  const getcategory = async () =>{
-
-    try{
-      const res =await axios.get("https://api.novajobs.us/api/jobseeker/job-categories",{
-        header:{
-          Authorization:token},
-        })
-        Setcategory(res.data.data);
-      }catch(err){
-        console.log(err,'error')
-      }
+  const getCategory = async () => {
+    try {
+      const res = await axios.get("https://api.novajobs.us/api/jobseeker/job-categories", {
+        headers: {
+          Authorization: token
+        },
+      });
+      Setcategory(res.data.data);
+    } catch (err) {
+      console.log(err, 'error')
     }
+  }
 
   const getWorkplaceType = async () => {
     try {
@@ -234,6 +247,17 @@ function JobPage() {
         headers: { Authorization: token },
       });
       setWorkplace_type(response.data.data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  const getExperience = async () => {
+    try {
+      const response = await axios.get("https://api.novajobs.us/api/jobseeker/experience-level", {
+        headers: { Authorization: token },
+      });
+      setExperience(response.data.data);
     } catch (err) {
       console.log(err);
       showToastError(err?.response?.data?.message);
@@ -246,9 +270,8 @@ function JobPage() {
         headers: { Authorization: token },
       });
       setCountries(response.data.data);
-    } catch (err) {
-      console.log(err);
-      setCities([]);
+    } catch (error) {
+      console.log("error", error);
     }
   };
 
@@ -271,23 +294,54 @@ function JobPage() {
         headers: { Authorization: token },
       });
       setCities(response.data.data);
-    } catch (err) {
-      console.log(err, "CITY");
-      setCities([]);
+    } catch (error) {
+      console.log("error", error);
     }
   };
 
-  const getExperience = async () => {
-    try {
-      const response = await axios.get("https://api.novajobs.us/api/jobseeker/experience-level", {
-        headers: { Authorization: token },
-      });
-      setExperience(response.data.data);
-    } catch (err) {
-      console.log(err);
-      showToastError(err?.response?.data?.message);
-    }
+  
+  const baseUrl =
+    // "https://api.novajobs.us/api/jobseeker/job-lists/?page_size=7&is_publish=1";
+    "https://api.novajobs.us/api/jobseeker/job-lists?page_size=7&is_publish=1";
+
+  const params = new URLSearchParams();
+  // Handle Search Based on Params
+  const handleSearch = () => {
+    const { category, state_id, city_id, workplace_type, job_type, experience_level, title_keywords } = jobApplicationValues;
+    const params = new URLSearchParams();
+
+    if (category) params.append("category", category);
+    if (state_id) params.append("state_id", state_id);
+    if (city_id) params.append("city_id", city_id);
+    if (workplace_type) params.append("workplace_type", workplace_type);
+    if (job_type) params.append("job_type", job_type);
+    if (experience_level) params.append("experience_level", experience_level);
+    if (title_keywords) params.append("title_keywords", title_keywords);
+
+    const url = `${baseUrl}&${params.toString()}`;
+    handleGetReq(url);
   };
+
+  // Perform GET request to fetch filtered job listings
+  const handleGetReq = (url) => {
+    axios({
+      method: "GET",
+      url: url,
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((response) => {
+        dispatch(setJobApplicationData(response.data.data || []));
+      })
+      .catch((err) => {
+        console.error("Error fetching filtered jobs:", err);
+      });
+  };
+
+
+
+
 
   const submitApplication = async () => {
     if (selectedJob && selectedJob.job_apply_url) {
@@ -313,59 +367,6 @@ function JobPage() {
         showToastError(err?.response?.data?.message);
       }
     }
-  };
-  
-
-  console.log("SelectedJob", selectedJob);
-  console.log("JobApplicationData", jobApplicationData);
-
- 
-  const baseUrl =
-    // "https://api.novajobs.us/api/jobseeker/job-lists/?page_size=7&is_publish=1";
-    "https://api.novajobs.us/api/jobseeker/job-lists?page_size=7&is_publish=1";
-
-  const params = new URLSearchParams();
-
-  const handleSearch = () => {
-    const { category, state_id, city_id, workplace_type, job_type, experience_level, title_keywords } = jobApplicationValues;
-
-    // Add the selected filters to the URLSearchParams object
-    if (category) params.append("category", category);
-    if (state_id) params.append("state_id", state_id);
-    if (city_id) params.append("city_id", city_id);
-    if (workplace_type) params.append("workplace_type", workplace_type);
-    if (job_type) params.append("job_type", job_type);
-    if (experience_level) params.append("experience_level", experience_level);
-    if (title_keywords) params.append("title_keywords", title_keywords); // Add title_keywords to the params
-
-    // Construct the final URL
-    const url = `${baseUrl}&${params.toString()}`;
-    console.log(url, "this is the url");
-
-    // Call the handleGetReq function to perform the search
-    handleGetReq(url);
-  };
-
-  const handleGetReq = (url) => {
-    axios({
-      method: "GET",
-      url: url,
-      headers: {
-        Authorization: token,
-      },
-    })
-      .then((response) => {
-        if (response.data.data) {
-          dispatch(setJobApplicationData(response.data.data));
-        } else {
-          dispatch(setJobApplicationData([]));
-        }
-
-        console.log(response, "custom data");
-      })
-      .catch((err) => {
-        console.log(err, "custom err");
-      });
   };
  
   return (
