@@ -28,7 +28,7 @@ function EmployeeCompanyprofile() {
   const [tagline, setTagline] = useState("");
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
-  const [foundedYear, setDate] = useState("");
+  const [foundedYear, setFoundedYear] = useState("");
   const [industry, setIndustry] = useState(""); // State variable to hold selected industry ID
   const [description, setDescription] = useState("");
   const [number, setNumber] = useState("");
@@ -115,7 +115,7 @@ function EmployeeCompanyprofile() {
     setTagline(companyDetail?.tagline || "");
     setEmail(companyDetail?.email || "");
     setWebsite(companyDetail?.website_link || "");
-    setDate(companyDetail?.created_at || "");
+    setFoundedYear(companyDetail?.created_at || "");
     setDescription(companyDetail?.about || "");
     setSelectedCountry(companyDetail?.country_id || null);
     setSelectedStates(companyDetail?.state_id || null);
@@ -306,17 +306,21 @@ function EmployeeCompanyprofile() {
                           </div>
                         </div>
                         <div className="col-lg-6 col-md-6">
-                          <div className="form-group">
-                            <label>Founded Year</label>
-                            <input
-                              type="date"
-                              className="form-control"
-                              onChange={(e) => setDate(e.target.value)}
-                              value={foundedYear}
-                              aria-required
-                            />
-                          </div>
-                        </div>
+      <div className="form-group">
+        <label>Founded Year</label>
+        <input
+          type="month"  // Allows the user to select year and month
+          className="form-control"
+          onChange={(e) => {
+            const year = e.target.value.split("-")[0];  // Extract the year from the selected value
+            setFoundedYear(year);  // Update state with the selected year
+          }}
+          value={foundedYear ? `${foundedYear}-01` : ""}
+          aria-required
+        />
+      </div>
+    </div>
+
                         <div className="col-lg-6 col-md-6">
                           <div className="form-group">
                             <label>Industry</label>

@@ -26,7 +26,9 @@ const postBlog = [
 
 function Jobsection() {
   const [data, setData] = useState([]);
+  const [isDataFetched, setIsDataFetched] = useState(false); // Add a state to track data fetching
   const token = localStorage.getItem("employeeLoginToken");
+
   useEffect(() => {
     axios({
       method: "GET",
@@ -37,14 +39,20 @@ function Jobsection() {
     })
       .then((res) => {
         console.log(res.data.data, "job seekers data");
-        setData(res.data.data);
+        if (res.data.data && res.data.data.length > 0) {
+          setData(res.data.data);
+        } else {
+          console.log(res.data.message); // "Records not found"
+        }
+        setIsDataFetched(true); // Mark data as fetched
       })
       .catch((err) => {
         console.log(err);
-        console.log(err.response.data.message);
         showToastError(err?.response?.data?.message);
+        setIsDataFetched(true); // Mark data as fetched even if there's an error
       });
   }, []);
+
   const navigate = useNavigate();
   return (
     <div className="section-full bg-white content-inner-2">
@@ -116,26 +124,26 @@ function Jobsection() {
                             </li>
                           </ul>
                         ) : null}
-                        {item.jobskkers_detail.skills_arr ? (
-                          <div
-                            className="job-time d-flex flex-column my-2 "
-                            style={{ gap: "12px" }}
-                          >
-                            <ul>
-                              <li className="fw-bold"> Skills: </li>
-                            </ul>
-                            <div className="d-flex text-break" style={{ gap: "3px", flexWrap: "wrap" }}>
-  {item.jobskkers_detail.skills_arr.map((skill, index) => (
-    <ul key={index} className="job-time" style={{ marginBottom: index % 5 === 4 ? '3px' : '0' }}>
-      <Link to={"#"}>
-        <span>{skill}</span>
-      </Link>
+                       {item?.jobskkers_detail?.skills_arr?.length > 0 ? (
+  <div
+    className="job-time d-flex flex-column my-2 "
+    style={{ gap: "12px" }}
+  >
+    <ul>
+      <li className="fw-bold"> Skills: </li>
     </ul>
-  ))}
-</div>
+    <div className="d-flex text-break" style={{ gap: "3px", flexWrap: "wrap" }}>
+      {item.jobskkers_detail.skills_arr.map((skill, index) => (
+        <ul key={index} className="job-time" style={{ marginBottom: index % 5 === 4 ? '3px' : '0' }}>
+          <Link to={"#"}>
+            <span>{skill}</span>
+          </Link>
+        </ul>
+      ))}
+    </div>
+  </div>
+) : null}
 
-                          </div>
-                        ) : null}
                       </div>
                     </div>
                     <div className="d-flex">

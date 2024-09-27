@@ -185,6 +185,7 @@ import JobPagethirdparty from "./markup/Pages/JobPagethirdparty";
 
 import Transactions from "./markup/Pages/Transactions";
 import Vendorplan from "./vendor/Vendorplan";
+import Jobadd from "./adminPanel/Jobadd";
 function App() {
   const dispatch = useDispatch();
 
@@ -223,6 +224,7 @@ function App() {
               <Route path="/admin/listalljobseeker" element={<PrivateRouteadmin><Jobseekerlist /></PrivateRouteadmin>} />
               <Route path="/admin/CompanyListAdmin" element={<PrivateRouteadmin><CompanyListAdmin /></PrivateRouteadmin>} />
               <Route path="/admin/CompanyNameAdmin" element={<PrivateRouteadmin><CompanyNameAdmin /></PrivateRouteadmin>} />
+              <Route path="/admin/addjob/:id" element={<PrivateRouteadmin><Jobadd /></PrivateRouteadmin>} />
 
 
 

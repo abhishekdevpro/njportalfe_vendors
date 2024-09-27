@@ -126,7 +126,7 @@ const Jobslist = () => {
                         <td>
                           <button
                             onClick={() => {
-                              navigate(`/admin/edit/${job.job_detail.id}`);
+                              navigate(`/admin/addjob/${job.job_detail.id}`);
                             }}
                             className="px-3 py-2 site-button text-white border-0"
                             style={{
