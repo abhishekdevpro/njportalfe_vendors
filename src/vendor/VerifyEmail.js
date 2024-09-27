@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import { ToastContainer } from "react-toastify";
@@ -7,14 +7,21 @@ import { showToastError, showToastSuccess } from "../utils/toastify";
 
 const VerifyEmail = () => {
   const navigate = useNavigate();
-  const { token } = useParams();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
 
   useEffect(() => {
     const verifyEmail = async () => {
+      const token = queryParams.get("token");
+
+      console.log("Token:", token);
+
       try {
-        const response = await axios.get(`https://api.novajobs.us/api/admin/verify-account/token=${token}`);
-        console.log(response)
-        if (response) { 
+        const response = await axios.get(
+          `https://api.novajobs.us/api/admin/verify-account/${token}`
+        );
+        console.log(response);
+        if (response) {
           showToastSuccess("Email verified successfully");
           navigate("/user/login");
         } else {
@@ -29,13 +36,14 @@ const VerifyEmail = () => {
     };
 
     verifyEmail();
-  }, [token, navigate]);
+  }, [queryParams, navigate]);
 
   return (
-    <div>Verifying...
-      <ToastContainer/>
+    <div>
+      Verifying...
+      <ToastContainer />
     </div>
   );
-}
+};
 
 export default VerifyEmail;
