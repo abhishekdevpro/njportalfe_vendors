@@ -1,42 +1,41 @@
-import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+
+import { ToastContainer } from "react-toastify";
+import { showToastError, showToastSuccess } from "../utils/toastify";
 
 const VerifyEmail = () => {
-  const location = useLocation();
+  const navigate = useNavigate();
+  const { token } = useParams();
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const token = queryParams.get('token');
-    const email = queryParams.get('email');
-
-    if (token && email) {
-      verifyEmail(token, email);
-    }
-  }, [location]);
-
-  const verifyEmail = async (token, email) => {
-    try {
-      const response = await fetch(`https://api.novajobs.us/api/admin/auth/vendor/verify?token=${token}&email=${email}`, {
-        method: 'GET',
-      });
-
-      if (response.ok) {
-        toast.success('Email verified successfully! You can now log in.');
-      } else {
-        toast.error('Email verification failed. Please try again.');
+    const verifyEmail = async () => {
+      try {
+        const response = await axios.get(`https://api.novajobs.us/api/admin/verify-account/token=${token}`);
+        console.log(response)
+        if (response) { 
+          showToastSuccess("Email verified successfully");
+          navigate("/user/login");
+        } else {
+          showToastError("Email verification failed");
+          navigate("/vendor/login");
+        }
+      } catch (error) {
+        console.error("Verification Error:", error);
+        showToastError("Invalid token or email");
+        navigate("/vendor/login");
       }
-    } catch (error) {
-      toast.error('An error occurred during email verification.');
-    }
-  };
+    };
+
+    verifyEmail();
+  }, [token, navigate]);
 
   return (
-    <div>
-      <h2>Verifying your email...</h2>
-      <p>Please wait while we verify your email address.</p>
+    <div>Verifying...
+      <ToastContainer/>
     </div>
   );
-};
+}
 
 export default VerifyEmail;

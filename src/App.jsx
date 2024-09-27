@@ -229,10 +229,11 @@ function App() {
 
 
 
-              <Route path="/vendor/verify" component={<VerifyEmail/>} />
+              <Route path="/vendor/verify" element={<VerifyEmail />} />
 
              
         <Route path="/vendor">
+        
         <Route path="login" element={<Vendorlogin />} />
         <Route  path="vendorprofile" element={ <PrivateRoutevendor> <VendorCompanyprofile />  </PrivateRoutevendor> }  />
         <Route path="vendorcompanySideBar" element={<PrivateRoutevendor><VendorCompanySideBar /> </PrivateRoutevendor>} />
