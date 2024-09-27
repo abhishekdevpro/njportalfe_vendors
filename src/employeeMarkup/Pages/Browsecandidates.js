@@ -6,20 +6,14 @@ import { Link,useNavigate } from "react-router-dom";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
 import { FaSave, FaSearch, FaTimes } from "react-icons/fa";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { Tab, Nav, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { showToastError } from "../../utils/toastify";
-import FixedHeader from "../Layout/fixedHeader";
+
 
 import moment from "moment";
-import testImg from "../../images/team/pic1.jpg";
 import "react-quill/dist/quill.snow.css";
 
-import { submit } from "redux-form";
-import JobPageSkeleton from "../../markup/skeleton/jobPage";
 import TwoBoxWithLinesSkeleton from "../../markup/skeleton/twoBoxLines";
 
 import PageTitle from "../Layout/PageTitle";
@@ -238,24 +232,7 @@ function EmployeeBrowsecandidates() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   axios({
-  //     method: "GET",
-  //     url: "https://api.novajobs.us/api/employeer/job-seekers",
-  //     headers: {
-  //       Authorization: token,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       console.log(res.data.data);
-  //       dispatch(setBrowseCandidateData(res.data.data || []));
-  //       setHasDataFetched(true);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       setHasDataFetched(false);
-  //     });
-  // }, []);
+ 
 
   const baseUrl = "https://api.novajobs.us/api/employeer/job-seekers";
 
@@ -285,7 +262,11 @@ function EmployeeBrowsecandidates() {
     params.append("education", browseCandidateValues.education);
   }
 
-  const url = `${baseUrl}?${params.toString()}`;
+  const [currentPage, setCurrentPage] = useState(1);
+const [totalPages, setTotalPages] = useState(1); // or use total candidates instead
+const itemsPerPage = 5; 
+
+const url = `${baseUrl}?${params.toString()}&page=${currentPage}&limit=${itemsPerPage}`;
   console.log(url, "this is the url");
 
   const handleGetReq = () => {
@@ -299,18 +280,17 @@ function EmployeeBrowsecandidates() {
       .then((response) => {
         if (response.data.data) {
           dispatch(setBrowseCandidateData(response.data.data));
-          console.log(response.data.data, "filter data");
+          setTotalPages(response.data.totalPages); // Adjust based on API response
           setShowSkeleton(false);
         } else {
           dispatch(setBrowseCandidateData([]));
         }
-
-        console.log(response, "custom data");
       })
       .catch((err) => {
         console.log(err, "custom err");
       });
   };
+  
   useEffect(() => {
     // if (localStorage.getItem("profession_title") !== null) {
     handleGetReq();
@@ -319,6 +299,13 @@ function EmployeeBrowsecandidates() {
       localStorage.removeItem("profession_title");
     };
   }, []);
+
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    handleGetReq(); // Re-fetch the data with the new page number
+  };
+  
 
   const getSingleCountry = (countryId) => {
     return countries.find((country) => country.id === countryId)?.name || "";
@@ -372,72 +359,7 @@ const navigate = useNavigate();
                   </div>
                   
                 </div>
-                 {/* <div className="col-lg-3 col-md-5">
-                    <div className="form-group">
-                      <label htmlFor="education"></label>
-                      <div className="input-group">
-                        {educations ? (
-                          <select
-                            type="text"
-                            className="form-control"
-                            id="education"
-                            name="education"
-                            onChange={handleChange}
-                            value={browseCandidateValues.education}
-                            autoComplete="false"
-                          >
-                            <option value="">Choose Education</option>
-                            {educations.map((item) => {
-                              return (
-                                <option key={item.id} value={item.name}>
-                                  {item.name}
-                                </option>
-                              );
-                            })}
-                          </select>
-                        ) : null}
-                        {/* <div className="input-group-append">
-                      <span className="input-group-text">
-                        <i className="fa fa-search"></i>
-                      </span>
-                    </div> 
-                      </div>
-                    </div>
-                  </div> */}
-                  {/*<div className="col-lg-2 col-md-5">
-                    <div className="form-group">
-                      <label htmlFor="experience"></label>
-                      <div className="input-group">
-                        <select
-                          type="text"
-                          className="form-control"
-                          id="experience"
-                          name="experience"
-                          onChange={handleChange}
-                          value={browseCandidateValues.experience}
-                          autoComplete="false"
-                        >
-                          <option value="">Choose Experience</option>
-                          {experienceValue.map((item, index) => {
-                            return (
-                              <option
-                                className="form-control"
-                                key={index}
-                                value={item.id}
-                              >
-                                {item.name}
-                              </option>
-                            );
-                          })}
-                        </select>
-                        {/* <div className="input-group-append">
-                      <span className="input-group-text">
-                        <i className="fa fa-map-marker"></i>
-                      </span>
-                    </div>
-                      </div>
-                    </div>
-                  </div> */}
+                
                   <div className="col-lg-2 col-md-5">
                     <div className="form-group">
                       <label htmlFor="state_id"></label>
@@ -460,41 +382,11 @@ const navigate = useNavigate();
                             );
                           })}
                         </select>
-                        {/* <div className="input-group-append">
-                      <span className="input-group-text">
-                        <i className="fa fa-dollar"></i>
-                      </span>
-                    </div> */}
+                       
                       </div>
                     </div>
                   </div>
-                 {/* <div className="col-lg-2 col-md-5">
-                    <div className="form-group">
-                      <label htmlFor="salary"></label>
-                      <div className="input-group">
-                        <select
-                          type="text"
-                          className="form-control"
-                          id="salary"
-                          name="salary"
-                          onChange={handleChange}
-                          value={browseCandidateValues.salary}
-                          autoComplete="false"
-                        >
-                          <option value="">Choose Your Salary</option>
-                          {salaryValue.map((item, index) => {
-                            return (
-                              <option key={index} value={item.id}>
-                                {item.name}
-                              </option>
-                            );
-                          })}
-                        </select>
-                        
-                        
-                      </div>
-                    </div>
-                  </div> */}
+               
                   <div className="col-lg-2 col-md-5">
                     <div className="form-group">
                       <label htmlFor="salary"></label>
@@ -510,8 +402,7 @@ const navigate = useNavigate();
                     <FaSearch />
                     Find Talent
                   </button>
-                        
-                        
+
                       </div>
                     </div>
                   </div>
@@ -665,10 +556,7 @@ const navigate = useNavigate();
                                   </li>
                                 </div> </li>
                               ))}
-                              <label className="like-btn">
-                      <input type="checkbox" />
-                      <span className="checkmark"></span>
-                    </label>
+                          
                             </ul>
                             
                           </div>
@@ -677,283 +565,6 @@ const navigate = useNavigate();
                       </div>
                     </div>
                   
-
-{/*  {selectedJob && (
-                      <div className="col-xl-8 col-lg-7 m-b30 job-bx ">
-                        <div
-                          className="d-flex flex-column "
-                          style={{ gap: "12px" }}
-                        >
-                          <div className="candidate-title">
-                            <Link
-                              to={`/employee/profilepage/${selectedJob.jobskkers_detail.id}`}
-                            >
-                              <h3 className="mb-1">
-                                {selectedJob.jobskkers_detail.first_name}{" "}
-                                {selectedJob.jobskkers_detail.last_name}
-                              </h3>
-                            </Link>
-                            <div className="job-details-content">
-                              {selectedJob.jobskkers_detail.email &&
-                                selectedJob.jobskkers_detail.phone && (
-                                  <p className="mb-0">
-                                    {selectedJob.jobskkers_detail.email} |{" "}
-                                    {selectedJob.jobskkers_detail.phone}
-                                  </p>
-                                )}
-                              {selectedJob.jobskkers_detail.skills_arr ? (
-                                <div
-                                  className="d-flex flex-column "
-                                  style={{ gap: "7px" }}
-                                >
-                                  <h5 className="mb-0">Skills:</h5>
-                                  <div
-                                    className="row m-0 "
-                                    style={{ gap: "12px" }}
-                                  >
-                                    {selectedJob.jobskkers_detail.skills_arr.map(
-                                      (item, index) => (
-                                        <p key={index} className="mb-0">
-                                          {item}
-                                        </p>
-                                      )
-                                    )}
-                                  </div>
-                                </div>
-                              ) : null}
-                            </div>
-
-                            {selectedJob.jobskkers_detail.city_id ||
-                            selectedJob.jobskkers_detail.state_id ||
-                            selectedJob.jobskkers_detail.country_id ? (
-                              <div
-                                className="d-flex flex-column"
-                                style={{ marginTop: "7px", gap: "7px" }}
-                              >
-                                <h5 className="mb-0 ">Location :</h5>
-                                <div
-                                  className="row m-0 "
-                                  style={{ gap: "12px" }}
-                                >
-                                  <p className="mb-0 ">
-                                    {getSingleCity(
-                                      selectedJob.jobskkers_detail.city_id
-                                    )}{" "}
-                                  </p>
-                                  <p className="mb-0 ">
-                                    {getSingleState(
-                                      selectedJob.jobskkers_detail.state_id
-                                    )}{" "}
-                                  </p>
-
-                                  <p className="mb-0 ">
-                                    {getSingleCountry(
-                                      selectedJob.jobskkers_detail.country_id
-                                    )}
-                                  </p>
-                                </div>
-                              </div>
-                            ) : null}
-                            {selectedJob.jobskkers_detail
-                              .profileSummaryValue && (
-                              <p className="mb-1">
-                                <div
-                                  className="ql-editor"
-                                  style={{
-                                    fontSize: "13px",
-                                  }}
-                                  dangerouslySetInnerHTML={{
-                                    __html:
-                                      selectedJob.jobskkers_detail
-                                        .profileSummaryValue,
-                                  }}
-                                />
-                              </p>
-                            )}
-                          </div>
-
-                          {selectedJob.jobskkers_detail
-                            .resume_score_percentage ? (
-                            <div
-                              className="row m-0  align-items-center "
-                              style={{ gap: "7px" }}
-                            >
-                              <h5 className="mb-0 ">Resume Score:</h5>
-                              <p className="mb-0">
-                                {
-                                  selectedJob.jobskkers_detail
-                                    .resume_score_percentage
-                                }
-                              </p>
-                            </div>
-                          ) : null}
-
-                          {selectedJob.jobskkers_detail.ai_resume_parse_data
-                            .jobsMyResumeData.profileSummaryValue ? (
-                            <div
-                              className="d-flex flex-column  "
-                              style={{ gap: "7px" }}
-                            >
-                              <h5 className="mb-0">Profile Summary</h5>
-                              <p className="mb-0 ">
-                                {
-                                  selectedJob.jobskkers_detail
-                                    .ai_resume_parse_data.jobsMyResumeData
-                                    .profileSummaryValue
-                                }
-                              </p>
-                            </div>
-                          ) : null}
-
-                          {selectedJob.jobskkers_detail.ai_resume_parse_data
-                            .jobsMyResumeData.educationData ? (
-                            <div
-                              className="d-flex flex-column "
-                              style={{ gap: "12px" }}
-                            >
-                              <h5 className="mb-0 ">Education</h5>
-                              <div
-                                className="d-flex flex-column "
-                                style={{ gap: "7px" }}
-                              >
-                                {selectedJob.jobskkers_detail.ai_resume_parse_data.jobsMyResumeData.educationData.map(
-                                  (item, index) => {
-                                    return (
-                                      <div
-                                        key={index}
-                                        className="d-flex flex-column "
-                                        style={{ gap: "4px" }}
-                                      >
-                                        <h6 className="mb-0">
-                                          {item.education}
-                                        </h6>
-                                        <p className="mb-0">
-                                          {item.course}, {item.university}
-                                        </p>
-                                      </div>
-                                    );
-                                  }
-                                )}
-                              </div>
-                            </div>
-                          ) : null}
-
-                          {selectedJob.jobskkers_detail.ai_resume_parse_data
-                            .jobsMyResumeData.employmentData ? (
-                            <div
-                              className="d-flex flex-column "
-                              style={{ gap: "12px" }}
-                            >
-                              <h5 className="mb-0 ">Education</h5>
-                              <div
-                                className="d-flex flex-column "
-                                style={{ gap: "7px" }}
-                              >
-                                {selectedJob.jobskkers_detail.ai_resume_parse_data.jobsMyResumeData.employmentData.map(
-                                  (item, index) => {
-                                    return (
-                                      <div
-                                        key={index}
-                                        className="d-flex flex-column "
-                                        style={{ gap: "4px" }}
-                                      >
-                                        <h6 className="mb-0">
-                                          {item.jobTitle}, {item.company}
-                                        </h6>
-                                        <p className="mb-0">
-                                          {item.jobStartDate}, {item.jobEndDate}
-                                        </p>
-                                        <p className="mb-0">
-                                          {item.jobDescription}
-                                        </p>
-                                      </div>
-                                    );
-                                  }
-                                )}
-                              </div>
-                            </div>
-                          ) : null}
-                          {selectedJob.jobskkers_detail.created_at && (
-                            <p className="mb-0 ">
-                              Posted{" "}
-                              {moment(
-                                selectedJob.jobskkers_detail.created_at
-                              ).fromNow()}
-                            </p>
-                          )}
-                          {/* <div className="d-flex justify-content-start align-items-center">
-                          {selectedJob.job_detail.is_job_applied ? (
-                            <button
-                              className="radius-xl site-button"
-                              // onClick={handleShow}
-                            >
-                              View Status
-                            </button>
-                          ) : (
-                            <button
-                              className="radius-xl site-button"
-                              onClick={handleShow}
-                            >
-                              Apply
-                            </button>
-                          )}
-                          <Modal
-                            show={show}
-                            onHide={handleClose}
-                            backdrop="static"
-                            keyboard={false}
-                          >
-                            <Modal.Header
-                              closeButton
-                              style={{ backgroundColor: "#ffff" }}
-                              className="mt-4"
-                            >
-                              <Modal.Title style={{ color: "#000" }}>
-                                <p> Apply to {selectedJob.company}</p>
-                              </Modal.Title>
-                            </Modal.Header>
-
-                            <Modal.Footer>
-                              {activeTab !== "contact-info" && (
-                                <button
-                                  className="site-button mr-2"
-                                  onClick={handlePrev}
-                                >
-                                  Previous
-                                </button>
-                              )}
-                              {activeTab === "contact-info" && (
-                                <button
-                                  className="site-button"
-                                  onClick={() => {
-                                    handleClose();
-                                    submitApplication();
-                                  }}
-                                  // onClick={handleClose}
-                                >
-                                  Submit
-                                </button>
-                              )}
-                            </Modal.Footer>
-                          </Modal>
-
-                          <label className="like-btn">
-                            <input
-                              type="checkbox"
-                              defaultChecked={
-                                selectedJob.job_detail.is_job_favorite
-                              }
-                              name={selectedJob.job_detail.id}
-                              onClick={() => {
-                                toggleFabJobs();
-                              }}
-                            />
-                            <span className="checkmark"></span>
-                          </label>
-                        </div> 
-                        </div>
-                      </div>
-                    )} */}
 
                   </div>
                 </div>
@@ -970,6 +581,32 @@ const navigate = useNavigate();
           </div>
         )}
       </div>
+      <div className="pagination d-flex justify-content-center align-items-center">
+  <ul className="pagination">
+    <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+      <button
+        className="page-link"
+        onClick={() => handlePageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        Previous
+      </button>
+    </li>
+    <li className="page-item disabled">
+      <span className="page-link">Page {currentPage} of {totalPages}</span>
+    </li>
+    <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+      <button
+        className="page-link"
+        onClick={() => handlePageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
+        Next
+      </button>
+    </li>
+  </ul>
+</div>
+
       <Footer />
     </>
   );

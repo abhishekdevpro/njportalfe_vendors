@@ -189,9 +189,10 @@ function EmployeeCompanymanage() {
                     {console.log('yehi h console', item.job_detail)}
                     {item.job_detail.job_title && (
                       <h4 className="mb-0">
-                        <a href="/react/demo/job-detail">
-                          {item.job_detail.job_title}
-                        </a>
+                         <Link to={`/user/company/${item.companies.id}`}>
+                         {item.job_detail.job_title}
+                                      </Link>
+                        
                       </h4>
                     )}
                     {(item.job_category.name || item.job_type.name || item.job_workplace_types.name) && (

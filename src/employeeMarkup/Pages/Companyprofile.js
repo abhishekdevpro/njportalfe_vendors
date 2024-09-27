@@ -79,7 +79,7 @@ function EmployeeCompanyprofile() {
         about: description,
         email: email,
         tagline: tagline,
-        user_id: 1,
+       // user_id: 1,
         website_link: website,
         founded_date: foundedYear,
         phone: number,
@@ -115,11 +115,11 @@ function EmployeeCompanyprofile() {
     setTagline(companyDetail?.tagline || "");
     setEmail(companyDetail?.email || "");
     setWebsite(companyDetail?.website_link || "");
-    setDate(companyDetail?.founded_date || "");
+    setDate(companyDetail?.created_at || "");
     setDescription(companyDetail?.about || "");
-    setSelectedCountry(companyDetail?.country?.id || null);
-    setSelectedStates(companyDetail?.state?.id || null);
-    setSelectedCities(companyDetail?.city?.id || null);
+    setSelectedCountry(companyDetail?.country_id || null);
+    setSelectedStates(companyDetail?.state_id || null);
+    setSelectedCities(companyDetail?.city_id || null);
     setNumber(companyDetail?.phone || "");
     setAddress(companyDetail?.address || "");
     setlinkdin(companyDetail?.linkedin_link || "");

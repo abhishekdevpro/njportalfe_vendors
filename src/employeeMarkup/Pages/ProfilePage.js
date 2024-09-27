@@ -234,7 +234,7 @@ const ProfilePage = () => {
                           {userData.jobskkers_detail.ai_resume_parse_data
                             .jobsMyResumeData.employmentData ? (
                             <div className="job-list-container">
-                              <h4 className="mb-2 mt-4">Education</h4>
+                              <h4 className="mb-2 mt-4">Work Experience</h4>
                               {userData.jobskkers_detail.ai_resume_parse_data.jobsMyResumeData.employmentData.map(
                                 (item) => (
                                   <div className="d-flex justify-content-start aligns-item-center ">
