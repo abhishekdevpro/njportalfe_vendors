@@ -43,6 +43,11 @@ function EmployeeCompanyprofile() {
 
   const token = localStorage.getItem("employeeLoginToken");
 
+  const handleChange = (content, delta, source, editor) => {
+    const plainText = editor.getText(); // Extract plain text from the editor
+    setDescription(plainText); // Set the plain text in the state
+  };
+
   useEffect(() => {
     // Fetch industries from API
     axios({
@@ -77,7 +82,7 @@ function EmployeeCompanyprofile() {
       },
       data: {
         company_name: companyName,
-        about: description,
+        about: description.trim(),
         email: email,
         tagline: tagline,
        // user_id: 1,
@@ -240,12 +245,12 @@ function EmployeeCompanyprofile() {
                       <h5 className="font-weight-700 pull-left text-uppercase">
                         Company Profile
                       </h5>
-                      {/*<Link
-                        to={"/employee/company-profile"}
+                      <Link
+                        to={`/user/company/178`}
                         className="site-button right-arrow button-sm float-right"
                       >
-                        Back
-                      </Link> */}
+                        View Company page
+                      </Link>
                     </div>
                     <form onSubmit={(e) => {
                       e.preventDefault();
@@ -359,7 +364,7 @@ function EmployeeCompanyprofile() {
                          <ReactQuill
   theme="snow"
   value={description}
-  onChange={(content) => setDescription(content)} // Correct way to handle onChange
+  onChange={handleChange} // Correct way to handle onChange
   style={{ height: "200px", width: "100%", marginBottom: "70px" }}
 />
 
@@ -500,7 +505,7 @@ function EmployeeCompanyprofile() {
                             </Form.Control>
                           </div>
                         </div>
-                        <div className="col-lg-12 col-md-12">
+                       {/* <div className="col-lg-12 col-md-12">
                           <div className="form-group">
                             <label>Address</label>
                             <input
@@ -512,7 +517,7 @@ function EmployeeCompanyprofile() {
                               required
                             />
                           </div>
-                        </div>
+                        </div> */}
                         
                         <div className="col-lg-6 col-md-6">
                           <div className="form-group">
