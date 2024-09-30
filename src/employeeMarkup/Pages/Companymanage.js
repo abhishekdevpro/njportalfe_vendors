@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Link, useNavigate } from "react-router-dom";
 import Header2 from "./../Layout/Header2";
@@ -69,7 +71,7 @@ function EmployeeCompanymanage() {
   
   const handleRepostJob = (id) => {
     const currentDate = new Date().toISOString();
-
+  
     axios({
       method: "PUT",
       url: `https://api.novajobs.us/api/employeer/job-post/${id}`,
@@ -87,21 +89,27 @@ function EmployeeCompanymanage() {
             ? { ...job, job_detail: { ...job.job_detail, reposted_at: currentDate } }
             : job
         );
-
+  
         // Move the reposted job to the top of the list
-        const repostedJobIndex = updatedData.findIndex(job => job.job_detail.id === id);
+        const repostedJobIndex = updatedData.findIndex((job) => job.job_detail.id === id);
         if (repostedJobIndex !== -1) {
           const repostedJob = updatedData.splice(repostedJobIndex, 1)[0];
           updatedData.unshift(repostedJob);
         }
-
+  
         setData(updatedData);
+  
+        // Show success toast notification
+        toast.success("Job reposted successfully!");
       })
       .catch((err) => {
         console.error("Error reposting job:", err);
+  
+        // Show error toast notification
+        toast.error("Failed to repost the job. Please try again.");
       });
   };
-
+  
   const handleShowOptions = (index) => {
     setShowOptions(index === showOptions ? null : index);
   };
@@ -141,6 +149,7 @@ function EmployeeCompanymanage() {
   return (
     <div className="position-relative">
       <Header2 />
+      <ToastContainer/>
       <div className="page-content bg-white ">
         <div className="content-block">
           <div className="section-full bg-white p-t50 p-b20">

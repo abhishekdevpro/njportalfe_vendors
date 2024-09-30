@@ -408,22 +408,7 @@ function Jobprofile() {
                         <h5 className="font-weight-700 pull-left text-uppercase ">
                           Basic Information
                         </h5>
-                        <ToggleSwitch>
-    <Link to={  `/employee/profilepage/${id}`}>
-    <span className="ml-2 text-gray-700 font-medium">Public View</span>
-    </Link>
-  <label className="form-switch m-0">
-    <input
-      type="checkbox"
-      checked={isToggled}
-      onChange={handleToggle}
-      className="form-check-input"
-    />
-    
-    <span className="slider"></span>
-     
-  </label >
-</ToggleSwitch>
+                      
 
                       </div>
                       <Link
@@ -553,7 +538,7 @@ function Jobprofile() {
                         <div className="col-lg-6 col-md-6">
                           <div className="form-group">
                             <label htmlFor="current_salary">
-                              Current Salary($):
+                              Current Salary/month($):
                             </label>
                             <input
                               type="text"
@@ -574,7 +559,7 @@ function Jobprofile() {
                         <div className="col-12">
                           <div className="form-group">
                             <label htmlFor="expected_salary">
-                              Expected Salary:
+                              Expected Salary/month:
                             </label>
                             <input
                               type="text"

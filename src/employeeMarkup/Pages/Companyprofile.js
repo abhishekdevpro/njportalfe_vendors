@@ -97,7 +97,8 @@ function EmployeeCompanyprofile() {
         twitter_link: twitter,
         google_link: googleBusiness,
         linkedin_link: linkdin,
-        company_industry_id: Number(industry), // Pass selected industry ID
+        company_industry_id: Number(industry),
+        services:services
       },
     })
       .then((res) => {
@@ -362,12 +363,11 @@ function EmployeeCompanyprofile() {
                               required
                             /> */}
                          <ReactQuill
-  theme="snow"
-  value={description}
-  onChange={handleChange} // Correct way to handle onChange
-  style={{ height: "200px", width: "100%", marginBottom: "70px" }}
-/>
-
+        theme="snow"
+        value={description}
+        onChange={handleChange}
+        style={{ height: "200px", width: "100%", marginBottom: "70px" }}
+      />
                           </div>
                         </div>
                         <div className="col-lg-12 col-md-12">

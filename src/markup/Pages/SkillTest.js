@@ -209,7 +209,7 @@ function SkillTest() {
                                         onClick={() => handleButtonClick(card)}
                                         className="btn site-button border bg-primary-subtle"
                                       >
-                                        Retake Test
+                                        Take Test
                                       </button>
                                       {userPercentage > 65 ? (
         <button

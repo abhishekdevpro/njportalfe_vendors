@@ -66,6 +66,7 @@ function EmployeeBrowsecandidates() {
     },
   ]);
 
+  const [selectedState, setSelectedState] = useState("");
   const token = localStorage.getItem("employeeLoginToken");
   const [hasDataFetched, setHasDataFetched] = useState(false);
   const [showSkeleton, setShowSkeleton] = useState(true);
@@ -83,6 +84,10 @@ function EmployeeBrowsecandidates() {
 
   const handleSelectJob = (job) => {
     setSelectedJob(job);
+  };
+
+  const handleStateChange = (event) => {
+    setSelectedState(event.target.value);
   };
 
   const getCountry = () => {
@@ -114,6 +119,7 @@ function EmployeeBrowsecandidates() {
       .then((response) => {
         // console.log(response.data.data, "STATE");
         setStates(response.data.data);
+        console.log(response.data.data);
       })
       .catch((err) => {
         setStates([]);
@@ -252,11 +258,9 @@ function EmployeeBrowsecandidates() {
     params.append("title_keywords", browseCandidateValues.search_input);
   }
 
-  if (localStorage.getItem("location")) {
-    params.append("location", localStorage.getItem("location"));
-  } else if (browseCandidateValues.state_id) {
-    params.append("location", browseCandidateValues.state_id);
-  }
+   if (selectedState) {
+      params.append("location", selectedState);
+    }
 
   if (browseCandidateValues.education) {
     params.append("education", browseCandidateValues.education);
@@ -369,14 +373,14 @@ const navigate = useNavigate();
                           className="form-control"
                           id="state_id"
                           name="state_id"
-                          onChange={handleChange}
-                          value={browseCandidateValues.state_id}
+                          onChange={handleStateChange}
+                        
                           autoComplete="false"
                         >
                           <option value="">Location</option>
                           {states.map((item, index) => {
                             return (
-                              <option key={index} value={item.id}>
+                              <option key={index} value={item.name}>
                                 {item.name}
                               </option>
                             );

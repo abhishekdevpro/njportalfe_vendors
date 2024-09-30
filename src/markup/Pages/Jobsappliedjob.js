@@ -282,6 +282,7 @@ function Jobsappliedjob() {
       </li>
     </ul> */}
                                     <div className="job-time m-t15 m-b10">
+                                    Applied on: {Date(item.job_applied.created_at)}
                                       {item.job_detail.skills_arr ? (
                                         <div>
                                           {item.job_detail.skills_arr.map(
@@ -305,7 +306,7 @@ function Jobsappliedjob() {
                                         className="d-flex align-items-center  w-50 justify-content-end "
                                         style={{ gap: "7px" }}
                                       >
-                                        <Link
+                                       {/* <Link
                                           to={"/user/jobs-my-resume"}
                                           className="site-button button-sm float-right"
                                         >
@@ -319,7 +320,7 @@ function Jobsappliedjob() {
                                           className="site-button button-sm float-right"
                                         >
                                           Apply
-                                        </button>
+                                        </button> */}
                                         <Modal
                                           show={show}
                                           onHide={handleClose}

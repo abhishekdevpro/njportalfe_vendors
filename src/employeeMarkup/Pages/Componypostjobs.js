@@ -193,25 +193,28 @@ function EmployeeComponypostjobs() {
 
   const aiJobDescription = async () => {
     setDescription(true);
-    await axios({
-      url: `https://api.novajobs.us/api/employeer/ai-job-description`,
-      method: "post",
-      headers: {
-        Authorization: token,
-      },
-      data: {
-        keyword: postAJobData.jobTitle,
-        title: postAJobData.jobTitle,
-        workplace_type: postAJobData.workplaceType,
-        job_type: postAJobData.jobType,
-        company: postAJobData.company,
-      },
-    }).then((res) => {
+    try {
+      const res = await axios({
+        url: `https://api.novajobs.us/api/employeer/ai-job-description`,
+        method: "post",
+        headers: {
+          Authorization: token,
+        },
+        data: {
+          keyword: postAJobData.jobTitle,
+          title: postAJobData.jobTitle,
+          workplace_type: postAJobData.workplaceType,
+          job_type: postAJobData.jobType,
+          company: postAJobData.company,
+        },
+      });
       console.log(res.data.data.description);
       renderSection(res.data.data.description);
-    });
+    } catch (error) {
+      console.error("Error occurred: ", error.response.data);
+    }
   };
-
+  
   const postCompleted = async () => {
     await axios({
       url: `https://api.novajobs.us/api/employeer/job-post/${id}`,
@@ -503,7 +506,7 @@ function EmployeeComponypostjobs() {
                         </div>
                         <div className="col-6 ">
                           <div className="form-group">
-                            <label htmlFor="salary">Salary</label>
+                            <label htmlFor="salary">Salary/month</label>
                             <input
                               type="text"
                               className="form-control"

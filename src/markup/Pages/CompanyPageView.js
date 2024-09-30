@@ -29,7 +29,7 @@ const MapJobFinder = () => (
 
 
 const CompanyPage = () => {
-  const [activeTab, setActiveTab] = useState("home");
+  const [activeTab, setActiveTab] = useState("about");
   const [companyData, setCompany] = useState(null);
   const [jobData, setJobData] = useState(null);
 
@@ -193,7 +193,7 @@ const CompanyPage = () => {
 
 
           <div className='m-5 '></div>
-           <h3 className='ms-5 ps-5 mt-5'>Jobs Available</h3>
+           <h3 className='ms-5 ps-5 mt-5'>Explore Companies</h3>
           
           
 
@@ -278,11 +278,15 @@ const CompanyPage = () => {
           </li>
           <li className="d-flex justify-content-between mb-3">
             <strong>Email:</strong>
-            <span><i className="bi bi-envelope me-3"></i>{companyData?.email}</span>
+            <span style={{fontSize:"14px"}}><i className="bi bi-envelope me-3 "></i>{companyData?.email}</span>
           </li>
           <li className="d-flex justify-content-between mb-3">
             <strong>Location:</strong>
             <span><i className="bi bi-geo-alt me-3"></i> {companyData.state.name}</span>
+          </li>
+          <li className="d-flex justify-content-between mb-3">
+            <strong>Founded Year:</strong>
+            <span><i className="bi bi-clock me-3"></i> {companyData.founded_date}</span>
           </li>
        
         </ul>
