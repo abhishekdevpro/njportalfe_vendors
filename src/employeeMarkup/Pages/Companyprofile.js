@@ -11,6 +11,7 @@ import CompanySideBar from "../Layout/companySideBar";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import TextEditor from "../Element/Editor";
+import ReactQuill from "react-quill";
 
 function EmployeeCompanyprofile() {
   const companyData = useSelector(
@@ -355,7 +356,13 @@ function EmployeeCompanyprofile() {
                               rows="3"
                               required
                             /> */}
-                            <TextEditor />
+                         <ReactQuill
+  theme="snow"
+  value={description}
+  onChange={(content) => setDescription(content)} // Correct way to handle onChange
+  style={{ height: "200px", width: "100%", marginBottom: "70px" }}
+/>
+
                           </div>
                         </div>
                         <div className="col-lg-12 col-md-12">

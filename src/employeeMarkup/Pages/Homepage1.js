@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
 import CountUp from "react-countup";
@@ -22,6 +22,17 @@ import {
 var bnr2 = require("./../../images/background/bg4.jpg");
 var bnr3 = require("./../../images/lines.png");
 function EmployeeHomepage() {
+
+  const navigate =useNavigate();
+  useEffect (()=>{
+
+const token = localStorage.getItem('employeeLoginToken')
+
+if(!token){
+  navigate("/login");
+}
+  },[navigate])
+
   return (
     <div className="page-wraper">
       <Header />

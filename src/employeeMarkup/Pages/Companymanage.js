@@ -284,7 +284,7 @@ function EmployeeCompanymanage() {
       <div className="d-flex justify-content-evenly my-4">
         <a
           href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-            `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+            `${window.location.origin}/user/job/${item.job_detail.id}`
           )}`}
           className="text-white"
           target="_blank"
@@ -295,7 +295,7 @@ function EmployeeCompanymanage() {
         </a>
         <a
           href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-            `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+            `${window.location.origin}/user/job/${item.job_detail.id}`
           )}`}
           className="text-white"
           target="_blank"
@@ -310,7 +310,7 @@ function EmployeeCompanymanage() {
           style={{ width: '300px' }}
           className="py-2 rounded-2 p-1"
           type="text"
-          value={`${window.location.origin}/user/job-detail/${item.job_detail.id}`}
+          value={`${window.location.origin}/user/job/${item.job_detail.id}`}
           readOnly
         />
         <button
@@ -318,7 +318,7 @@ function EmployeeCompanymanage() {
           onClick={() => {
             
             navigator.clipboard.writeText(
-              `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+              `${window.location.origin}/user/job/${item.job_detail.id}`
             );
             alert("Link copied!");
           }}

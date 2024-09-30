@@ -302,7 +302,7 @@ function VendorCompanymanage() {
                       <div className="d-flex justify-content-evenly">
                         <a
                           href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-                            `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+                            `${window.location.origin}/user/job/${item.job_detail.id}`
                           )}`}
                           className="text-white text-center"
                           style={{ width: '40px' }}
@@ -314,7 +314,7 @@ function VendorCompanymanage() {
                         </a>
                         <a
                           href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
-                            `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+                            `${window.location.origin}/user/job/${item.job_detail.id}`
                           )}`}
                           className="text-white text-center"
                           style={{ width: '40px' }}
@@ -330,13 +330,13 @@ function VendorCompanymanage() {
                         <input
                           style={{ width: '300px' }}
                           type="text"
-                          value={`${window.location.origin}/user/job-detail/${item.job_detail.id}`}
+                          value={`${window.location.origin}/user/job/${item.job_detail.id}`}
                           readOnly
                         />
                         <button
                           onClick={() => {
                             navigator.clipboard.writeText(
-                              `${window.location.origin}/user/job-detail/${item.job_detail.id}`
+                              `${window.location.origin}/user/job/${item.job_detail.id}`
                             );
                             alert("Link copied!");
                           }}

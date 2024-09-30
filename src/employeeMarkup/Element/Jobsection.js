@@ -3,6 +3,7 @@ import { showToastError } from "../../utils/toastify";
 import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 const postBlog = [
   {
     image: require("./../../images/logo/icon1.png"),
@@ -10,26 +11,23 @@ const postBlog = [
   {
     image: require("./../../images/logo/icon1.png"),
   },
-  {
-    image: require("./../../images/logo/icon1.png"),
-  },
-  {
-    image: require("./../../images/logo/icon1.png"),
-  },
-  {
-    image: require("./../../images/logo/icon1.png"),
-  },
-  {
-    image: require("./../../images/logo/icon1.png"),
-  },
+  // Add more if needed
 ];
 
 function Jobsection() {
   const [data, setData] = useState([]);
-  const [isDataFetched, setIsDataFetched] = useState(false); // Add a state to track data fetching
+  const [isDataFetched, setIsDataFetched] = useState(false);
   const token = localStorage.getItem("employeeLoginToken");
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // Check if token exists
+    if (!token) {
+      navigate("/login"); // Redirect to login if no token is found
+      return; // Exit early
+    }
+
+    // Fetch job seekers data
     axios({
       method: "GET",
       url: "https://api.novajobs.us/api/employeer/job-seekers?page_size=10",
@@ -42,18 +40,18 @@ function Jobsection() {
         if (res.data.data && res.data.data.length > 0) {
           setData(res.data.data);
         } else {
-          console.log(res.data.message); // "Records not found"
+          console.log(res.data.message);
+          navigate("/employee/login"); // Redirect if no data is found
         }
-        setIsDataFetched(true); // Mark data as fetched
+        setIsDataFetched(true);
       })
       .catch((err) => {
         console.log(err);
         showToastError(err?.response?.data?.message);
-        setIsDataFetched(true); // Mark data as fetched even if there's an error
+        setIsDataFetched(true);
       });
-  }, []);
+  }, [token, navigate]);
 
-  const navigate = useNavigate();
   return (
     <div className="section-full bg-white content-inner-2">
       <div className="container">
@@ -62,10 +60,7 @@ function Jobsection() {
             <h2 className="m-b5">Candidates</h2>
           </div>
           <div className="align-self-end">
-            <Link
-              to={"/employee/browse-candidates"}
-              className="site-button button-sm"
-            >
+            <Link to={"/employee/browse-candidates"} className="site-button button-sm">
               Browse All Candidates <i className="fa fa-long-arrow-right"></i>
             </Link>
           </div>
@@ -76,31 +71,26 @@ function Jobsection() {
               {data.map((item, index) => (
                 <li
                   key={index}
-                  onClick={() =>
-                    navigate(`profilepage/${item?.jobskkers_detail?.id}`)
-                  }
+                  onClick={() => navigate(`profilepage/${item?.jobskkers_detail?.id}`)}
                   style={{ cursor: "pointer" }}
                 >
                   <div className="post-bx">
                     <div className="d-flex m-b30">
                       <div className="job-post-company">
                         <span>
-                        <img
+                          <img
                             alt="profile"
                             src={item?.jobskkers_detail?.photo || 'path-to-default-image.jpg'}
                             onError={(e) => {
                               e.target.onerror = null;
-                            
                             }}
                           />
-                        </span>{console.log(item?.jobskkers_detail?.photo,'data is comming')}
+                        </span>
                       </div>
                       <div className="job-post-info">
                         <h4>
-                          {item?.jobskkers_detail?.first_name}{" "}
-                          {item?.jobskkers_detail?.last_name}
+                          {item?.jobskkers_detail?.first_name} {item?.jobskkers_detail?.last_name}
                         </h4>
-                        
                         <ul>
                           <li>
                             <i className="fa fa-map-marker"></i>
@@ -108,59 +98,47 @@ function Jobsection() {
                             {item?.jobskkers_detail?.states?.name}{" "}
                             {item?.jobskkers_detail?.countries?.name}
                           </li>
-
                           <li>
-                            <i className="fa fa-clock-o"></i>{" "}Published {""}
-                            {moment(
-                              item?.jobskkers_detail?.created_at
-                            ).fromNow()}
+                            <i className="fa fa-clock-o"></i> Published{" "}
+                            {moment(item?.jobskkers_detail?.created_at).fromNow()}
                           </li>
                         </ul>
-                        {item.jobskkers_detail.resume_score_percentage ? (
+                        {item.jobskkers_detail.resume_score_percentage && (
                           <ul>
                             <li>
-                              Resume Percentage :{" "}
+                              Resume Percentage:{" "}
                               {item?.jobskkers_detail?.resume_score_percentage}
                             </li>
                           </ul>
-                        ) : null}
-                       {item?.jobskkers_detail?.skills_arr?.length > 0 ? (
-  <div
-    className="job-time d-flex flex-column my-2 "
-    style={{ gap: "12px" }}
-  >
-    <ul>
-      <li className="fw-bold"> Skills: </li>
-    </ul>
-    <div className="d-flex text-break" style={{ gap: "3px", flexWrap: "wrap" }}>
-      {item.jobskkers_detail.skills_arr.map((skill, index) => (
-        <ul key={index} className="job-time" style={{ marginBottom: index % 5 === 4 ? '3px' : '0' }}>
-          <Link to={"#"}>
-            <span>{skill}</span>
-          </Link>
-        </ul>
-      ))}
-    </div>
-  </div>
-) : null}
-
+                        )}
+                        {item?.jobskkers_detail?.skills_arr?.length > 0 && (
+                          <div className="job-time d-flex flex-column my-2" style={{ gap: "12px" }}>
+                            <ul>
+                              <li className="fw-bold"> Skills: </li>
+                            </ul>
+                            <div className="d-flex text-break" style={{ gap: "3px", flexWrap: "wrap" }}>
+                              {item.jobskkers_detail.skills_arr.map((skill, index) => (
+                                <ul key={index} className="job-time">
+                                  <Link to={"#"}>
+                                    <span>{skill}</span>
+                                  </Link>
+                                </ul>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                     <div className="d-flex">
                       <div className="job-time mr-auto d-flex">
                         <ul>
-                          <li>Experience :</li>
+                          <li>Experience:</li>
                         </ul>
                         <Link to={"#"}>
-                          <span>
-                            {item?.jobskkers_detail?.experience_in_month}
-                          </span>
+                          <span>{item?.jobskkers_detail?.experience_in_month}</span>
                         </Link>
                       </div>
-                      <div
-                        className="d-flex align-items-center "
-                        style={{ gap: "7px" }}
-                      >
+                      <div className="d-flex align-items-center" style={{ gap: "7px" }}>
                         <div className="salary-bx">
                           <span>{item?.jobskkers_detail?.expected_salary}</span>
                         </div>
@@ -185,9 +163,6 @@ function Jobsection() {
               </div>
             </div>
           </div>
-
-
-          
           <div className="col-lg-3">
             <div className="sticky-top">
               <div className="candidates-are-sys m-b30">
@@ -207,21 +182,17 @@ function Jobsection() {
                     </p>
                   </div>
                   <div className="testimonial-detail">
-                    {" "}
                     <strong className="testimonial-name">
                       Richard Anderson
-                    </strong>{" "}
-                    <span className="testimonial-position">Nevada, USA</span>{" "}
+                    </strong>
+                    <span className="testimonial-position">Nevada, USA</span>
                   </div>
                 </div>
               </div>
               <div className="quote-bx">
                 <div className="quote-info">
                   <h4>Make a Difference with Your Online Resume!</h4>
-                  <p>
-                    Your resume in minutes with JobBoard resume assistant is
-                    ready!
-                  </p>
+                  <p>Your resume in minutes with JobBoard resume assistant is ready!</p>
                   <Link to={"/employee/register"} className="site-button">
                     Create an Account
                   </Link>

@@ -256,7 +256,7 @@ class UserHeader2 extends Component {
                           </Link>
                         </li>
                         <li>
-                          <Link to={"/user/job-detail"} className="dez-page">
+                          <Link to={"/user/job"} className="dez-page">
                             Job Detail
                           </Link>
                         </li>

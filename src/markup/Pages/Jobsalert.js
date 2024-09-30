@@ -147,7 +147,7 @@ function Jobsalert() {
                         {contacts.map((contact, index) => (
                           <tr key={index}>
                             <td className="job-name">
-                              <Link to={"/user/job-detail"}>
+                              <Link to={"/user/job"}>
                                 {contact.title}
                               </Link>
                             </td>
