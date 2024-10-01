@@ -59,6 +59,11 @@ const Listvendor = () => {
     console.log(`Filtering by more info type: ${infoType}`);
   };
 
+  const getDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString(); // Customize as needed
+};
+
   return (
     <div>
       <CustomNavbar />
@@ -92,7 +97,8 @@ const Listvendor = () => {
                   <tbody>
                     {jobs.map((vendor) => (
                       <tr key={vendor.vendors_detail.id} className="text-center">
-                        <td>{vendor.vendors_detail.created_at}</td>
+                       <td>{getDate(vendor.vendors_detail.created_at)}</td>
+
                         <td>{vendor.company_detail.company_name}</td>
                         <td>{vendor.vendors_detail.website_link}</td>
                         <td>Coming soon</td>

@@ -107,7 +107,7 @@ function Jobadd() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://api.novajobs.us/api/employeer/job-categories",
+      url: "https://api.novajobs.us/api/admin/job-categories",
       headers: {
         Authorization: token,
       },
@@ -134,7 +134,7 @@ function Jobadd() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://api.novajobs.us/api/employeer/experience-level",
+      url: "https://api.novajobs.us/api/admin/experience-level",
       headers: {
         Authorization: token,
       },
@@ -161,7 +161,7 @@ function Jobadd() {
 
   const getJob = async () => {
     await axios({
-      url: `https://api.novajobs.us/api/employeer/job-lists/${id}`,
+      url: `https://api.novajobs.us/api/admin/job-lists/${id}`,
       method: "get",
       headers: {
         Authorization: token,
@@ -198,7 +198,7 @@ function Jobadd() {
   const aiJobDescription = async () => {
     setDescription(true);
     await axios({
-      url: `https://api.novajobs.us/api/employeer/ai-job-description`,
+      url: `https://api.novajobs.us/api/admin/ai-job-description`,
       method: "post",
       headers: {
         Authorization: token,
@@ -206,8 +206,8 @@ function Jobadd() {
       data: {
         keyword: postAJobData.jobTitle,
         title: postAJobData.jobTitle,
-        workplace_type: postAJobData.workplaceType,
-        job_type: postAJobData.jobType,
+        workplace_type:Number(postAJobData.workplaceType)|| 0,
+        job_type: Number(postAJobData.jobType)||0,
         company: postAJobData.company,
       },
     }).then((res) => {
@@ -218,7 +218,7 @@ function Jobadd() {
 
   const postCompleted = async () => {
     await axios({
-      url: `https://novajobs.us/api/admin/job-post/${id}`,
+      url: `https://api.novajobs.us/api/admin/job-post/${id}`,
       method: "PUT",
       headers: {
         Authorization: token,
@@ -251,7 +251,7 @@ function Jobadd() {
   
   const getJobTyes = async () => {
     await axios({
-      url: "https://api.novajobs.us/api/employeer/job-types",
+      url: "https://api.novajobs.us/api/admin/job-types",
 
       headers: {
         Authorization: token,
@@ -268,7 +268,7 @@ function Jobadd() {
 
   const getWorkplaceType = async () => {
     await axios({
-      url: "https://api.novajobs.us/api/employeer/workplace-types",
+      url: "https://api.novajobs.us/api/admin/workplace-types",
 
       headers: {
         Authorization: token,
@@ -286,7 +286,7 @@ function Jobadd() {
   const getCountry = async () => {
     await axios({
       method: "get",
-      url: "https://api.novajobs.us/api/employeer/countries",
+      url: "https://api.novajobs.us/api/admin/countries",
       headers: {
         Authorization: token,
       },
@@ -304,7 +304,7 @@ function Jobadd() {
   const getState = async () => {
     await axios({
       method: "get",
-      url: `https://api.novajobs.us/api/employeer/stats/${postAJobData.selectedCountry}`,
+      url: `https://api.novajobs.us/api/admin/stats/231`,
       headers: {
         Authorization: token,
       },
@@ -329,7 +329,7 @@ function Jobadd() {
   const getCities = async () => {
     await axios({
       method: "get",
-      url: `https://api.novajobs.us/api/employeer/cities/${postAJobData.selectedState}`,
+      url: `https://api.novajobs.us/api/admin/cities/${postAJobData.selectedState}`,
       headers: {
         Authorization: token,
       },
@@ -549,7 +549,7 @@ function Jobadd() {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder="Conscious foundation"
+                              placeholder="Company"
                               id="company"
                               name="company"
                               value={postAJobData.company}

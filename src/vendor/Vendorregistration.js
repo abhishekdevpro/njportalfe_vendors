@@ -45,23 +45,28 @@ const Vendorregistration = () => {
     e.preventDefault();
   
     try {
-      const response = await fetch('https://api.novajobs.us/api/admin/auth/vendor/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+        const response = await fetch('https://api.novajobs.us/api/admin/auth/vendor/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
   
-      if (response.ok) {
-        toast.success('Vendor registered successfully! Please check your email for verification.');
-      } else {
-        toast.error('Vendor registration failed. Please try again later.');
-      }
+        // Check if response is ok
+        if (response.ok) {
+            toast.success('Vendor registered successfully! Please check your email for verification.');
+        } else {
+            // Attempt to parse the error message from the response
+            const errorData = await response.json();
+            toast.error(errorData.message || 'Registration failed. Please try again.');
+        }
     } catch (error) {
-      toast.error('Error registering vendor.');
+        toast.error('An unexpected error occurred. Please try again.');
+        console.error('Error:', error); // Log the error for debugging
     }
-  };
+};
+
 
   return (
     <div>
@@ -75,7 +80,7 @@ const Vendorregistration = () => {
         />
       </Navbar.Brand>
 
-
+<ToastContainer/>
         <Nav className="ml-auto align-items-center">
           <Nav.Link href="/vendor/login" className="mr-4">
           
