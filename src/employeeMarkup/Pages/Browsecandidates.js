@@ -483,8 +483,8 @@ const navigate = useNavigate();
   <div className="d-flex" style={{ justifyContent: "start", gap: "10px" }}>
     <div>
       {item.jobskkers_detail.state_id && (
-        <p style={{ margin: "0px"}}>
-          <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" style={{color:'#1C2957'}} />
+        <p style={{ margin: "0px", color:"blue"}}>
+          <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" style={{color:'blue'}} />
           {item?.jobskkers_detail?.states?.name}
         </p>
       )}
@@ -492,7 +492,7 @@ const navigate = useNavigate();
     
     <div>
       {item.jobskkers_detail.city_id && (
-        <p style={{ margin: "0px",  }}>
+        <p style={{ margin: "0px", color:"blue"  }}>
           {item?.jobskkers_detail?.cities?.name}
         </p>
       )}
@@ -501,16 +501,16 @@ const navigate = useNavigate();
 
   <div>
     {item.jobskkers_detail.ai_resume_parse_data.jobsMyResumeData.desiredCareerProfile.employmentType && (
-    <p style={{ margin: "0px" }}>
-      <FontAwesomeIcon icon={faEnvelope} className="mr-2 " style={{color:'#1C2957'}} />
+    <p style={{ margin: "0px", color:"blue" }}>
+      <FontAwesomeIcon icon={faEnvelope} className="mr-2 " style={{color:'blue'}} />
       {item.jobskkers_detail.ai_resume_parse_data.jobsMyResumeData.desiredCareerProfile.employmentType}
     </p>
   )}
     </div>
   <div>
     {item.jobskkers_detail.created_at && (
-      <p style={{ margin: "0px", fontWeight: "600" }}>
-        <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" style={{color:'#1C2957'}}/>Published {" "}
+      <p style={{ margin: "0px", fontWeight: "600", color:"blue" }}>
+        <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" style={{color:'blue'}}/>Published {" "}
         {moment(item.jobskkers_detail.created_at).fromNow()}
       </p>
     )}
@@ -520,8 +520,8 @@ const navigate = useNavigate();
   {item.jobskkers_detail.skills_arr ? (
     <div className="row mt-3">
       {item.jobskkers_detail.skills_arr.map((skill, index) => (
-        <div className="col-4 col-md-2 mb-1 text-break" key={index}>
-          <span className="badge badge-info p-2" style={{backgroundColor:'#52597B'}}>{skill}</span>
+        <div className="col-3 col-md-3 mb-1 text-break" key={index}>
+          <span className="badge badge-info p-2" style={{backgroundColor:'blue'}}>{skill}</span>
         </div>
       ))}
       
@@ -534,16 +534,7 @@ const navigate = useNavigate();
                     </label>
                     
 <div className="d-flex mt-3">
-                      <div className="job-time mr-auto d-flex">
-                        <ul>
-                          <li>Experience :</li>
-                        </ul>
-                        <Link to={"#"}>
-                          <span>
-                            {item?.jobskkers_detail?.experience_in_month}
-                          </span>
-                        </Link>
-                      </div>
+                    
                       <div
                         className="d-flex align-items-center "
                         style={{ gap: "7px" }}

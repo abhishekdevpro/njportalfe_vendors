@@ -40,6 +40,7 @@ function EmployeeCompanyprofile() {
   const [glassdoor, setGlassdor] = useState("");
   const [services, setServices] = useState([{ title: '', image: null }]);
   const [industries, setIndustries] = useState([]);
+  const [file, setFile] = useState(null);
 
   const token = localStorage.getItem("employeeLoginToken");
 
@@ -67,49 +68,7 @@ function EmployeeCompanyprofile() {
   }, [token]); // Added token as dependency to ensure useEffect runs on token change
 
   // Function to update company data
-  const updateCompanyData = async () => {
-    // Ensure required fields are filled
-    if (!companyName || !email || !industry || !selectedCountry || !selectedStates || !selectedCities) {
-      showToastError("Please fill out all required fields.");
-      return;
-    }
-
-    axios({
-      method: "put",
-      url: `https://api.novajobs.us/api/employeer/company`,
-      headers: {
-        Authorization: token,
-      },
-      data: {
-        company_name: companyName,
-        about: description.trim(),
-        email: email,
-        tagline: tagline,
-       // user_id: 1,
-        website_link: website,
-        founded_date: foundedYear,
-        phone: number,
-        country_id: Number(selectedCountry),
-        state_id: Number(selectedStates),
-        city_id: Number(selectedCities),
-        address: address,
-        facebook_link: glassdoor,
-        twitter_link: twitter,
-        google_link: googleBusiness,
-        linkedin_link: linkdin,
-        company_industry_id: Number(industry),
-        services:services
-      },
-    })
-      .then((res) => {
-        console.log(res, "data updated");
-        showToastSuccess("Company data updated successfully.");
-      })
-      .catch((error) => {
-        console.log(error);
-        showToastError("Failed to update company data.");
-      });
-  };
+ 
 
   const dispatch = useDispatch();
 
@@ -122,7 +81,7 @@ function EmployeeCompanyprofile() {
     setTagline(companyDetail?.tagline || "");
     setEmail(companyDetail?.email || "");
     setWebsite(companyDetail?.website_link || "");
-    setFoundedYear(companyDetail?.created_at || "");
+    setFoundedYear(companyDetail?.founded_date || "");
     setDescription(companyDetail?.about || "");
     setSelectedCountry(companyDetail?.country_id || null);
     setSelectedStates(companyDetail?.state_id || null);
@@ -133,8 +92,28 @@ function EmployeeCompanyprofile() {
     setTwitter(companyDetail?.twitter_link || "");
     setGoogleBusiness(companyDetail?.google_link || "");
     setGlassdor(companyDetail?.facebook_link || "");
-    setIndustry(companyDetail?.company_industry?.id || ""); // Set industry ID if available
-  }, [companyData]);
+    setIndustry(companyDetail?.company_industry?.id || "");
+    const companyServices = companyDetail?.company_services;
+
+    // Check if companyServices is a valid JSON string
+    if (companyServices && typeof companyServices === 'string' && companyServices.trim() !== '') {
+        try {
+            const parsedServices = JSON.parse(companyServices);
+            const formattedServices = parsedServices.map(service => ({
+                title: service.service_name,
+                image: service.service_photo,
+            }));
+            setServices(formattedServices);
+        } catch (error) {
+            console.error("Failed to parse company services:", error);
+            // Optionally set services to an empty array or handle the error as needed
+            setServices([]);
+        }
+    } else {
+        // If companyServices is not valid, set services to an empty array
+        setServices([]);
+    }
+}, [companyData]);
 
   const getCountry = async () => {
     axios({
@@ -202,14 +181,14 @@ function EmployeeCompanyprofile() {
   // ... (previous useEffect hooks and functions)
 
   const addService = () => {
-    setServices([...services, { title: "", image: null }]);
+    setServices([...services, { title: "", image: "" }]);
   };
-
+  
   const removeService = (index) => {
     const updatedServices = services.filter((_, i) => i !== index);
     setServices(updatedServices);
   };
-
+  
   const handleServiceChange = (index, field, value) => {
     const updatedServices = services.map((service, i) => {
       if (i === index) {
@@ -219,18 +198,108 @@ function EmployeeCompanyprofile() {
     });
     setServices(updatedServices);
   };
+  
+  const handleImageChange = (index, e) => {
+    const img = e.target.files[0];
+    const url = URL.createObjectURL(img);
 
-  const handleImageUpload = (index, event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        handleServiceChange(index, 'image', reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
+    const updatedServices = services.map((service, i) => {
+      if (i === index) {
+        return { ...service, image: img, url: url }; // Store the file and its URL
+      }
+      return service;
+    });
+    setServices(updatedServices);
   };
 
+  
+ 
+  const updateCompanyData = async () => {
+    if (!companyName || !email || !industry || !selectedCountry || !selectedStates || !selectedCities) {
+      showToastError("Please fill out all required fields.");
+      return;
+    }
+  
+    try {
+      const servicesName = services.map(service => service.title);
+      const formData = new FormData();
+      const serviceFiles = []; // Array to hold service images
+      const serviceNames = []; // Array to hold service names
+  
+      // Function to convert a URL or string to a Blob/File
+      const convertImageToBinary = async (image) => {
+        if (typeof image === "string") {
+          // If the image is a URL, fetch it as a Blob
+          const response = await fetch(image);
+          const blob = await response.blob();
+          return new File([blob], "image.png"); // You can adjust the file name and type if necessary
+        }
+        return image; // If it's already a File or Blob, return as is
+      };
+  
+      // Process each service to prepare the data
+      for (const service of services) {
+        serviceNames.push(service.title); // Collect service titles
+        if (service.image) {
+          const binaryImage = await convertImageToBinary(service.image); // Convert image to binary if needed
+          serviceFiles.push(binaryImage); // Collect service images
+        }
+      }
+  
+      // Append each service image and its corresponding name to formData
+      for (let i = 0; i < serviceFiles.length; i++) {
+        formData.append("images", serviceFiles[i]);
+        formData.append("services_name", serviceNames[i] || `file-${i}`); // Use a default name if none provided
+      }
+  
+      // First request to update company data
+      await axios({
+        method: "put",
+        url: `https://api.novajobs.us/api/employeer/company`,
+        headers: {
+          Authorization: token,
+        },
+        data: {
+          company_name: companyName,
+          about: description.trim(),
+          email: email,
+          tagline: tagline,
+          website_link: website,
+          founded_date: foundedYear,
+          phone: number,
+          country_id: Number(selectedCountry),
+          state_id: Number(selectedStates),
+          city_id: Number(selectedCities),
+          address: address,
+          facebook_link: glassdoor,
+          twitter_link: twitter,
+          google_link: googleBusiness,
+          linkedin_link: linkdin,
+          company_industry_id: Number(industry),
+        },
+      });
+  
+      showToastSuccess("Company data updated successfully.");
+  
+      // Second request to update company services
+      await axios({
+        method: "put",
+        url: `https://api.novajobs.us/api/employeer/company-services`,
+        headers: {
+          Authorization: token,
+          // No need to set 'Content-Type' when sending FormData; the browser sets it automatically
+        },
+        data: formData, // This is the FormData containing images and names
+      });
+  
+      showToastSuccess("Services updated successfully.");
+    } catch (error) {
+      console.error("Error updating company data or services:", error);
+      showToastError("Failed to update company data or services.");
+    }
+  };
+  
+  
   return (
     <>
       <Header2 />
@@ -316,14 +385,10 @@ function EmployeeCompanyprofile() {
       <div className="form-group">
         <label>Founded Year</label>
         <input
-          type="month"  // Allows the user to select year and month
+          type="text"  // Allows the user to select year and month
           className="form-control"
-          onChange={(e) => {
-            const year = e.target.value.split("-")[0];  // Extract the year from the selected value
-            setFoundedYear(year);  // Update state with the selected year
-          }}
-          value={foundedYear ? `${foundedYear}-01` : ""}
-          aria-required
+          onChange={(e) => setFoundedYear(e.target.value)}
+          value={foundedYear}
         />
       </div>
     </div>
@@ -391,7 +456,7 @@ function EmployeeCompanyprofile() {
                                     <input
                                       type="file"
                                       className="form-control-file"
-                                      onChange={(e) => handleImageUpload(index, e)}
+                                      onChange={(e) => handleImageChange(index, e)}
                                     />
                                   </div>
                                 </div>
@@ -406,7 +471,7 @@ function EmployeeCompanyprofile() {
                                 </div>
                                 {service.image && (
                                   <div className="col-lg-12 col-md-12 mt-2">
-                                    <img src={service.image} alt="Service" className="img-fluid" style={{maxHeight: '100px'}} />
+                                    <img src={`https://api.novajobs.us${service.image}`} alt="Service" className="img-fluid" style={{maxHeight: '100px'}} />
                                   </div>
                                 )}
                               </div>

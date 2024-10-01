@@ -4,8 +4,10 @@ import axios from "axios";
 import Header2 from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 import CompanySideBar from "../Layout/companySideBar";
+import { Modal, Button } from "react-bootstrap";
 
 function EmployeeCompanyresume() {
+  
   const [resumes, setResumes] = useState([]);
   const [selectedJobTitle, setSelectedJobTitle] = useState("All");
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -17,6 +19,11 @@ function EmployeeCompanyresume() {
   const [jobTitleDropdownOpen, setJobTitleDropdownOpen] = useState(false);
   const { id } = useParams();
   const [status, setStatus] = useState(null);
+
+  
+  const [showResumeModal, setShowResumeModal] = useState(false);
+  const [resumeLink, setResumeLink] = useState("");
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,7 +57,7 @@ function EmployeeCompanyresume() {
             resume_link: item.jobskkers_detail.resume_file_path,
             skills: item.jobskkers_detail.ai_resume_parse_data.jobsMyResumeData.skillsValue.skills || "", // Adjusted field
             phone: item.jobskkers_detail.phone, // Add phone
-  email: item.jobskkers_detail.email 
+            email: item.jobskkers_detail.email
           }));
           setResumes(formattedResumes);
         } else {
@@ -189,6 +196,21 @@ function EmployeeCompanyresume() {
     displayedResumes = resumes.filter((item) => scheduled.includes(item.id));
   }
 
+
+  const handleViewResume = (resumeLink) => {
+    if (resumeLink) {
+      setResumeLink(`https://api.novajobs.us${resumeLink}`); // Add full path if needed
+    } else {
+      setResumeLink(null);
+    }
+    setShowResumeModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowResumeModal(false);
+    setResumeLink("");
+  };
+
   return (
     <>
       <Header2 />
@@ -282,21 +304,21 @@ function EmployeeCompanyresume() {
                           className="job-bx bg-light clearfix border rounded p-4 mb-3"
                         >
                           <div className="job-info">
-                           
-                            <p className="font-weight-700" style={{fontSize:'25px',fontWeight:"600"}}>{item.job_title}</p>
+                            <p className="font-weight-700" style={{ fontSize: "25px", fontWeight: "600" }}>
+                              {item.job_title}
+                            </p>
                             <Link to={`/employee/profilepage/${item.id}`}>
-                            <h5 >{item.first_name} {item.last_name}</h5>
-                                      </Link>
-                                      <p >Phone: {item.phone} <br/> Email: {item.email}</p>
+                              <h5>{item.first_name} {item.last_name}</h5>
+                            </Link>
+                            <p>Phone: {item.phone} <br /> Email: {item.email}</p>
                             <p>Skills: {item.skills}</p>
                             <p>
-                              <a href={item.resume_link} target="_blank" rel="noopener noreferrer"> <button
-                              className="btn btn-primary"
-
-                            >
-                             View Resume
-                            </button></a>
-                          
+                              <button
+                                className="btn btn-primary"
+                                onClick={() => handleViewResume(item.resume_link)}
+                              >
+                                View Resume
+                              </button>
                             </p>
                             <p>Applied on: {new Date(item.created_at).toLocaleDateString()}</p>
                           </div>
@@ -331,8 +353,32 @@ function EmployeeCompanyresume() {
         </div>
       </div>
       <Footer />
+
+      <Modal show={showResumeModal} onHide={handleCloseModal} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Resume</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {resumeLink ? (
+            <iframe
+              src={resumeLink}
+              title="Resume"
+              style={{ width: "100%", height: "500px" }}
+            ></iframe>
+          ) : (
+            <p>There is no resume available.</p>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }
 
 export default EmployeeCompanyresume;
+
+
