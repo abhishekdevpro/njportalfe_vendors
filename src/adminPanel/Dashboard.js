@@ -10,6 +10,7 @@ const Dashboard = () => {
   const [maxSNo, setMaxSNo] = useState(0); 
   const [maxSNo2, setMaxSNo2] = useState(0);// State to store max s_no
   const [maxSNo3, setMaxSNo3] = useState(0);
+  const [maxSNo4, setMaxSNo4] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -123,6 +124,43 @@ const Dashboard = () => {
     fetchJobsCount3();
   }, []);
 
+  useEffect(() => {
+    const fetchJobsCount4 = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken');
+        if (!authToken) {
+          throw new Error('Auth token not found');
+        }
+
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: authToken,
+        };
+
+        const jobsEndpoint = 'https://api.novajobs.us/api/admin/companies';
+
+        const response = await fetch(jobsEndpoint, { headers });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.data && data.data.length > 0) {
+          // Find the maximum s_no value
+          const maxSNoValue = Math.max(...data.data.map(job => job.id));
+          setMaxSNo4(maxSNoValue);
+        } else {
+          setMaxSNo4(0); // Handle case where no jobs are returned
+        }
+      } catch (error) {
+        console.error('Error fetching jobs count:', error);
+        // Handle errors, e.g., setMaxSNo(-1);
+      }
+    };
+
+    fetchJobsCount4();
+  }, [])
+
   const Box = ({ icon, title, count, path, size }) => (
     <Col md={size} className="">
       <Card
@@ -161,77 +199,40 @@ const Dashboard = () => {
                 </Col>
               </Row>
               <Row className='gap-3'>
-                <Box 
-                
-                  icon={<FaUsers className="display-4" />}
-                  title="Team"
-                  count={0} // Replace with actual count
-                  path="/admin/team"
-                  size={2} // Size for this Box
-                />
+              
                 <Box
                   icon={<FaStore className="display-4" />}
                   title="Vendors"
                   count={maxSNo3} // Replace with actual count
-                  path="/admin/vendors"
-                  size={2} // Size for this Box
+                  path="/admin/vendor"
+                  size={6} // Size for this Box
                 />
                 <Box
                   icon={<FaUserTie className="display-4" />}
                   title="Employer"
-                  count={0} // Replace with actual count
-                  path="/admin/employees"
-                  size={2} // Size for this Box
+                  count={maxSNo4} // Replace with actual count
+                  path="/admin/employee"
+                  size={5} // Size for this Box
                 />
                 <Box 
                   icon={<FaBriefcase className="display-4" />}
                   title="Jobs"
                   count={maxSNo} // Display max s_no here
                   path="/admin/jobs"
-                  size={2} // Larger size for this Box
+                  size={6} // Larger size for this Box
                 />
-                <Box
-                  icon={<FaBell className="display-4" />}
-                  title="Notifications"
-                  count={0} // Replace with actual count
-                  path="/admin/notifications"
-                  size={2} // Size for this Box
-                />
+                
                 <Box
                   icon={<FaUserGraduate className="display-4" />}
                   title="JobSeekers"
                   count={maxSNo2} // Replace with actual count
                   path="/admin/jobseekers"
-                  size={3} // Size for this Box
+                  size={5} // Size for this Box
                 />
-                <Box
-                  icon={<FaUserPlus className="display-4" />}
-                  title="Add to team"
-                  count={0} // Replace with actual count
-                  path="/admin/addteam"
-                  size={4} // Size for this Box
-                />
-                 <Box
-                  icon={<FaTasks className="display-4" />}
-                  title="Assign Task"
-                  count={0} // Replace with actual count
-                  path="/admin/assigntask"
-                  size={4} // Size for this Box
-                />
-                <Box
-                  icon={<FaWallet className="display-4" />}
-                  title="Wallet"
-                  count={0} // Replace with actual count
-                  path="/admin/wallet"
-                  size={8} // Size for this Box
-                />
-                <Box
-                  icon={<FaTasks className="display-4" />}
-                  title="Assign Role"
-                  count={0} // Replace with actual count
-                  path="/admin/assignrole"
-                  size={3} // Size for this Box
-                />
+               
+               
+                
+               
                
               </Row>
             </Container>

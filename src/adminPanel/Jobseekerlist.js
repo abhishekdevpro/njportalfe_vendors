@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card, Container, Row, Col,Dropdown} from 'react-bootstrap';
-import {FaStore}  from 'react-icons/fa';
+import { Card, Container, Row, Col, Dropdown, Button } from 'react-bootstrap';
+import { FaStore } from 'react-icons/fa';
 import CustomNavbar from './Navbar';
 import Sidebar from './Sidebar';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Jobseekerlist = () => {
   const [jobs, setJobs] = useState([]);
@@ -38,6 +38,33 @@ const Jobseekerlist = () => {
     fetchJobs();
   }, []);
 
+  const handleStatusChange = async (jobId, status) => {
+    const authToken = localStorage.getItem('authToken');
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: authToken,
+    };
+
+    try {
+      if (status === 'active') {
+        await fetch(`https://api.novajobs.us/api/admin/jobseeker-active/${jobId}`, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({ status: 1 }), // Sending 1 for active
+        });
+      } else if (status === 'inactive') {
+        await fetch(`https://api.novajobs.us/api/admin/jobseeker-inactive/${jobId}`, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({ status: 0 }), // Sending 0 for inactive
+        });
+      }
+      // Optionally refetch the jobs to update the list after status change
+    } catch (error) {
+      console.error('Error updating job status:', error);
+    }
+  };
+
   return (
     <div>
       <CustomNavbar />
@@ -55,38 +82,43 @@ const Jobseekerlist = () => {
                 <table className="table">
                   <thead className='text-center'>
                     <tr>
-                      <th>Job ID</th>
+                     
                       <th>First Name</th>
-                      <th>last Name</th>
+                      <th>Last Name</th>
                       <th>Email</th>
                       <th>Phone</th>
-                      <th>Status</th>
-                      <th>More info</th>
+                      <th>Account Status</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody className='text-center'>
                     {jobs.map((job) => (
-                      <tr key={job.id} >
-                        <td>{job.jobskkers_detail.id}</td>
+                      <tr key={job}>
+                        
                         <td>{job.jobskkers_detail.first_name}</td>
                         <td>{job.jobskkers_detail.last_name}</td>
                         <td>{job.jobskkers_detail.email}</td>
                         <td>{job.jobskkers_detail.phone}</td>
                         <td>
-                          {/* Example dropdown */}
-                          <Dropdown>
-                            <Dropdown.Toggle >
-                              Select
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                              <Dropdown.Item >Active</Dropdown.Item>
-                              <Dropdown.Item >Pending</Dropdown.Item>
-                             
-                            </Dropdown.Menu>
-                          </Dropdown>
-                        </td> 
-                        
-                       
+                          {job.jobskkers_detail.is_verified === 1 ? 'Active' : 'Inactive'}
+                        </td>
+                       <td>
+                          {job.jobskkers_detail.is_verified === 1 ? (
+                            <Button
+                              variant="warning"
+                              onClick={() => handleStatusChange(job.id, 'inactive')}
+                            >
+                              Set Inactive
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="success"
+                              onClick={() => handleStatusChange(job.id, 'active')}
+                            >
+                              Set Active
+                            </Button>
+                          )}
+                        </td>
                       </tr>
                     ))}
                   </tbody>

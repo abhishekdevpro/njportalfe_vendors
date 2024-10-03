@@ -137,6 +137,7 @@ import ResumeSecurity from "./markup/Pages/ResumeSecurity";
 import LandingPage from "./employeeMarkup/Pages/LandingPage";
 import Verifyemail from "./markup/Pages/Verifyemail";
 import Aboutus1 from "./markup/Pages/Aboutus1";
+import Novajobs from "./markup/Pages/Novajobs";
 import Jobreferral from "./markup/Element/Jobreferral";
 import VerifyEmailemployee from "./employeeMarkup/Pages/Verifyemailemploye";
 
@@ -186,6 +187,7 @@ import JobPagethirdparty from "./markup/Pages/JobPagethirdparty";
 import Transactions from "./markup/Pages/Transactions";
 import Vendorplan from "./vendor/Vendorplan";
 import Jobadd from "./adminPanel/Jobadd";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -193,6 +195,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="services" element={<LandingPage />} />
+      <Route path="novajobs" element={<Novajobs />} />
       <Route path="aboutus" element={<Aboutus1 />} />
       <Route path="Profilepagehome" element={<Profilepagehome />} />
       <Route path="/*" element={<Error404 />} />

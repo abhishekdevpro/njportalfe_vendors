@@ -66,7 +66,7 @@ const Sidebar = () => {
   };
 
   return (
-    <Nav className="flex-column bg-light vh-screen gap-3 h-full">
+    <Nav className="flex-column bg-light h-screen gap-3 h-full">
       <Nav.Link as={NavLink} to="/admin/dashboard" style={navLinkStyle("/admin/dashboard")} className='ps-4'>
         <FaTachometerAlt style={iconStyle} /> Dashboard
       </Nav.Link>
@@ -92,30 +92,6 @@ const Sidebar = () => {
         )}
       </div>
 
-      <Nav.Link as={NavLink} to="/admin/users" style={navLinkStyle("/admin/users")} className='ps-4'>
-        <FaUsers style={iconStyle} /> User
-      </Nav.Link>
-      
-      <div>
-        <Nav.Link
-          onClick={handleTeamClick}
-          as={NavLink} to="/admin/team"
-          style={navLinkStyle("/admin/team")}
-          className='ps-4'
-        >
-          <FaUserTie style={iconStyle} /> Team
-        </Nav.Link>
-        {showTeamSubmenu && (
-          <>
-            <Nav.Link as={NavLink} to="/admin/team/list-number" style={navLinkStyle("/admin/team/list-number")} className='ps-5'>
-              <FaUsers style={iconStyle} /> List Number
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/team/list-team" style={navLinkStyle("/admin/team/list-team")} className='ps-5'>
-              <FaUsers style={iconStyle} /> Add Team
-            </Nav.Link>
-          </>
-        )}
-      </div>
       
       <div>
         <Nav.Link
@@ -134,14 +110,14 @@ const Sidebar = () => {
             <Nav.Link as={NavLink} to="/admin/addjobs" style={navLinkStyle("/admin/addjobs")} className='ps-5'>
               <FaBriefcase style={iconStyle} /> Add Jobs
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/bulkUploadjobs" style={navLinkStyle("/admin/bulkUploadjobs")} className='ps-5'>
+           {/* <Nav.Link as={NavLink} to="/admin/bulkUploadjobs" style={navLinkStyle("/admin/bulkUploadjobs")} className='ps-5'>
               <FaUsers style={iconStyle} /> Bulk Upload
-            </Nav.Link>
+            </Nav.Link> */}
           </>
         )}
       </div>
 
-      <div>
+     {/* <div>
         <Nav.Link
           onClick={handleTeamClick4}
           as={NavLink} to="/admin/notifications"
@@ -157,7 +133,7 @@ const Sidebar = () => {
             </Nav.Link>
           </>
         )}
-      </div>
+      </div> */}
       
       <div>
         <Nav.Link
@@ -176,9 +152,9 @@ const Sidebar = () => {
             <Nav.Link as={NavLink} to="/admin/Addjobseeker" style={navLinkStyle("/admin/Addjobseeker")} className='ps-5'>
               <FaUserGraduate style={iconStyle} /> Add Job Seeker
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/bulkUpload" style={navLinkStyle("/admin/bulkUpload")} className='ps-5'>
+           {/*  <Nav.Link as={NavLink} to="/admin/bulkUpload" style={navLinkStyle("/admin/bulkUpload")} className='ps-5'>
               <FaUsers style={iconStyle} /> Bulk Upload
-            </Nav.Link>
+            </Nav.Link> */}
           </>
         )}
       </div>
@@ -200,40 +176,22 @@ const Sidebar = () => {
             <Nav.Link as={NavLink} to="/admin/team/addemployers" style={navLinkStyle("/admin/team/addemployers")} className='ps-5'>
               <FaUsers style={iconStyle} /> Add Employers
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/team/bulkUploademployers" style={navLinkStyle("/admin/team/bulkUploademployers")} className='ps-5'>
+            {/*<Nav.Link as={NavLink} to="/admin/team/bulkUploademployers" style={navLinkStyle("/admin/team/bulkUploademployers")} className='ps-5'>
               <FaUsers style={iconStyle} /> Bulk Upload
-            </Nav.Link>
+            </Nav.Link> */}
           </>
         )}
       </div>
 
-      <div>
-        <Nav.Link
-          onClick={handleTeamClick7}
-          as={NavLink} to="/admin/CompanyNameAdmin"
-          style={navLinkStyle("/admin/CompanyNameAdmin")}
-          className='ps-4'
-        >
-          <FaUserTie style={iconStyle} /> Company
-        </Nav.Link>
-        {showTeamSubmenu7 && (
-          <>
-            <Nav.Link as={NavLink} to="/admin/CompanyListAdmin" style={navLinkStyle("/admin/CompanyListAdmin")} className='ps-5'>
-              <FaUsers style={iconStyle} /> List All
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/team/addemployers" style={navLinkStyle("/admin/team/addemployers")} className='ps-5'>
-              <FaUsers style={iconStyle} /> Add Employers
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/team/bulkUploademployers" style={navLinkStyle("/admin/team/bulkUploademployers")} className='ps-5'>
-              <FaUsers style={iconStyle} /> Bulk Upload
-            </Nav.Link>
-          </>
-        )}
-      </div>
+     
       
      
       
-      <div>
+    
+
+     {/*
+     
+       <div>
         <Nav.Link
           onClick={handleTeamClick6}
           as={NavLink} to="/admin/wallet"
@@ -265,13 +223,13 @@ const Sidebar = () => {
           </>
         )}
       </div>
-
-      <Nav.Link as={NavLink} to="/admin/assignrole" style={navLinkStyle("/admin/assignrole")} className='ps-4'>
+     
+     <Nav.Link as={NavLink} to="/admin/assignrole" style={navLinkStyle("/admin/assignrole")} className='ps-4'>
         <FaTasks style={iconStyle} /> Assign Role
       </Nav.Link>
       <Nav.Link as={NavLink} to="/admin/assigntask" style={navLinkStyle("/admin/assigntask")} className='ps-4'>
         <FaTasks style={iconStyle} /> Assign Task
-      </Nav.Link>
+      </Nav.Link> */}
     </Nav>
   );
 };

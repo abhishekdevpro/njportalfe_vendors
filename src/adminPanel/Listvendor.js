@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Container, Row, Col, Dropdown, DropdownButton, Button } from 'react-bootstrap';
 import { FaStore } from 'react-icons/fa';
 import CustomNavbar from './Navbar';
 import Sidebar from './Sidebar';
@@ -64,6 +64,34 @@ const Listvendor = () => {
     return date.toLocaleDateString(); // Customize as needed
 };
 
+
+const handleStatusChange1 = async (id, status) => {
+  const authToken = localStorage.getItem('authToken');
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: authToken,
+  };
+
+  try {
+    if (status === 'active') {
+      await fetch(`https://api.novajobs.us/api/admin/vendor-active/${id}`, {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify({ status: 1 }), // Sending 1 for active
+      });
+    } else if (status === 'inactive') {
+      await fetch(`https://api.novajobs.us/api/admin/vendor-inactive/${id}`, {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify({ status: 0 }), // Sending 0 for inactive
+      });
+    }
+    // Optionally refetch the jobs to update the list after status change
+  } catch (error) {
+    console.error('Error updating job status:', error);
+  }
+};
+
   return (
     <div>
       <CustomNavbar />
@@ -91,7 +119,7 @@ const Listvendor = () => {
                       <th style={{ backgroundColor: '#1C2957', color: 'white' }}>Contact Number</th>
                       <th style={{ backgroundColor: '#1C2957', color: 'white' }}>Email ID</th>
                       <th style={{ backgroundColor: '#1C2957', color: 'white' }}>Status</th>
-                      <th style={{ backgroundColor: '#1C2957', color: 'white' }}>More Info</th>
+                      <th style={{ backgroundColor: '#1C2957', color: 'white' }}>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -105,26 +133,24 @@ const Listvendor = () => {
                         <td>{vendor.vendors_detail.phone}</td>
                         <td>{vendor.vendors_detail.email}</td>
                         <td>
-                          <DropdownButton
-                            id={`dropdown-status-${vendor.vendors_detail.id}`}
-                            title={vendor.status}
-                            onSelect={(status) => handleStatusChange(vendor.vendors_detail.id, status)}
-                          >
-                            <Dropdown.Item eventKey="approved">Approved</Dropdown.Item>
-                            <Dropdown.Item eventKey="rejected" className="text-white w-full font-bold rounded-3" style={{ backgroundColor: '#1C2957' }}>Rejected</Dropdown.Item>
-                            <Dropdown.Item eventKey="pending">Pending</Dropdown.Item>
-                          </DropdownButton>
+                          {vendor.vendors_detail.is_verified === 1 ? 'Active' : 'Inactive'}
                         </td>
-                        <td  className=" text-white font-bold rounded-3 border">
-              
-                
-                  <Link to="/admin/addvendor" className="text-dark text-decoration-none">
-                   <button className='p-1 rounded-3' style={{ backgroundColor: '#1C2957', color: 'white' }}>
-                   View More
-                   </button>
-                  </Link>
-                
-              
+                        <td>
+                          {vendor.vendors_detail.is_active === 1 ? (
+                            <Button
+                              variant="warning"
+                              onClick={() => handleStatusChange1(vendor.vendors_detail.id, 'inactive')}
+                            >
+                              Set Inactive
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="success"
+                              onClick={() => handleStatusChange1(vendor.vendors_detail.id, 'active')}
+                            >
+                              Set Active
+                            </Button>
+                          )}
                         </td>
                       </tr>
                     ))}

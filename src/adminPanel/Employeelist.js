@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col ,Dropdown} from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FaStore } from 'react-icons/fa';
 import CustomNavbar from './Navbar';
 import Sidebar from './Sidebar';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const Employeelist = () => {
   const [jobs, setJobs] = useState([]);
@@ -39,6 +37,33 @@ const Employeelist = () => {
     fetchJobs();
   }, []);
 
+  const handleStatusChange = async (companyId, status) => {
+    const authToken = localStorage.getItem('authToken');
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: authToken,
+    };
+
+    try {
+      if (status === 'active') {
+        await fetch(`https://api.novajobs.us/api/admin/employeer-active/${companyId}`, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({ status: 1 }), // Sending 1 for active
+        });
+      } else if (status === 'inactive') {
+        await fetch(`https://api.novajobs.us/api/admin/employeer-inactive/${companyId}`, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({ status: 0 }), // Sending 0 for inactive
+        });
+      }
+      // Optionally refetch the jobs to update the list after status change
+    } catch (error) {
+      console.error('Error updating company status:', error);
+    }
+  };
+
   return (
     <div>
       <CustomNavbar />
@@ -56,37 +81,41 @@ const Employeelist = () => {
                 <table className="table">
                   <thead className='text-center'>
                     <tr>
-                      <th> ID</th>
+                      <th>ID</th>
                       <th>Company Name</th>
                       <th>State</th>
                       <th>Company Industry</th>
-                      
-                      <th>Status</th>
-                      <th>More info</th>
+                      <th>Account Status</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody className='text-center'>
                     {jobs.map((job) => (
-                      <tr key={job.id} >
+                      <tr key={job.id}>
                         <td>{job.s_no}</td>
                         <td>{job.company_name}</td>
                         <td>{job.state.name}</td>
                         <td>{job.company_industry.name}</td>
                         <td>
-                          {/* Example dropdown */}
-                          <Dropdown>
-                            <Dropdown.Toggle >
-                              Select
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                              <Dropdown.Item >Active</Dropdown.Item>
-                              <Dropdown.Item >Pending</Dropdown.Item>
-                             
-                            </Dropdown.Menu>
-                          </Dropdown>
-                        </td> 
-                        
-                       
+                          {job.is_verified === 1 ? 'Active' : 'Inactive'}
+                        </td>
+                        <td>
+                          {job.is_verified === 1 ? (
+                            <Button
+                              variant="warning"
+                              onClick={() => handleStatusChange(job.id, 'inactive')}
+                            >
+                              Set Inactive
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="success"
+                              onClick={() => handleStatusChange(job.id, 'active')}
+                            >
+                              Set Active
+                            </Button>
+                          )}
+                        </td>
                       </tr>
                     ))}
                   </tbody>

@@ -86,7 +86,7 @@ const Jobs = () => {
                   </Card>
                 </Link>
               </Col>
-              <Col md={5} className='text-center m-5'>
+             {/* <Col md={5} className='text-center m-5'>
                 <Link to="/admin/addvendor" className="card-link">
                   <Card className="box-card w-75 border rounded-4" style={{ fontSize: '1.5rem', fontWeight:'500', color:'white', backgroundColor:'#1C2957' }}>
                     <Card.Body >
@@ -96,7 +96,7 @@ const Jobs = () => {
                     </Card.Body>
                   </Card>
                 </Link>
-              </Col>
+              </Col> */}
             </Row>
           </Col>
         </Row>

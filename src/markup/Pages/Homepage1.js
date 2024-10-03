@@ -199,7 +199,8 @@ function Homepage() {
               <h3>Check Resume Score</h3>
               <p className="text-primary">Our AI Gives Immediate Score On Your Resume.</p>
             </div>
-            <div
+          
+           <div
               className="card"
               style={{
                 padding: "20px",
@@ -209,13 +210,17 @@ function Homepage() {
               }}
               onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
               onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
-            >
+            > 
+           
               <div className="card-icon">
                 <FaRegFilePdf />
               </div>
+              <Link to={"https://airesume.novajobs.us/form"}>
               <h3>Build Your Public Profile</h3>
               <p className="text-primary">Add Your Details To Reach leading Companies.</p>
+              </Link>
             </div>
+           
             <div
               className="card"
               style={{
