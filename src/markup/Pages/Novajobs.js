@@ -83,7 +83,7 @@ function Novajobs() {
             <div className="container">
               <div className="m-b30">
                 <div className="job-bx shadow-lg p-4 bg-white rounded">
-                  <div className="mt-5">
+                  <div className="">
                     {/* Tabs */}
                     <ul className="nav nav-tabs justify-content-center mb-4">
                       <li className="nav-item">

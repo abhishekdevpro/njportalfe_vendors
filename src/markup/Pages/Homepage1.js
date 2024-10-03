@@ -196,8 +196,9 @@ function Homepage() {
               <div className="card-icon">
                 <FaRegFileAlt />
               </div>
+              <Link to={"/novajobs#tab1"}>
               <h3>Check Resume Score</h3>
-              <p className="text-primary">Our AI Gives Immediate Score On Your Resume.</p>
+              <p className="text-primary">Our AI Gives Immediate Score On Your Resume.</p></Link>
             </div>
           
            <div
@@ -235,8 +236,9 @@ function Homepage() {
               <div className="card-icon">
                 <FaRegUser />
               </div>
+              <Link to={"/novajobs#tab3"}>
               <h3>AI Skill Testing Tool</h3>
-              <p className="text-primary">AI Skill Testing Tool & Earn Rewards.</p>
+              <p className="text-primary">AI Skill Testing Tool & Earn Rewards.</p>    </Link>
             </div>
           </div>
         </div>
