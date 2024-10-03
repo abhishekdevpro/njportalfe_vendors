@@ -5,10 +5,10 @@ import CustomNavbar from './Navbar';
 import Sidebar from './Sidebar';
 
 const Employeelist = () => {
-  const [jobs, setJobs] = useState([]);
+  const [company, setCompany] = useState(null);
 
   useEffect(() => {
-    const fetchJobs = async () => {
+    const fetchCompany = async () => {
       try {
         const authToken = localStorage.getItem('authToken');
         if (!authToken) {
@@ -20,21 +20,23 @@ const Employeelist = () => {
           Authorization: authToken,
         };
 
-        const jobsEndpoint = 'https://api.novajobs.us/api/admin/companies';
+        const companyEndpoint = 'https://api.novajobs.us/api/admin/employeer-lists';
 
-        const response = await fetch(jobsEndpoint, { headers });
+        const response = await fetch(companyEndpoint, { headers });
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
         const data = await response.json();
-        setJobs(data.data); // Assuming the data is in data.data
+        setCompany(data.data.employeer_detail); 
+        console.log(data.data.employeer_detail); 
+       
       } catch (error) {
-        console.error('Error fetching job data:', error);
+        console.error('Error fetching company data:', error);
       }
     };
 
-    fetchJobs();
+    fetchCompany();
   }, []);
 
   const handleStatusChange = async (companyId, status) => {
@@ -58,7 +60,7 @@ const Employeelist = () => {
           body: JSON.stringify({ status: 0 }), // Sending 0 for inactive
         });
       }
-      // Optionally refetch the jobs to update the list after status change
+      // Optionally refetch the company data after status change
     } catch (error) {
       console.error('Error updating company status:', error);
     }
@@ -74,52 +76,54 @@ const Employeelist = () => {
           </Col>
           <Col md={10}>
             <p>
-              <FaStore className='mx-1' /> / Jobs
+              <FaStore className='mx-1' /> / Company
             </p>
             <Row>
               <Col md={12}>
-                <table className="table">
-                  <thead className='text-center'>
-                    <tr>
-                      <th>ID</th>
-                      <th>Company Name</th>
-                      <th>State</th>
-                      <th>Company Industry</th>
-                      <th>Account Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className='text-center'>
-                    {jobs.map((job) => (
-                      <tr key={job.id}>
-                        <td>{job.s_no}</td>
-                        <td>{job.company_name}</td>
-                        <td>{job.state.name}</td>
-                        <td>{job.company_industry.name}</td>
+                {company ? (
+                  <table className="table">
+                    <thead className='text-center'>
+                      <tr>
+                      
+                        <th>Company Name</th>
+                        <th>State</th>
+                        <th>Email</th>
+                        <th>Account Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody className='text-center'>
+                      <tr key={company.id}>
+                        
+                        <td>{company.first_name}</td>
+                        <td>{company.states.name}</td>
+                        <td>{company.email}</td>
                         <td>
-                          {job.is_verified === 1 ? 'Active' : 'Inactive'}
+                          {company.is_active === 1 ? 'Active' : 'Inactive'}
                         </td>
                         <td>
-                          {job.is_verified === 1 ? (
+                          {company.is_active === 1 ? (
                             <Button
                               variant="warning"
-                              onClick={() => handleStatusChange(job.id, 'inactive')}
+                              onClick={() => handleStatusChange(company.id, 'inactive')}
                             >
                               Set Inactive
                             </Button>
                           ) : (
                             <Button
                               variant="success"
-                              onClick={() => handleStatusChange(job.id, 'active')}
+                              onClick={() => handleStatusChange(company.id, 'active')}
                             >
                               Set Active
                             </Button>
                           )}
                         </td>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </tbody>
+                  </table>
+                ) : (
+                  <p>Loading...</p>
+                )}
               </Col>
             </Row>
           </Col>
