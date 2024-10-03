@@ -169,27 +169,63 @@ if(!token){
         
 
           <div className="two-box-container">
-            
-            <div className="card">
-              <div className="card-icon ">
+            <div
+              className="card"
+              style={{
+                padding: "20px",
+                borderRadius: "8px",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                transition: "transform 0.3s ease",
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+              onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+            >
+              <div className="card-icon">
                 <FaRegFileAlt />
               </div>
+              <Link to={"/novajobs#tab1"}>
               <h3>Check Resume Score</h3>
-              <p className="text-primary">Our AI Gives Immediate Score On Your Resume.</p>
+              <p className="text-primary">Our AI Gives Immediate Score On Your Resume.</p></Link>
             </div>
-            <div className="card">
+          
+           <div
+              className="card"
+              style={{
+                padding: "20px",
+                borderRadius: "8px",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                transition: "transform 0.3s ease",
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+              onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+            > 
+           
               <div className="card-icon">
                 <FaRegFilePdf />
               </div>
+              <Link to={"https://airesume.novajobs.us/form"}>
               <h3>Build Your Public Profile</h3>
               <p className="text-primary">Add Your Details To Reach leading Companies.</p>
+              </Link>
             </div>
-            <div className="card">
+           
+            <div
+              className="card"
+              style={{
+                padding: "20px",
+                borderRadius: "8px",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                transition: "transform 0.3s ease",
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+              onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+            >
               <div className="card-icon">
                 <FaRegUser />
               </div>
+              <Link to={"/novajobs#tab3"}>
               <h3>AI Skill Testing Tool</h3>
-              <p className="text-primary">AI Skill Testing Tool & Earn Rewards.</p>
+              <p className="text-primary">AI Skill Testing Tool & Earn Rewards.</p>    </Link>
             </div>
           </div>
         </div>
