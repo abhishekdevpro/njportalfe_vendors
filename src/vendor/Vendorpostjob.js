@@ -299,7 +299,7 @@ function VendorComponypostjobs() {
   const getState = async () => {
     await axios({
       method: "get",
-      url: `https://api.novajobs.us/api/admin/stats/${postAJobData.selectedCountry}`,
+      url: `https://api.novajobs.us/api/admin/stats/231`,
       headers: {
         Authorization: token,
       },
