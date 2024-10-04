@@ -153,7 +153,7 @@ const VendorCompanySideBar = ({ active }) => {
                 ) : (
                   <img className="img-fluid"
                     alt=""
-                    src={logo}
+                    src={`https://api.novajobs.us${logo}`}
                     style={{
                       width: "100%",
                       height:'100%',
