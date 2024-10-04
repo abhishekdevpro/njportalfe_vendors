@@ -297,16 +297,19 @@ function Aboutus1() {
                         More Services from Hyper V Solutions
                       </h1>
                       <p style={{ fontSize: "clamp(14px, 3vw, 15px)" }}>
-                        This is just one of the many amazing services that Hyper
-                        V Solutions offers. If you're struggling to find a job
-                        or are ready to kickstart your career, check out our
-                        EdTech site, UltraAura.education. <br />
+                      Discover the wide range of innovative services offered
+                       by Hyper V Solutions. Whether you're navigating a 
+                       job search or looking to elevate your career, our
+                        EdTech platform, UltraAura.education, is here to support you.
+                      <br />
                       </p>
                       <p style={{ fontSize: "clamp(14px, 3vw, 15px)" }}>
-                        We provide content, online classes with industry expert
-                        trainers, and placement support powered by Novajobs.us.
-                        Explore the future of education and career advancement
-                        with us.
+                      We offer expertly curated content, live online classes
+                       led by industry professionals, and robust placement
+                        assistance through Novajobs.us. Take the next step 
+                        towards your future with our cutting-edge educational solutions.
+
+
                       </p>
                       <p
                         style={{
@@ -314,7 +317,7 @@ function Aboutus1() {
                           fontWeight: "500",
                         }}
                       >
-                        To know more about Us visit our parent website:
+                        For more information, visit our parent website: 
                         https://hypervsolutions.net/
                       </p>
                     </div>
@@ -338,7 +341,7 @@ function Aboutus1() {
                       }}
                     >
                       Experience the difference of innovation and inclusivity at
-                      Nova US Jobs. Explore our website today and unlock your
+                      Novajobs.us . Explore our website today and unlock your
                       path to success.
                     </h1>
                   </div>
