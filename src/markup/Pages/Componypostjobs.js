@@ -57,7 +57,7 @@ function Componypostjobs() {
                         </div>
                         <div className="candidate-title">
                           <h4 className="m-b5">
-                            <Link to={"#"}>@COMPANY</Link>
+                            <Link to={"#"}>hello</Link>
                           </h4>
                         </div>
                       </div>

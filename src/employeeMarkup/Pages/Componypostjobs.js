@@ -223,6 +223,7 @@ function EmployeeComponypostjobs() {
         Authorization: token,
       },
       data: {
+        company_name:postAJobData.company,
         job_category_id: Number(postAJobData.jobCategory),
         job_title: postAJobData.jobTitle,
         job_description: postAJobData.description,
@@ -548,7 +549,8 @@ function EmployeeComponypostjobs() {
                               id="company"
                               name="company"
                               value={postAJobData.company}
-                              disabled
+                              onChange={handleChange}
+                              // disabled
                             />
                           </div>
                           {errors.company && (
