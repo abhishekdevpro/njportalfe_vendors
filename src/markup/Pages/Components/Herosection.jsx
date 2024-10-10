@@ -321,7 +321,7 @@ const CareerAdvisorPage = () => {
   const [location, setLocation] = useState('');
   const [states, setStates] = useState([]);
   const [categories, setCategories] = useState([]); // For sector dropdown
-  const token = 'your_token_here'; // Add your actual token
+  const token = localStorage.getItem("jobSeekerLoginToken"); // Add your actual token
   const navigate = useNavigate();
 
   const [selectedOption, setSelectedOption] = useState('');

@@ -228,7 +228,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
+import {  useEffect } from 'react';
 // ... (previous styled components remain unchanged)
 const FormContainer = styled.div`
   background-color: white;
@@ -377,8 +377,10 @@ const SkipButton = styled.button`
 
 `;
 
+
 const JobseekerForm = () => {
   const [step, setStep] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -393,6 +395,16 @@ const JobseekerForm = () => {
   
   const [errors, setErrors] = useState({});
   const [showSummary, setShowSummary] = useState(false);
+
+  useEffect(() => {
+    // Check if the user is logged in (example using a token in localStorage)
+    const token = localStorage.getItem("jobSeekerLoginToken");
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   const steps = [
     {
@@ -573,16 +585,20 @@ const JobseekerForm = () => {
             <ChevronLeft size={20} />
             Back
           </Button>
-          <Button primary onClick={nextStep}>
-            {step < steps.length - 1 ? (
-              <>
-                Next
-                <ChevronRight size={20} />
-              </>
-            ) : (
-              'Submit'
-            )}
-          </Button>
+          {isLoggedIn ? (
+            <Button primary onClick={nextStep}>
+              {step < steps.length - 1 ? (
+                <>
+                  Next
+                  <ChevronRight size={20} />
+                </>
+              ) : (
+                'Submit'
+              )}
+            </Button>
+          ) : (
+            <p>Please log in to submit the form.</p>
+          )}
         </ButtonContainer>
       </FormCard>
 

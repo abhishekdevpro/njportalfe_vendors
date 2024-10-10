@@ -393,7 +393,7 @@ const FixedHeader = () => {
                                 navigate("/");
                               }}
                             >
-                              Go To Dashboard
+                              Go To Home
                             </button>
                           </div>
                         )}
@@ -424,7 +424,7 @@ const FixedHeader = () => {
                         navigate("/");
                       }}
                     >
-                      Go To Dashboard
+                      Go To Home
                     </button>
                   </div>
                 ) : (
@@ -436,7 +436,7 @@ const FixedHeader = () => {
                         navigate("/");
                       }}
                     >
-                      Go To Dashboard
+                      Go To Home
                     </button>
                   </div>
                 )}
