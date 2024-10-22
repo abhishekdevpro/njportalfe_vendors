@@ -193,7 +193,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<EmployeeLogin />} />
+      <Route path="/" element={<Vendorlogin />} />
       <Route path="services" element={<LandingPage />} />
       <Route path="novajobs" element={<Novajobs />} />
       <Route path="aboutus" element={<Aboutus1 />} />
